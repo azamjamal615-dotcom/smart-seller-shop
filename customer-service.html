@@ -3,185 +3,173 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Customer Service - Smart Seller Shop</title>
+<title>Customer Service</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
+* {
+  box-sizing: border-box;
 }
 
-body{
-  background:#f5f6f8;
-  color:#222;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f6f8;
+  color: #222;
 }
 
-.header{
-  background:#111827;
-  color:white;
-  padding:20px;
-  text-align:center;
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
 }
 
-.header h1{
-  font-size:24px;
+.box {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.08);
 }
 
-.header p{
-  margin-top:6px;
-  color:#cbd5e1;
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
 }
 
-.container{
-  max-width:600px;
-  margin:25px auto;
-  padding:15px;
+input,
+textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
 }
 
-.card{
-  background:white;
-  border-radius:16px;
-  padding:20px;
-  box-shadow:0 4px 20px rgba(0,0,0,.08);
+textarea {
+  height: 130px;
+  resize: none;
 }
 
-h2{
-  margin-bottom:8px;
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #1677ff;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
 }
 
-.info{
-  color:#666;
-  margin-bottom:20px;
-  line-height:1.5;
+button:disabled {
+  opacity: 0.6;
 }
 
-label{
-  display:block;
-  margin:14px 0 6px;
-  font-weight:bold;
-}
-
-input, textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  font-size:16px;
-}
-
-textarea{
-  min-height:130px;
-  resize:vertical;
-}
-
-button{
-  width:100%;
-  margin-top:18px;
-  padding:14px;
-  border:0;
-  border-radius:10px;
-  background:#16a34a;
-  color:white;
-  font-size:17px;
-  font-weight:bold;
-}
-
-button:active{
-  transform:scale(.98);
-}
-
-#result{
-  margin-top:15px;
-  padding:12px;
-  border-radius:10px;
-  display:none;
+#status {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 15px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  <h1>Smart Seller Shop</h1>
-  <p>Customer Service</p>
-</div>
-
 <div class="container">
+  <div class="box">
 
-  <div class="card">
+    <h1>Customer Service</h1>
 
-    <h2>How can we help you?</h2>
+    <input
+      type="text"
+      id="name"
+      placeholder="Your name"
+    >
 
-    <p class="info">
-      Payment karni hai, payment account chahiye,
-      order ke bare mein poochna hai ya koi aur help chahiye?
-      Neeche message bhejein.
-    </p>
+    <input
+      type="email"
+      id="email"
+      placeholder="Your email"
+    >
 
-    <label>Your Name</label>
-    <input id="name" type="text" placeholder="Enter your name">
+    <textarea
+      id="message"
+      placeholder="Write your message..."
+    ></textarea>
 
-    <label>Email</label>
-    <input id="email" type="email" placeholder="Enter your email">
-
-    <label>Order Number</label>
-    <input id="order" type="text" placeholder="Order number (optional)">
-
-    <label>Message</label>
-    <textarea id="message"
-      placeholder="Example: Mujhe payment karni hai, payment account details dein."></textarea>
-
-    <button onclick="sendMessage()">
+    <button id="sendBtn" onclick="sendMessage()">
       Send Message
     </button>
 
-    <div id="result"></div>
+    <div id="status"></div>
 
   </div>
-
 </div>
 
 <script>
+const SUPABASE_URL =
+  "https://cgrwiwzqiusvjibpjzdv.supabase.co";
 
-async function sendMessage(){
+const SUPABASE_KEY =
+  "sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
+
+async function sendMessage() {
 
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
-  const order = document.getElementById("order").value.trim();
   const message = document.getElementById("message").value.trim();
-  const result = document.getElementById("result");
 
-  if(!name || !email || !message){
+  const status = document.getElementById("status");
+  const button = document.getElementById("sendBtn");
 
-    result.style.display="block";
-    result.style.background="#fee2e2";
-    result.style.color="#991b1b";
-    result.innerText="Please name, email aur message fill karein.";
+  if (!name || !email || !message) {
+    status.textContent = "Please fill all fields.";
     return;
   }
 
-  result.style.display="block";
-  result.style.background="#e0f2fe";
-  result.style.color="#075985";
-  result.innerText="Message sending...";
+  button.disabled = true;
+  status.textContent = "Sending...";
 
-  /*
-   * Supabase connection next step mein add karenge.
-   */
+  try {
 
-  setTimeout(function(){
+    const response = await fetch(
+      SUPABASE_URL + "/rest/v1/support_tickets",
+      {
+        method: "POST",
 
-    result.style.background="#dcfce7";
-    result.style.color="#166534";
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal"
+        },
 
-    result.innerText=
-      "Message received! Customer Service aapko website ke andar reply karegi.";
+        body: JSON.stringify({
+          customer_name: name,
+          customer_email: email,
+          message: message,
+          subject: "Customer Service"
+        })
+      }
+    );
 
-  },800);
+    if (!response.ok) {
+      throw new Error("Message could not be sent");
+    }
+
+    status.textContent = "Message sent successfully.";
+
+    document.getElementById("message").value = "";
+
+  } catch (error) {
+
+    status.textContent =
+      "Something went wrong. Please try again.";
+
+  }
+
+  button.disabled = false;
 }
-
 </script>
 
 </body>
