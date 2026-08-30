@@ -6,32 +6,71 @@
 <title>Smart Seller Shop</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#222}
-header{background:#111827;color:white;padding:16px 20px;position:sticky;top:0;z-index:10}
-.nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:22px;font-weight:bold}
-.cart-btn{background:#22c55e;color:white;border:0;padding:11px 16px;border-radius:8px;font-weight:bold}
-.hero{background:linear-gradient(135deg,#111827,#2563eb);color:white;padding:55px 20px}
-.hero div{max-width:1100px;margin:auto}
-.hero h1{font-size:40px;margin:0 0 10px}
-.container{max-width:1100px;margin:25px auto;padding:0 20px}
-.controls{display:flex;gap:10px;margin-bottom:25px}
-input,select{padding:13px;border:1px solid #ddd;border-radius:8px;font-size:15px}
-.search{flex:1}
-.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
-.card{background:white;border-radius:14px;overflow:hidden;box-shadow:0 3px 12px #0002}
-.card img{width:100%;height:190px;object-fit:cover}
-.card-body{padding:15px}
-.card h3{margin:0 0 8px}
-.desc{color:#666;font-size:14px;height:40px}
-.price{font-size:21px;font-weight:bold;margin:12px 0}
-.add{width:100%;padding:12px;border:0;border-radius:8px;background:#2563eb;color:white;font-weight:bold}
-.empty{text-align:center;padding:50px;color:#777}
-.overlay{display:none;position:fixed;inset:0;background:#0008;z-index:20}
-.cart{background:white;width:min(430px,100%);height:100%;margin-left:auto;padding:20px;overflow:auto}
-.close{float:right;border:0;padding:8px;border-radius:6px}
-.cart-item{display:flex;gap:10px;padding:15px 0;border-bottom:1px solid #ddd}
-.cart-item img{width:65px;height:65px;object-fit:cover;border-radius:7px}
-.cart-info{flex:1}
-.qty{margin
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f6f8;
+  color: #222;
+}
+
+.header {
+  background: #111827;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.box {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  background: #1677ff;
+  color: white;
+  font-size: 17px;
+}
+
+a {
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>Smart Seller Shop</h1>
+</div>
+
+<div class="container">
+  <div class="box">
+    <h2>Welcome</h2>
+    <p>Customer Service ke liye neeche button dabayein.</p>
+
+    <a href="customer-service.html">
+      <button>Customer Service</button>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
