@@ -18,66 +18,205 @@ body{
 .header{
     background:#111820;
     color:white;
-    padding:25px 20px;
+    padding:22px 15px;
     text-align:center;
 }
 
 .header h1{
     margin:0;
-    font-size:30px;
+    font-size:28px;
+}
+
+.header p{
+    margin:7px 0 0;
+    color:#ccc;
 }
 
 .container{
-    max-width:900px;
-    margin:25px auto;
-    padding:15px;
+    max-width:950px;
+    margin:20px auto;
+    padding:12px;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:white;
+    padding:18px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 3px 12px #ddd;
+}
+
+.stat h2{
+    margin:0;
+    font-size:28px;
+}
+
+.stat p{
+    margin:7px 0 0;
+    color:#777;
 }
 
 .card{
     background:white;
-    padding:22px;
+    padding:20px;
     margin-bottom:20px;
     border-radius:15px;
     box-shadow:0 3px 15px #ddd;
 }
 
+.card h2{
+    margin-top:0;
+}
+
 input,select,textarea{
     width:100%;
     padding:13px;
-    margin:8px 0 15px;
+    margin:7px 0 14px;
     border:1px solid #ddd;
     border-radius:10px;
     font-size:16px;
+    outline:none;
+}
+
+textarea{
+    min-height:110px;
+    resize:vertical;
 }
 
 button{
     width:100%;
-    padding:14px;
+    padding:13px;
     border:0;
     border-radius:10px;
     background:#1877f2;
     color:white;
-    font-size:17px;
+    font-size:16px;
     cursor:pointer;
+    margin-top:5px;
 }
 
 button:hover{
     background:#0d65d9;
 }
 
+.secondary{
+    background:#555;
+}
+
+.secondary:hover{
+    background:#333;
+}
+
 .danger{
     background:#e53935;
+}
+
+.danger:hover{
+    background:#c62828;
+}
+
+.success{
+    background:#16a34a;
+}
+
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
 .product{
     border:1px solid #ddd;
     padding:15px;
     margin-top:12px;
-    border-radius:10px;
+    border-radius:12px;
+    background:#fafafa;
 }
 
 .product h3{
     margin:0 0 8px;
+}
+
+.product img{
+    width:100%;
+    max-height:180px;
+    object-fit:cover;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+.price{
+    color:#1877f2;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:10px;
+}
+
+.actions button{
+    margin:0;
+}
+
+.message{
+    border:1px solid #ddd;
+    padding:15px;
+    border-radius:12px;
+    margin-top:12px;
+    background:#fafafa;
+}
+
+.message strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.message small{
+    color:#777;
+}
+
+.empty{
+    text-align:center;
+    color:#888;
+    padding:20px;
+}
+
+#editBox{
+    display:none;
+}
+
+.notice{
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-size:14px;
+}
+
+@media(max-width:600px){
+    .dashboard{
+        grid-template-columns:1fr;
+    }
+
+    .row{
+        grid-template-columns:1fr;
+    }
+
+    .actions{
+        grid-template-columns:1fr;
+    }
 }
 </style>
 </head>
@@ -85,130 +224,589 @@ button:hover{
 <body>
 
 <div class="header">
-    <h1>Smart Seller Shop</h1>
+    <h1>Smart Seller</h1>
     <p>Admin Panel</p>
 </div>
 
 <div class="container">
 
-<div class="card">
-    <h2>Add Product</h2>
+    <!-- DASHBOARD -->
+    <div class="dashboard">
 
-    <input id="name" type="text" placeholder="Product name">
+        <div class="stat">
+            <h2 id="productCount">0</h2>
+            <p>Products</p>
+        </div>
 
-    <input id="price" type="number" placeholder="Price">
+        <div class="stat">
+            <h2 id="messageCount">0</h2>
+            <p>Messages</p>
+        </div>
 
-    <input id="image" type="text" placeholder="Product image URL">
+        <div class="stat">
+            <h2 id="stockCount">0</h2>
+            <p>Total Stock</p>
+        </div>
 
-    <textarea id="description" placeholder="Product description"></textarea>
+    </div>
 
-    <button onclick="addProduct()">Add Product</button>
+
+    <!-- ADD PRODUCT -->
+    <div class="card">
+
+        <h2>➕ Add New Product</h2>
+
+        <div class="notice">
+            Product ki information fill karke Add Product dabayein.
+        </div>
+
+        <label>Product Name</label>
+        <input id="productName" type="text" placeholder="Example: Samsung Phone">
+
+        <div class="row">
+
+            <div>
+                <label>Price</label>
+                <input id="productPrice" type="number" placeholder="100">
+            </div>
+
+            <div>
+                <label>Stock</label>
+                <input id="productStock" type="number" placeholder="10">
+            </div>
+
+        </div>
+
+        <label>Category</label>
+        <select id="productCategory">
+            <option value="General">General</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Clothes">Clothes</option>
+            <option value="Shoes">Shoes</option>
+            <option value="Beauty">Beauty</option>
+            <option value="Accessories">Accessories</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>Product Image URL</label>
+        <input id="productImage" type="text" placeholder="https://example.com/image.jpg">
+
+        <label>Description</label>
+        <textarea id="productDescription" placeholder="Product description..."></textarea>
+
+        <button onclick="addProduct()">Add Product</button>
+
+    </div>
+
+
+    <!-- EDIT PRODUCT -->
+    <div class="card" id="editBox">
+
+        <h2>✏️ Edit Product</h2>
+
+        <input id="editId" type="hidden">
+
+        <label>Product Name</label>
+        <input id="editName" type="text">
+
+        <div class="row">
+
+            <div>
+                <label>Price</label>
+                <input id="editPrice" type="number">
+            </div>
+
+            <div>
+                <label>Stock</label>
+                <input id="editStock" type="number">
+            </div>
+
+        </div>
+
+        <label>Category</label>
+        <select id="editCategory">
+            <option value="General">General</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Clothes">Clothes</option>
+            <option value="Shoes">Shoes</option>
+            <option value="Beauty">Beauty</option>
+            <option value="Accessories">Accessories</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>Image URL</label>
+        <input id="editImage" type="text">
+
+        <label>Description</label>
+        <textarea id="editDescription"></textarea>
+
+        <button class="success" onclick="saveEdit()">Save Changes</button>
+        <button class="secondary" onclick="cancelEdit()">Cancel</button>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+    <div class="card">
+
+        <h2>📦 Products</h2>
+
+        <input
+            id="searchProduct"
+            type="text"
+            placeholder="Search product..."
+            oninput="showProducts()"
+        >
+
+        <div id="productsList"></div>
+
+    </div>
+
+
+    <!-- CUSTOMER MESSAGES -->
+    <div class="card">
+
+        <h2>💬 Customer Messages</h2>
+
+        <div id="messagesList"></div>
+
+        <button class="danger" onclick="clearMessages()">
+            Delete All Messages
+        </button>
+
+    </div>
+
+
+    <!-- DATA MANAGEMENT -->
+    <div class="card">
+
+        <h2>⚙️ Data Management</h2>
+
+        <button class="secondary" onclick="exportData()">
+            Export Products
+        </button>
+
+        <button class="danger" onclick="deleteAllProducts()">
+            Delete All Products
+        </button>
+
+    </div>
+
 </div>
 
-<div class="card">
-    <h2>Products</h2>
-    <div id="products"></div>
-</div>
-
-</div>
 
 <script>
 
-let products =
-JSON.parse(localStorage.getItem("products")) || [];
+let products = JSON.parse(localStorage.getItem("smartSellerProducts")) || [];
+
+let messages = JSON.parse(localStorage.getItem("smartSellerMessages")) || [];
+
+
+/* SAVE DATA */
 
 function saveProducts(){
     localStorage.setItem(
-        "products",
+        "smartSellerProducts",
         JSON.stringify(products)
     );
 }
 
+
+/* ADD PRODUCT */
+
 function addProduct(){
 
-    let name =
-        document.getElementById("name").value;
+    const name = document.getElementById("productName").value.trim();
+    const price = document.getElementById("productPrice").value;
+    const stock = document.getElementById("productStock").value;
+    const category = document.getElementById("productCategory").value;
+    const image = document.getElementById("productImage").value.trim();
+    const description = document.getElementById("productDescription").value.trim();
 
-    let price =
-        document.getElementById("price").value;
-
-    let image =
-        document.getElementById("image").value;
-
-    let description =
-        document.getElementById("description").value;
-
-    if(!name || !price){
-        alert("Product name aur price zaroori hai");
+    if(!name){
+        alert("Product name likhein.");
         return;
     }
 
-    products.push({
+    if(!price){
+        alert("Product price likhein.");
+        return;
+    }
+
+    const product = {
+
+        id: Date.now(),
+
         name:name,
-        price:price,
+
+        price:Number(price),
+
+        stock:Number(stock) || 0,
+
+        category:category,
+
         image:image,
+
         description:description
-    });
+
+    };
+
+    products.push(product);
 
     saveProducts();
 
-    document.getElementById("name").value="";
-    document.getElementById("price").value="";
-    document.getElementById("image").value="";
-    document.getElementById("description").value="";
+    document.getElementById("productName").value="";
+    document.getElementById("productPrice").value="";
+    document.getElementById("productStock").value="";
+    document.getElementById("productImage").value="";
+    document.getElementById("productDescription").value="";
 
     showProducts();
 
-    alert("Product added!");
+    alert("Product successfully add ho gaya.");
+
 }
 
-function deleteProduct(index){
 
-    products.splice(index,1);
-
-    saveProducts();
-
-    showProducts();
-}
+/* SHOW PRODUCTS */
 
 function showProducts(){
 
-    let box =
-        document.getElementById("products");
+    const list = document.getElementById("productsList");
 
-    box.innerHTML="";
+    const search =
+        document.getElementById("searchProduct").value
+        .toLowerCase();
 
-    if(products.length===0){
-        box.innerHTML="<p>No products yet.</p>";
+    const filtered = products.filter(p =>
+        p.name.toLowerCase().includes(search)
+    );
+
+    if(filtered.length === 0){
+
+        list.innerHTML =
+            '<div class="empty">No products found.</div>';
+
+        updateDashboard();
+
         return;
     }
 
-    products.forEach((p,index)=>{
+    list.innerHTML = filtered.map(p => `
 
-        box.innerHTML += `
         <div class="product">
 
-            <h3>${p.name}</h3>
+            ${p.image ? `
+                <img src="${escapeHtml(p.image)}"
+                     onerror="this.style.display='none'">
+            ` : ""}
 
-            <p>Price: $${p.price}</p>
+            <h3>${escapeHtml(p.name)}</h3>
 
-            <p>${p.description}</p>
+            <div class="price">
+                $${Number(p.price).toFixed(2)}
+            </div>
 
-            <button
-            class="danger"
-            onclick="deleteProduct(${index})">
-            Delete
-            </button>
+            <p>
+                <b>Category:</b>
+                ${escapeHtml(p.category)}
+            </p>
+
+            <p>
+                <b>Stock:</b>
+                ${p.stock}
+            </p>
+
+            <p>
+                ${escapeHtml(p.description || "No description")}
+            </p>
+
+            <div class="actions">
+
+                <button onclick="editProduct(${p.id})">
+                    ✏️ Edit
+                </button>
+
+                <button
+                    class="danger"
+                    onclick="deleteProduct(${p.id})">
+                    🗑️ Delete
+                </button>
+
+            </div>
 
         </div>
-        `;
 
-    });
+    `).join("");
+
+    updateDashboard();
 }
 
+
+/* EDIT PRODUCT */
+
+function editProduct(id){
+
+    const p = products.find(x => x.id === id);
+
+    if(!p) return;
+
+    document.getElementById("editBox").style.display="block";
+
+    document.getElementById("editId").value=p.id;
+    document.getElementById("editName").value=p.name;
+    document.getElementById("editPrice").value=p.price;
+    document.getElementById("editStock").value=p.stock;
+    document.getElementById("editCategory").value=p.category;
+    document.getElementById("editImage").value=p.image;
+    document.getElementById("editDescription").value=p.description;
+
+    window.scrollTo({
+        top:document.getElementById("editBox").offsetTop - 20,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* SAVE EDIT */
+
+function saveEdit(){
+
+    const id =
+        Number(document.getElementById("editId").value);
+
+    const p = products.find(x => x.id === id);
+
+    if(!p) return;
+
+    p.name =
+        document.getElementById("editName").value.trim();
+
+    p.price =
+        Number(document.getElementById("editPrice").value) || 0;
+
+    p.stock =
+        Number(document.getElementById("editStock").value) || 0;
+
+    p.category =
+        document.getElementById("editCategory").value;
+
+    p.image =
+        document.getElementById("editImage").value.trim();
+
+    p.description =
+        document.getElementById("editDescription").value.trim();
+
+    saveProducts();
+
+    cancelEdit();
+
+    showProducts();
+
+    alert("Product update ho gaya.");
+
+}
+
+
+/* CANCEL EDIT */
+
+function cancelEdit(){
+
+    document.getElementById("editBox").style.display="none";
+
+}
+
+
+/* DELETE ONE PRODUCT */
+
+function deleteProduct(id){
+
+    if(!confirm("Kya aap is product ko delete karna chahte hain?")){
+        return;
+    }
+
+    products =
+        products.filter(p => p.id !== id);
+
+    saveProducts();
+
+    showProducts();
+
+}
+
+
+/* DELETE ALL PRODUCTS */
+
+function deleteAllProducts(){
+
+    if(products.length === 0){
+        alert("Products already empty hain.");
+        return;
+    }
+
+    if(!confirm(
+        "WARNING: Kya aap tamam products delete karna chahte hain?"
+    )){
+        return;
+    }
+
+    products=[];
+
+    saveProducts();
+
+    showProducts();
+
+}
+
+
+/* SHOW MESSAGES */
+
+function showMessages(){
+
+    const list =
+        document.getElementById("messagesList");
+
+    if(messages.length === 0){
+
+        list.innerHTML =
+            '<div class="empty">No customer messages.</div>';
+
+        updateDashboard();
+
+        return;
+    }
+
+    list.innerHTML =
+        messages.slice().reverse().map((m,index) => `
+
+        <div class="message">
+
+            <strong>
+                ${escapeHtml(m.name || "Customer")}
+            </strong>
+
+            <p>
+                <b>Email:</b>
+                ${escapeHtml(m.email || "No email")}
+            </p>
+
+            <p>
+                ${escapeHtml(m.message || "")}
+            </p>
+
+            <small>
+                ${escapeHtml(m.date || "")}
+            </small>
+
+        </div>
+
+    `).join("");
+
+    updateDashboard();
+}
+
+
+/* DELETE MESSAGES */
+
+function clearMessages(){
+
+    if(messages.length === 0){
+        alert("Messages already empty hain.");
+        return;
+    }
+
+    if(!confirm(
+        "Kya aap tamam customer messages delete karna chahte hain?"
+    )){
+        return;
+    }
+
+    messages=[];
+
+    localStorage.setItem(
+        "smartSellerMessages",
+        JSON.stringify(messages)
+    );
+
+    showMessages();
+
+}
+
+
+/* DASHBOARD */
+
+function updateDashboard(){
+
+    document.getElementById("productCount").textContent =
+        products.length;
+
+    document.getElementById("messageCount").textContent =
+        messages.length;
+
+    const totalStock =
+        products.reduce(
+            (total,p) => total + Number(p.stock || 0),
+            0
+        );
+
+    document.getElementById("stockCount").textContent =
+        totalStock;
+}
+
+
+/* EXPORT PRODUCTS */
+
+function exportData(){
+
+    const data =
+        JSON.stringify(products,null,2);
+
+    const blob =
+        new Blob([data],{
+            type:"application/json"
+        });
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href=url;
+
+    a.download="smart-seller-products.json";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+/* SECURITY */
+
+function escapeHtml(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* START */
+
 showProducts();
+
+showMessages();
+
+updateDashboard();
 
 </script>
 
 </body>
-</html>
+        </html>
