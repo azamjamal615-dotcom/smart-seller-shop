@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Seller - Admin Panel</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f3f4f6;
+    color:#222;
+}
+
+.header{
+    background:#111820;
+    color:white;
+    padding:25px 20px;
+    text-align:center;
+}
+
+.header h1{
+    margin:0;
+    font-size:30px;
+}
+
+.container{
+    max-width:900px;
+    margin:25px auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    padding:22px;
+    margin-bottom:20px;
+    border-radius:15px;
+    box-shadow:0 3px 15px #ddd;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:13px;
+    margin:8px 0 15px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:10px;
+    background:#1877f2;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0d65d9;
+}
+
+.danger{
+    background:#e53935;
+}
+
+.product{
+    border:1px solid #ddd;
+    padding:15px;
+    margin-top:12px;
+    border-radius:10px;
+}
+
+.product h3{
+    margin:0 0 8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>Smart Seller Shop</h1>
+    <p>Admin Panel</p>
+</div>
+
+<div class="container">
+
+<div class="card">
+    <h2>Add Product</h2>
+
+    <input id="name" type="text" placeholder="Product name">
+
+    <input id="price" type="number" placeholder="Price">
+
+    <input id="image" type="text" placeholder="Product image URL">
+
+    <textarea id="description" placeholder="Product description"></textarea>
+
+    <button onclick="addProduct()">Add Product</button>
+</div>
+
+<div class="card">
+    <h2>Products</h2>
+    <div id="products"></div>
+</div>
+
+</div>
+
+<script>
+
+let products =
+JSON.parse(localStorage.getItem("products")) || [];
+
+function saveProducts(){
+    localStorage.setItem(
+        "products",
+        JSON.stringify(products)
+    );
+}
+
+function addProduct(){
+
+    let name =
+        document.getElementById("name").value;
+
+    let price =
+        document.getElementById("price").value;
+
+    let image =
+        document.getElementById("image").value;
+
+    let description =
+        document.getElementById("description").value;
+
+    if(!name || !price){
+        alert("Product name aur price zaroori hai");
+        return;
+    }
+
+    products.push({
+        name:name,
+        price:price,
+        image:image,
+        description:description
+    });
+
+    saveProducts();
+
+    document.getElementById("name").value="";
+    document.getElementById("price").value="";
+    document.getElementById("image").value="";
+    document.getElementById("description").value="";
+
+    showProducts();
+
+    alert("Product added!");
+}
+
+function deleteProduct(index){
+
+    products.splice(index,1);
+
+    saveProducts();
+
+    showProducts();
+}
+
+function showProducts(){
+
+    let box =
+        document.getElementById("products");
+
+    box.innerHTML="";
+
+    if(products.length===0){
+        box.innerHTML="<p>No products yet.</p>";
+        return;
+    }
+
+    products.forEach((p,index)=>{
+
+        box.innerHTML += `
+        <div class="product">
+
+            <h3>${p.name}</h3>
+
+            <p>Price: $${p.price}</p>
+
+            <p>${p.description}</p>
+
+            <button
+            class="danger"
+            onclick="deleteProduct(${index})">
+            Delete
+            </button>
+
+        </div>
+        `;
+
+    });
+}
+
+showProducts();
+
+</script>
+
+</body>
+</html>
