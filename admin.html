@@ -3,220 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Seller - Admin Panel</title>
+<title>Smart Seller Shop - Admin</title>
 
 <style>
 *{box-sizing:border-box}
 
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f3f4f6;
-    color:#222;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f3f4f6;
+  color:#222;
 }
 
 .header{
-    background:#111820;
-    color:white;
-    padding:22px 15px;
-    text-align:center;
+  background:#111827;
+  color:white;
+  padding:22px 15px;
+  text-align:center;
 }
 
 .header h1{
-    margin:0;
-    font-size:28px;
+  margin:0;
+  font-size:26px;
 }
 
 .header p{
-    margin:7px 0 0;
-    color:#ccc;
+  margin:7px 0 0;
+  color:#cbd5e1;
 }
 
 .container{
-    max-width:950px;
-    margin:20px auto;
-    padding:12px;
-}
-
-.dashboard{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-bottom:20px;
-}
-
-.stat{
-    background:white;
-    padding:18px;
-    border-radius:14px;
-    text-align:center;
-    box-shadow:0 3px 12px #ddd;
-}
-
-.stat h2{
-    margin:0;
-    font-size:28px;
-}
-
-.stat p{
-    margin:7px 0 0;
-    color:#777;
+  max-width:900px;
+  margin:auto;
+  padding:15px;
 }
 
 .card{
-    background:white;
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:15px;
-    box-shadow:0 3px 15px #ddd;
+  background:white;
+  padding:20px;
+  margin-bottom:18px;
+  border-radius:14px;
+  box-shadow:0 3px 12px #ddd;
 }
 
-.card h2{
-    margin-top:0;
+h2{
+  margin-top:0;
 }
 
-input,select,textarea{
-    width:100%;
-    padding:13px;
-    margin:7px 0 14px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-size:16px;
-    outline:none;
-}
-
-textarea{
-    min-height:110px;
-    resize:vertical;
+input,select{
+  width:100%;
+  padding:13px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:9px;
+  font-size:16px;
 }
 
 button{
-    width:100%;
-    padding:13px;
-    border:0;
-    border-radius:10px;
-    background:#1877f2;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-    margin-top:5px;
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:9px;
+  background:#1677ff;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
 }
 
 button:hover{
-    background:#0d65d9;
-}
-
-.secondary{
-    background:#555;
-}
-
-.secondary:hover{
-    background:#333;
+  background:#095fd3;
 }
 
 .danger{
-    background:#e53935;
+  background:#e53935;
 }
 
 .danger:hover{
-    background:#c62828;
+  background:#c62828;
 }
 
-.success{
-    background:#16a34a;
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:18px;
 }
 
-.row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
+.stat{
+  background:white;
+  padding:18px 10px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 3px 10px #ddd;
+}
+
+.stat h3{
+  margin:0;
+  font-size:25px;
+}
+
+.stat p{
+  margin:6px 0 0;
+  color:#777;
 }
 
 .product{
-    border:1px solid #ddd;
-    padding:15px;
-    margin-top:12px;
-    border-radius:12px;
-    background:#fafafa;
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:15px;
+  margin-top:12px;
 }
 
 .product h3{
-    margin:0 0 8px;
-}
-
-.product img{
-    width:100%;
-    max-height:180px;
-    object-fit:cover;
-    border-radius:10px;
-    margin-bottom:10px;
+  margin:0 0 7px;
 }
 
 .price{
-    color:#1877f2;
-    font-weight:bold;
-    font-size:18px;
-}
-
-.actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    margin-top:10px;
-}
-
-.actions button{
-    margin:0;
-}
-
-.message{
-    border:1px solid #ddd;
-    padding:15px;
-    border-radius:12px;
-    margin-top:12px;
-    background:#fafafa;
-}
-
-.message strong{
-    display:block;
-    margin-bottom:5px;
-}
-
-.message small{
-    color:#777;
+  font-weight:bold;
+  color:#1677ff;
+  font-size:18px;
 }
 
 .empty{
-    text-align:center;
-    color:#888;
-    padding:20px;
+  text-align:center;
+  color:#888;
+  padding:15px;
 }
 
-#editBox{
-    display:none;
-}
-
-.notice{
-    background:#fff7ed;
-    border:1px solid #fed7aa;
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:15px;
-    font-size:14px;
+.back{
+  background:#111827;
 }
 
 @media(max-width:600px){
-    .dashboard{
-        grid-template-columns:1fr;
-    }
+  .stats{
+    grid-template-columns:1fr;
+  }
 
-    .row{
-        grid-template-columns:1fr;
-    }
+  .container{
+    padding:12px;
+  }
 
-    .actions{
-        grid-template-columns:1fr;
-    }
+  .card{
+    padding:16px;
+  }
 }
 </style>
 </head>
@@ -224,589 +153,329 @@ button:hover{
 <body>
 
 <div class="header">
-    <h1>Smart Seller</h1>
-    <p>Admin Panel</p>
+  <h1>Smart Seller Shop</h1>
+  <p>Admin Panel</p>
 </div>
 
 <div class="container">
 
-    <!-- DASHBOARD -->
-    <div class="dashboard">
-
-        <div class="stat">
-            <h2 id="productCount">0</h2>
-            <p>Products</p>
-        </div>
-
-        <div class="stat">
-            <h2 id="messageCount">0</h2>
-            <p>Messages</p>
-        </div>
-
-        <div class="stat">
-            <h2 id="stockCount">0</h2>
-            <p>Total Stock</p>
-        </div>
-
+  <div class="stats">
+    <div class="stat">
+      <h3 id="productCount">0</h3>
+      <p>Products</p>
     </div>
 
-
-    <!-- ADD PRODUCT -->
-    <div class="card">
-
-        <h2>➕ Add New Product</h2>
-
-        <div class="notice">
-            Product ki information fill karke Add Product dabayein.
-        </div>
-
-        <label>Product Name</label>
-        <input id="productName" type="text" placeholder="Example: Samsung Phone">
-
-        <div class="row">
-
-            <div>
-                <label>Price</label>
-                <input id="productPrice" type="number" placeholder="100">
-            </div>
-
-            <div>
-                <label>Stock</label>
-                <input id="productStock" type="number" placeholder="10">
-            </div>
-
-        </div>
-
-        <label>Category</label>
-        <select id="productCategory">
-            <option value="General">General</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Clothes">Clothes</option>
-            <option value="Shoes">Shoes</option>
-            <option value="Beauty">Beauty</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Other">Other</option>
-        </select>
-
-        <label>Product Image URL</label>
-        <input id="productImage" type="text" placeholder="https://example.com/image.jpg">
-
-        <label>Description</label>
-        <textarea id="productDescription" placeholder="Product description..."></textarea>
-
-        <button onclick="addProduct()">Add Product</button>
-
+    <div class="stat">
+      <h3 id="orderCount">0</h3>
+      <p>Orders</p>
     </div>
 
-
-    <!-- EDIT PRODUCT -->
-    <div class="card" id="editBox">
-
-        <h2>✏️ Edit Product</h2>
-
-        <input id="editId" type="hidden">
-
-        <label>Product Name</label>
-        <input id="editName" type="text">
-
-        <div class="row">
-
-            <div>
-                <label>Price</label>
-                <input id="editPrice" type="number">
-            </div>
-
-            <div>
-                <label>Stock</label>
-                <input id="editStock" type="number">
-            </div>
-
-        </div>
-
-        <label>Category</label>
-        <select id="editCategory">
-            <option value="General">General</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Clothes">Clothes</option>
-            <option value="Shoes">Shoes</option>
-            <option value="Beauty">Beauty</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Other">Other</option>
-        </select>
-
-        <label>Image URL</label>
-        <input id="editImage" type="text">
-
-        <label>Description</label>
-        <textarea id="editDescription"></textarea>
-
-        <button class="success" onclick="saveEdit()">Save Changes</button>
-        <button class="secondary" onclick="cancelEdit()">Cancel</button>
-
+    <div class="stat">
+      <h3 id="totalSales">$0</h3>
+      <p>Total Sales</p>
     </div>
+  </div>
 
+  <div class="card">
+    <h2>Add Product</h2>
 
-    <!-- PRODUCTS -->
-    <div class="card">
+    <label>Product Name</label>
+    <input id="productName" type="text" placeholder="Enter product name">
 
-        <h2>📦 Products</h2>
+    <label>Price</label>
+    <input id="productPrice" type="number" placeholder="Enter price">
 
-        <input
-            id="searchProduct"
-            type="text"
-            placeholder="Search product..."
-            oninput="showProducts()"
-        >
+    <label>Category</label>
+    <input id="productCategory" type="text" placeholder="Enter category">
 
-        <div id="productsList"></div>
+    <button onclick="addProduct()">Add Product</button>
+  </div>
 
-    </div>
+  <div class="card">
+    <h2>Products</h2>
+    <div id="products"></div>
+  </div>
 
+  <div class="card">
+    <h2>Orders</h2>
+    <div id="orders"></div>
+  </div>
 
-    <!-- CUSTOMER MESSAGES -->
-    <div class="card">
+  <div class="card">
+    <button class="danger" onclick="clearAllData()">
+      Clear All Data
+    </button>
+  </div>
 
-        <h2>💬 Customer Messages</h2>
-
-        <div id="messagesList"></div>
-
-        <button class="danger" onclick="clearMessages()">
-            Delete All Messages
-        </button>
-
-    </div>
-
-
-    <!-- DATA MANAGEMENT -->
-    <div class="card">
-
-        <h2>⚙️ Data Management</h2>
-
-        <button class="secondary" onclick="exportData()">
-            Export Products
-        </button>
-
-        <button class="danger" onclick="deleteAllProducts()">
-            Delete All Products
-        </button>
-
-    </div>
+  <div class="card">
+    <button class="back" onclick="location.href='index.html'">
+      Back to Shop
+    </button>
+  </div>
 
 </div>
 
-
 <script>
 
-let products = JSON.parse(localStorage.getItem("smartSellerProducts")) || [];
+let products =
+JSON.parse(localStorage.getItem("smartSellerProducts")) || [];
 
-let messages = JSON.parse(localStorage.getItem("smartSellerMessages")) || [];
+let orders =
+JSON.parse(localStorage.getItem("smartSellerOrders")) || [];
 
 
-/* SAVE DATA */
+function saveData(){
 
-function saveProducts(){
-    localStorage.setItem(
-        "smartSellerProducts",
-        JSON.stringify(products)
-    );
+  localStorage.setItem(
+    "smartSellerProducts",
+    JSON.stringify(products)
+  );
+
+  localStorage.setItem(
+    "smartSellerOrders",
+    JSON.stringify(orders)
+  );
+
 }
 
-
-/* ADD PRODUCT */
 
 function addProduct(){
 
-    const name = document.getElementById("productName").value.trim();
-    const price = document.getElementById("productPrice").value;
-    const stock = document.getElementById("productStock").value;
-    const category = document.getElementById("productCategory").value;
-    const image = document.getElementById("productImage").value.trim();
-    const description = document.getElementById("productDescription").value.trim();
+  const name =
+  document.getElementById("productName").value.trim();
 
-    if(!name){
-        alert("Product name likhein.");
-        return;
-    }
+  const price =
+  document.getElementById("productPrice").value;
 
-    if(!price){
-        alert("Product price likhein.");
-        return;
-    }
+  const category =
+  document.getElementById("productCategory").value.trim();
 
-    const product = {
 
-        id: Date.now(),
+  if(!name || !price){
 
-        name:name,
+    alert("Please enter product name and price.");
 
-        price:Number(price),
+    return;
+  }
 
-        stock:Number(stock) || 0,
 
-        category:category,
+  products.push({
 
-        image:image,
+    id:Date.now(),
 
-        description:description
+    name:name,
 
-    };
+    price:Number(price),
 
-    products.push(product);
+    category:category || "General"
 
-    saveProducts();
+  });
 
-    document.getElementById("productName").value="";
-    document.getElementById("productPrice").value="";
-    document.getElementById("productStock").value="";
-    document.getElementById("productImage").value="";
-    document.getElementById("productDescription").value="";
 
-    showProducts();
+  saveData();
 
-    alert("Product successfully add ho gaya.");
+  document.getElementById("productName").value="";
+  document.getElementById("productPrice").value="";
+  document.getElementById("productCategory").value="";
+
+  displayProducts();
+
+  updateStats();
+
+  alert("Product added successfully!");
 
 }
 
-
-/* SHOW PRODUCTS */
-
-function showProducts(){
-
-    const list = document.getElementById("productsList");
-
-    const search =
-        document.getElementById("searchProduct").value
-        .toLowerCase();
-
-    const filtered = products.filter(p =>
-        p.name.toLowerCase().includes(search)
-    );
-
-    if(filtered.length === 0){
-
-        list.innerHTML =
-            '<div class="empty">No products found.</div>';
-
-        updateDashboard();
-
-        return;
-    }
-
-    list.innerHTML = filtered.map(p => `
-
-        <div class="product">
-
-            ${p.image ? `
-                <img src="${escapeHtml(p.image)}"
-                     onerror="this.style.display='none'">
-            ` : ""}
-
-            <h3>${escapeHtml(p.name)}</h3>
-
-            <div class="price">
-                $${Number(p.price).toFixed(2)}
-            </div>
-
-            <p>
-                <b>Category:</b>
-                ${escapeHtml(p.category)}
-            </p>
-
-            <p>
-                <b>Stock:</b>
-                ${p.stock}
-            </p>
-
-            <p>
-                ${escapeHtml(p.description || "No description")}
-            </p>
-
-            <div class="actions">
-
-                <button onclick="editProduct(${p.id})">
-                    ✏️ Edit
-                </button>
-
-                <button
-                    class="danger"
-                    onclick="deleteProduct(${p.id})">
-                    🗑️ Delete
-                </button>
-
-            </div>
-
-        </div>
-
-    `).join("");
-
-    updateDashboard();
-}
-
-
-/* EDIT PRODUCT */
-
-function editProduct(id){
-
-    const p = products.find(x => x.id === id);
-
-    if(!p) return;
-
-    document.getElementById("editBox").style.display="block";
-
-    document.getElementById("editId").value=p.id;
-    document.getElementById("editName").value=p.name;
-    document.getElementById("editPrice").value=p.price;
-    document.getElementById("editStock").value=p.stock;
-    document.getElementById("editCategory").value=p.category;
-    document.getElementById("editImage").value=p.image;
-    document.getElementById("editDescription").value=p.description;
-
-    window.scrollTo({
-        top:document.getElementById("editBox").offsetTop - 20,
-        behavior:"smooth"
-    });
-
-}
-
-
-/* SAVE EDIT */
-
-function saveEdit(){
-
-    const id =
-        Number(document.getElementById("editId").value);
-
-    const p = products.find(x => x.id === id);
-
-    if(!p) return;
-
-    p.name =
-        document.getElementById("editName").value.trim();
-
-    p.price =
-        Number(document.getElementById("editPrice").value) || 0;
-
-    p.stock =
-        Number(document.getElementById("editStock").value) || 0;
-
-    p.category =
-        document.getElementById("editCategory").value;
-
-    p.image =
-        document.getElementById("editImage").value.trim();
-
-    p.description =
-        document.getElementById("editDescription").value.trim();
-
-    saveProducts();
-
-    cancelEdit();
-
-    showProducts();
-
-    alert("Product update ho gaya.");
-
-}
-
-
-/* CANCEL EDIT */
-
-function cancelEdit(){
-
-    document.getElementById("editBox").style.display="none";
-
-}
-
-
-/* DELETE ONE PRODUCT */
 
 function deleteProduct(id){
 
-    if(!confirm("Kya aap is product ko delete karna chahte hain?")){
-        return;
-    }
+  if(!confirm("Delete this product?")) return;
 
-    products =
-        products.filter(p => p.id !== id);
+  products =
+  products.filter(function(product){
 
-    saveProducts();
+    return product.id !== id;
 
-    showProducts();
+  });
 
-}
+  saveData();
 
+  displayProducts();
 
-/* DELETE ALL PRODUCTS */
-
-function deleteAllProducts(){
-
-    if(products.length === 0){
-        alert("Products already empty hain.");
-        return;
-    }
-
-    if(!confirm(
-        "WARNING: Kya aap tamam products delete karna chahte hain?"
-    )){
-        return;
-    }
-
-    products=[];
-
-    saveProducts();
-
-    showProducts();
+  updateStats();
 
 }
 
 
-/* SHOW MESSAGES */
+function displayProducts(){
 
-function showMessages(){
+  const box =
+  document.getElementById("products");
 
-    const list =
-        document.getElementById("messagesList");
+  if(products.length === 0){
 
-    if(messages.length === 0){
+    box.innerHTML =
+    '<div class="empty">No products added yet.</div>';
 
-        list.innerHTML =
-            '<div class="empty">No customer messages.</div>';
-
-        updateDashboard();
-
-        return;
-    }
-
-    list.innerHTML =
-        messages.slice().reverse().map((m,index) => `
-
-        <div class="message">
-
-            <strong>
-                ${escapeHtml(m.name || "Customer")}
-            </strong>
-
-            <p>
-                <b>Email:</b>
-                ${escapeHtml(m.email || "No email")}
-            </p>
-
-            <p>
-                ${escapeHtml(m.message || "")}
-            </p>
-
-            <small>
-                ${escapeHtml(m.date || "")}
-            </small>
-
-        </div>
-
-    `).join("");
-
-    updateDashboard();
-}
+    return;
+  }
 
 
-/* DELETE MESSAGES */
+  box.innerHTML = "";
 
-function clearMessages(){
 
-    if(messages.length === 0){
-        alert("Messages already empty hain.");
-        return;
-    }
+  products.forEach(function(product){
 
-    if(!confirm(
-        "Kya aap tamam customer messages delete karna chahte hain?"
-    )){
-        return;
-    }
+    const div =
+    document.createElement("div");
 
-    messages=[];
+    div.className="product";
 
-    localStorage.setItem(
-        "smartSellerMessages",
-        JSON.stringify(messages)
-    );
+    div.innerHTML=`
 
-    showMessages();
+      <h3>${escapeHTML(product.name)}</h3>
+
+      <p>Category:
+      ${escapeHTML(product.category)}</p>
+
+      <p class="price">
+      $${Number(product.price).toFixed(2)}
+      </p>
+
+      <button
+      class="danger"
+      onclick="deleteProduct(${product.id})">
+      Delete
+      </button>
+
+    `;
+
+    box.appendChild(div);
+
+  });
 
 }
 
 
-/* DASHBOARD */
+function displayOrders(){
 
-function updateDashboard(){
-
-    document.getElementById("productCount").textContent =
-        products.length;
-
-    document.getElementById("messageCount").textContent =
-        messages.length;
-
-    const totalStock =
-        products.reduce(
-            (total,p) => total + Number(p.stock || 0),
-            0
-        );
-
-    document.getElementById("stockCount").textContent =
-        totalStock;
-}
+  const box =
+  document.getElementById("orders");
 
 
-/* EXPORT PRODUCTS */
+  if(orders.length === 0){
 
-function exportData(){
+    box.innerHTML =
+    '<div class="empty">No orders yet.</div>';
 
-    const data =
-        JSON.stringify(products,null,2);
-
-    const blob =
-        new Blob([data],{
-            type:"application/json"
-        });
-
-    const url =
-        URL.createObjectURL(blob);
-
-    const a =
-        document.createElement("a");
-
-    a.href=url;
-
-    a.download="smart-seller-products.json";
-
-    a.click();
-
-    URL.revokeObjectURL(url);
-
-}
+    return;
+  }
 
 
-/* SECURITY */
+  box.innerHTML="";
 
-function escapeHtml(text){
 
-    return String(text)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+  orders.forEach(function(order,index){
+
+    const div =
+    document.createElement("div");
+
+    div.className="product";
+
+    div.innerHTML=`
+
+      <h3>Order #${index + 1}</h3>
+
+      <p>Customer:
+      ${escapeHTML(order.customer || "Customer")}
+      </p>
+
+      <p class="price">
+      $${Number(order.total || 0).toFixed(2)}
+      </p>
+
+      <p>Status:
+      ${escapeHTML(order.status || "Pending")}
+      </p>
+
+    `;
+
+    box.appendChild(div);
+
+  });
 
 }
 
 
-/* START */
+function updateStats(){
 
-showProducts();
+  document.getElementById("productCount")
+  .textContent=products.length;
 
-showMessages();
+  document.getElementById("orderCount")
+  .textContent=orders.length;
 
-updateDashboard();
+
+  let total=0;
+
+  orders.forEach(function(order){
+
+    total += Number(order.total || 0);
+
+  });
+
+
+  document.getElementById("totalSales")
+  .textContent="$"+total.toFixed(2);
+
+}
+
+
+function clearAllData(){
+
+  if(!confirm(
+    "Are you sure you want to delete all admin data?"
+  )) return;
+
+
+  products=[];
+  orders=[];
+
+  saveData();
+
+  displayProducts();
+
+  displayOrders();
+
+  updateStats();
+
+}
+
+
+function escapeHTML(text){
+
+  return String(text)
+
+    .replace(/&/g,"&amp;")
+
+    .replace(/</g,"&lt;")
+
+    .replace(/>/g,"&gt;")
+
+    .replace(/"/g,"&quot;")
+
+    .replace(/'/g,"&#039;");
+
+}
+
+
+displayProducts();
+
+displayOrders();
+
+updateStats();
 
 </script>
 
 </body>
-        </html>
+</html>
