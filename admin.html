@@ -5,12 +5,162 @@
 <title>Smart Seller Shop - Admin Panel</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f4f6;color:#222}.header{background:#111827;color:#fff;padding:18px 14px;text-align:center}.header h1{margin:0;font-size:24px}.header p{margin:5px 0;color:#ccc}.container{max-width:950px;margin:auto;padding:12px}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}.tabs button{border:0;border-radius:10px;padding:10px;background:#fff;box-shadow:0 2px 7px #ddd;cursor:pointer}.tabs button.active{background:#1877f2;color:#fff}.page{display:none}.page.active{display:block}.card{background:#fff;border-radius:15px;padding:15px;margin-bottom:12px;box-shadow:0 3px 13px #ddd}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{text-align:center;padding:12px;background:#fff;border-radius:13px;box-shadow:0 2px 8px #ddd}.stat b{font-size:20px}.stat span{display:block;color:#777;font-size:11px;margin-top:3px}input,select,textarea{width:100%;padding:10px;margin:5px 0 9px;border:1px solid #ddd;border-radius:9px}button.action{width:100%;padding:11px;border:0;border-radius:9px;background:#1877f2;color:#fff;cursor:pointer;margin-top:6px}.danger{background:#e53935!important}.green{background:#08b978!important}.orange{background:#ff9800!important}.gray{background:#777!important}.item{border:1px solid #ddd;border-radius:12px;padding:12px;margin:8px 0;background:#fafafa}.row{display:flex;justify-content:space-between;gap:8px;align-items:center}.reply{background:#ecfdf5;padding:10px;border-radius:9px;margin-top:8px}.muted{color:#777;font-size:12px}.empty{text-align:center;color:#777;padding:18px}.badge{padding:4px 8px;border-radius:15px;background:#fff3cd;color:#856404;font-size:11px}.error{background:#fee2e2;color:#991b1b;padding:9px;border-radius:9px}.success{background:#dcfce7;color:#166534;padding:9px;border-radius:9px}@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.tabs{grid-template-columns:repeat(2,1fr)}}
+*{box-sizing:border-box}
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+body{
+  margin:0;
+  font-family:'Patrick Hand',Arial,sans-serif;
+  background:#f4f5f7;
+  color:#172033;
+  font-size:15px;
+}
+.header{
+  background:#fff;
+  color:#172033;
+  padding:14px 18px;
+  border-bottom:1px solid #e5e7eb;
+  text-align:left;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.header:before{
+  content:"▦";
+  width:64px;height:64px;
+  border-radius:20px;
+  background:#7040e8;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:Arial,sans-serif;
+  font-size:34px;
+  flex:none;
+}
+.header h1{margin:0;font-size:32px;line-height:1}
+.header p{margin:5px 0 0;color:#777;font-size:18px;line-height:1}
+
+.container{max-width:900px;margin:auto;padding:14px}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  margin-bottom:10px;
+}
+.stat{
+  text-align:left;
+  padding:12px 13px;
+  background:#fff;
+  border-radius:14px;
+  border:1px solid #e5e7eb;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+.stat b{font-size:22px;display:block;line-height:1.1}
+.stat span{display:block;color:#777;font-size:13px;margin-top:3px}
+
+.tabs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:12px;
+}
+.tabs button{
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  padding:11px 7px;
+  background:#fff;
+  color:#222;
+  box-shadow:0 2px 7px rgba(0,0,0,.07);
+  cursor:pointer;
+  font-family:inherit;
+  font-size:14px;
+}
+.tabs button.active{background:#7040e8;color:#fff;border-color:#7040e8}
+
+.page{display:none}
+.page.active{display:block}
+
+.card{
+  background:#fff;
+  border-radius:17px;
+  padding:15px;
+  margin-bottom:12px;
+  border:1px solid #e5e7eb;
+  box-shadow:0 3px 13px rgba(0,0,0,.07);
+}
+.card h2{margin:0 0 10px;font-size:22px}
+
+input,select,textarea{
+  width:100%;
+  padding:10px 11px;
+  margin:4px 0 8px;
+  border:1px solid #ddd;
+  border-radius:9px;
+  font-family:inherit;
+  font-size:15px;
+}
+textarea{min-height:80px;resize:vertical}
+
+button.action{
+  width:100%;
+  padding:10px;
+  border:0;
+  border-radius:9px;
+  background:#7040e8;
+  color:#fff;
+  cursor:pointer;
+  margin-top:5px;
+  font-family:inherit;
+  font-size:15px;
+}
+.danger{background:#e53935!important}
+.green{background:#08b978!important}
+.orange{background:#ff9800!important}
+.gray{background:#777!important}
+
+.item{
+  border:1px solid #e1e4e8;
+  border-radius:12px;
+  padding:11px;
+  margin:7px 0;
+  background:#fafafa;
+}
+.item p{margin:6px 0}
+.row{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.reply{background:#ecfdf5;padding:9px;border-radius:9px;margin-top:7px}
+.muted{color:#777;font-size:12px}
+.empty{text-align:center;color:#777;padding:18px}
+.badge{padding:4px 8px;border-radius:15px;background:#fff3cd;color:#856404;font-size:11px}
+.error{background:#fee2e2;color:#991b1b;padding:9px;border-radius:9px}
+.success{background:#dcfce7;color:#166534;padding:9px;border-radius:9px}
+
+@media(max-width:600px){
+  body{font-size:14px}
+  .header{padding:11px 14px;gap:10px}
+  .header:before{width:48px;height:48px;border-radius:15px;font-size:26px}
+  .header h1{font-size:25px}
+  .header p{font-size:14px}
+  .container{padding:10px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:7px}
+  .stat{padding:10px;border-radius:12px}
+  .stat b{font-size:20px}
+  .stat span{font-size:12px}
+  .tabs{grid-template-columns:repeat(2,1fr);gap:7px}
+  .tabs button{padding:9px 5px;font-size:13px}
+  .card{padding:12px;border-radius:15px}
+  .card h2{font-size:20px}
+}
 </style>
 </head>
 <body>
 <div class="header"><h1>Smart Seller Shop</h1><p>Admin Panel</p></div>
 <div class="container">
+<div class="card" style="padding:13px 15px;margin-bottom:10px;">
+  <div style="font-size:13px;color:#777;">WELCOME BACK</div>
+  <div style="font-size:23px;font-weight:bold;line-height:1.1;">Smart Seller Shop Admin</div>
+</div>
 <div class="stats"><div class="stat"><b id="productCount">0</b><span>Products</span></div><div class="stat"><b id="messageCount">0</b><span>Messages</span></div><div class="stat"><b id="orderCount">0</b><span>Orders</span></div><div class="stat"><b id="withdrawCount">0</b><span>Withdrawals</span></div></div>
 <div class="tabs">
 <button class="active" onclick="page('products',this)">📦 Products</button><button onclick="page('messages',this)">💬 Messages</button><button onclick="page('orders',this)">🛒 Orders</button><button onclick="page('withdrawals',this)">💳 Withdrawals</button><button onclick="page('kyc',this)">🛡️ KYC</button><button onclick="page('customers',this)">👥 Customers</button>
