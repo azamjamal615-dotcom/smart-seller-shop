@@ -5,344 +5,196 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart Seller Shop - Customer Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172033}
-.header{background:#123b60;color:#fff;padding:18px 15px;text-align:center}
-.header h1{margin:0;font-size:23px}.header p{margin:6px 0 0;color:#dbeafe;font-size:13px}
-.container{max-width:1050px;margin:auto;padding:15px}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f4f6;color:#222}
+.header{background:#111827;color:#fff;padding:18px 15px;text-align:center}
+.header h1{margin:0;font-size:25px}.header p{margin:6px 0 0;color:#ccc}
+.container{max-width:1000px;margin:auto;padding:15px}
 .nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px}
-.nav button{border:0;padding:13px 7px;border-radius:10px;background:#fff;color:#334155;box-shadow:0 2px 10px #dfe5ee;cursor:pointer;font-size:14px}
+.nav button{border:0;padding:13px 5px;border-radius:10px;background:#fff;color:#222;box-shadow:0 2px 10px #ddd;cursor:pointer}
 .nav button.active{background:#1877f2;color:#fff}
+.card{background:#fff;padding:20px;margin-bottom:18px;border-radius:16px;box-shadow:0 3px 15px #ddd}
 .section{display:none}.section.active{display:block}
-.card{background:#fff;padding:20px;border-radius:17px;box-shadow:0 3px 15px #dfe5ee;margin-bottom:16px}
-.hero{background:#164b75;color:white;padding:24px;border-radius:18px;margin-bottom:16px}
-.hero h2{margin:0 0 7px}.hero p{margin:0;color:#dbeafe}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
-.stat{background:#fff;padding:18px 10px;border-radius:15px;text-align:center;box-shadow:0 3px 12px #dfe5ee}
-.stat h2{margin:0;font-size:25px}.stat p{margin:7px 0 0;color:#64748b;font-size:13px}
-.products{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.product{border:1px solid #e2e8f0;border-radius:14px;padding:12px;background:#fff}
-.product img{width:100%;height:190px;object-fit:cover;border-radius:10px;background:#eef2f7}
-.product h3{margin:10px 0 5px}.product p{margin:6px 0;color:#64748b;font-size:14px}
-.price{font-size:20px!important;font-weight:bold;color:#1877f2!important}
-.btn{border:0;border-radius:9px;padding:12px;cursor:pointer}
-.primary{width:100%;background:#1877f2;color:#fff;font-size:15px}.danger{background:#e53935;color:#fff}.success{background:#16a34a;color:#fff}
-.product .primary{margin-top:8px}
-input,textarea,select{width:100%;padding:13px;margin:7px 0 14px;border:1px solid #dbe2ea;border-radius:10px;font-size:16px;background:#fff}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{background:#fff;padding:18px 10px;border-radius:15px;text-align:center;box-shadow:0 3px 12px #ddd}
+.stat h2{margin:0;font-size:28px}.stat p{margin:7px 0 0;color:#777}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.product{border:1px solid #ddd;border-radius:13px;padding:12px}
+.product img{width:100%;height:190px;object-fit:cover;border-radius:10px;background:#eee}
+.product h3{margin:10px 0 5px}.product p{margin:6px 0;color:#555}
+.price{font-size:20px;font-weight:bold;color:#1877f2}
+.add,.primary{background:#1877f2;color:#fff;border:0;width:100%;padding:12px;border-radius:9px;margin-top:8px;cursor:pointer}
+.primary{padding:14px;font-size:16px}
+input,textarea{width:100%;padding:13px;margin:7px 0 15px;border:1px solid #ddd;border-radius:10px;font-size:16px}
 textarea{height:120px;resize:none}
-.cart-item,.order{border-bottom:1px solid #e5e7eb;padding:14px 0}
-.cart-line{display:flex;justify-content:space-between;gap:12px;align-items:center}
-.qty{display:flex;align-items:center;gap:8px;margin-top:8px}.qty button{border:0;background:#e5e7eb;border-radius:6px;padding:5px 10px}
-.total{font-size:22px;font-weight:bold;margin:18px 0}
-.badge{display:inline-block;padding:5px 9px;border-radius:20px;background:#e0f2fe;color:#0369a1;font-size:12px}
-.empty{text-align:center;color:#64748b;padding:25px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.notice{padding:12px;border-radius:10px;background:#eff6ff;margin:8px 0}
-.error{color:#dc2626;font-weight:bold}.successText{color:#15803d;font-weight:bold}
-.footer{text-align:center;color:#94a3b8;padding:10px 0 25px;font-size:13px}
-@media(max-width:700px){.nav{grid-template-columns:repeat(2,1fr)}.products{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}}
-@media(max-width:430px){.products{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.product img{height:220px}}
+.success{color:#15803d;font-weight:bold}.error{color:#dc2626;font-weight:bold}
+.cart-item{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid #ddd;padding:12px 0}
+.remove{background:#e53935;color:#fff;border:0;padding:8px 12px;border-radius:7px}
+.total{font-size:22px;font-weight:bold;margin-top:15px}.empty{text-align:center;color:#777;padding:20px}
+.reply{background:#eef7ee;border-left:4px solid #16a34a;padding:12px;border-radius:8px;margin-top:15px}
+.ticket{border:1px solid #ddd;border-radius:12px;padding:14px;margin-top:12px}
+.small{font-size:13px;color:#777}
+@media(max-width:600px){.nav{grid-template-columns:repeat(2,1fr)}.products{grid-template-columns:1fr}.product img{height:220px}.stats{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
-<div class="header">
-  <h1>Smart Seller Shop</h1>
-  <p>Customer Dashboard</p>
+<div class="header"><h1>Smart Seller Shop</h1><p>Customer Dashboard</p></div>
+<div class="container">
+<div class="nav">
+<button class="active" onclick="showSection('home',this)">🏠 Dashboard</button>
+<button onclick="showSection('productsSection',this)">🛍️ Products</button>
+<button onclick="showSection('cartSection',this)">🛒 Cart <span id="navCartCount">0</span></button>
+<button onclick="showSection('ordersSection',this)">📦 My Orders</button>
+<button onclick="showSection('notificationsSection',this)">🔔 Notifications</button>
+<button onclick="showSection('profileSection',this)">👤 Profile</button>
+<button onclick="showSection('serviceSection',this)">💬 Customer Service</button>
+<button onclick="logout()">🚪 Logout</button>
 </div>
 
-<div class="container">
-  <div class="nav">
-    <button class="active" onclick="showSection('dashboard',this)">🏠 Dashboard</button>
-    <button onclick="showSection('productsSection',this)">🛍️ Products</button>
-    <button onclick="showSection('cartSection',this)">🛒 Cart <span id="navCart">0</span></button>
-    <button onclick="showSection('ordersSection',this)">📦 My Orders</button>
-    <button onclick="showSection('notificationsSection',this)">🔔 Notifications</button>
-    <button onclick="showSection('profileSection',this)">👤 Profile</button>
-    <button onclick="showSection('serviceSection',this)">💬 Customer Service</button>
-    <button onclick="logout()">🚪 Logout</button>
-  </div>
+<div id="home" class="section active">
+<div class="card"><h2>Welcome to Smart Seller Shop 👋</h2>
+<p>From here you can browse products, add items to your cart, place orders, and contact Customer Service.</p></div>
+<div class="stats">
+<div class="stat"><h2 id="homeProductCount">0</h2><p>Products</p></div>
+<div class="stat"><h2 id="cartCount">0</h2><p>Cart Items</p></div>
+<div class="stat"><h2>24/7</h2><p>Customer Service</p></div>
+</div>
+</div>
 
-  <div id="dashboard" class="section active">
-    <div class="hero">
-      <h2>Welcome back, <span id="welcomeName">Customer</span> 👋</h2>
-      <p>Shop products, manage your cart and track your orders.</p>
-    </div>
-    <div class="stats">
-      <div class="stat"><h2 id="dashProducts">0</h2><p>Total Products</p></div>
-      <div class="stat"><h2 id="dashCart">0</h2><p>Cart Items</p></div>
-      <div class="stat"><h2 id="dashOrders">0</h2><p>Total Orders</p></div>
-      <div class="stat"><h2 id="dashPending">0</h2><p>Pending Orders</p></div>
-      <div class="stat"><h2 id="dashDelivered">0</h2><p>Delivered</p></div>
-      <div class="stat"><h2>24/7</h2><p>Customer Service</p></div>
-    </div>
-    <div class="card">
-      <h2>🛍️ Featured Products</h2>
-      <div id="dashboardProducts" class="products"></div>
-    </div>
-    <div class="card">
-      <h2>📦 Recent Orders</h2>
-      <div id="recentOrders"></div>
-    </div>
-  </div>
+<div id="productsSection" class="section"><div class="card"><h2>🛍️ All Products</h2><div id="products" class="products">Loading products...</div></div></div>
 
-  <div id="productsSection" class="section">
-    <div class="card">
-      <h2>🛍️ All Products</h2>
-      <p id="productStatus">Loading products...</p>
-      <div id="products" class="products"></div>
-    </div>
-  </div>
+<div id="cartSection" class="section"><div class="card"><h2>🛒 My Cart</h2><div id="cartItems"></div><div id="cartTotal" class="total">Total: $0.00</div><button class="primary" onclick="checkout()">💳 Checkout</button></div></div>
 
-  <div id="cartSection" class="section">
-    <div class="card">
-      <h2>🛒 My Cart</h2>
-      <div id="cartItems"></div>
-      <div id="cartTotal" class="total">Total: $0.00</div>
-      <button class="btn primary" onclick="checkout()">💳 Checkout / Place Order</button>
-    </div>
-  </div>
+<div id="ordersSection" class="section"><div class="card"><h2>📦 My Orders</h2><p class="empty">Orders will appear here after you place an order.</p></div></div>
 
-  <div id="ordersSection" class="section">
-    <div class="card">
-      <h2>📦 My Orders</h2>
-      <div id="ordersList"></div>
-    </div>
-  </div>
+<div id="notificationsSection" class="section"><div class="card"><h2>🔔 Notifications</h2><div id="notifications">No new notifications.</div></div></div>
 
-  <div id="notificationsSection" class="section">
-    <div class="card">
-      <h2>🔔 Notifications</h2>
-      <div id="notifications"></div>
-    </div>
-  </div>
+<div id="serviceSection" class="section">
+<div class="card">
+<h2>💬 Customer Service</h2>
+<p>For payment details, orders or any help, send us a message.</p>
+<input id="customerEmail" type="email" placeholder="Your email">
+<textarea id="customerMessage" placeholder="Example: I want to place an order. Please send payment account details."></textarea>
+<button id="sendButton" class="primary" onclick="sendMessage()">Send Message</button>
+<p id="serviceStatus"></p>
+</div>
+<div class="card"><h3>💬 My Support Messages</h3><div id="myMessages">Enter your email above to view your messages and replies.</div></div>
+</div>
 
-  <div id="profileSection" class="section">
-    <div class="card">
-      <h2>👤 My Profile</h2>
-      <div class="row">
-        <div><b>Name</b><p id="profileName">Customer</p></div>
-        <div><b>Email</b><p id="profileEmail">Not provided</p></div>
-      </div>
-      <hr>
-      <h3>Update Profile</h3>
-      <input id="newName" placeholder="Your name">
-      <input id="newEmail" type="email" placeholder="Your email">
-      <button class="btn primary" onclick="saveProfile()">Save Profile</button>
-      <p id="profileStatus"></p>
-    </div>
-  </div>
-
-  <div id="serviceSection" class="section">
-    <div class="card">
-      <h2>💬 Customer Service</h2>
-      <p>For payment details, orders or any help, send us a message.</p>
-      <input id="customerName" placeholder="Your name">
-      <input id="customerEmail" type="email" placeholder="Your email">
-      <textarea id="customerMessage" placeholder="Example: I want to place an order. Please send payment account details."></textarea>
-      <button id="sendButton" class="btn primary" onclick="sendMessage()">Send Message</button>
-      <p id="serviceStatus"></p>
-    </div>
-  </div>
-
-  <div class="footer">Smart Seller Shop © 2026</div>
+<div id="profileSection" class="section"><div class="card"><h2>👤 My Profile</h2>
+<p><b>Email</b></p><input id="profileEmail" type="email" placeholder="Your email">
+<button class="primary" onclick="saveProfile()">Save Email</button><p id="profileStatus"></p>
+</div></div>
 </div>
 
 <script>
-const SUPABASE_URL="https://cgrwiwzqiusvjibpjzdv.supabase.co";
-const SUPABASE_KEY="sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
-const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-
+const SUPABASE_URL = "https://cgrwiwzqiusvjibpjzdv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
+const supabaseClient = supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 let products=[];
 let cart=JSON.parse(localStorage.getItem("smartSellerCart")||"[]");
-let orders=JSON.parse(localStorage.getItem("smartSellerOrders")||"[]");
-let notifications=JSON.parse(localStorage.getItem("smartSellerNotifications")||"[]");
 
 function showSection(id,button){
-  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
-  if(button)button.classList.add("active");
-  if(id==="cartSection")showCart();
-  if(id==="ordersSection")showOrders();
-  if(id==="notificationsSection")showNotifications();
+ document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+ if(button) button.classList.add("active");
+ if(id==="cartSection") showCart();
+ if(id==="serviceSection") loadMyMessages();
 }
+function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
 
 async function loadProducts(){
-  const box=document.getElementById("products");
-  document.getElementById("productStatus").textContent="Loading products...";
-  const {data,error}=await supabaseClient.from("Products").select("*").order("id",{ascending:false});
-  if(error){
-    console.error(error);
-    document.getElementById("productStatus").innerHTML="<span class='error'>Products could not be loaded.</span>";
-    box.innerHTML="";
-    return;
-  }
-  products=data||[];
-  document.getElementById("productStatus").textContent=products.length+" products available";
-  document.getElementById("dashProducts").textContent=products.length;
-  renderProducts(box,products);
-  renderProducts(document.getElementById("dashboardProducts"),products.slice(0,3));
+ const box=document.getElementById("products"); box.innerHTML="Loading products...";
+ const {data,error}=await supabaseClient.from("Products").select("*").order("id",{ascending:false});
+ if(error){box.innerHTML="<p class='error'>Products could not be loaded.</p>";return;}
+ products=data||[]; document.getElementById("homeProductCount").innerText=products.length; showProducts();
 }
-
-function productData(p){
-  return {
-    id:p.id,
-    name:p["Name"]??p.name??"Unnamed Product",
-    description:p["Description"]??p.description??"No description",
-    price:Number(p["Price"]??p.price??0),
-    stock:Number(p["Stock"]??p.stock??0),
-    category:p["Category"]??p.category??"Other",
-    image:p["Image url"]??p.image_url??p.image??""
-  };
+function showProducts(){
+ const box=document.getElementById("products"); box.innerHTML="";
+ if(!products.length){box.innerHTML="<div class='empty'>No products available.</div>";return;}
+ products.forEach(product=>{
+  const name=product["Name"]||product.name||"Unnamed Product";
+  const description=product["Description"]||product.description||"No description";
+  const price=Number(product["Price"]??product.price??0);
+  const stock=Number(product["Stock"]??product.stock??0);
+  const category=product["Category"]||product.category||"Other";
+  const image=product["Image url"]||product.image||product.image_url||"";
+  const card=document.createElement("div");card.className="product";
+  if(image){const img=document.createElement("img");img.src=image;img.onerror=function(){this.style.display="none"};card.appendChild(img);}
+  card.innerHTML+=`<h3>${escapeHTML(name)}</h3><p>Description: ${escapeHTML(description)}</p><p class="price">$${price.toFixed(2)}</p><p>Stock: ${stock}</p><p>Category: ${escapeHTML(category)}</p>`;
+  const btn=document.createElement("button");btn.className="add";btn.innerText=stock>0?"🛒 Add to Cart":"Out of Stock";btn.disabled=stock<=0;btn.onclick=()=>addToCart(product);card.appendChild(btn);box.appendChild(card);
+ });
 }
-
-function renderProducts(box,list){
-  box.innerHTML="";
-  if(!list.length){box.innerHTML="<div class='empty'>No products available.</div>";return}
-  list.forEach(p=>{
-    const x=productData(p);
-    const card=document.createElement("div");card.className="product";
-    if(x.image){
-      const img=document.createElement("img");img.src=x.image;img.alt=x.name;
-      img.onerror=()=>img.style.display="none";card.appendChild(img);
-    }
-    card.innerHTML+=`<h3>${escapeHTML(x.name)}</h3>
-      <p>${escapeHTML(x.description)}</p>
-      <p class="price">$${x.price.toFixed(2)}</p>
-      <p>Stock: ${x.stock}</p><p>Category: ${escapeHTML(x.category)}</p>`;
-    const btn=document.createElement("button");btn.className="btn primary";
-    btn.textContent=x.stock>0?"🛒 Add to Cart":"Out of Stock";btn.disabled=x.stock<=0;
-    btn.onclick=()=>addToCart(x);card.appendChild(btn);box.appendChild(card);
-  });
+function addToCart(product){
+ const existing=cart.find(x=>Number(x.id)===Number(product.id));
+ if(existing) existing.quantity++; else cart.push({id:product.id,name:product["Name"]||product.name||"Product",price:Number(product["Price"]??product.price??0),quantity:1});
+ saveCart();updateCartCount();alert("Product added to cart ✅");
 }
-
-function addToCart(p){
-  const found=cart.find(i=>Number(i.id)===Number(p.id));
-  if(found){if(found.quantity<p.stock)found.quantity++}
-  else cart.push({id:p.id,name:p.name,price:p.price,quantity:1});
-  saveCart();updateCounts();alert("Product added to cart ✅");
+function saveCart(){localStorage.setItem("smartSellerCart",JSON.stringify(cart));}
+function updateCartCount(){
+ let n=cart.reduce((a,x)=>a+Number(x.quantity),0);
+ document.getElementById("cartCount").innerText=n;document.getElementById("navCartCount").innerText=n;
 }
-
-function saveCart(){localStorage.setItem("smartSellerCart",JSON.stringify(cart))}
-function updateCounts(){
-  const count=cart.reduce((a,i)=>a+Number(i.quantity),0);
-  document.getElementById("dashCart").textContent=count;
-  document.getElementById("navCart").textContent=count;
-}
-
 function showCart(){
-  const box=document.getElementById("cartItems");box.innerHTML="";
-  if(!cart.length){box.innerHTML="<div class='empty'>Your cart is empty 🛒</div>";document.getElementById("cartTotal").textContent="Total: $0.00";return}
-  let total=0;
-  cart.forEach((item,index)=>{
-    total+=Number(item.price)*Number(item.quantity);
-    const row=document.createElement("div");row.className="cart-item";
-    row.innerHTML=`<div><b>${escapeHTML(item.name)}</b><br>$${Number(item.price).toFixed(2)} each
-      <div class="qty"><button onclick="changeQty(${index},-1)">−</button><span>${item.quantity}</span><button onclick="changeQty(${index},1)">+</button></div></div>`;
-    const rm=document.createElement("button");rm.className="btn danger";rm.textContent="Remove";rm.onclick=()=>{cart.splice(index,1);saveCart();updateCounts();showCart()};row.appendChild(rm);box.appendChild(row);
-  });
-  document.getElementById("cartTotal").textContent="Total: $"+total.toFixed(2);
+ const box=document.getElementById("cartItems");box.innerHTML="";
+ if(!cart.length){box.innerHTML="<div class='empty'>Your cart is empty 🛒</div>";document.getElementById("cartTotal").innerText="Total: $0.00";return;}
+ let total=0;
+ cart.forEach((item,index)=>{
+  total+=Number(item.price)*Number(item.quantity);
+  const row=document.createElement("div");row.className="cart-item";
+  row.innerHTML=`<div><b>${escapeHTML(item.name)}</b><br>$${Number(item.price).toFixed(2)} × ${item.quantity}</div>`;
+  const rm=document.createElement("button");rm.className="remove";rm.innerText="Remove";rm.onclick=()=>{cart.splice(index,1);saveCart();updateCartCount();showCart();};row.appendChild(rm);box.appendChild(row);
+ });
+ document.getElementById("cartTotal").innerText="Total: $"+total.toFixed(2);
 }
-
-function changeQty(i,n){
-  cart[i].quantity+=n;if(cart[i].quantity<=0)cart.splice(i,1);
-  saveCart();updateCounts();showCart();
-}
-
 function checkout(){
-  if(!cart.length){alert("Please add a product to your cart first.");return}
-  const name=localStorage.getItem("smartSellerCustomerName")||"Customer";
-  const email=localStorage.getItem("smartSellerCustomerEmail")||"";
-  let total=cart.reduce((a,i)=>a+Number(i.price)*Number(i.quantity),0);
-  const order={id:"SS-"+Date.now(),date:new Date().toLocaleString(),name,email,total,items:cart.map(i=>({...i})),status:"Pending"};
-  orders.unshift(order);localStorage.setItem("smartSellerOrders",JSON.stringify(orders));
-  notifications.unshift({text:"Your order "+order.id+" has been placed.",date:new Date().toLocaleString()});
-  localStorage.setItem("smartSellerNotifications",JSON.stringify(notifications));
-  cart=[];saveCart();updateCounts();updateDashboard();
-  alert("Order placed successfully ✅\nPlease contact Customer Service for payment account details.");
-  showSection("serviceSection",document.querySelectorAll(".nav button")[6]);
-  document.getElementById("customerName").value=name;
-  document.getElementById("customerEmail").value=email;
-  document.getElementById("customerMessage").value="I placed order "+order.id+". Please send me the payment account details.";
+ if(!cart.length){alert("Please add a product to your cart first.");return;}
+ showSection("serviceSection",document.querySelectorAll(".nav button")[6]);
+ document.getElementById("customerMessage").value="I want to place an order. Please send payment account details.";
 }
-
-function showOrders(){
-  const box=document.getElementById("ordersList");box.innerHTML="";
-  if(!orders.length){box.innerHTML="<div class='empty'>No orders yet.</div>";return}
-  orders.forEach(o=>{
-    const d=document.createElement("div");d.className="order";
-    d.innerHTML=`<b>Order #${escapeHTML(o.id)}</b><br><small>${escapeHTML(o.date)}</small>
-      <p>Total: <b>$${Number(o.total).toFixed(2)}</b></p><span class="badge">${escapeHTML(o.status)}</span>`;
-    box.appendChild(d);
-  });
-}
-
-function showNotifications(){
-  const box=document.getElementById("notifications");box.innerHTML="";
-  if(!notifications.length){box.innerHTML="<div class='empty'>No notifications.</div>";return}
-  notifications.slice(0,20).forEach(n=>{
-    box.innerHTML+=`<div class="notice">🔔 ${escapeHTML(n.text)}<br><small>${escapeHTML(n.date)}</small></div>`;
-  });
-}
-
 async function sendMessage(){
-  const name=document.getElementById("customerName").value.trim();
-  const email=document.getElementById("customerEmail").value.trim();
-  const message=document.getElementById("customerMessage").value.trim();
-  const status=document.getElementById("serviceStatus"),button=document.getElementById("sendButton");
-  if(!name||!email||!message){status.className="error";status.textContent="Please fill all fields.";return}
-  button.disabled=true;button.textContent="Sending...";status.textContent="Sending...";
-  const {error}=await supabaseClient.from("support_tickets").insert([{customer_name:name,customer_email:email,message,subject:"Customer Service"}]);
-  if(error){console.error(error);status.className="error";status.textContent="Message could not be sent. Please try again."}
-  else{status.className="successText";status.textContent="Message sent successfully ✅";document.getElementById("customerMessage").value="";
-    notifications.unshift({text:"Your Customer Service message was sent.",date:new Date().toLocaleString()});
-    localStorage.setItem("smartSellerNotifications",JSON.stringify(notifications));
-  }
-  button.disabled=false;button.textContent="Send Message";
+ const email=document.getElementById("customerEmail").value.trim();
+ const message=document.getElementById("customerMessage").value.trim();
+ const status=document.getElementById("serviceStatus"),button=document.getElementById("sendButton");
+ if(!email||!message){status.className="error";status.innerText="Please enter your email and message.";return;}
+ button.disabled=true;button.innerText="Sending...";status.innerText="Sending...";
+ const {error}=await supabaseClient.from("support_tickets").insert([{customer_email:email,message:message,subject:"Customer Service"}]);
+ if(error){console.error(error);status.className="error";status.innerText="Message could not be sent. Please try again.";}
+ else{status.className="success";status.innerText="Message sent successfully ✅";document.getElementById("customerMessage").value="";loadMyMessages();}
+ button.disabled=false;button.innerText="Send Message";
 }
-
+async function loadMyMessages(){
+ const email=document.getElementById("customerEmail").value.trim()||localStorage.getItem("smartSellerCustomerEmail")||"";
+ const box=document.getElementById("myMessages");
+ if(!email){box.innerHTML="Enter your email above to view your messages and replies.";return;}
+ const {data,error}=await supabaseClient.from("support_tickets").select("id,customer_email,message,subject,admin_reply,replied_at,created_at").eq("customer_email",email).order("id",{ascending:false});
+ if(error){box.innerHTML="<p class='error'>Messages could not be loaded.</p>";return;}
+ if(!data?.length){box.innerHTML="<div class='empty'>No support messages yet.</div>";return;}
+ box.innerHTML="";
+ data.forEach(t=>{
+  const d=document.createElement("div");d.className="ticket";
+  d.innerHTML=`<div class="small">${escapeHTML(t.created_at||"")}</div><p><b>Your message:</b><br>${escapeHTML(t.message)}</p>`;
+  if(t.admin_reply)d.innerHTML+=`<div class="reply"><b>Admin Reply:</b><br>${escapeHTML(t.admin_reply)}${t.replied_at?`<div class="small">Replied: ${escapeHTML(t.replied_at)}</div>`:""}</div>`;
+  else d.innerHTML+=`<div class="small">No reply yet. Our team will reply here.</div>`;
+  box.appendChild(d);
+ });
+}
 function loadProfile(){
-  const name=localStorage.getItem("smartSellerCustomerName")||"";
-  const email=localStorage.getItem("smartSellerCustomerEmail")||"";
-  document.getElementById("profileName").textContent=name||"Customer";
-  document.getElementById("profileEmail").textContent=email||"Not provided";
-  document.getElementById("newName").value=name;
-  document.getElementById("newEmail").value=email;
-  document.getElementById("customerName").value=name;
-  document.getElementById("customerEmail").value=email;
-  document.getElementById("welcomeName").textContent=name||"Customer";
+ const email=localStorage.getItem("smartSellerCustomerEmail")||"";
+ document.getElementById("profileEmail").value=email;document.getElementById("customerEmail").value=email;
 }
 function saveProfile(){
-  const name=document.getElementById("newName").value.trim(),email=document.getElementById("newEmail").value.trim();
-  const s=document.getElementById("profileStatus");
-  if(!name||!email){s.className="error";s.textContent="Please enter name and email.";return}
-  localStorage.setItem("smartSellerCustomerName",name);localStorage.setItem("smartSellerCustomerEmail",email);
-  loadProfile();s.className="successText";s.textContent="Profile saved successfully ✅";
+ const email=document.getElementById("profileEmail").value.trim(),status=document.getElementById("profileStatus");
+ if(!email){status.className="error";status.innerText="Please enter your email.";return;}
+ localStorage.setItem("smartSellerCustomerEmail",email);
+ document.getElementById("customerEmail").value=email;
+ status.className="success";status.innerText="Email saved successfully ✅";loadMyMessages();
 }
-function updateDashboard(){
-  document.getElementById("dashOrders").textContent=orders.length;
-  document.getElementById("dashPending").textContent=orders.filter(o=>o.status==="Pending").length;
-  document.getElementById("dashDelivered").textContent=orders.filter(o=>o.status==="Delivered").length;
-  const box=document.getElementById("recentOrders");box.innerHTML="";
-  if(!orders.length){box.innerHTML="<div class='empty'>No orders yet.</div>";return}
-  orders.slice(0,3).forEach(o=>box.innerHTML+=`<div class="notice"><b>#${escapeHTML(o.id)}</b> — $${Number(o.total).toFixed(2)} — <span class="badge">${escapeHTML(o.status)}</span></div>`);
-}
-function logout(){
-  if(confirm("Are you sure you want to logout?")){
-    localStorage.removeItem("smartSellerCustomerName");
-    localStorage.removeItem("smartSellerCustomerEmail");
-    alert("Logged out.");
-    location.reload();
-  }
-}
-function escapeHTML(v){
-  return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-}
-
-loadProfile();updateCounts();updateDashboard();showCart();showOrders();showNotifications();loadProducts();
+function logout(){if(confirm("Do you want to logout?")){localStorage.removeItem("smartSellerCustomerEmail");localStorage.removeItem("smartSellerCart");location.reload();}}
+document.getElementById("customerEmail").addEventListener("change",loadMyMessages);
+loadProfile();updateCartCount();loadProducts();
 </script>
 </body>
 </html>
