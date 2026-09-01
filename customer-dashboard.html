@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,23 +9,22 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
 *{
     box-sizing:border-box;
 }
 
 body{
     margin:0;
-    background:#f3f4f6;
-    color:#222;
     font-family:Arial,sans-serif;
+    background:#f3f4f6;
+    color:#202124;
 }
 
 .header{
     background:#111827;
     color:white;
     text-align:center;
-    padding:18px 10px;
+    padding:20px 10px;
 }
 
 .header h1{
@@ -36,14 +34,14 @@ body{
 
 .header p{
     margin:5px 0 0;
-    font-size:12px;
     color:#cbd5e1;
+    font-size:13px;
 }
 
 .container{
     max-width:900px;
     margin:auto;
-    padding:12px;
+    padding:14px;
 }
 
 /* MENU */
@@ -51,18 +49,18 @@ body{
 .menu{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:9px;
-    margin-bottom:14px;
+    gap:10px;
+    margin-bottom:15px;
 }
 
 .menu button{
     border:0;
     background:white;
     color:#222;
-    padding:13px 5px;
+    padding:13px 8px;
     border-radius:10px;
     box-shadow:0 2px 8px #ddd;
-    font-size:13px;
+    font-size:14px;
     cursor:pointer;
 }
 
@@ -85,29 +83,24 @@ body{
 
 .card{
     background:white;
-    border-radius:15px;
-    padding:18px;
-    margin-bottom:14px;
-    box-shadow:0 3px 14px #ddd;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:15px;
+    box-shadow:0 3px 15px #ddd;
 }
 
 .card h2{
     margin-top:0;
 }
 
-/* DASHBOARD */
+/* WELCOME */
 
 .welcome{
-    padding:22px;
+    padding:24px;
 }
 
 .welcome h2{
-    font-size:20px;
-}
-
-.welcome p{
-    line-height:1.6;
-    color:#555;
+    margin-top:0;
 }
 
 /* STATS */
@@ -115,26 +108,25 @@ body{
 .stats{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:10px;
+    gap:12px;
 }
 
 .stat{
     background:white;
     text-align:center;
-    padding:18px 5px;
-    border-radius:14px;
+    padding:18px 8px;
+    border-radius:15px;
     box-shadow:0 2px 10px #ddd;
 }
 
 .stat h2{
     margin:0;
-    font-size:24px;
+    font-size:25px;
 }
 
 .stat p{
     margin:6px 0 0;
     color:#777;
-    font-size:13px;
 }
 
 /* PRODUCTS */
@@ -142,36 +134,36 @@ body{
 .product-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:14px;
+    gap:15px;
 }
 
 .product{
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    padding:12px;
     background:white;
+    border-radius:14px;
+    padding:12px;
+    box-shadow:0 2px 10px #ddd;
 }
 
 .product img{
     width:100%;
     height:190px;
     object-fit:cover;
-    border-radius:9px;
+    border-radius:10px;
 }
 
 .product h3{
-    margin:9px 0 5px;
+    margin:10px 0 5px;
 }
 
 .product p{
     color:#666;
-    margin:5px 0;
+    margin:6px 0;
 }
 
 .price{
-    color:#1877f2 !important;
-    font-size:18px;
+    font-size:19px;
     font-weight:bold;
+    color:#1877f2 !important;
 }
 
 .action{
@@ -193,17 +185,17 @@ body{
 /* CART */
 
 .cart-item{
+    background:#f8fafc;
     border:1px solid #ddd;
-    padding:13px;
     border-radius:10px;
+    padding:14px;
     margin-bottom:10px;
-    background:#fafafa;
 }
 
 .total{
-    text-align:right;
     font-size:20px;
     font-weight:bold;
+    text-align:right;
     margin-top:15px;
 }
 
@@ -213,25 +205,25 @@ body{
     font-size:25px;
 }
 
-.service-text{
-    color:#555;
-    line-height:1.5;
-}
-
 textarea{
     width:100%;
     min-height:150px;
-    padding:14px;
+    padding:15px;
     border:1px solid #ddd;
     border-radius:12px;
-    font-size:16px;
     resize:vertical;
+    font-size:16px;
+    outline:none;
 }
 
-.send{
+textarea:focus{
+    border-color:#1877f2;
+}
+
+.send-btn{
     width:100%;
-    padding:14px;
-    margin-top:10px;
+    padding:15px;
+    margin-top:12px;
     border:0;
     border-radius:10px;
     background:#1877f2;
@@ -240,37 +232,69 @@ textarea{
     cursor:pointer;
 }
 
-.result{
-    display:none;
-    margin-top:12px;
-    padding:12px;
+.send-btn:disabled{
+    opacity:.6;
+}
+
+/* MESSAGE RESULT */
+
+.message-box{
+    padding:13px;
     border-radius:10px;
+    margin-top:12px;
+    display:none;
+    font-weight:bold;
 }
 
 .success{
-    display:block;
     background:#dcfce7;
     color:#166534;
 }
 
 .error{
-    display:block;
     background:#fee2e2;
     color:#991b1b;
 }
 
-.support{
+/* SUPPORT */
+
+.support-message{
     border:1px solid #ddd;
-    border-radius:12px;
     padding:14px;
+    border-radius:12px;
     margin-top:10px;
 }
 
-.reply{
-    margin-top:10px;
-    padding:12px;
-    border-radius:9px;
+.support-message .reply{
     background:#ecfdf5;
+    padding:12px;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+/* PROFILE */
+
+.profile-row{
+    padding:15px;
+    border-bottom:1px solid #eee;
+}
+
+/* ORDERS */
+
+.order-box{
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:14px;
+    margin-bottom:10px;
+    background:#fafafa;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    background:#fff3cd;
+    color:#856404;
 }
 
 /* MOBILE */
@@ -281,6 +305,10 @@ textarea{
         grid-template-columns:repeat(2,1fr);
     }
 
+    .stats{
+        grid-template-columns:repeat(3,1fr);
+    }
+
     .product-grid{
         grid-template-columns:1fr;
     }
@@ -289,13 +317,17 @@ textarea{
         height:220px;
     }
 
-}
+    .menu button{
+        font-size:13px;
+    }
 
+}
 </style>
 </head>
 
-
 <body>
+
+<!-- HEADER -->
 
 <div class="header">
 
@@ -307,7 +339,6 @@ textarea{
 
 
 <div class="container">
-
 
 <!-- ================= MENU ================= -->
 
@@ -323,7 +354,7 @@ textarea{
     </button>
 
     <button onclick="showPage('cartPage',this)">
-        🛒 Cart <span id="cartCount">0</span>
+        🛒 Cart <span id="cartMenuCount">0</span>
     </button>
 
     <button onclick="showPage('ordersPage',this)">
@@ -372,9 +403,7 @@ textarea{
 
         <div class="stat">
 
-            <h2 id="productCount">
-                0
-            </h2>
+            <h2 id="dashboardProducts">0</h2>
 
             <p>Products</p>
 
@@ -383,9 +412,7 @@ textarea{
 
         <div class="stat">
 
-            <h2 id="dashboardCart">
-                0
-            </h2>
+            <h2 id="dashboardCart">0</h2>
 
             <p>Cart Items</p>
 
@@ -433,9 +460,7 @@ textarea{
 
         <h2>🛒 My Cart</h2>
 
-        <div id="cartItems">
-            Your cart is empty.
-        </div>
+        <div id="cartItems"></div>
 
         <div class="total">
 
@@ -466,7 +491,7 @@ textarea{
 
         <div id="orders">
 
-            No orders yet.
+            <p>No orders yet.</p>
 
         </div>
 
@@ -500,13 +525,13 @@ textarea{
 
         <h2>👤 Profile</h2>
 
-        <p>
-            Welcome to Smart Seller Shop.
-        </p>
+        <div class="profile-row">
+            Customer Account
+        </div>
 
-        <p>
-            This is your customer account.
-        </p>
+        <div class="profile-row">
+            Smart Seller Shop Customer
+        </div>
 
     </div>
 
@@ -523,11 +548,10 @@ textarea{
             💬 Customer Service
         </h2>
 
-        <p class="service-text">
+        <p>
             For payment details, orders, or any help,
             send us a message.
         </p>
-
 
         <!-- ONLY MESSAGE -->
 
@@ -537,22 +561,24 @@ textarea{
         ></textarea>
 
 
-        <button class="send"
-                onclick="sendMessage()">
+        <button
+            id="sendSupportBtn"
+            class="send-btn"
+            onclick="sendSupportMessage()">
 
             Send Message
 
         </button>
 
 
-        <div id="result"
-             class="result">
+        <div id="serviceResult"
+             class="message-box">
         </div>
 
     </div>
 
 
-    <!-- MESSAGES -->
+    <!-- SUPPORT MESSAGES -->
 
     <div class="card">
 
@@ -580,45 +606,27 @@ textarea{
    SUPABASE
 ===================================================== */
 
-var supabaseClient = null;
+const SUPABASE_URL =
+"https://cgrwiwzqiusvjibpjzdv.supabase.co";
 
-try{
+const SUPABASE_KEY =
+"sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
 
-    if(
-        window.supabase &&
-        typeof window.supabase.createClient === "function"
-    ){
-
-        supabaseClient =
-            window.supabase.createClient(
-
-                "https://cgrwiwzqiusvjibpjzdv.supabase.co",
-
-                "sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV"
-
-            );
-
-    }
-
-}catch(error){
-
-    console.log(
-        "Supabase unavailable:",
-        error
-    );
-
-}
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
 /* =====================================================
    CUSTOMER ID
 ===================================================== */
 
-var customerId =
+let customerId =
 localStorage.getItem(
     "smartSellerCustomerId"
 );
-
 
 if(!customerId){
 
@@ -642,7 +650,7 @@ if(!customerId){
    CART
 ===================================================== */
 
-var cart = [];
+let cart = [];
 
 try{
 
@@ -654,18 +662,18 @@ try{
         );
 
     if(!Array.isArray(cart)){
-        cart=[];
+        cart = [];
     }
 
-}catch(error){
+}catch(e){
 
-    cart=[];
+    cart = [];
 
 }
 
 
 /* =====================================================
-   MENU
+   PAGE NAVIGATION
 ===================================================== */
 
 function showPage(pageId,button){
@@ -679,7 +687,7 @@ function showPage(pageId,button){
     });
 
 
-    var page =
+    const page =
         document.getElementById(pageId);
 
 
@@ -722,7 +730,7 @@ function showPage(pageId,button){
 
     if(pageId === "servicePage"){
 
-        loadMessages();
+        loadSupportMessages();
 
     }
 
@@ -730,217 +738,258 @@ function showPage(pageId,button){
 
 
 /* =====================================================
-   PRODUCTS
+   LOAD PRODUCTS
 ===================================================== */
 
 async function loadProducts(){
 
-    var box =
+    const box =
         document.getElementById(
             "products"
         );
 
 
-    if(!supabaseClient){
+    box.innerHTML =
+        "<p>Loading products...</p>";
+
+
+    const result =
+        await supabaseClient
+        .from("Products")
+        .select("*");
+
+
+    const data =
+        result.data;
+
+    const error =
+        result.error;
+
+
+    if(error){
+
+        console.error(error);
 
         box.innerHTML =
-            "<p>Products connection unavailable.</p>";
+            "<p>Products could not be loaded.</p>";
 
         return;
 
     }
 
 
-    try{
-
-        var response =
-            await supabaseClient
-            .from("Products")
-            .select("*");
+    const list =
+        data || [];
 
 
-        var data =
-            response.data;
-
-        var error =
-            response.error;
-
-
-        if(error){
-
-            console.log(error);
-
-            box.innerHTML =
-                "<p>Products could not be loaded.</p>";
-
-            return;
-
-        }
+    document.getElementById(
+        "dashboardProducts"
+    ).innerText =
+        list.length;
 
 
-        data =
-            data || [];
+    if(list.length === 0){
+
+        box.innerHTML =
+            "<p>No products available.</p>";
+
+        return;
+
+    }
 
 
-        document.getElementById(
-            "productCount"
-        ).innerText =
-            data.length;
+    box.innerHTML = "";
 
 
-        if(data.length === 0){
+    list.forEach(function(product){
 
-            box.innerHTML =
-                "<p>No products available.</p>";
-
-            return;
-
-        }
+        const id =
+            product["Id"] ??
+            product["id"];
 
 
-        box.innerHTML = "";
+        const name =
+            product["Name"] ??
+            product["name"] ??
+            "Product";
 
 
-        data.forEach(function(product){
-
-            var id =
-                product.Id ??
-                product.id;
-
-
-            var name =
-                product.Name ??
-                product.name ??
-                "Product";
+        const description =
+            product["Description"] ??
+            product["description"] ??
+            "";
 
 
-            var description =
-                product.Description ??
-                product.description ??
-                "";
+        const price =
+            Number(
+                product["Price"] ??
+                product["price"] ??
+                0
+            );
 
 
-            var price =
-                Number(
-                    product.Price ??
-                    product.price ??
-                    0
-                );
+        const stock =
+            Number(
+                product["Stock"] ??
+                product["stock"] ??
+                0
+            );
 
 
-            var stock =
-                Number(
-                    product.Stock ??
-                    product.stock ??
-                    0
-                );
+        const category =
+            product["Category"] ??
+            product["category"] ??
+            "";
 
 
-            var image =
-                product["Image url"] ??
-                product.image ??
-                product.image_url ??
-                "";
+        const image =
+            product["Image url"] ??
+            product["image"] ??
+            product["image_url"] ??
+            "";
 
 
-            var div =
-                document.createElement(
-                    "div"
-                );
+        const productData = {
 
-            div.className =
-                "product";
+            id:id,
 
+            name:name,
 
-            var imageHTML =
-                image
-                ?
-                '<img src="' +
-                escapeHTML(image) +
-                '" alt="' +
-                escapeHTML(name) +
-                '">'
-                :
-                "";
+            price:price
+
+        };
 
 
-            div.innerHTML =
+        const div =
+            document.createElement("div");
 
-                imageHTML +
-
-                "<h3>" +
-                escapeHTML(name) +
-                "</h3>" +
-
-                "<p>" +
-                escapeHTML(description) +
-                "</p>" +
-
-                '<p class="price">$' +
-                price.toFixed(2) +
-                "</p>" +
-
-                "<p>Stock: " +
-                stock +
-                "</p>";
+        div.className =
+            "product";
 
 
-            var button =
-                document.createElement(
-                    "button"
-                );
+        if(image){
 
+            const img =
+                document.createElement("img");
 
-            button.className =
-                "action";
+            img.src = image;
 
+            img.alt = name;
 
-            button.innerText =
-                "🛒 Add to Cart";
-
-
-            button.onclick =
+            img.onerror =
                 function(){
 
-                    addToCart({
-
-                        id:id,
-
-                        name:name,
-
-                        price:price
-
-                    });
+                    this.style.display =
+                        "none";
 
                 };
 
+            div.appendChild(img);
 
-            div.appendChild(button);
-
-            box.appendChild(div);
-
-        });
+        }
 
 
-    }catch(error){
+        const title =
+            document.createElement("h3");
 
-        console.log(error);
+        title.innerText =
+            name;
 
-        box.innerHTML =
-            "<p>Products could not be loaded.</p>";
+        div.appendChild(title);
 
-    }
+
+        const desc =
+            document.createElement("p");
+
+        desc.innerText =
+            description;
+
+        div.appendChild(desc);
+
+
+        const priceEl =
+            document.createElement("p");
+
+        priceEl.className =
+            "price";
+
+        priceEl.innerText =
+            "$" + price.toFixed(2);
+
+        div.appendChild(priceEl);
+
+
+        const stockEl =
+            document.createElement("p");
+
+        stockEl.innerText =
+            "Stock: " + stock;
+
+        div.appendChild(stockEl);
+
+
+        if(category){
+
+            const categoryEl =
+                document.createElement("p");
+
+            categoryEl.innerText =
+                "Category: " + category;
+
+            div.appendChild(
+                categoryEl
+            );
+
+        }
+
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "action";
+
+        button.innerText =
+            "🛒 Add to Cart";
+
+
+        button.onclick =
+            function(){
+
+                addToCart(
+                    productData
+                );
+
+            };
+
+
+        if(stock <= 0){
+
+            button.disabled = true;
+
+            button.innerText =
+                "Out of Stock";
+
+        }
+
+
+        div.appendChild(button);
+
+
+        box.appendChild(div);
+
+    });
 
 }
 
 
 /* =====================================================
-   CART
+   ADD TO CART
 ===================================================== */
 
 function addToCart(product){
 
-    var existing =
+    const existing =
         cart.find(function(item){
 
             return String(item.id) ===
@@ -972,6 +1021,7 @@ function addToCart(product){
 
     saveCart();
 
+
     alert(
         "Product added to cart! ✅"
     );
@@ -979,24 +1029,30 @@ function addToCart(product){
 }
 
 
+/* =====================================================
+   SAVE CART
+===================================================== */
+
 function saveCart(){
 
     localStorage.setItem(
-
         "smartSellerCart",
-
         JSON.stringify(cart)
-
     );
+
 
     updateCartCount();
 
 }
 
 
+/* =====================================================
+   CART COUNT
+===================================================== */
+
 function updateCartCount(){
 
-    var count=0;
+    let count = 0;
 
 
     cart.forEach(function(item){
@@ -1007,30 +1063,52 @@ function updateCartCount(){
     });
 
 
-    document.getElementById(
-        "cartCount"
-    ).innerText=count;
+    const menuCount =
+        document.getElementById(
+            "cartMenuCount"
+        );
 
 
-    document.getElementById(
-        "dashboardCart"
-    ).innerText=count;
+    const dashboardCount =
+        document.getElementById(
+            "dashboardCart"
+        );
+
+
+    if(menuCount){
+
+        menuCount.innerText =
+            count;
+
+    }
+
+
+    if(dashboardCount){
+
+        dashboardCount.innerText =
+            count;
+
+    }
 
 }
 
 
+/* =====================================================
+   SHOW CART
+===================================================== */
+
 function showCart(){
 
-    var box =
+    const box =
         document.getElementById(
             "cartItems"
         );
 
 
-    if(cart.length===0){
+    if(cart.length === 0){
 
         box.innerHTML =
-            "Your cart is empty.";
+            "<p>Your cart is empty.</p>";
 
         document.getElementById(
             "cartTotal"
@@ -1042,50 +1120,110 @@ function showCart(){
     }
 
 
-    box.innerHTML="";
+    box.innerHTML = "";
 
 
-    var total=0;
+    let total = 0;
 
 
-    cart.forEach(function(item,index){
+    cart.forEach(
+        function(item,index){
 
-        var itemTotal =
-            Number(item.price) *
-            Number(item.quantity);
-
-
-        total += itemTotal;
+            const itemTotal =
+                Number(item.price) *
+                Number(item.quantity);
 
 
-        box.innerHTML +=
+            total += itemTotal;
 
-            '<div class="cart-item">' +
 
-            "<b>" +
-            escapeHTML(item.name) +
-            "</b>" +
+            const div =
+                document.createElement(
+                    "div"
+                );
 
-            "<p>Price: $" +
-            Number(item.price).toFixed(2) +
-            "</p>" +
 
-            "<p>Quantity: " +
-            item.quantity +
-            "</p>" +
+            div.className =
+                "cart-item";
 
-            '<button class="action danger" ' +
-            'onclick="removeItem(' +
-            index +
-            ')">' +
 
-            "Remove" +
+            const name =
+                document.createElement(
+                    "b"
+                );
 
-            "</button>" +
+            name.innerText =
+                item.name;
 
-            "</div>";
 
-    });
+            div.appendChild(name);
+
+
+            const price =
+                document.createElement(
+                    "p"
+                );
+
+            price.innerText =
+                "Price: $" +
+                Number(
+                    item.price
+                ).toFixed(2);
+
+
+            div.appendChild(price);
+
+
+            const quantity =
+                document.createElement(
+                    "p"
+                );
+
+            quantity.innerText =
+                "Quantity: " +
+                item.quantity;
+
+
+            div.appendChild(
+                quantity
+            );
+
+
+            const remove =
+                document.createElement(
+                    "button"
+                );
+
+
+            remove.className =
+                "action danger";
+
+
+            remove.innerText =
+                "Remove";
+
+
+            remove.onclick =
+                function(){
+
+                    removeCartItem(
+                        index
+                    );
+
+                };
+
+
+            div.appendChild(
+                remove
+            );
+
+
+            box.appendChild(
+                div
+            );
+
+        }
+    );
 
 
     document.getElementById(
@@ -1096,7 +1234,11 @@ function showCart(){
 }
 
 
-function removeItem(index){
+/* =====================================================
+   REMOVE CART ITEM
+===================================================== */
+
+function removeCartItem(index){
 
     cart.splice(index,1);
 
@@ -1108,12 +1250,12 @@ function removeItem(index){
 
 
 /* =====================================================
-   ORDERS
+   PLACE ORDER
 ===================================================== */
 
 function placeOrder(){
 
-    if(cart.length===0){
+    if(cart.length === 0){
 
         alert(
             "Your cart is empty."
@@ -1124,26 +1266,15 @@ function placeOrder(){
     }
 
 
-    var orders=[];
+    const orders =
+        JSON.parse(
+            localStorage.getItem(
+                "smartSellerOrders"
+            ) || "[]"
+        );
 
 
-    try{
-
-        orders =
-            JSON.parse(
-                localStorage.getItem(
-                    "smartSellerOrders"
-                ) || "[]"
-            );
-
-    }catch(error){
-
-        orders=[];
-
-    }
-
-
-    var total =
+    const total =
         cart.reduce(
             function(sum,item){
 
@@ -1167,30 +1298,33 @@ function placeOrder(){
                 JSON.stringify(cart)
             ),
 
-        total:total,
+        total:
+            total,
 
-        status:"Pending",
+        status:
+            "Pending",
 
         date:
-            new Date().toLocaleString()
+            new Date()
+            .toLocaleString()
 
     });
 
 
     localStorage.setItem(
-
         "smartSellerOrders",
-
         JSON.stringify(orders)
-
     );
 
 
-    cart=[];
+    cart = [];
+
 
     saveCart();
 
+
     showCart();
+
 
     alert(
         "Order placed successfully! ✅"
@@ -1199,174 +1333,16 @@ function placeOrder(){
 }
 
 
+/* =====================================================
+   LOAD ORDERS
+===================================================== */
+
 function loadOrders(){
 
-    var orders=[];
-
-
-    try{
-
-        orders =
-            JSON.parse(
-                localStorage.getItem(
-                    "smartSellerOrders"
-                ) || "[]"
-            );
-
-    }catch(error){
-
-        orders=[];
-
-    }
-
-
-    var box =
+    const box =
         document.getElementById(
             "orders"
         );
 
 
-    if(!orders.length){
-
-        box.innerHTML =
-            "<p>No orders yet.</p>";
-
-        return;
-
-    }
-
-
-    box.innerHTML="";
-
-
-    orders
-    .slice()
-    .reverse()
-    .forEach(function(order){
-
-        box.innerHTML +=
-
-            '<div class="support">' +
-
-            "<b>" +
-            escapeHTML(order.id) +
-            "</b>" +
-
-            "<p>Total: $" +
-            Number(order.total).toFixed(2) +
-            "</p>" +
-
-            "<p>Status: " +
-            escapeHTML(order.status) +
-            "</p>" +
-
-            "<small>" +
-            escapeHTML(order.date) +
-            "</small>" +
-
-            "</div>";
-
-    });
-
-}
-
-
-/* =====================================================
-   CUSTOMER SERVICE
-===================================================== */
-
-async function sendMessage(){
-
-    var input =
-        document.getElementById(
-            "supportMessage"
-        );
-
-
-    var result =
-        document.getElementById(
-            "result"
-        );
-
-
-    var message =
-        input.value.trim();
-
-
-    if(!message){
-
-        result.innerText =
-            "Please write a message first.";
-
-        result.className =
-            "result error";
-
-        return;
-
-    }
-
-
-    if(!supabaseClient){
-
-        result.innerText =
-            "Message service is temporarily unavailable.";
-
-        result.className =
-            "result error";
-
-        return;
-
-    }
-
-
-    result.innerText =
-        "Sending...";
-
-    result.className =
-        "result success";
-
-
-    try{
-
-        /*
-         IMPORTANT:
-         Name and Email are NOT shown to customer.
-         Placeholder values are used only because
-         your old database requires these columns.
-        */
-
-        var response =
-            await supabaseClient
-            .from("support_tickets")
-            .insert([{
-
-                customer_id:
-                    customerId,
-
-                customer_name:
-                    "Customer",
-
-                customer_email:
-                    "no-email@customer.local",
-
-                message:
-                    message,
-
-                status:
-                    "pending"
-
-            }]);
-
-
-        if(response.error){
-
-            throw response.error;
-
-        }
-
-
-        input.value="";
-
-
-        result.innerText =
-            "Message sent succ
+    let orders = [];
