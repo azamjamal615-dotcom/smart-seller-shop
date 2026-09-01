@@ -6,349 +6,110 @@
 <title>Smart Seller Shop - Admin Panel</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f3f4f6;color:#222}
-.header{background:#111827;color:white;padding:22px 15px;text-align:center}
-.header h1{margin:0;font-size:28px}.header p{margin:7px 0 0;color:#ccc}
-.container{max-width:900px;margin:auto;padding:15px}
-.card{background:white;padding:20px;margin-bottom:18px;border-radius:16px;box-shadow:0 3px 15px #ddd}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.stat{background:white;padding:20px 10px;border-radius:15px;text-align:center;box-shadow:0 3px 12px #ddd}
-.stat h2{margin:0;font-size:30px}.stat p{margin:8px 0 0;color:#777}
-label{display:block;margin-top:8px;font-weight:bold}
-input,select,textarea{width:100%;padding:13px;margin:7px 0 15px;border:1px solid #ddd;border-radius:10px;font-size:16px}
-textarea{min-height:90px;resize:vertical}
-button{width:100%;padding:14px;border:0;border-radius:10px;background:#1877f2;color:white;font-size:17px;cursor:pointer}
-button:hover{background:#0d65d9}button:disabled{opacity:.6;cursor:not-allowed}
-.cancel{background:#777;margin-top:8px}.delete{background:#e53935;margin-top:5px}.edit{background:#ff9800;margin-bottom:7px}
-.message{padding:13px;border-radius:10px;margin-bottom:15px;display:none;font-weight:bold}
-.success{background:#dcfce7;color:#166534}.error{background:#fee2e2;color:#991b1b}
-.loading{text-align:center;padding:20px;color:#777}.empty{text-align:center;padding:20px;color:#777}
-.product{border:1px solid #ddd;border-radius:12px;padding:15px;margin-top:12px}
-.product img{width:100%;max-height:220px;object-fit:cover;border-radius:10px;margin-bottom:10px}
-.product h3{margin:5px 0}.product p{margin:6px 0;color:#555}
-.nav{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}
-.nav button{background:white;color:#222;box-shadow:0 2px 10px #ddd}
-.nav button.active{background:#1877f2;color:white}
-.section{display:none}.section.active{display:block}
-.ticket{border:1px solid #ddd;border-radius:12px;padding:15px;margin-top:12px}
-.ticket.unreplied{border-left:5px solid #1877f2}
-.ticket small{color:#777}
-.customer-message{background:#f3f4f6;padding:12px;border-radius:10px;margin:10px 0;white-space:pre-wrap}
-.reply-box{background:#eff6ff;padding:12px;border-radius:10px;margin-top:10px}
-.reply-text{background:#dcfce7;padding:12px;border-radius:10px;white-space:pre-wrap}
-.badge{display:inline-block;padding:5px 9px;border-radius:20px;font-size:12px;font-weight:bold;background:#fee2e2;color:#991b1b}
-.badge.replied{background:#dcfce7;color:#166534}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f4f6;color:#222}
+.header{background:#111827;color:#fff;padding:22px 15px;text-align:center}.header h1{margin:0;font-size:28px}.header p{margin:7px 0;color:#ccc}
+.container{max-width:900px;margin:auto;padding:15px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat,.card{background:#fff;border-radius:16px;box-shadow:0 3px 15px #ddd}.stat{padding:20px 10px;text-align:center}.stat h2{margin:0;font-size:30px}.stat p{margin:8px 0;color:#777}
+.card{padding:20px;margin-bottom:18px}label{display:block;margin-top:8px;font-weight:bold}input,select,textarea{width:100%;padding:13px;margin:7px 0 15px;border:1px solid #ddd;border-radius:10px;font-size:16px}textarea{min-height:90px;resize:vertical}
+button{width:100%;padding:14px;border:0;border-radius:10px;background:#1877f2;color:#fff;font-size:17px;cursor:pointer}button:disabled{opacity:.6}.cancel{background:#777;margin-top:8px}.delete{background:#e53935;margin-top:5px}.edit{background:#ff9800;margin-bottom:7px}.replyBtn{background:#16a34a;margin-top:8px}
+.message{padding:13px;border-radius:10px;margin-bottom:15px;display:none;font-weight:bold}.success{background:#dcfce7;color:#166534}.error{background:#fee2e2;color:#991b1b}
+.loading,.empty{text-align:center;padding:20px;color:#777}.product,.ticket{border:1px solid #ddd;border-radius:12px;padding:15px;margin-top:12px}.product img{width:100%;max-height:220px;object-fit:cover;border-radius:10px;margin-bottom:10px}.product h3{margin:5px 0}.product p{margin:6px 0;color:#555}
+.ticket{background:#fafafa}.ticket-header{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.email{font-weight:bold;color:#1877f2}.ticket-message{padding:12px;background:#fff;border-radius:10px;margin-top:10px}.reply-area{margin-top:12px}.badge{padding:5px 9px;border-radius:20px;font-size:12px;font-weight:bold;background:#fef3c7;color:#92400e}.badge.replied{background:#dcfce7;color:#166534}
 @media(max-width:600px){.stats{grid-template-columns:1fr}.header h1{font-size:25px}}
 </style>
 </head>
 <body>
-
-<div class="header">
-<h1>Smart Seller Shop</h1>
-<p>Admin Panel</p>
-</div>
-
+<div class="header"><h1>Smart Seller Shop</h1><p>Admin Panel</p></div>
 <div class="container">
 <div id="messageBox" class="message"></div>
-
-<div class="stats">
-<div class="stat"><h2 id="productCount">0</h2><p>Products</p></div>
-<div class="stat"><h2 id="messageCount">0</h2><p>Messages</p></div>
-<div class="stat"><h2 id="stockCount">0</h2><p>Total Stock</p></div>
-</div>
-
-<br>
-
-<div class="nav">
-<button id="productsTab" class="active" onclick="showSection('productsSection',this)">📦 Products</button>
-<button id="messagesTab" onclick="showSection('messagesSection',this)">💬 Customer Messages</button>
-</div>
-
-<div id="productsSection" class="section active">
+<div class="stats"><div class="stat"><h2 id="productCount">0</h2><p>Products</p></div><div class="stat"><h2 id="messageCount">0</h2><p>Messages</p></div><div class="stat"><h2 id="stockCount">0</h2><p>Total Stock</p></div></div><br>
 
 <div class="card">
 <h2 id="formTitle">➕ Add New Product</h2>
-
-<label>Product Name</label>
-<input id="name" type="text" placeholder="Example: Samsung Phone">
-
-<label>Description</label>
-<textarea id="description" placeholder="Product description"></textarea>
-
-<label>Price</label>
-<input id="price" type="number" step="0.01" placeholder="100">
-
-<label>Stock</label>
-<input id="stock" type="number" placeholder="10">
-
-<label>Category</label>
-<select id="category">
-<option value="Phone">Phone</option>
-<option value="Laptop">Laptop</option>
-<option value="Accessories">Accessories</option>
-<option value="Other">Other</option>
-</select>
-
-<label>Product Image URL</label>
-<input id="image" type="text" placeholder="https://example.com/image.jpg">
-
-<button id="saveBtn" onclick="saveProduct()">Add Product</button>
-<button class="cancel" id="cancelBtn" onclick="cancelEdit()" style="display:none">Cancel Edit</button>
+<label>Product Name</label><input id="name" type="text" placeholder="Example: Samsung Phone">
+<label>Description</label><textarea id="description" placeholder="Product description"></textarea>
+<label>Price</label><input id="price" type="number" step="0.01" placeholder="100">
+<label>Stock</label><input id="stock" type="number" placeholder="10">
+<label>Category</label><select id="category"><option>Phone</option><option>Laptop</option><option>Accessories</option><option>Other</option></select>
+<label>Product Image URL</label><input id="image" type="text" placeholder="https://example.com/image.jpg">
+<button id="saveBtn" onclick="saveProduct()">Add Product</button><button class="cancel" id="cancelBtn" onclick="cancelEdit()" style="display:none">Cancel Edit</button>
 </div>
 
-<div class="card">
-<h2>📦 Products</h2>
-<div id="products"><div class="loading">Products loading...</div></div>
-</div>
+<div class="card"><h2>📦 Products</h2><div id="products"><div class="loading">Products loading...</div></div></div>
 
-</div>
-
-<div id="messagesSection" class="section">
-<div class="card">
-<h2>💬 Customer Messages</h2>
-<p>Customers ke messages yahan aayenge. Reply karne ke liye neeche box mein jawab likhein.</p>
-<button onclick="loadTickets()">🔄 Refresh Messages</button>
-<div id="tickets"><div class="loading">Messages loading...</div></div>
-</div>
-</div>
-
+<div class="card"><h2>💬 Customer Messages</h2><p>Customer messages appear below. Reply directly from this page.</p><div id="tickets"><div class="loading">Messages loading...</div></div></div>
 </div>
 
 <script>
 const SUPABASE_URL="https://cgrwiwzqiusvjibpjzdv.supabase.co";
 const SUPABASE_KEY="sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
 const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let products=[],editId=null;
 
-let products=[];
-let editId=null;
-
-function showSection(id,button){
-document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-document.getElementById(id).classList.add("active");
-document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
-button.classList.add("active");
-if(id==="messagesSection") loadTickets();
-}
-
-function showMessage(text,type){
-const box=document.getElementById("messageBox");
-box.innerText=text;box.className="message "+type;box.style.display="block";
-setTimeout(()=>box.style.display="none",5000);
-}
-
-function getProductId(p){
-return p["Id"] ?? p["id"] ?? null;
-}
-
+function showMessage(text,type){const box=document.getElementById("messageBox");box.innerText=text;box.className="message "+type;box.style.display="block";setTimeout(()=>box.style.display="none",5000)}
+function getId(p){return p.Id??p.id??null}
+function val(p,a,b,c){return p[a]??p[b]??p[c]??null}
 async function loadProducts(){
-const box=document.getElementById("products");
-box.innerHTML='<div class="loading">Products loading...</div>';
-const {data,error}=await supabaseClient.from("Products").select("*");
-if(error){
-box.innerHTML="<p>Products load nahi ho rahe.</p>";
-showMessage("Supabase error: "+error.message,"error");return;
+ const box=document.getElementById("products");box.innerHTML='<div class="loading">Products loading...</div>';
+ const {data,error}=await supabaseClient.from("Products").select("*");
+ if(error){box.innerHTML="<p class='error'>Products could not be loaded.</p>";showMessage("Supabase error: "+error.message,"error");return}
+ products=data||[];products.sort((a,b)=>Number(getId(b)||0)-Number(getId(a)||0));showProducts();updateStats();
 }
-products=data||[];
-products.sort((a,b)=>Number(getProductId(b)||0)-Number(getProductId(a)||0));
-showProducts();updateStats();
-}
-
 async function saveProduct(){
-const name=document.getElementById("name").value.trim();
-const description=document.getElementById("description").value.trim();
-const price=document.getElementById("price").value;
-const stock=document.getElementById("stock").value;
-const category=document.getElementById("category").value;
-const image=document.getElementById("image").value.trim();
-
-if(!name||price===""||stock===""){
-showMessage("Product Name, Price aur Stock zaroor bharain.","error");return;
+ const name=document.getElementById("name").value.trim(),description=document.getElementById("description").value.trim(),price=document.getElementById("price").value,stock=document.getElementById("stock").value,category=document.getElementById("category").value,image=document.getElementById("image").value.trim();
+ if(!name||price===""||stock===""){showMessage("Product Name, Price and Stock are required.","error");return}
+ const productData={"Name":name,"Description":description||null,"Price":Number(price),"Stock":Number(stock),"Category":category,"Image url":image||null};
+ const btn=document.getElementById("saveBtn");btn.disabled=true;btn.innerText="Saving...";
+ let error;
+ if(editId===null){({error}=await supabaseClient.from("Products").insert([productData]))}else{({error}=await supabaseClient.from("Products").update(productData).eq("Id",editId))}
+ if(error)showMessage("Product could not be saved: "+error.message,"error");
+ else{showMessage(editId===null?"Product added successfully! ✅":"Product updated successfully! ✅","success");cancelEdit();await loadProducts()}
+ btn.disabled=false;
 }
-
-const productData={"Name":name,"Description":description||null,"Price":Number(price),"Stock":Number(stock),"Category":category,"Image url":image||null};
-const saveButton=document.getElementById("saveBtn");
-saveButton.disabled=true;saveButton.innerText="Saving...";
-
-let result;
-if(editId===null){
-result=await supabaseClient.from("Products").insert([productData]);
-}else{
-result=await supabaseClient.from("Products").update(productData).eq("Id",editId);
-}
-
-if(result.error){
-showMessage("Product save/update nahi hua: "+result.error.message,"error");
-}else{
-showMessage(editId===null?"Product Successfully Add ho gaya! ✅":"Product Successfully Update ho gaya! ✅","success");
-cancelEdit();await loadProducts();
-}
-saveButton.disabled=false;
-}
-
 function showProducts(){
-const box=document.getElementById("products");box.innerHTML="";
-if(!products.length){box.innerHTML='<div class="empty">No products added yet.</div>';return;}
-products.forEach(p=>{
-const id=getProductId(p);
-const name=p["Name"]||p["name"]||"Unnamed Product";
-const description=p["Description"]||p["description"]||"";
-const price=p["Price"]??p["price"]??0;
-const stock=p["Stock"]??p["stock"]??0;
-const category=p["Category"]||p["category"]||"Other";
-const image=p["Image url"]||p["image"]||p["image_url"]||"";
-box.innerHTML+=`
-<div class="product">
-${image?`<img src="${escapeHTML(image)}" alt="${escapeHTML(name)}" onerror="this.style.display='none'">`:""}
-<h3>${escapeHTML(name)}</h3>
-${description?`<p><b>Description:</b> ${escapeHTML(description)}</p>`:""}
-<p><b>Price:</b> $${Number(price).toFixed(2)}</p>
-<p><b>Stock:</b> ${escapeHTML(stock)}</p>
-<p><b>Category:</b> ${escapeHTML(category)}</p>
-<button class="edit" onclick="editProduct(${Number(id)})">✏️ Edit Product</button>
-<button class="delete" onclick="deleteProduct(${Number(id)})">🗑️ Delete Product</button>
-</div>`;
-});
+ const box=document.getElementById("products");box.innerHTML="";
+ if(!products.length){box.innerHTML='<div class="empty">No products added yet.</div>';return}
+ products.forEach(p=>{
+  const id=getId(p),name=val(p,"Name","name")||"Unnamed Product",desc=val(p,"Description","description")||"",price=Number(val(p,"Price","price")||0),stock=val(p,"Stock","stock")||0,cat=val(p,"Category","category")||"Other",image=val(p,"Image url","image","image_url")||"";
+  let imageHTML=image?`<img src="${escapeHTML(image)}" alt="${escapeHTML(name)}" onerror="this.style.display='none'">`:"";
+  box.innerHTML+=`<div class="product">${imageHTML}<h3>${escapeHTML(name)}</h3>${desc?`<p><b>Description:</b> ${escapeHTML(desc)}</p>`:""}<p><b>Price:</b> $${price.toFixed(2)}</p><p><b>Stock:</b> ${escapeHTML(stock)}</p><p><b>Category:</b> ${escapeHTML(cat)}</p><button class="edit" onclick="editProduct(${Number(id)})">✏️ Edit Product</button><button class="delete" onclick="deleteProduct(${Number(id)})">🗑️ Delete Product</button></div>`;
+ })
 }
-
 function editProduct(id){
-const product=products.find(p=>Number(getProductId(p))===Number(id));
-if(!product){showMessage("Product nahi mila.","error");return;}
-document.getElementById("name").value=product["Name"]||product["name"]||"";
-document.getElementById("description").value=product["Description"]||product["description"]||"";
-document.getElementById("price").value=product["Price"]??product["price"]??"";
-document.getElementById("stock").value=product["Stock"]??product["stock"]??"";
-document.getElementById("category").value=product["Category"]||product["category"]||"Other";
-document.getElementById("image").value=product["Image url"]||product["image"]||product["image_url"]||"";
-editId=getProductId(product);
-document.getElementById("formTitle").innerText="✏️ Edit Product";
-document.getElementById("saveBtn").innerText="Update Product";
-document.getElementById("cancelBtn").style.display="block";
-window.scrollTo({top:0,behavior:"smooth"});
+ const p=products.find(x=>Number(getId(x))===Number(id));if(!p){showMessage("Product not found.","error");return}
+ document.getElementById("name").value=val(p,"Name","name")||"";document.getElementById("description").value=val(p,"Description","description")||"";document.getElementById("price").value=val(p,"Price","price")??"";document.getElementById("stock").value=val(p,"Stock","stock")??"";document.getElementById("category").value=val(p,"Category","category")||"Other";document.getElementById("image").value=val(p,"Image url","image","image_url")||"";editId=getId(p);document.getElementById("formTitle").innerText="✏️ Edit Product";document.getElementById("saveBtn").innerText="Update Product";document.getElementById("cancelBtn").style.display="block";scrollTo({top:0,behavior:"smooth"})
 }
-
-async function deleteProduct(id){
-if(!confirm("Kya aap is product ko delete karna chahte hain?"))return;
-const {error}=await supabaseClient.from("Products").delete().eq("Id",id);
-if(error){showMessage("Product delete nahi hua: "+error.message,"error");return;}
-showMessage("Product Delete ho gaya! 🗑️","success");await loadProducts();
-}
-
-function cancelEdit(){
-editId=null;clearForm();
-document.getElementById("formTitle").innerText="➕ Add New Product";
-document.getElementById("saveBtn").innerText="Add Product";
-document.getElementById("cancelBtn").style.display="none";
-}
-
-function clearForm(){
-document.getElementById("name").value="";
-document.getElementById("description").value="";
-document.getElementById("price").value="";
-document.getElementById("stock").value="";
-document.getElementById("category").value="Phone";
-document.getElementById("image").value="";
-}
-
-function updateStats(){
-document.getElementById("productCount").innerText=products.length;
-let totalStock=0;
-products.forEach(p=>totalStock+=Number(p["Stock"]??p["stock"]??0)||0);
-document.getElementById("stockCount").innerText=totalStock;
-loadMessageCount();
-}
-
-async function loadMessageCount(){
-const {count,error}=await supabaseClient.from("support_tickets").select("*",{count:"exact",head:true});
-document.getElementById("messageCount").innerText=error?"0":(count||0);
-}
-
-/* =========================
-   CUSTOMER MESSAGES / REPLY
-========================= */
+async function deleteProduct(id){if(!confirm("Delete this product?"))return;const {error}=await supabaseClient.from("Products").delete().eq("Id",id);if(error){showMessage("Product could not be deleted: "+error.message,"error");return}showMessage("Product deleted!","success");await loadProducts()}
+function cancelEdit(){editId=null;clearForm();document.getElementById("formTitle").innerText="➕ Add New Product";document.getElementById("saveBtn").innerText="Add Product";document.getElementById("cancelBtn").style.display="none"}
+function clearForm(){["name","description","price","stock","image"].forEach(id=>document.getElementById(id).value="");document.getElementById("category").value="Phone"}
+function updateStats(){document.getElementById("productCount").innerText=products.length;document.getElementById("stockCount").innerText=products.reduce((s,p)=>s+(Number(val(p,"Stock","stock")||0)||0),0);loadMessageCount()}
+async function loadMessageCount(){const {count,error}=await supabaseClient.from("support_tickets").select("*",{count:"exact",head:true});document.getElementById("messageCount").innerText=error?"0":(count||0)}
 
 async function loadTickets(){
-const box=document.getElementById("tickets");
-box.innerHTML='<div class="loading">Messages loading...</div>';
-
-const {data,error}=await supabaseClient
-.from("support_tickets")
-.select("*")
-.order("created_at",{ascending:false});
-
-if(error){
-box.innerHTML="<p class='error'>Messages load nahi ho rahe: "+escapeHTML(error.message)+"</p>";
-return;
+ const box=document.getElementById("tickets");box.innerHTML='<div class="loading">Messages loading...</div>';
+ const {data,error}=await supabaseClient.from("support_tickets").select("id,customer_email,message,admin_reply,status,created_at").order("created_at",{ascending:false});
+ if(error){console.error(error);box.innerHTML="<p class='error'>Messages could not be loaded. Run the provided SQL in Supabase first.</p>";return}
+ if(!data?.length){box.innerHTML='<div class="empty">No customer messages yet.</div>';return}
+ box.innerHTML="";
+ data.forEach(t=>{
+  const card=document.createElement("div");card.className="ticket";
+  const date=t.created_at?new Date(t.created_at).toLocaleString():"";
+  card.innerHTML=`<div class="ticket-header"><span class="email">${escapeHTML(t.customer_email)}</span><span class="badge ${t.status==="replied"?"replied":""}">${t.status==="replied"?"Replied":"Pending"}</span></div><small>${escapeHTML(date)}</small><div class="ticket-message"><b>Customer message:</b><br>${escapeHTML(t.message)}</div>`;
+  const area=document.createElement("div");area.className="reply-area";
+  const ta=document.createElement("textarea");ta.placeholder="Write your reply to the customer...";ta.value=t.admin_reply||"";
+  const btn=document.createElement("button");btn.className="replyBtn";btn.innerText=t.admin_reply?"Update Reply":"Send Reply";btn.onclick=()=>sendReply(t.id,ta,btn);
+  area.appendChild(ta);area.appendChild(btn);card.appendChild(area);box.appendChild(card);
+ })
 }
-
-const tickets=data||[];
-document.getElementById("messageCount").innerText=tickets.length;
-
-if(!tickets.length){
-box.innerHTML='<div class="empty">No customer messages yet.</div>';return;
+async function sendReply(id,ta,btn){
+ const reply=ta.value.trim();if(!reply){alert("Please write a reply.");return}
+ btn.disabled=true;btn.innerText="Sending...";
+ const {error}=await supabaseClient.from("support_tickets").update({admin_reply:reply,status:"replied",replied_at:new Date().toISOString()}).eq("id",id);
+ if(error){console.error(error);showMessage("Reply could not be sent: "+error.message,"error")}else{showMessage("Reply sent successfully ✅","success");await loadTickets()}
+ btn.disabled=false;
 }
-
-box.innerHTML="";
-tickets.forEach(ticket=>{
-const id=ticket.id;
-const email=ticket.customer_email||ticket.email||"No email";
-const msg=ticket.message||"";
-const reply=ticket.reply||ticket.admin_reply||"";
-const date=ticket.created_at?new Date(ticket.created_at).toLocaleString():"";
-const replied=reply.trim()!=="";
-
-const div=document.createElement("div");
-div.className="ticket "+(replied?"":"unreplied");
-div.innerHTML=`
-<div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
-<b>📧 ${escapeHTML(email)}</b>
-<span class="badge ${replied?"replied":""}">${replied?"Replied":"Pending"}</span>
-</div>
-<small>${escapeHTML(date)}</small>
-<div class="customer-message"><b>Customer Message:</b><br>${escapeHTML(msg)}</div>
-${replied?`<div class="reply-text"><b>Your Reply:</b><br>${escapeHTML(reply)}</div>`:""}
-<div class="reply-box">
-<label>Reply to Customer</label>
-<textarea id="reply-${id}" placeholder="Write your reply here...">${escapeHTML(reply)}</textarea>
-<button onclick="sendReply(${Number(id)})">📤 Send Reply</button>
-<button class="delete" onclick="deleteTicket(${Number(id)})">🗑️ Delete Message</button>
-</div>`;
-box.appendChild(div);
-});
-}
-
-async function sendReply(id){
-const textarea=document.getElementById("reply-"+id);
-if(!textarea)return;
-const reply=textarea.value.trim();
-if(!reply){showMessage("Reply likhein.","error");return;}
-
-const {error}=await supabaseClient
-.from("support_tickets")
-.update({reply:reply})
-.eq("id",id);
-
-if(error){
-showMessage("Reply send nahi hua: "+error.message,"error");
-return;
-}
-
-showMessage("Customer ko reply send ho gaya ✅","success");
-await loadTickets();
-}
-
-async function deleteTicket(id){
-if(!confirm("Kya aap ye customer message delete karna chahte hain?"))return;
-const {error}=await supabaseClient.from("support_tickets").delete().eq("id",id);
-if(error){showMessage("Message delete nahi hua: "+error.message,"error");return;}
-showMessage("Message delete ho gaya.","success");await loadTickets();loadMessageCount();
-}
-
-function escapeHTML(value){
-return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
-}
-
-loadProducts();
+function escapeHTML(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+loadProducts();loadTickets();
 </script>
 </body>
-    </html>
+</html>
