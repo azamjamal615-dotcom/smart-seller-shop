@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Smart Seller Shop - Customer Messages</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f4f6;color:#222}
+.header{background:#111827;color:#fff;padding:20px;text-align:center}.header h1{margin:0}
+.container{max-width:850px;margin:auto;padding:18px}.card{background:#fff;border-radius:16px;padding:20px;margin-bottom:18px;box-shadow:0 3px 15px #ddd}
+.ticket{border:1px solid #ddd;border-radius:14px;padding:16px;margin:12px 0}
+.meta{color:#777;font-size:13px;margin-bottom:10px}.message{background:#f8fafc;padding:12px;border-radius:10px;margin:10px 0}
+.replybox{width:100%;min-height:90px;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:15px}
+button{border:0;border-radius:9px;padding:12px 18px;background:#1877f2;color:#fff;cursor:pointer;margin-top:8px}
+button:disabled{opacity:.6}.delete{background:#e53935}.success{color:#15803d;font-weight:bold}.error{color:#dc2626;font-weight:bold}
+.empty{text-align:center;color:#777;padding:25px}
+</style>
+</head>
+<body>
+<div class="header"><h1>Smart Seller Shop</h1><p>Admin Panel — Customer Messages</p></div>
+<div class="container">
+<div class="card"><h2>💬 Customer Messages</h2><p>Read customer messages and send a reply. The reply will appear in the customer's Customer Service page.</p><button onclick="loadMessages()">🔄 Refresh Messages</button><div id="status"></div></div>
+<div class="card"><div id="messages">Loading messages...</div></div>
+</div>
+<script>
+const SUPABASE_URL="https://cgrwiwzqiusvjibpjzdv.supabase.co";
+const SUPABASE_KEY="sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
+const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+async function loadMessages(){
+ const box=document.getElementById("messages");box.innerHTML="Loading messages...";
+ const {data,error}=await supabaseClient.from("support_tickets").select("*").order("id",{ascending:false});
+ if(error){box.innerHTML="<p class='error'>Messages could not be loaded.</p>";console.error(error);return;}
+ if(!data?.length){box.innerHTML="<div class='empty'>No customer messages yet.</div>";return;}
+ box.innerHTML="";
+ data.forEach(t=>{
+  const card=document.createElement("div");card.className="ticket";
+  card.innerHTML=`<div class="meta">Message #${esc(t.id)} · ${esc(t.created_at||"")}</div>
+  <p><b>Email:</b> ${esc(t.customer_email)}</p>
+  <p><b>Subject:</b> ${esc(t.subject||"Customer Service")}</p>
+  <div class="message"><b>Customer message:</b><br>${esc(t.message)}</div>
+  <textarea class="replybox" id="reply-${esc(t.id)}" placeholder="Write your reply here...">${esc(t.admin_reply||"")}</textarea>
+  <br><button onclick="replyTo(${Number(t.id)})">📤 ${t.admin_reply?"Update Reply":"Send Reply"}</button>
+  <button class="delete" onclick="deleteTicket(${Number(t.id)})">🗑️ Delete</button>
+  ${t.admin_reply?`<div class="message"><b>Current reply:</b><br>${esc(t.admin_reply)}</div>`:""}`;
+  box.appendChild(card);
+ });
+}
+async function replyTo(id){
+ const text=document.getElementById("reply-"+id).value.trim();
+ if(!text){alert("Please write a reply.");return;}
+ const {error}=await supabaseClient.from("support_tickets").update({admin_reply:text,replied_at:new Date().toISOString()}).eq("id",id);
+ if(error){alert("Reply could not be sent: "+error.message);return;}
+ document.getElementById("status").className="success";document.getElementById("status").innerText="Reply saved successfully ✅";
+ loadMessages();
+}
+async function deleteTicket(id){
+ if(!confirm("Delete this customer message?"))return;
+ const {error}=await supabaseClient.from("support_tickets").delete().eq("id",id);
+ if(error){alert("Could not delete message: "+error.message);return;}
+ loadMessages();
+}
+loadMessages();
+</script>
+</body>
+</html>
