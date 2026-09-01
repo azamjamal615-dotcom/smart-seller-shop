@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Smart Seller Shop - Admin</title>
 
@@ -12,615 +12,592 @@
 <style>
 
 *{
-    box-sizing:border-box;
+ box-sizing:border-box;
 }
 
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f4f5f7;
-    color:#172033;
-    padding-bottom:80px;
+ margin:0;
+ background:#f3f4f6;
+ font-family:Arial,sans-serif;
+ color:#172033;
+ padding-bottom:80px;
 }
-
-/* HEADER */
 
 .header{
-    background:white;
-    padding:16px 18px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    border-bottom:1px solid #ddd;
+ background:white;
+ padding:16px;
+ display:flex;
+ align-items:center;
+ gap:12px;
+ border-bottom:1px solid #ddd;
 }
 
-.header-icon{
-    width:58px;
-    height:58px;
-    background:#7040e8;
-    color:white;
-    border-radius:16px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
+.logo{
+ width:58px;
+ height:58px;
+ border-radius:16px;
+ background:#713be8;
+ color:white;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:27px;
 }
 
 .header h1{
-    margin:0;
-    font-size:22px;
+ margin:0;
+ font-size:21px;
 }
 
 .header p{
-    margin:4px 0 0;
-    color:#777;
-    font-size:13px;
+ margin:4px 0 0;
+ color:#777;
+ font-size:12px;
 }
-
-/* MAIN */
 
 .container{
-    max-width:700px;
-    margin:auto;
-    padding:14px;
+ max-width:900px;
+ margin:auto;
+ padding:14px;
 }
 
-/* PAGE */
+
+/* MENU */
+
+.menu{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:8px;
+ margin-bottom:12px;
+}
+
+.menu button{
+ border:0;
+ background:white;
+ padding:13px 5px;
+ border-radius:11px;
+ box-shadow:0 2px 7px #ddd;
+ font-size:13px;
+ cursor:pointer;
+}
+
+.menu button.active{
+ background:#713be8;
+ color:white;
+}
+
+
+/* PAGES */
 
 .page{
-    display:none;
+ display:none;
 }
 
 .page.active{
-    display:block;
+ display:block;
 }
 
-/* WELCOME */
-
-.welcome{
-    background:white;
-    padding:20px;
-    border-radius:18px;
-    margin-bottom:12px;
-    box-shadow:0 2px 10px #ddd;
-}
-
-.welcome small{
-    color:#777;
-}
-
-.welcome h2{
-    margin:7px 0 0;
-    font-size:24px;
-}
-
-/* BALANCE */
-
-.balance-card{
-    background:linear-gradient(135deg,#173f66,#315d83);
-    color:white;
-    border-radius:22px;
-    padding:22px;
-    margin-bottom:12px;
-}
-
-.balance-label{
-    font-size:13px;
-    letter-spacing:2px;
-    opacity:.8;
-}
-
-.balance{
-    font-size:34px;
-    font-weight:bold;
-    margin:6px 0 18px;
-}
-
-.balance-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.balance-box{
-    background:rgba(255,255,255,.12);
-    border-radius:14px;
-    padding:12px;
-}
-
-.balance-box span{
-    display:block;
-    font-size:12px;
-    opacity:.8;
-}
-
-.balance-box b{
-    font-size:18px;
-}
-
-/* STATS */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    margin-bottom:12px;
-}
-
-.stat{
-    background:white;
-    border-radius:15px;
-    padding:16px;
-    box-shadow:0 2px 8px #ddd;
-}
-
-.stat b{
-    font-size:23px;
-    display:block;
-}
-
-.stat span{
-    color:#777;
-    font-size:13px;
-}
 
 /* CARD */
 
 .card{
-    background:white;
-    padding:18px;
-    border-radius:18px;
-    margin-bottom:12px;
-    box-shadow:0 2px 10px #ddd;
+ background:white;
+ border-radius:16px;
+ padding:16px;
+ margin-bottom:12px;
+ box-shadow:0 2px 10px #ddd;
 }
 
 .card h2{
-    margin-top:0;
-    font-size:20px;
+ margin:0 0 10px;
+ font-size:19px;
 }
 
-/* INPUTS */
 
-label{
-    display:block;
-    margin-top:10px;
-    font-size:14px;
-    font-weight:bold;
+/* WELCOME */
+
+.welcome{
+ background:#214f78;
+ color:white;
 }
 
-input,select,textarea{
-    width:100%;
-    padding:12px;
-    margin-top:6px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-size:15px;
+.welcome small{
+ opacity:.8;
 }
 
-textarea{
-    min-height:100px;
+.welcome h2{
+ font-size:22px;
+ margin:7px 0 15px;
 }
+
+
+/* STATS */
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px;
+}
+
+.stat{
+ background:white;
+ padding:15px;
+ border-radius:14px;
+ box-shadow:0 2px 8px #ddd;
+}
+
+.stat b{
+ font-size:24px;
+}
+
+.stat span{
+ display:block;
+ color:#777;
+ margin-top:5px;
+}
+
+
+/* ITEMS */
+
+.item{
+ border:1px solid #e2e2e2;
+ border-radius:12px;
+ padding:13px;
+ margin-top:9px;
+ background:#fafafa;
+}
+
+.item b{
+ font-size:16px;
+}
+
+.item p{
+ margin:5px 0;
+ color:#555;
+ font-size:13px;
+}
+
 
 /* BUTTON */
 
-.btn{
-    width:100%;
-    border:0;
-    padding:12px;
-    margin-top:10px;
-    border-radius:10px;
-    background:#7040e8;
-    color:white;
-    font-size:15px;
-    cursor:pointer;
+button.action{
+ border:0;
+ border-radius:8px;
+ padding:9px 12px;
+ background:#713be8;
+ color:white;
+ cursor:pointer;
+ margin:3px;
 }
 
-.btn.red{
-    background:#e53935;
+button.green{
+ background:#16a34a;
 }
 
-.btn.green{
-    background:#16a34a;
+button.red{
+ background:#dc2626;
 }
 
-/* PRODUCT */
-
-.product{
-    border:1px solid #ddd;
-    padding:12px;
-    border-radius:13px;
-    margin-top:10px;
+button.orange{
+ background:#ea8a00;
 }
 
-.product img{
-    width:100%;
-    max-height:180px;
-    object-fit:cover;
-    border-radius:10px;
+
+/* FORM */
+
+input,select,textarea{
+ width:100%;
+ padding:11px;
+ border:1px solid #ddd;
+ border-radius:9px;
+ margin:5px 0 10px;
+ font-size:14px;
 }
 
-.product h3{
-    margin:8px 0 5px;
+textarea{
+ min-height:90px;
 }
 
-.product p{
-    margin:5px 0;
-    color:#666;
+label{
+ font-size:13px;
+ font-weight:bold;
 }
 
-/* WITHDRAWAL */
 
-.withdrawal{
-    border:1px solid #ddd;
-    border-radius:12px;
-    padding:13px;
-    margin-top:10px;
+/* STATUS */
+
+.status{
+ display:inline-block;
+ padding:5px 9px;
+ border-radius:20px;
+ background:#fff3cd;
+ color:#856404;
+ font-size:12px;
 }
 
-.pending{
-    color:#b77900;
-    font-weight:bold;
+
+/* BOTTOM */
+
+.bottom{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ background:white;
+ border-top:1px solid #ddd;
+ display:flex;
+ justify-content:center;
+ z-index:100;
 }
 
-.approved{
-    color:#16803c;
-    font-weight:bold;
+.bottom button{
+ flex:1;
+ max-width:130px;
+ border:0;
+ background:white;
+ padding:9px 3px;
+ font-size:11px;
+ color:#555;
 }
 
-.rejected{
-    color:#d62828;
-    font-weight:bold;
+.bottom button.active{
+ color:#713be8;
 }
 
-/* KYC */
-
-.kyc-status{
-    background:#fff7d6;
-    color:#8a6500;
-    padding:10px;
-    border-radius:10px;
-    font-weight:bold;
-}
-
-/* MESSAGE */
-
-.message{
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:12px;
-    display:none;
-}
-
-.success{
-    background:#dcfce7;
-    color:#166534;
-}
-
-.error{
-    background:#fee2e2;
-    color:#991b1b;
-}
-
-/* BOTTOM MENU */
-
-.bottom-menu{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    height:72px;
-    background:white;
-    border-top:1px solid #ddd;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    z-index:9999;
-    box-shadow:0 -2px 12px #ddd;
-}
-
-.bottom-menu button{
-    border:0;
-    background:white;
-    color:#777;
-    font-size:11px;
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:4px;
-}
-
-.bottom-menu button span{
-    font-size:22px;
-}
-
-.bottom-menu button.active{
-    color:#7040e8;
-    font-weight:bold;
-}
-
-.empty{
-    text-align:center;
-    padding:20px;
-    color:#777;
-}
-
-.loading{
-    text-align:center;
-    padding:20px;
-    color:#777;
-}
 
 /* MOBILE */
 
 @media(max-width:600px){
 
-    .header h1{
-        font-size:20px;
-    }
+ .menu{
+  grid-template-columns:repeat(2,1fr);
+ }
 
-    .header-icon{
-        width:52px;
-        height:52px;
-        font-size:24px;
-    }
+ .stats{
+  grid-template-columns:repeat(2,1fr);
+ }
 
-    .container{
-        padding:10px;
-    }
-
-    .balance{
-        font-size:31px;
-    }
+ .header h1{
+  font-size:18px;
+ }
 
 }
 
 </style>
-
 </head>
 
 <body>
+
 
 <!-- HEADER -->
 
 <div class="header">
 
-    <div class="header-icon">
-        ▦
-    </div>
+ <div class="logo">▦</div>
 
-    <div>
-        <h1>Smart Seller Shop</h1>
-        <p>Admin Panel</p>
-    </div>
+ <div>
+  <h1>Smart Seller Shop</h1>
+  <p>Admin Panel</p>
+ </div>
 
 </div>
 
 
 <div class="container">
 
-<div id="messageBox" class="message"></div>
 
+<!-- MENU -->
 
-<!-- ================= BALANCE ================= -->
+<div class="menu">
 
-<div id="balancePage" class="page active">
+ <button class="active"
+ onclick="openPage('dashboard',this)">
+ 🏠 Dashboard
+ </button>
 
-    <div class="welcome">
-        <small>WELCOME BACK</small>
-        <h2>Smart Seller Shop Admin</h2>
-    </div>
+ <button onclick="openPage('balance',this)">
+ 💰 Balance
+ </button>
 
+ <button onclick="openPage('withdrawal',this)">
+ 💸 Withdrawal
+ </button>
 
-    <div class="balance-card">
+ <button onclick="openPage('kyc',this)">
+ 🛡️ KYC
+ </button>
 
-        <div class="balance-label">
-            TOTAL BALANCE
-        </div>
+ <button onclick="openPage('products',this)">
+ 📦 Products
+ </button>
 
-        <div class="balance">
-            $<span id="totalBalance">0.00</span>
-        </div>
+ <button onclick="openPage('orders',this)">
+ 🛒 Orders
+ </button>
 
+ <button onclick="openPage('messages',this)">
+ 💬 Messages
+ </button>
 
-        <div class="balance-grid">
-
-            <div class="balance-box">
-                <span>Revenue</span>
-                <b>$<span id="revenue">0.00</span></b>
-            </div>
-
-            <div class="balance-box">
-                <span>Withdrawn</span>
-                <b>$<span id="withdrawn">0.00</span></b>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="stats">
-
-        <div class="stat">
-            <b id="productCount">0</b>
-            <span>Products</span>
-        </div>
-
-        <div class="stat">
-            <b id="orderCount">0</b>
-            <span>Orders</span>
-        </div>
-
-        <div class="stat">
-            <b id="withdrawalCount">0</b>
-            <span>Withdrawals</span>
-        </div>
-
-        <div class="stat">
-            <b id="customerCount">0</b>
-            <span>Customers</span>
-        </div>
-
-    </div>
+ <button onclick="openPage('customers',this)">
+ 👥 Customers
+ </button>
 
 </div>
 
 
-<!-- ================= WITHDRAWAL ================= -->
+<!-- DASHBOARD -->
 
-<div id="withdrawalPage" class="page">
+<div id="dashboard" class="page active">
 
-    <div class="card">
+ <div class="card welcome">
 
-        <h2>💳 Withdrawal</h2>
+  <small>WELCOME BACK</small>
 
-        <p>
-            Customer withdrawal requests yahan manage hongi.
-        </p>
+  <h2>Smart Seller Shop Admin</h2>
 
-        <div id="withdrawals">
+  <p>
+   یہاں سے Customer Orders، Products،
+   Messages، Balance، Withdrawal اور KYC
+   manage کریں۔
+  </p>
 
-            <div class="loading">
-                Withdrawals loading...
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
+ </div>
 
 
-<!-- ================= KYC ================= -->
+ <div class="stats">
 
-<div id="kycPage" class="page">
+  <div class="stat">
+   <b id="statProducts">0</b>
+   <span>Products</span>
+  </div>
 
-    <div class="card">
+  <div class="stat">
+   <b id="statOrders">0</b>
+   <span>Orders</span>
+  </div>
 
-        <h2>🛡️ KYC Verification</h2>
+  <div class="stat">
+   <b id="statMessages">0</b>
+   <span>Messages</span>
+  </div>
 
-        <p>
-            Customer KYC verification requests yahan manage hongi.
-        </p>
+  <div class="stat">
+   <b id="statWithdrawals">0</b>
+   <span>Withdrawals</span>
+  </div>
 
-        <div id="kycList">
-
-            <div class="empty">
-                No KYC requests yet.
-            </div>
-
-        </div>
-
-    </div>
+ </div>
 
 </div>
 
 
-<!-- ================= PRODUCTS ================= -->
+<!-- BALANCE -->
 
-<div id="productsPage" class="page">
+<div id="balance" class="page">
 
-    <div class="card">
+ <div class="card">
 
-        <h2>📦 Add Product</h2>
+  <h2>💰 Customer Balance</h2>
 
-        <label>Product Name</label>
-        <input id="name" placeholder="Product name">
+  <p>
+   یہاں Customer کا balance بڑھا یا کم کیا جا سکتا ہے۔
+  </p>
 
-        <label>Description</label>
-        <textarea id="description"
-        placeholder="Product description"></textarea>
+  <div id="balanceList">
+   Loading...
+  </div>
 
-        <label>Price</label>
-        <input id="price" type="number"
-        step="0.01" placeholder="100">
+ </div>
 
-        <label>Stock</label>
-        <input id="stock" type="number"
-        placeholder="10">
-
-        <label>Category</label>
-        <select id="category">
-            <option>Phone</option>
-            <option>Laptop</option>
-            <option>Accessories</option>
-            <option>Other</option>
-        </select>
-
-        <label>Image URL</label>
-        <input id="image"
-        placeholder="https://example.com/image.jpg">
-
-        <button class="btn"
-        onclick="saveProduct()">
-            ➕ Add Product
-        </button>
-
-    </div>
+</div>
 
 
-    <div class="card">
+<!-- WITHDRAWAL -->
 
-        <h2>📦 Products</h2>
+<div id="withdrawal" class="page">
 
-        <div id="products">
+ <div class="card">
 
-            <div class="loading">
-                Products loading...
-            </div>
+  <h2>💸 Withdrawal Requests</h2>
 
-        </div>
+  <div id="withdrawalList">
+   Loading...
+  </div>
 
-    </div>
+ </div>
+
+</div>
+
+
+<!-- KYC -->
+
+<div id="kyc" class="page">
+
+ <div class="card">
+
+  <h2>🛡️ KYC Verification</h2>
+
+  <div id="kycList">
+   Loading...
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- PRODUCTS -->
+
+<div id="products" class="page">
+
+ <div class="card">
+
+  <h2>📦 Add Product</h2>
+
+  <label>Product Name</label>
+
+  <input id="productName"
+  placeholder="مثلاً Smart Watch">
+
+  <label>Description</label>
+
+  <textarea id="productDescription"
+  placeholder="Product description"></textarea>
+
+  <label>Price</label>
+
+  <input id="productPrice"
+  type="number"
+  placeholder="50">
+
+  <label>Stock</label>
+
+  <input id="productStock"
+  type="number"
+  placeholder="10">
+
+  <label>Category</label>
+
+  <input id="productCategory"
+  placeholder="Watch">
+
+  <label>Image URL</label>
+
+  <input id="productImage"
+  placeholder="https://...">
+
+  <button class="action"
+  onclick="addProduct()">
+  ➕ Product Add کریں
+  </button>
+
+ </div>
+
+
+ <div class="card">
+
+  <h2>📦 Products</h2>
+
+  <div id="productList">
+   Loading...
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- ORDERS -->
+
+<div id="orders" class="page">
+
+ <div class="card">
+
+  <h2>🛒 Customer Orders</h2>
+
+  <p>
+   Customer کے Dashboard سے آنے والے تمام Orders یہاں دکھیں گے۔
+  </p>
+
+  <div id="orderList">
+   Loading...
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- MESSAGES -->
+
+<div id="messages" class="page">
+
+ <div class="card">
+
+  <h2>💬 Customer Messages</h2>
+
+  <div id="messageList">
+   Loading...
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- CUSTOMERS -->
+
+<div id="customers" class="page">
+
+ <div class="card">
+
+  <h2>👥 Customers</h2>
+
+  <div id="customerList">
+   Loading...
+  </div>
+
+ </div>
 
 </div>
 
 </div>
 
 
-<!-- ================= BOTTOM MENU ================= -->
+<!-- BOTTOM MENU -->
 
-<div class="bottom-menu">
+<div class="bottom">
 
-    <button
-        class="active"
-        onclick="showPage('balancePage',this)">
+ <button class="active"
+ onclick="openPage('dashboard',this)">
+ 🏠<br>Dashboard
+ </button>
 
-        <span>💰</span>
-        Balance
-    </button>
+ <button onclick="openPage('products',this)">
+ 📦<br>Products
+ </button>
 
+ <button onclick="openPage('orders',this)">
+ 🛒<br>Orders
+ </button>
 
-    <button
-        onclick="showPage('withdrawalPage',this)">
+ <button onclick="openPage('messages',this)">
+ 💬<br>Messages
+ </button>
 
-        <span>💳</span>
-        Withdrawal
-    </button>
-
-
-    <button
-        onclick="showPage('kycPage',this)">
-
-        <span>🛡️</span>
-        KYC
-    </button>
-
-
-    <button
-        onclick="showPage('productsPage',this)">
-
-        <span>📦</span>
-        Products
-    </button>
+ <button onclick="openPage('customers',this)">
+ 👥<br>Customers
+ </button>
 
 </div>
 
 
 <script>
 
-/* ================= SUPABASE ================= */
+/* ==============================
+   SUPABASE
+============================== */
 
 const SUPABASE_URL =
 "https://cgrwiwzqiusvjibpjzdv.supabase.co";
@@ -628,476 +605,951 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
 
-const supabaseClient =
+const db =
 supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
+ SUPABASE_URL,
+ SUPABASE_KEY
 );
 
 
-/* ================= NAVIGATION ================= */
+/* ==============================
+   PAGE
+============================== */
 
-function showPage(id,button){
+function openPage(id,button){
 
-    document
-    .querySelectorAll(".page")
-    .forEach(function(page){
+ document
+ .querySelectorAll(".page")
+ .forEach(p=>{
+  p.classList.remove("active");
+ });
 
-        page.classList.remove("active");
+ const page =
+ document.getElementById(id);
 
-    });
+ if(page){
+  page.classList.add("active");
+ }
 
-    const page =
-    document.getElementById(id);
+ document
+ .querySelectorAll(".menu button,.bottom button")
+ .forEach(b=>{
+  b.classList.remove("active");
+ });
 
-    if(page){
-        page.classList.add("active");
-    }
+ if(button){
+  button.classList.add("active");
+ }
 
-    document
-    .querySelectorAll(".bottom-menu button")
-    .forEach(function(btn){
-
-        btn.classList.remove("active");
-
-    });
-
-    if(button){
-        button.classList.add("active");
-    }
-
-    if(id==="productsPage"){
-        loadProducts();
-    }
-
-    if(id==="withdrawalPage"){
-        loadWithdrawals();
-    }
+ if(id==="balance") loadBalances();
+ if(id==="withdrawal") loadWithdrawals();
+ if(id==="kyc") loadKYC();
+ if(id==="products") loadProducts();
+ if(id==="orders") loadOrders();
+ if(id==="messages") loadMessages();
+ if(id==="customers") loadCustomers();
 
 }
 
 
-/* ================= MESSAGE ================= */
+/* ==============================
+   DASHBOARD
+============================== */
 
-function showMessage(text,type){
+async function loadDashboard(){
 
-    const box =
-    document.getElementById("messageBox");
+ try{
 
-    box.innerText = text;
+  const products =
+  await db
+  .from("Products")
+  .select("*",{count:"exact",head:true});
 
-    box.className =
-    "message " + type;
+  const orders =
+  await db
+  .from("orders")
+  .select("*",{count:"exact",head:true});
 
-    box.style.display = "block";
+  const messages =
+  await db
+  .from("support_tickets")
+  .select("*",{count:"exact",head:true});
 
-    setTimeout(function(){
+  const withdrawals =
+  await db
+  .from("withdrawals")
+  .select("*",{count:"exact",head:true});
 
-        box.style.display = "none";
+  document.getElementById("statProducts").innerText =
+  products.count || 0;
 
-    },5000);
+  document.getElementById("statOrders").innerText =
+  orders.count || 0;
+
+  document.getElementById("statMessages").innerText =
+  messages.count || 0;
+
+  document.getElementById("statWithdrawals").innerText =
+  withdrawals.count || 0;
+
+ }catch(e){
+  console.log(e);
+ }
 
 }
 
 
-/* ================= PRODUCTS ================= */
+/* ==============================
+   PRODUCTS
+============================== */
 
 async function loadProducts(){
 
-    const box =
-    document.getElementById("products");
+ const box =
+ document.getElementById("productList");
 
-    box.innerHTML =
-    '<div class="loading">Products loading...</div>';
+ box.innerHTML="Loading...";
 
-    const result =
-    await supabaseClient
-    .from("Products")
-    .select("*");
+ const {data,error} =
+ await db
+ .from("Products")
+ .select("*")
+ .order("Id",{ascending:false});
 
-    if(result.error){
+ if(error){
 
-        console.error(result.error);
+  box.innerHTML =
+  "Products load نہیں ہو سکے۔";
 
-        box.innerHTML =
-        '<div class="empty">Products could not be loaded.</div>';
+  console.log(error);
+  return;
 
-        return;
+ }
 
-    }
+ if(!data || data.length===0){
 
-    const data =
-    result.data || [];
+  box.innerHTML =
+  "ابھی کوئی Product نہیں ہے۔";
 
-    document.getElementById(
-        "productCount"
-    ).innerText =
-    data.length;
+  return;
 
-    if(data.length===0){
+ }
 
-        box.innerHTML =
-        '<div class="empty">No products yet.</div>';
+ box.innerHTML="";
 
-        return;
+ data.forEach(p=>{
 
-    }
+  const id =
+  p.Id ?? p.id;
 
-    box.innerHTML="";
+  const name =
+  p.Name ?? p.name ?? "Product";
 
+  const price =
+  Number(p.Price ?? p.price ?? 0);
 
-    data.forEach(function(product){
+  const stock =
+  Number(p.Stock ?? p.stock ?? 0);
 
-        const id =
-        product.Id ??
-        product.id;
+  const div =
+  document.createElement("div");
 
-        const name =
-        product.Name ??
-        product.name ??
-        "Product";
+  div.className="item";
 
-        const description =
-        product.Description ??
-        product.description ??
-        "";
+  div.innerHTML=`
 
-        const price =
-        Number(
-            product.Price ??
-            product.price ??
-            0
-        );
+   <b>📦 ${escapeHtml(name)}</b>
 
-        const stock =
-        Number(
-            product.Stock ??
-            product.stock ??
-            0
-        );
+   <p>Price: $${price.toFixed(2)}</p>
 
-        const image =
-        product["Image url"] ??
-        product.image ??
-        product.image_url ??
-        "";
+   <p>Stock: ${stock}</p>
 
-        const div =
-        document.createElement("div");
+   <button class="action red"
+   onclick="deleteProduct('${id}')">
+   🗑️ Delete
+   </button>
 
-        div.className="product";
+  `;
 
-        if(image){
+  box.appendChild(div);
 
-            const img =
-            document.createElement("img");
-
-            img.src=image;
-
-            img.onerror=function(){
-
-                this.style.display="none";
-
-            };
-
-            div.appendChild(img);
-
-        }
-
-        div.innerHTML +=
-        "<h3>"+escapeHTML(name)+"</h3>" +
-        "<p>"+escapeHTML(description)+"</p>" +
-        "<p><b>Price:</b> $"+
-        price.toFixed(2)+"</p>" +
-        "<p><b>Stock:</b> "+
-        stock+"</p>" +
-
-        "<button class='btn red' " +
-        "onclick='deleteProduct(\""+
-        id+"\")'>" +
-        "🗑️ Delete</button>";
-
-        box.appendChild(div);
-
-    });
+ });
 
 }
 
 
-/* ================= ADD PRODUCT ================= */
+/* ADD PRODUCT */
 
-async function saveProduct(){
+async function addProduct(){
 
-    const name =
-    document.getElementById("name")
-    .value.trim();
+ const name =
+ document.getElementById("productName").value.trim();
 
-    const description =
-    document.getElementById("description")
-    .value.trim();
+ const description =
+ document.getElementById("productDescription").value.trim();
 
-    const price =
-    document.getElementById("price")
-    .value;
+ const price =
+ Number(document.getElementById("productPrice").value);
 
-    const stock =
-    document.getElementById("stock")
-    .value;
+ const stock =
+ Number(document.getElementById("productStock").value);
 
-    const category =
-    document.getElementById("category")
-    .value;
+ const category =
+ document.getElementById("productCategory").value.trim();
 
-    const image =
-    document.getElementById("image")
-    .value.trim();
+ const image =
+ document.getElementById("productImage").value.trim();
 
 
-    if(!name || price==="" || stock===""){
+ if(!name){
 
-        showMessage(
-            "Name, Price aur Stock zaroori hain.",
-            "error"
-        );
+  alert("Product name لکھیں۔");
+  return;
 
-        return;
-
-    }
+ }
 
 
-    const productData = {
+ const {error} =
+ await db
+ .from("Products")
+ .insert({
 
-        "Name":name,
+  Name:name,
+  Description:description,
+  Price:price,
+  Stock:stock,
+  Category:category,
+  "Image url":image
 
-        "Description":
-        description || null,
-
-        "Price":
-        Number(price),
-
-        "Stock":
-        Number(stock),
-
-        "Category":
-        category,
-
-        "Image url":
-        image || null
-
-    };
+ });
 
 
-    const result =
-    await supabaseClient
-    .from("Products")
-    .insert([productData]);
+ if(error){
+
+  console.log(error);
+
+  alert(
+   "Product add نہیں ہوا۔ Products table کے column names check کریں۔"
+  );
+
+  return;
+
+ }
 
 
-    if(result.error){
+ alert("Product successfully add ہوگیا ✅");
 
-        console.error(result.error);
+ document.getElementById("productName").value="";
+ document.getElementById("productDescription").value="";
+ document.getElementById("productPrice").value="";
+ document.getElementById("productStock").value="";
+ document.getElementById("productCategory").value="";
+ document.getElementById("productImage").value="";
 
-        showMessage(
-            "Product save nahi hua: "+
-            result.error.message,
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    showMessage(
-        "Product successfully added ✅",
-        "success"
-    );
-
-
-    document.getElementById("name").value="";
-    document.getElementById("description").value="";
-    document.getElementById("price").value="";
-    document.getElementById("stock").value="";
-    document.getElementById("image").value="";
-
-
-    loadProducts();
+ loadProducts();
+ loadDashboard();
 
 }
 
 
-/* ================= DELETE PRODUCT ================= */
+/* DELETE PRODUCT */
 
 async function deleteProduct(id){
 
-    if(!confirm(
-        "Kya aap ye product delete karna chahte hain?"
-    )){
-        return;
-    }
+ if(!confirm("کیا آپ یہ Product delete کرنا چاہتے ہیں؟")){
+  return;
+ }
+
+ const {error} =
+ await db
+ .from("Products")
+ .delete()
+ .eq("Id",id);
 
 
-    const result =
-    await supabaseClient
-    .from("Products")
-    .delete()
-    .eq("Id",id);
+ if(error){
 
+  console.log(error);
 
-    if(result.error){
+  alert("Product delete نہیں ہوا۔");
 
-        showMessage(
-            "Product delete nahi hua: "+
-            result.error.message,
-            "error"
-        );
+  return;
 
-        return;
+ }
 
-    }
-
-
-    showMessage(
-        "Product delete ho gaya ✅",
-        "success"
-    );
-
-    loadProducts();
+ loadProducts();
+ loadDashboard();
 
 }
 
 
-/* ================= WITHDRAWALS ================= */
+/* ==============================
+   ORDERS
+============================== */
+
+async function loadOrders(){
+
+ const box =
+ document.getElementById("orderList");
+
+ box.innerHTML="Loading...";
+
+ const {data,error} =
+ await db
+ .from("orders")
+ .select("*")
+ .order("created_at",{ascending:false});
+
+
+ if(error){
+
+  console.log(error);
+
+  box.innerHTML =
+  "Orders load نہیں ہو سکے۔";
+
+  return;
+
+ }
+
+
+ if(!data || data.length===0){
+
+  box.innerHTML =
+  "ابھی کوئی Customer Order نہیں آیا۔";
+
+  return;
+
+ }
+
+
+ box.innerHTML="";
+
+
+ data.forEach(order=>{
+
+  const div =
+  document.createElement("div");
+
+  div.className="item";
+
+  div.innerHTML=`
+
+   <b>🛒 Order #${order.id}</b>
+
+   <p>
+   Customer:
+   ${escapeHtml(order.customer_name || order.customer_id)}
+   </p>
+
+   <p>
+   Product:
+   ${escapeHtml(order.product_name || "")}
+   </p>
+
+   <p>
+   Quantity: ${order.quantity || 1}
+   </p>
+
+   <p>
+   Total:
+   <b>$${Number(order.total_amount || 0).toFixed(2)}</b>
+   </p>
+
+   <p>
+   Status:
+   <span class="status">
+   ${escapeHtml(order.status || "Pending")}
+   </span>
+   </p>
+
+   <select id="orderStatus${order.id}">
+
+    <option>Pending</option>
+    <option>Processing</option>
+    <option>Shipped</option>
+    <option>Delivered</option>
+    <option>Cancelled</option>
+
+   </select>
+
+   <button class="action"
+   onclick="updateOrder('${order.id}')">
+   Update Status
+   </button>
+
+  `;
+
+  box.appendChild(div);
+
+ });
+
+}
+
+
+/* UPDATE ORDER */
+
+async function updateOrder(id){
+
+ const status =
+ document.getElementById(
+  "orderStatus"+id
+ ).value;
+
+
+ const {error} =
+ await db
+ .from("orders")
+ .update({status:status})
+ .eq("id",id);
+
+
+ if(error){
+
+  console.log(error);
+
+  alert("Order status update نہیں ہوا۔");
+
+  return;
+
+ }
+
+
+ alert("Order status update ہوگیا ✅");
+
+ loadOrders();
+
+}
+
+
+/* ==============================
+   MESSAGES
+============================== */
+
+async function loadMessages(){
+
+ const box =
+ document.getElementById("messageList");
+
+ box.innerHTML="Loading...";
+
+
+ const {data,error} =
+ await db
+ .from("support_tickets")
+ .select("*")
+ .order("created_at",{ascending:false});
+
+
+ if(error){
+
+  console.log(error);
+
+  box.innerHTML =
+  "Messages load نہیں ہو سکے۔";
+
+  return;
+
+ }
+
+
+ if(!data || data.length===0){
+
+  box.innerHTML =
+  "ابھی کوئی message نہیں ہے۔";
+
+  return;
+
+ }
+
+
+ box.innerHTML="";
+
+
+ data.forEach(message=>{
+
+  const div =
+  document.createElement("div");
+
+  div.className="item";
+
+
+  div.innerHTML=`
+
+   <b>💬
+   ${escapeHtml(
+    message.customer_name ||
+    message.customer_id ||
+    "Customer"
+   )}
+   </b>
+
+   <p>
+   ${escapeHtml(message.message || "")}
+   </p>
+
+   <p>
+   Status:
+   <span class="status">
+   ${escapeHtml(message.status || "Pending")}
+   </span>
+   </p>
+
+   <textarea
+   id="reply${message.id}"
+   placeholder="Customer کو جواب لکھیں..."></textarea>
+
+   <button class="action green"
+   onclick="replyMessage('${message.id}')">
+   ↩️ جواب بھیجیں
+   </button>
+
+   <button class="action red"
+   onclick="deleteMessage('${message.id}')">
+   🗑️ Delete
+   </button>
+
+  `;
+
+  box.appendChild(div);
+
+ });
+
+}
+
+
+/* REPLY */
+
+async function replyMessage(id){
+
+ const reply =
+ document.getElementById(
+  "reply"+id
+ ).value.trim();
+
+
+ if(!reply){
+
+  alert("جواب لکھیں۔");
+  return;
+
+ }
+
+
+ const {error} =
+ await db
+ .from("support_tickets")
+ .update({
+  admin_reply:reply,
+  status:"Replied"
+ })
+ .eq("id",id);
+
+
+ if(error){
+
+  console.log(error);
+
+  alert(
+   "Reply نہیں گیا۔ support_tickets میں admin_reply column ہونا ضروری ہے۔"
+  );
+
+  return;
+
+ }
+
+
+ alert("Customer کو جواب بھیج دیا گیا ✅");
+
+ loadMessages();
+
+}
+
+
+/* DELETE MESSAGE */
+
+async function deleteMessage(id){
+
+ if(!confirm(
+  "کیا آپ یہ message delete کرنا چاہتے ہیں؟"
+  )){
+  return;
+ }
+
+ const {error} =
+ await db
+ .from("support_tickets")
+ .delete()
+ .eq("id",id);
+
+
+ if(error){
+
+  console.log(error);
+
+  alert("Message delete نہیں ہوا۔");
+
+  return;
+
+ }
+
+ loadMessages();
+ loadDashboard();
+
+}
+
+
+/* ==============================
+   BALANCES
+============================== */
+
+async function loadBalances(){
+
+ const box =
+ document.getElementById("balanceList");
+
+ box.innerHTML="Loading...";
+
+
+ const {data,error} =
+ await db
+ .from("customer_balances")
+ .select("*")
+ .order("updated_at",{ascending:false});
+
+
+ if(error){
+
+  console.log(error);
+
+  box.innerHTML="Balance load نہیں ہوا۔";
+
+  return;
+
+ }
+
+
+ if(!data || data.length===0){
+
+  box.innerHTML=
+  "ابھی کوئی Customer balance موجود نہیں۔";
+
+  return;
+
+ }
+
+
+ box.innerHTML="";
+
+
+ data.forEach(c=>{
+
+  const div =
+  document.createElement("div");
+
+  div.className="item";
+
+
+  div.innerHTML=`
+
+   <b>👤
+   ${escapeHtml(c.customer_name || c.customer_id)}
+   </b>
+
+   <p>
+   Current Balance:
+   <b>$${Number(c.balance || 0).toFixed(2)}</b>
+   </p>
+
+   <input
+   id="balance${c.id}"
+   type="number"
+   placeholder="نیا Balance">
+
+   <button
+   class="action"
+   onclick="updateBalance('${c.id}')">
+   💰 Balance Update
+   </button>
+
+  `;
+
+  box.appendChild(div);
+
+ });
+
+}
+
+
+/* UPDATE BALANCE */
+
+async function updateBalance(id){
+
+ const value =
+ Number(
+  document.getElementById(
+   "balance"+id
+  ).value
+ );
+
+
+ if(isNaN(value) || value<0){
+
+  alert("صحیح Balance لکھیں۔");
+  return;
+
+ }
+
+
+ const {error} =
+ await db
+ .from("customer_balances")
+ .update({
+  balance:value,
+  updated_at:new Date().toISOString()
+ })
+ .eq("id",id);
+
+
+ if(error){
+
+  console.log(error);
+
+  alert("Balance update نہیں ہوا۔");
+
+  return;
+
+ }
+
+
+ alert("Balance update ہوگیا ✅");
+
+ loadBalances();
+
+}
+
+
+/* ==============================
+   WITHDRAWALS
+============================== */
 
 async function loadWithdrawals(){
 
-    const box =
-    document.getElementById("withdrawals");
+ const box =
+ document.getElementById("withdrawalList");
 
-    box.innerHTML =
-    '<div class="loading">Withdrawals loading...</div>';
-
-
-    const result =
-    await supabaseClient
-    .from("withdrawals")
-    .select("*")
-    .order("created_at",{ascending:false});
+ box.innerHTML="Loading...";
 
 
-    if(result.error){
-
-        box.innerHTML =
-        '<div class="empty">Withdrawal table abhi available nahi hai.</div>';
-
-        return;
-
-    }
+ const {data,error} =
+ await db
+ .from("withdrawals")
+ .select("*")
+ .order("created_at",{ascending:false});
 
 
-    const data =
-    result.data || [];
+ if(error){
+
+  console.log(error);
+
+  box.innerHTML=
+  "Withdrawal requests load نہیں ہوئیں۔";
+
+  return;
+
+ }
 
 
-    document.getElementById(
-        "withdrawalCount"
-    ).innerText =
-    data.length;
+ if(!data || data.length===0){
+
+  box.innerHTML=
+  "ابھی کوئی Withdrawal Request نہیں ہے۔";
+
+  return;
+
+ }
 
 
-    if(!data.length){
-
-        box.innerHTML =
-        '<div class="empty">No withdrawal requests.</div>';
-
-        return;
-
-    }
+ box.innerHTML="";
 
 
-    box.innerHTML="";
+ data.forEach(w=>{
+
+  const div =
+  document.createElement("div");
+
+  div.className="item";
 
 
-    data.forEach(function(item){
+  div.innerHTML=`
 
-        const div =
-        document.createElement("div");
+   <b>💸 Withdrawal #${w.id}</b>
 
-        div.className="withdrawal";
+   <p>
+   Customer:
+   ${escapeHtml(w.customer_name || w.customer_id)}
+   </p>
 
-        div.innerHTML =
-        "<b>Customer:</b> "+
-        escapeHTML(
-            item.customer_id ||
-            item.customerId ||
-            "Customer"
-        ) +
+   <p>
+   Amount:
+   <b>$${Number(w.amount || 0).toFixed(2)}</b>
+   </p>
 
-        "<br><br><b>Amount:</b> $"+
-        Number(item.amount || 0).toFixed(2) +
+   <p>
+   Method:
+   ${escapeHtml(w.method || "")}
+   </p>
 
-        "<br><br><b>Status:</b> "+
-        escapeHTML(
-            item.status || "pending"
-        );
+   <p>
+   Account:
+   ${escapeHtml(w.account_details || "")}
+   </p>
 
-        box.appendChild(div);
+   <p>
+   Status:
+   <span class="status">
+   ${escapeHtml(w.status || "Pending")}
+   </span>
+   </p>
 
-    });
+   <select id="withdraw${w.id}">
+
+    <option>Pending</option>
+    <option>Approved</option>
+    <option>Paid</option>
+    <option>Rejected</option>
+
+   </select>
+
+   <button
+   class="action green"
+   onclick="updateWithdrawal('${w.id}')">
+   Update
+   </button>
+
+  `;
+
+  box.appendChild(div);
+
+ });
 
 }
 
 
-/* ================= KYC ================= */
+/* UPDATE WITHDRAWAL */
+
+async function updateWithdrawal(id){
+
+ const status =
+ document.getElementById(
+  "withdraw"+id
+ ).value;
+
+
+ const {error} =
+ await db
+ .from("withdrawals")
+ .update({status:status})
+ .eq("id",id);
+
+
+ if(error){
+
+  console.log(error);
+
+  alert("Withdrawal update نہیں ہوئی۔");
+
+  return;
+
+ }
+
+
+ alert("Withdrawal update ہوگئی ✅");
+
+ loadWithdrawals();
+
+}
+
+
+/* ==============================
+   KYC
+============================== */
 
 async function loadKYC(){
 
-    return;
+ const box =
+ document.getElementById("kycList");
 
-}
-
-
-/* ================= STATS ================= */
-
-async function loadStats(){
-
-    const products =
-    await supabaseClient
-    .from("Products")
-    .select("*",{count:"exact",head:true});
-
-    if(!products.error){
-
-        document.getElementById(
-            "productCount"
-        ).innerText =
-        products.count || 0;
-
-    }
-
-}
+ box.innerHTML="Loading...";
 
 
-/* ================= ESCAPE ================= */
-
-function escapeHTML(value){
-
-    return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
+ const {data,error} =
+ await db
+ .from("kyc_requests")
+ .select("*")
+ .order("created_at",{ascending:false});
 
 
-/* ================= START ================= */
+ if(error){
 
-loadProducts();
-loadStats();
+  console.log(error);
 
-</script>
+  box.innerHTML=
+  "KYC requests load نہیں ہوئیں۔";
 
-</body>
-</html>
+  return;
+
+ }
+
+
+ if(!data || data.length===0){
+
+  box.innerHTML=
+  "ابھی کوئی KYC Request نہیں ہے۔";
+
+  return;
+
+ }
+
+
+ box.innerHTML="";
+
+
+ data.forEach(k=>{
+
+  const div =
+  document.createElement("div");
+
+  div.className="item";
+
+
+  div.innerHTML=`
+
+   <b>🛡️ KYC #${k.id}</b>
+
+   <p>
+   Customer:
+   ${escapeHtml(k.customer_name || k.customer_id)}
+   </p>
+
+   <p>
+   Document:
+   ${escapeHtml(k.document_type || "")}
+   </p>
+
+   <p>
+   Number:
+   ${escapeHtml(k.document_number || "")}
+   </p>
+
+   <p>
+   Status:
+   <span class="status">
+   ${escapeHtml(k.status || "Pending")}
+   </span>
+   </p>
+
+   <select id="kycStatus${k.id}">
+
+    <option>Pending</option>
+    <option>Approved</o
