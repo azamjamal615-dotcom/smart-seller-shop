@@ -101,11 +101,12 @@ button:hover{
 
 .delete{
     background:#e53935;
+    margin-top:7px;
 }
 
 .edit{
     background:#ff9800;
-    margin-bottom:7px;
+    margin-top:7px;
 }
 
 .product{
@@ -132,6 +133,30 @@ button:hover{
     color:#555;
 }
 
+.status{
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+    display:none;
+}
+
+.success{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.loading{
+    text-align:center;
+    padding:15px;
+}
+
 @media(max-width:600px){
     .stats{
         grid-template-columns:1fr;
@@ -148,6 +173,8 @@ button:hover{
 </div>
 
 <div class="container">
+
+    <div id="status" class="status"></div>
 
     <div class="stats">
 
@@ -175,15 +202,23 @@ button:hover{
         <h2>➕ Add New Product</h2>
 
         <label>Product Name</label>
-        <input id="name" type="text" placeholder="Example: Samsung Phone">
+        <input id="name"
+               type="text"
+               placeholder="Example: Samsung Phone">
 
         <label>Price</label>
-        <input id="price" type="number" placeholder="100">
+        <input id="price"
+               type="number"
+               step="0.01"
+               placeholder="100">
 
         <label>Stock</label>
-        <input id="stock" type="number" placeholder="10">
+        <input id="stock"
+               type="number"
+               placeholder="10">
 
         <label>Category</label>
+
         <select id="category">
             <option value="Phone">Phone</option>
             <option value="Laptop">Laptop</option>
@@ -192,17 +227,19 @@ button:hover{
         </select>
 
         <label>Product Image URL</label>
-        <input id="image" type="text"
-        placeholder="https://example.com/image.jpg">
+
+        <input id="image"
+               type="text"
+               placeholder="https://example.com/image.jpg">
 
         <button id="saveBtn" onclick="saveProduct()">
             Add Product
         </button>
 
         <button class="cancel"
-        id="cancelBtn"
-        onclick="cancelEdit()"
-        style="display:none">
+                id="cancelBtn"
+                onclick="cancelEdit()"
+                style="display:none">
             Cancel Edit
         </button>
 
@@ -212,85 +249,258 @@ button:hover{
 
         <h2>📦 Products</h2>
 
-        <div id="products"></div>
+        <div id="products">
+            <div class="loading">Loading products...</div>
+        </div>
 
     </div>
 
 </div>
 
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 
-let products = JSON.parse(localStorage.getItem("smartSellerProducts")) || [];
+/* ================================
+   SUPABASE CONNECTION
+================================ */
 
-let editIndex = -1;
+const SUPABASE_URL =
+"https://cgrwiwzqiusvjibpjzdv.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
-/* SAVE PRODUCT */
+/* ================================
+   VARIABLES
+================================ */
 
-function saveProduct(){
+let products = [];
+let editId = null;
 
-    let name = document.getElementById("name").value.trim();
-    let price = document.getElementById("price").value;
-    let stock = document.getElementById("stock").value;
-    let category = document.getElementById("category").value;
-    let image = document.getElementById("image").value.trim();
 
-    if(!name || !price || !stock){
+/* ================================
+   STATUS MESSAGE
+================================ */
 
-        alert("Please fill Product Name, Price and Stock.");
+function showStatus(message, type){
+
+    const status =
+    document.getElementById("status");
+
+    status.innerText = message;
+
+    status.className =
+    "status " + type;
+
+    setTimeout(function(){
+
+        status.className = "status";
+
+    },4000);
+}
+
+
+/* ================================
+   LOAD PRODUCTS
+================================ */
+
+async function loadProducts(){
+
+    const box =
+    document.getElementById("products");
+
+    box.innerHTML =
+    '<div class="loading">Loading products...</div>';
+
+    const { data, error } =
+    await supabaseClient
+    .from("Products")
+    .select("*")
+    .order("id", { ascending:false });
+
+
+    if(error){
+
+        console.error(error);
+
+        box.innerHTML =
+        "<p>Products load نہیں ہو سکے۔</p>";
+
+        showStatus(
+            "Supabase connection error: " + error.message,
+            "error"
+        );
 
         return;
     }
 
-    let product = {
-        name:name,
-        price:price,
-        stock:stock,
-        category:category,
-        image:image
-    };
 
-
-    if(editIndex === -1){
-
-        products.push(product);
-
-        alert("Product Added Successfully!");
-
-    }else{
-
-        products[editIndex] = product;
-
-        alert("Product Updated Successfully!");
-
-        editIndex = -1;
-
-        document.getElementById("saveBtn").innerText =
-        "Add Product";
-
-        document.getElementById("cancelBtn").style.display =
-        "none";
-    }
-
-
-    localStorage.setItem(
-        "smartSellerProducts",
-        JSON.stringify(products)
-    );
-
-
-    clearForm();
+    products = data || [];
 
     showProducts();
 
+    await loadMessageCount();
 }
 
 
-/* SHOW PRODUCTS */
+/* ================================
+   SAVE / UPDATE PRODUCT
+================================ */
+
+async function saveProduct(){
+
+    const name =
+    document.getElementById("name")
+    .value.trim();
+
+    const price =
+    document.getElementById("price")
+    .value;
+
+    const stock =
+    document.getElementById("stock")
+    .value;
+
+    const category =
+    document.getElementById("category")
+    .value;
+
+    const image =
+    document.getElementById("image")
+    .value.trim();
+
+
+    if(!name || price === "" || stock === ""){
+
+        showStatus(
+            "Product Name, Price اور Stock لازمی بھریں۔",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const productData = {
+
+        name: name,
+
+        price: Number(price),
+
+        stock: Number(stock),
+
+        category: category,
+
+        image_url: image || null
+
+    };
+
+
+    const button =
+    document.getElementById("saveBtn");
+
+    button.disabled = true;
+
+    button.innerText =
+    editId === null
+    ? "Adding..."
+    : "Updating...";
+
+
+    let result;
+
+
+    if(editId === null){
+
+        result =
+        await supabaseClient
+        .from("Products")
+        .insert([productData]);
+
+    }else{
+
+        result =
+        await supabaseClient
+        .from("Products")
+        .update(productData)
+        .eq("id", editId);
+
+    }
+
+
+    if(result.error){
+
+        console.error(result.error);
+
+        showStatus(
+            "Error: " + result.error.message,
+            "error"
+        );
+
+        button.disabled = false;
+
+        button.innerText =
+        editId === null
+        ? "Add Product"
+        : "Update Product";
+
+        return;
+    }
+
+
+    if(editId === null){
+
+        showStatus(
+            "Product کامیابی سے Add ہو گیا! ✅",
+            "success"
+        );
+
+    }else{
+
+        showStatus(
+            "Product کامیابی سے Update ہو گیا! ✅",
+            "success"
+        );
+
+    }
+
+
+    editId = null;
+
+    clearForm();
+
+    button.disabled = false;
+
+    button.innerText =
+    "Add Product";
+
+    document.getElementById("cancelBtn")
+    .style.display = "none";
+
+
+    await loadProducts();
+}
+
+
+/* ================================
+   SHOW PRODUCTS
+================================ */
 
 function showProducts(){
 
-    let box = document.getElementById("products");
+    const box =
+    document.getElementById("products");
 
     box.innerHTML = "";
 
@@ -300,18 +510,24 @@ function showProducts(){
         box.innerHTML =
         "<p>No products added yet.</p>";
 
+        updateStats();
+
+        return;
     }
 
 
-    products.forEach(function(product,index){
+    products.forEach(function(product){
 
         let imageHTML = "";
 
-        if(product.image){
+        if(product.image_url){
 
-            imageHTML =
-            `<img src="${product.image}"
-            onerror="this.style.display='none'">`;
+            imageHTML = `
+            <img
+                src="${escapeHTML(product.image_url)}"
+                onerror="this.style.display='none'"
+            >
+            `;
 
         }
 
@@ -322,22 +538,35 @@ function showProducts(){
 
             ${imageHTML}
 
-            <h3>${product.name}</h3>
+            <h3>
+                ${escapeHTML(product.name || "")}
+            </h3>
 
-            <p><b>Price:</b> $${product.price}</p>
+            <p>
+                <b>Price:</b>
+                $${Number(product.price || 0)}
+            </p>
 
-            <p><b>Stock:</b> ${product.stock}</p>
+            <p>
+                <b>Stock:</b>
+                ${Number(product.stock || 0)}
+            </p>
 
-            <p><b>Category:</b> ${product.category}</p>
+            <p>
+                <b>Category:</b>
+                ${escapeHTML(product.category || "")}
+            </p>
 
-            <button class="edit"
-            onclick="editProduct(${index})">
-            ✏️ Edit Product
+            <button
+                class="edit"
+                onclick="editProduct(${product.id})">
+                ✏️ Edit Product
             </button>
 
-            <button class="delete"
-            onclick="deleteProduct(${index})">
-            🗑️ Delete Product
+            <button
+                class="delete"
+                onclick="deleteProduct(${product.id})">
+                🗑️ Delete Product
             </button>
 
         </div>
@@ -348,131 +577,244 @@ function showProducts(){
 
 
     updateStats();
-
 }
 
 
-/* EDIT */
+/* ================================
+   EDIT PRODUCT
+================================ */
 
-function editProduct(index){
+function editProduct(id){
 
-    let product = products[index];
+    const product =
+    products.find(function(item){
 
-    document.getElementById("name").value =
-    product.name;
+        return item.id === id;
 
-    document.getElementById("price").value =
-    product.price;
-
-    document.getElementById("stock").value =
-    product.stock;
-
-    document.getElementById("category").value =
-    product.category;
-
-    document.getElementById("image").value =
-    product.image;
+    });
 
 
-    editIndex = index;
+    if(!product){
+
+        showStatus(
+            "Product نہیں ملا۔",
+            "error"
+        );
+
+        return;
+    }
 
 
-    document.getElementById("saveBtn").innerText =
-    "Update Product";
+    document.getElementById("name")
+    .value = product.name || "";
 
-    document.getElementById("cancelBtn").style.display =
-    "block";
+    document.getElementById("price")
+    .value = product.price || "";
+
+    document.getElementById("stock")
+    .value = product.stock || "";
+
+    document.getElementById("category")
+    .value = product.category || "Other";
+
+    document.getElementById("image")
+    .value = product.image_url || "";
+
+
+    editId = product.id;
+
+
+    document.getElementById("saveBtn")
+    .innerText = "Update Product";
+
+
+    document.getElementById("cancelBtn")
+    .style.display = "block";
 
 
     window.scrollTo({
+
         top:0,
+
         behavior:"smooth"
+
     });
 
 }
 
 
-/* DELETE */
+/* ================================
+   DELETE PRODUCT
+================================ */
 
-function deleteProduct(index){
+async function deleteProduct(id){
 
-    if(confirm("Delete this product?")){
+    if(!confirm("Delete this product?")){
 
-        products.splice(index,1);
-
-        localStorage.setItem(
-            "smartSellerProducts",
-            JSON.stringify(products)
-        );
-
-        showProducts();
-
+        return;
     }
 
+
+    const { error } =
+    await supabaseClient
+    .from("Products")
+    .delete()
+    .eq("id", id);
+
+
+    if(error){
+
+        console.error(error);
+
+        showStatus(
+            "Delete error: " + error.message,
+            "error"
+        );
+
+        return;
+    }
+
+
+    showStatus(
+        "Product delete ہو گیا! 🗑️",
+        "success"
+    );
+
+
+    await loadProducts();
 }
 
 
-/* CLEAR FORM */
+/* ================================
+   CLEAR FORM
+================================ */
 
 function clearForm(){
 
-    document.getElementById("name").value = "";
-    document.getElementById("price").value = "";
-    document.getElementById("stock").value = "";
-    document.getElementById("image").value = "";
+    document.getElementById("name")
+    .value = "";
 
+    document.getElementById("price")
+    .value = "";
+
+    document.getElementById("stock")
+    .value = "";
+
+    document.getElementById("image")
+    .value = "";
+
+    document.getElementById("category")
+    .value = "Phone";
 }
 
 
-/* CANCEL EDIT */
+/* ================================
+   CANCEL EDIT
+================================ */
 
 function cancelEdit(){
 
-    editIndex = -1;
+    editId = null;
 
     clearForm();
 
-    document.getElementById("saveBtn").innerText =
-    "Add Product";
 
-    document.getElementById("cancelBtn").style.display =
-    "none";
+    document.getElementById("saveBtn")
+    .innerText = "Add Product";
 
+
+    document.getElementById("cancelBtn")
+    .style.display = "none";
 }
 
 
-/* STATS */
+/* ================================
+   STATS
+================================ */
 
 function updateStats(){
 
-    document.getElementById("productCount").innerText =
-    products.length;
+    document.getElementById("productCount")
+    .innerText = products.length;
 
 
     let totalStock = 0;
 
+
     products.forEach(function(product){
 
-        totalStock += Number(product.stock) || 0;
+        totalStock +=
+        Number(product.stock) || 0;
 
     });
 
 
-    document.getElementById("stockCount").innerText =
-    totalStock;
-
-
-    document.getElementById("messageCount").innerText =
-    "0";
-
+    document.getElementById("stockCount")
+    .innerText = totalStock;
 }
 
 
-/* START */
+/* ================================
+   MESSAGE COUNT
+================================ */
 
-showProducts();
+async function loadMessageCount(){
+
+    const { count, error } =
+    await supabaseClient
+    .from("support_tickets")
+    .select("*", {
+        count:"exact",
+        head:true
+    });
+
+
+    if(error){
+
+        console.error(
+            "Message count error:",
+            error
+        );
+
+        document.getElementById("messageCount")
+        .innerText = "0";
+
+        return;
+    }
+
+
+    document.getElementById("messageCount")
+    .innerText = count || 0;
+}
+
+
+/* ================================
+   HTML SECURITY
+================================ */
+
+function escapeHTML(value){
+
+    return String(value)
+
+    .replace(/&/g,"&amp;")
+
+    .replace(/</g,"&lt;")
+
+    .replace(/>/g,"&gt;")
+
+    .replace(/"/g,"&quot;")
+
+    .replace(/'/g,"&#039;");
+}
+
+
+/* ================================
+   START
+================================ */
+
+loadProducts();
 
 </script>
 
 </body>
-</html>
+    </html>
