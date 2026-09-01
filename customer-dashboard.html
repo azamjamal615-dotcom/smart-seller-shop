@@ -23,7 +23,7 @@ body{
 .header{
     background:#111827;
     color:white;
-    padding:18px 15px;
+    padding:20px 15px;
     text-align:center;
 }
 
@@ -33,7 +33,7 @@ body{
 }
 
 .header p{
-    margin:6px 0 0;
+    margin:7px 0 0;
     color:#ccc;
 }
 
@@ -45,7 +45,7 @@ body{
 
 .nav{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(3,1fr);
     gap:10px;
     margin-bottom:15px;
 }
@@ -58,6 +58,7 @@ body{
     color:#222;
     box-shadow:0 2px 10px #ddd;
     cursor:pointer;
+    font-size:14px;
 }
 
 .nav button.active{
@@ -115,6 +116,7 @@ body{
     border:1px solid #ddd;
     border-radius:13px;
     padding:12px;
+    overflow:hidden;
 }
 
 .product img{
@@ -137,7 +139,7 @@ body{
 .price{
     font-size:20px;
     font-weight:bold;
-    color:#1877f2;
+    color:#1877f2 !important;
 }
 
 .add{
@@ -149,6 +151,10 @@ body{
     border-radius:9px;
     margin-top:8px;
     cursor:pointer;
+}
+
+.add:disabled{
+    background:#999;
 }
 
 input,
@@ -174,6 +180,11 @@ textarea{
     background:#1877f2;
     color:white;
     font-size:16px;
+    cursor:pointer;
+}
+
+.primary:disabled{
+    opacity:.6;
 }
 
 .danger{
@@ -205,12 +216,14 @@ textarea{
     border:0;
     padding:8px 12px;
     border-radius:7px;
+    cursor:pointer;
 }
 
 .total{
     font-size:22px;
     font-weight:bold;
     margin-top:15px;
+    margin-bottom:15px;
 }
 
 .empty{
@@ -220,12 +233,18 @@ textarea{
 }
 
 .profile-row{
-    margin-bottom:12px;
+    margin-bottom:15px;
 }
 
 .profile-row b{
     display:block;
     margin-bottom:5px;
+}
+
+.footer{
+    text-align:center;
+    color:#777;
+    padding:25px 10px;
 }
 
 @media(max-width:600px){
@@ -251,230 +270,217 @@ textarea{
 
 <body>
 
+<!-- HEADER -->
+
 <div class="header">
     <h1>Smart Seller Shop</h1>
     <p>Customer Dashboard</p>
 </div>
 
+
 <div class="container">
 
-    <!-- NAVIGATION -->
+<!-- NAVIGATION -->
 
-    <div class="nav">
+<div class="nav">
 
-        <button
-            class="active"
-            onclick="showSection('home',this)"
-        >
-            🏠 Home
-        </button>
+    <button class="active"
+        onclick="showSection('home',this)">
+        🏠 Home
+    </button>
 
-        <button
-            onclick="showSection('productsSection',this)"
-        >
-            🛍️ Products
-        </button>
+    <button
+        onclick="showSection('productsSection',this)">
+        🛍️ Products
+    </button>
 
-        <button
-            onclick="showSection('cartSection',this)"
-        >
-            🛒 Cart
-        </button>
+    <button
+        onclick="showSection('cartSection',this)">
+        🛒 Cart
+    </button>
 
-        <button
-            onclick="showSection('serviceSection',this)"
-        >
-            💬 Service
-        </button>
+    <button
+        onclick="showSection('serviceSection',this)">
+        💬 Service
+    </button>
 
-        <button
-            onclick="showSection('profileSection',this)"
-        >
-            👤 Profile
-        </button>
+    <button
+        onclick="showSection('profileSection',this)">
+        👤 Profile
+    </button>
 
-        <button
-            onclick="logout()"
-        >
-            🚪 Logout
-        </button>
+    <button
+        onclick="logout()">
+        🚪 Logout
+    </button>
+
+</div>
+
+
+<!-- HOME -->
+
+<div id="home" class="section active">
+
+    <div class="card">
+
+        <h2>Welcome to Smart Seller Shop 👋</h2>
+
+        <p>
+            Yahan se aap products dekh sakte hain,
+            cart mein add kar sakte hain aur Customer
+            Service se contact kar sakte hain.
+        </p>
 
     </div>
 
+    <div class="stats">
 
-    <!-- HOME -->
-
-    <div id="home" class="section active">
-
-        <div class="card">
-
-            <h2>Welcome to Smart Seller Shop 👋</h2>
-
-            <p>
-                Yahan se aap products dekh sakte hain,
-                cart mein add kar sakte hain aur Customer
-                Service se contact kar sakte hain.
-            </p>
-
+        <div class="stat">
+            <h2 id="homeProductCount">0</h2>
+            <p>Products</p>
         </div>
 
+        <div class="stat">
+            <h2 id="cartCount">0</h2>
+            <p>Cart Items</p>
+        </div>
 
-        <div class="stats">
-
-            <div class="stat">
-                <h2 id="homeProductCount">0</h2>
-                <p>Products</p>
-            </div>
-
-            <div class="stat">
-                <h2 id="cartCount">0</h2>
-                <p>Cart Items</p>
-            </div>
-
-            <div class="stat">
-                <h2>24/7</h2>
-                <p>Customer Service</p>
-            </div>
-
+        <div class="stat">
+            <h2>24/7</h2>
+            <p>Customer Service</p>
         </div>
 
     </div>
 
+</div>
 
-    <!-- PRODUCTS -->
 
-    <div id="productsSection" class="section">
+<!-- PRODUCTS -->
 
-        <div class="card">
+<div id="productsSection" class="section">
 
-            <h2>🛍️ All Products</h2>
+    <div class="card">
 
-            <div
-                id="products"
-                class="products"
-            >
-                Loading products...
-            </div>
+        <h2>🛍️ All Products</h2>
 
+        <div id="products" class="products">
+            Loading products...
         </div>
 
     </div>
 
+</div>
 
-    <!-- CART -->
 
-    <div id="cartSection" class="section">
+<!-- CART -->
 
-        <div class="card">
+<div id="cartSection" class="section">
 
-            <h2>🛒 My Cart</h2>
+    <div class="card">
 
-            <div id="cartItems"></div>
+        <h2>🛒 My Cart</h2>
 
-            <div
-                id="cartTotal"
-                class="total"
-            >
-                Total: $0.00
-            </div>
+        <div id="cartItems"></div>
 
-            <button
-                class="primary"
-                onclick="checkout()"
-            >
-                💳 Checkout
-            </button>
-
+        <div id="cartTotal" class="total">
+            Total: $0.00
         </div>
+
+        <button
+            class="primary"
+            onclick="checkout()">
+            💳 Checkout
+        </button>
 
     </div>
 
+</div>
 
-    <!-- CUSTOMER SERVICE -->
 
-    <div id="serviceSection" class="section">
+<!-- CUSTOMER SERVICE -->
 
-        <div class="card">
+<div id="serviceSection" class="section">
 
-            <h2>💬 Customer Service</h2>
+    <div class="card">
 
-            <p>
-                Payment account ya kisi bhi help ke liye
-                neeche message bhejein.
-            </p>
+        <h2>💬 Customer Service</h2>
 
-            <input
-                id="customerName"
-                type="text"
-                placeholder="Your name"
-            >
+        <p>
+            Payment account ya kisi bhi help ke liye
+            neeche message bhejein.
+        </p>
 
-            <input
-                id="customerEmail"
-                type="email"
-                placeholder="Your email"
-            >
+        <input
+            id="customerName"
+            type="text"
+            placeholder="Your name">
 
-            <textarea
-                id="customerMessage"
-                placeholder="Example: Mujhe payment karni hai, account do."
-            ></textarea>
+        <input
+            id="customerEmail"
+            type="email"
+            placeholder="Your email">
 
-            <button
-                id="sendButton"
-                class="primary"
-                onclick="sendMessage()"
-            >
-                Send Message
-            </button>
+        <textarea
+            id="customerMessage"
+            placeholder="Example: Mujhe payment karni hai, account do."></textarea>
 
-            <p id="serviceStatus"></p>
+        <button
+            id="sendButton"
+            class="primary"
+            onclick="sendMessage()">
+            Send Message
+        </button>
 
-        </div>
+        <p id="serviceStatus"></p>
 
     </div>
 
+</div>
 
-    <!-- PROFILE -->
 
-    <div id="profileSection" class="section">
+<!-- PROFILE -->
 
-        <div class="card">
+<div id="profileSection" class="section">
 
-            <h2>👤 My Profile</h2>
+    <div class="card">
 
-            <div class="profile-row">
-                <b>Name</b>
-                <span id="profileName">-</span>
-            </div>
+        <h2>👤 My Profile</h2>
 
-            <div class="profile-row">
-                <b>Email</b>
-                <span id="profileEmail">-</span>
-            </div>
-
-            <hr>
-
-            <h3>Update Name</h3>
-
-            <input
-                id="newName"
-                type="text"
-                placeholder="Enter your name"
-            >
-
-            <button
-                class="primary"
-                onclick="saveProfile()"
-            >
-                Save Profile
-            </button>
-
-            <p id="profileStatus"></p>
-
+        <div class="profile-row">
+            <b>Name</b>
+            <span id="profileName">Customer</span>
         </div>
 
+        <div class="profile-row">
+            <b>Email</b>
+            <span id="profileEmail">Not provided</span>
+        </div>
+
+        <hr>
+
+        <h3>Update Name</h3>
+
+        <input
+            id="newName"
+            type="text"
+            placeholder="Enter your name">
+
+        <button
+            class="primary"
+            onclick="saveProfile()">
+            Save Profile
+        </button>
+
+        <p id="profileStatus"></p>
+
     </div>
+
+</div>
+
+
+<div class="footer">
+    Smart Seller Shop © 2026
+</div>
 
 </div>
 
@@ -505,51 +511,50 @@ supabase.createClient(
 let products = [];
 
 let cart =
-    JSON.parse(
-        localStorage.getItem("smartSellerCart") || "[]"
-    );
+JSON.parse(
+    localStorage.getItem("smartSellerCart") || "[]"
+);
 
 
 /* =====================================================
-   SECTION
+   SHOW SECTION
 ===================================================== */
 
 function showSection(id,button){
 
     document
-        .querySelectorAll(".section")
-        .forEach(function(section){
+    .querySelectorAll(".section")
+    .forEach(function(section){
 
-            section.classList.remove("active");
+        section.classList.remove("active");
 
-        });
+    });
+
+
+    const section =
+    document.getElementById(id);
+
+    if(section){
+        section.classList.add("active");
+    }
 
 
     document
-        .getElementById(id)
-        .classList.add("active");
+    .querySelectorAll(".nav button")
+    .forEach(function(btn){
 
+        btn.classList.remove("active");
 
-    document
-        .querySelectorAll(".nav button")
-        .forEach(function(btn){
-
-            btn.classList.remove("active");
-
-        });
+    });
 
 
     if(button){
-
         button.classList.add("active");
-
     }
 
 
     if(id === "cartSection"){
-
         showCart();
-
     }
 
 }
@@ -562,17 +567,21 @@ function showSection(id,button){
 async function loadProducts(){
 
     const box =
-        document.getElementById("products");
+    document.getElementById("products");
 
     box.innerHTML =
-        "Loading products...";
+    "Loading products...";
 
 
-    const {data,error} =
-        await supabaseClient
-        .from("Products")
-        .select("*")
-        .order("id",{ascending:false});
+    const result =
+    await supabaseClient
+    .from("Products")
+    .select("*")
+    .order("id",{ascending:false});
+
+
+    const data = result.data;
+    const error = result.error;
 
 
     if(error){
@@ -580,7 +589,7 @@ async function loadProducts(){
         console.error(error);
 
         box.innerHTML =
-            "<p class='error'>Products load nahi ho rahe.</p>";
+        "<p class='error'>Products load nahi ho rahe.</p>";
 
         return;
     }
@@ -591,7 +600,8 @@ async function loadProducts(){
 
     document.getElementById(
         "homeProductCount"
-    ).innerText = products.length;
+    ).innerText =
+    products.length;
 
 
     showProducts();
@@ -606,7 +616,7 @@ async function loadProducts(){
 function showProducts(){
 
     const box =
-        document.getElementById("products");
+    document.getElementById("products");
 
     box.innerHTML = "";
 
@@ -614,7 +624,7 @@ function showProducts(){
     if(products.length === 0){
 
         box.innerHTML =
-            "<div class='empty'>No products available.</div>";
+        "<div class='empty'>No products available.</div>";
 
         return;
     }
@@ -623,70 +633,74 @@ function showProducts(){
     products.forEach(function(product){
 
         const id =
-            product.id;
+        product.id;
 
 
         const name =
-            product["Name"] ||
-            product.name ||
-            "Unnamed Product";
+        product["Name"] ||
+        product.name ||
+        "Unnamed Product";
 
 
         const description =
-            product["Description"] ||
-            product.description ||
-            "No description";
+        product["Description"] ||
+        product.description ||
+        "No description";
 
 
         const price =
-            Number(
-                product["Price"] ??
-                product.price ??
-                0
-            );
+        Number(
+            product["Price"] ??
+            product.price ??
+            0
+        );
 
 
         const stock =
-            Number(
-                product["Stock"] ??
-                product.stock ??
-                0
-            );
+        Number(
+            product["Stock"] ??
+            product.stock ??
+            0
+        );
 
 
         const category =
-            product["Category"] ||
-            product.category ||
-            "Other";
+        product["Category"] ||
+        product.category ||
+        "Other";
 
 
         const image =
-            product["Image url"] ||
-            product.image ||
-            product.image_url ||
-            "";
+        product["Image url"] ||
+        product["Image URL"] ||
+        product.image_url ||
+        product.image ||
+        "";
 
 
         const card =
-            document.createElement("div");
+        document.createElement("div");
 
-        card.className = "product";
+        card.className =
+        "product";
 
 
         if(image){
 
             const img =
-                document.createElement("img");
+            document.createElement("img");
 
             img.src = image;
 
+            img.alt = name;
+
             img.onerror =
-                function(){
+            function(){
 
-                    this.style.display =
-                        "none";
+                this.style.display =
+                "none";
 
-                };
+            };
 
             card.appendChild(img);
 
@@ -694,74 +708,76 @@ function showProducts(){
 
 
         const title =
-            document.createElement("h3");
+        document.createElement("h3");
 
-        title.innerText = name;
+        title.innerText =
+        name;
 
         card.appendChild(title);
 
 
         const desc =
-            document.createElement("p");
+        document.createElement("p");
 
         desc.innerText =
-            "Description: " + description;
+        "Description: " + description;
 
         card.appendChild(desc);
 
 
         const priceText =
-            document.createElement("p");
+        document.createElement("p");
 
         priceText.className =
-            "price";
+        "price";
 
         priceText.innerText =
-            "$" + price.toFixed(2);
+        "$" + price.toFixed(2);
 
         card.appendChild(priceText);
 
 
         const stockText =
-            document.createElement("p");
+        document.createElement("p");
 
         stockText.innerText =
-            "Stock: " + stock;
+        "Stock: " + stock;
 
         card.appendChild(stockText);
 
 
         const categoryText =
-            document.createElement("p");
+        document.createElement("p");
 
         categoryText.innerText =
-            "Category: " + category;
+        "Category: " + category;
 
         card.appendChild(categoryText);
 
 
         const button =
-            document.createElement("button");
+        document.createElement("button");
 
         button.className =
-            "add";
+        "add";
+
 
         button.innerText =
-            stock > 0
-            ? "🛒 Add to Cart"
-            : "Out of Stock";
+        stock > 0
+        ? "🛒 Add to Cart"
+        : "Out of Stock";
 
 
         button.disabled =
-            stock <= 0;
+        stock <= 0;
 
 
         button.onclick =
-            function(){
+        function(){
 
-                addToCart(product);
+            addToCart(product);
 
-            };
+        };
 
 
         card.appendChild(button);
@@ -780,15 +796,15 @@ function showProducts(){
 function addToCart(product){
 
     const id =
-        product.id;
+    product.id;
 
 
     const existing =
-        cart.find(function(item){
+    cart.find(function(item){
 
-            return Number(item.id) === Number(id);
+        return Number(item.id) === Number(id);
 
-        });
+    });
 
 
     if(existing){
@@ -802,16 +818,16 @@ function addToCart(product){
             id:id,
 
             name:
-                product["Name"] ||
-                product.name ||
-                "Product",
+            product["Name"] ||
+            product.name ||
+            "Product",
 
             price:
-                Number(
-                    product["Price"] ??
-                    product.price ??
-                    0
-                ),
+            Number(
+                product["Price"] ??
+                product.price ??
+                0
+            ),
 
             quantity:1
 
@@ -824,7 +840,9 @@ function addToCart(product){
 
     updateCartCount();
 
-    alert("Product cart mein add ho gaya ✅");
+    alert(
+        "Product cart mein add ho gaya ✅"
+    );
 
 }
 
@@ -854,14 +872,16 @@ function updateCartCount(){
 
     cart.forEach(function(item){
 
-        count += Number(item.quantity);
+        count +=
+        Number(item.quantity);
 
     });
 
 
     document.getElementById(
         "cartCount"
-    ).innerText = count;
+    ).innerText =
+    count;
 
 }
 
@@ -873,7 +893,7 @@ function updateCartCount(){
 function showCart(){
 
     const box =
-        document.getElementById("cartItems");
+    document.getElementById("cartItems");
 
     box.innerHTML = "";
 
@@ -881,12 +901,12 @@ function showCart(){
     if(cart.length === 0){
 
         box.innerHTML =
-            "<div class='empty'>Your cart is empty 🛒</div>";
+        "<div class='empty'>Your cart is empty 🛒</div>";
 
         document.getElementById(
             "cartTotal"
         ).innerText =
-            "Total: $0.00";
+        "Total: $0.00";
 
         return;
     }
@@ -898,58 +918,75 @@ function showCart(){
     cart.forEach(function(item,index){
 
         const itemTotal =
-            Number(item.price) *
-            Number(item.quantity);
+        Number(item.price) *
+        Number(item.quantity);
 
 
         total += itemTotal;
 
 
         const row =
-            document.createElement("div");
+        document.createElement("div");
 
         row.className =
-            "cart-item";
+        "cart-item";
 
 
         const text =
-            document.createElement("div");
+        document.createElement("div");
 
-        text.innerHTML =
-            "<b>" +
-            escapeHTML(item.name) +
-            "</b><br>" +
-            "$" +
-            Number(item.price).toFixed(2) +
-            " × " +
-            item.quantity;
+
+        const name =
+        document.createElement("b");
+
+        name.innerText =
+        item.name;
+
+
+        const details =
+        document.createElement("div");
+
+        details.innerText =
+        "$" +
+        Number(item.price).toFixed(2) +
+        " × " +
+        item.quantity;
+
+
+        text.appendChild(name);
+
+        text.appendChild(
+            document.createElement("br")
+        );
+
+        text.appendChild(details);
 
 
         row.appendChild(text);
 
 
         const remove =
-            document.createElement("button");
+        document.createElement("button");
 
         remove.className =
-            "remove";
+        "remove";
 
         remove.innerText =
-            "Remove";
+        "Remove";
 
 
         remove.onclick =
-            function(){
+        function(){
 
-                cart.splice(index,1);
+            cart.splice(index,1);
 
-                saveCart();
+            saveCart();
 
-                updateCartCount();
+            updateCartCount();
 
-                showCart();
+            showCart();
 
-            };
+        };
 
 
         row.appendChild(remove);
@@ -962,7 +999,7 @@ function showCart(){
     document.getElementById(
         "cartTotal"
     ).innerText =
-        "Total: $" + total.toFixed(2);
+    "Total: $" + total.toFixed(2);
 
 }
 
@@ -975,22 +1012,30 @@ function checkout(){
 
     if(cart.length === 0){
 
-        alert("Pehle product cart mein add karein.");
+        alert(
+            "Pehle product cart mein add karein."
+        );
 
         return;
     }
 
 
+    const serviceButton =
+    document.querySelectorAll(
+        ".nav button"
+    )[3];
+
+
     showSection(
         "serviceSection",
-        document.querySelectorAll(".nav button")[3]
+        serviceButton
     );
 
 
     document.getElementById(
         "customerMessage"
     ).value =
-        "Mujhe order place karna hai. Please payment account details bhej dein.";
+    "Mujhe order place karna hai. Please payment account details bhej dein.";
 
 }
 
@@ -1002,42 +1047,42 @@ function checkout(){
 async function sendMessage(){
 
     const name =
-        document.getElementById(
-            "customerName"
-        ).value.trim();
+    document.getElementById(
+        "customerName"
+    ).value.trim();
 
 
     const email =
-        document.getElementById(
-            "customerEmail"
-        ).value.trim();
+    document.getElementById(
+        "customerEmail"
+    ).value.trim();
 
 
     const message =
-        document.getElementById(
-            "customerMessage"
-        ).value.trim();
+    document.getElementById(
+        "customerMessage"
+    ).value.trim();
 
 
     const status =
-        document.getElementById(
-            "serviceStatus"
-        );
+    document.getElementById(
+        "serviceStatus"
+    );
 
 
     const button =
-        document.getElementById(
-            "sendButton"
-        );
+    document.getElementById(
+        "sendButton"
+    );
 
 
     if(!name || !email || !message){
 
         status.className =
-            "error";
+        "error";
 
         status.innerText =
-            "Please sab fields fill karein.";
+        "Please sab fields fill karein.";
 
         return;
     }
@@ -1046,14 +1091,18 @@ async function sendMessage(){
     button.disabled = true;
 
     button.innerText =
-        "Sending...";
+    "Sending...";
 
+
+    status.className = "";
 
     status.innerText =
-        "Sending...";
+    "Sending...";
 
 
-    const {error} =
+    try{
+
+        const result =
         await supabaseClient
         .from("support_tickets")
         .insert([{
@@ -1069,27 +1118,46 @@ async function sendMessage(){
         }]);
 
 
-    if(error){
+        if(result.error){
 
-        console.error(error);
+            throw result.error;
+
+        }
+
+
+        localStorage.setItem(
+            "smartSellerCustomerName",
+            name
+        );
+
+
+        localStorage.setItem(
+            "smartSellerCustomerEmail",
+            email
+        );
+
 
         status.className =
-            "error";
+        "success";
 
         status.innerText =
-            "Message send nahi hua. Please dobara try karein.";
+        "Message successfully send ho gaya ✅";
 
-    }else{
-
-        status.className =
-            "success";
-
-        status.innerText =
-            "Message successfully send ho gaya ✅";
 
         document.getElementById(
             "customerMessage"
         ).value = "";
+
+
+    }catch(error){
+
+        console.error(error);
+
+        status.className =
+        "error";
+
+        status.innerText =
+        "Message send nahi hua. Please dobara try karein.";
 
     }
 
@@ -1097,57 +1165,57 @@ async function sendMessage(){
     button.disabled = false;
 
     button.innerText =
-        "Send Message";
+    "Send Message";
 
 }
 
 
 /* =====================================================
-   PROFILE
+   LOAD PROFILE
 ===================================================== */
 
 function loadProfile(){
 
     const savedName =
-        localStorage.getItem(
-            "smartSellerCustomerName"
-        ) || "";
+    localStorage.getItem(
+        "smartSellerCustomerName"
+    ) || "";
 
 
     const savedEmail =
-        localStorage.getItem(
-            "smartSellerCustomerEmail"
-        ) || "";
+    localStorage.getItem(
+        "smartSellerCustomerEmail"
+    ) || "";
 
 
     document.getElementById(
         "profileName"
     ).innerText =
-        savedName || "Customer";
+    savedName || "Customer";
 
 
     document.getElementById(
         "profileEmail"
     ).innerText =
-        savedEmail || "Not provided";
+    savedEmail || "Not provided";
 
 
     document.getElementById(
         "customerName"
     ).value =
-        savedName;
+    savedName;
 
 
     document.getElementById(
         "customerEmail"
     ).value =
-        savedEmail;
+    savedEmail;
 
 
     document.getElementById(
         "newName"
     ).value =
-        savedName;
+    savedName;
 
 }
 
@@ -1159,24 +1227,24 @@ function loadProfile(){
 function saveProfile(){
 
     const name =
-        document.getElementById(
-            "newName"
-        ).value.trim();
+    document.getElementById(
+        "newName"
+    ).value.trim();
 
 
     const status =
-        document.getElementById(
-            "profileStatus"
-        );
+    document.getElementById(
+        "profileStatus"
+    );
 
 
     if(!name){
 
         status.className =
-            "error";
+        "error";
 
         status.innerText =
-            "Name enter karein.";
+        "Name enter karein.";
 
         return;
     }
@@ -1190,19 +1258,21 @@ function saveProfile(){
 
     document.getElementById(
         "profileName"
-    ).innerText = name;
+    ).innerText =
+    name;
 
 
     document.getElementById(
         "customerName"
-    ).value = name;
+    ).value =
+    name;
 
 
     status.className =
-        "success";
+    "success";
 
     status.innerText =
-        "Profile save ho gaya ✅";
+    "Profile save ho gaya ✅";
 
 }
 
@@ -1213,7 +1283,21 @@ function saveProfile(){
 
 function logout(){
 
-    if(confirm("Kya aap logout karna chahte hain?")){
+    const confirmLogout =
+    confirm(
+        "Kya aap logout karna chahte hain?"
+    );
 
-        localStorage.removeItem(
-     
+
+    if(!confirmLogout){
+        return;
+    }
+
+
+    localStorage.removeItem(
+        "smartSellerCustomerName"
+    );
+
+
+    localStorage.removeItem(
+    
