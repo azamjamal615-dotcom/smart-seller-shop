@@ -3,10 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Smart Seller Shop - Admin Panel</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
@@ -70,7 +75,14 @@ body{
     color:#777;
 }
 
-input,select{
+label{
+    display:block;
+    margin-top:8px;
+    font-weight:bold;
+}
+
+input,
+select{
     width:100%;
     padding:13px;
     margin:7px 0 15px;
@@ -101,12 +113,11 @@ button:hover{
 
 .delete{
     background:#e53935;
-    margin-top:7px;
 }
 
 .edit{
     background:#ff9800;
-    margin-top:7px;
+    margin-bottom:7px;
 }
 
 .product{
@@ -133,34 +144,39 @@ button:hover{
     color:#555;
 }
 
-.status{
+.message{
     padding:12px;
     border-radius:10px;
-    margin-bottom:15px;
+    margin-bottom:12px;
     display:none;
 }
 
 .success{
-    display:block;
     background:#dcfce7;
     color:#166534;
 }
 
 .error{
-    display:block;
     background:#fee2e2;
     color:#991b1b;
 }
 
 .loading{
     text-align:center;
-    padding:15px;
+    padding:20px;
+    color:#777;
 }
 
 @media(max-width:600px){
+
     .stats{
         grid-template-columns:1fr;
     }
+
+    .header h1{
+        font-size:25px;
+    }
+
 }
 </style>
 </head>
@@ -174,8 +190,10 @@ button:hover{
 
 <div class="container">
 
-    <div id="status" class="status"></div>
+    <!-- MESSAGE -->
+    <div id="messageBox" class="message"></div>
 
+    <!-- STATS -->
     <div class="stats">
 
         <div class="stat">
@@ -197,60 +215,94 @@ button:hover{
 
     <br>
 
+    <!-- ADD PRODUCT -->
     <div class="card">
 
-        <h2>➕ Add New Product</h2>
+        <h2 id="formTitle">➕ Add New Product</h2>
 
         <label>Product Name</label>
-        <input id="name"
-               type="text"
-               placeholder="Example: Samsung Phone">
+
+        <input
+            id="name"
+            type="text"
+            placeholder="Example: Samsung Phone"
+        >
 
         <label>Price</label>
-        <input id="price"
-               type="number"
-               step="0.01"
-               placeholder="100">
+
+        <input
+            id="price"
+            type="number"
+            step="0.01"
+            placeholder="100"
+        >
 
         <label>Stock</label>
-        <input id="stock"
-               type="number"
-               placeholder="10">
+
+        <input
+            id="stock"
+            type="number"
+            placeholder="10"
+        >
 
         <label>Category</label>
 
         <select id="category">
-            <option value="Phone">Phone</option>
-            <option value="Laptop">Laptop</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Other">Other</option>
+
+            <option value="Phone">
+                Phone
+            </option>
+
+            <option value="Laptop">
+                Laptop
+            </option>
+
+            <option value="Accessories">
+                Accessories
+            </option>
+
+            <option value="Other">
+                Other
+            </option>
+
         </select>
 
         <label>Product Image URL</label>
 
-        <input id="image"
-               type="text"
-               placeholder="https://example.com/image.jpg">
+        <input
+            id="image"
+            type="text"
+            placeholder="https://example.com/image.jpg"
+        >
 
-        <button id="saveBtn" onclick="saveProduct()">
+        <button
+            id="saveBtn"
+            onclick="saveProduct()"
+        >
             Add Product
         </button>
 
-        <button class="cancel"
-                id="cancelBtn"
-                onclick="cancelEdit()"
-                style="display:none">
+        <button
+            class="cancel"
+            id="cancelBtn"
+            onclick="cancelEdit()"
+            style="display:none"
+        >
             Cancel Edit
         </button>
 
     </div>
 
+
+    <!-- PRODUCTS -->
     <div class="card">
 
         <h2>📦 Products</h2>
 
         <div id="products">
-            <div class="loading">Loading products...</div>
+            <div class="loading">
+                Products loading...
+            </div>
         </div>
 
     </div>
@@ -258,15 +310,11 @@ button:hover{
 </div>
 
 
-<!-- SUPABASE -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
 
-/* ================================
+/* =====================================================
    SUPABASE CONNECTION
-================================ */
+===================================================== */
 
 const SUPABASE_URL =
 "https://cgrwiwzqiusvjibpjzdv.supabase.co";
@@ -275,59 +323,62 @@ const SUPABASE_KEY =
 "sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
 
 const supabaseClient =
-window.supabase.createClient(
+supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
 
 
-/* ================================
+/* =====================================================
    VARIABLES
-================================ */
+===================================================== */
 
 let products = [];
+
 let editId = null;
 
 
-/* ================================
-   STATUS MESSAGE
-================================ */
+/* =====================================================
+   MESSAGE
+===================================================== */
 
-function showStatus(message, type){
+function showMessage(text,type){
 
-    const status =
-    document.getElementById("status");
+    const box =
+        document.getElementById("messageBox");
 
-    status.innerText = message;
+    box.innerText = text;
 
-    status.className =
-    "status " + type;
+    box.className =
+        "message " + type;
+
+    box.style.display = "block";
 
     setTimeout(function(){
 
-        status.className = "status";
+        box.style.display = "none";
 
     },4000);
 }
 
 
-/* ================================
-   LOAD PRODUCTS
-================================ */
+/* =====================================================
+   LOAD PRODUCTS FROM SUPABASE
+===================================================== */
 
 async function loadProducts(){
 
     const box =
-    document.getElementById("products");
+        document.getElementById("products");
 
     box.innerHTML =
-    '<div class="loading">Loading products...</div>';
+        '<div class="loading">Products loading...</div>';
 
     const { data, error } =
-    await supabaseClient
-    .from("Products")
-    .select("*")
-    .order("id", { ascending:false });
+        await supabaseClient
+        .from("Products")
+        .select("*")
+        .order("id",{ascending:false});
 
 
     if(error){
@@ -335,10 +386,10 @@ async function loadProducts(){
         console.error(error);
 
         box.innerHTML =
-        "<p>Products load نہیں ہو سکے۔</p>";
+            "<p>Products load nahi ho rahe.</p>";
 
-        showStatus(
-            "Supabase connection error: " + error.message,
+        showMessage(
+            "Supabase error: " + error.message,
             "error"
         );
 
@@ -350,41 +401,42 @@ async function loadProducts(){
 
     showProducts();
 
-    await loadMessageCount();
+    updateStats();
+
 }
 
 
-/* ================================
-   SAVE / UPDATE PRODUCT
-================================ */
+/* =====================================================
+   SAVE PRODUCT
+===================================================== */
 
 async function saveProduct(){
 
     const name =
-    document.getElementById("name")
-    .value.trim();
+        document.getElementById("name")
+        .value.trim();
 
     const price =
-    document.getElementById("price")
-    .value;
+        document.getElementById("price")
+        .value;
 
     const stock =
-    document.getElementById("stock")
-    .value;
+        document.getElementById("stock")
+        .value;
 
     const category =
-    document.getElementById("category")
-    .value;
+        document.getElementById("category")
+        .value;
 
     const image =
-    document.getElementById("image")
-    .value.trim();
+        document.getElementById("image")
+        .value.trim();
 
 
     if(!name || price === "" || stock === ""){
 
-        showStatus(
-            "Product Name, Price اور Stock لازمی بھریں۔",
+        showMessage(
+            "Product Name, Price aur Stock zaroor bharain.",
             "error"
         );
 
@@ -394,113 +446,122 @@ async function saveProduct(){
 
     const productData = {
 
-        name: name,
+        "Name": name,
 
-        price: Number(price),
+        "Price": Number(price),
 
-        stock: Number(stock),
+        "Stock": Number(stock),
 
-        category: category,
+        "Category": category,
 
-        image_url: image || null
+        "Image url": image || null
 
     };
 
 
-    const button =
-    document.getElementById("saveBtn");
+    const saveButton =
+        document.getElementById("saveBtn");
 
-    button.disabled = true;
+    saveButton.disabled = true;
 
-    button.innerText =
-    editId === null
-    ? "Adding..."
-    : "Updating...";
+    saveButton.innerText = "Saving...";
 
 
-    let result;
-
+    /* ================================
+       ADD NEW PRODUCT
+    ================================= */
 
     if(editId === null){
 
-        result =
-        await supabaseClient
-        .from("Products")
-        .insert([productData]);
+        const { error } =
+            await supabaseClient
+            .from("Products")
+            .insert([productData]);
 
-    }else{
 
-        result =
-        await supabaseClient
-        .from("Products")
-        .update(productData)
-        .eq("id", editId);
+        if(error){
+
+            console.error(error);
+
+            showMessage(
+                "Product save nahi hua: " +
+                error.message,
+                "error"
+            );
+
+        }else{
+
+            showMessage(
+                "Product Successfully Add ho gaya! ✅",
+                "success"
+            );
+
+            clearForm();
+
+            await loadProducts();
+
+        }
 
     }
 
 
-    if(result.error){
+    /* ================================
+       UPDATE PRODUCT
+    ================================= */
 
-        console.error(result.error);
+    else{
 
-        showStatus(
-            "Error: " + result.error.message,
-            "error"
-        );
+        const { error } =
+            await supabaseClient
+            .from("Products")
+            .update(productData)
+            .eq("id",editId);
 
-        button.disabled = false;
 
-        button.innerText =
+        if(error){
+
+            console.error(error);
+
+            showMessage(
+                "Product update nahi hua: " +
+                error.message,
+                "error"
+            );
+
+        }else{
+
+            showMessage(
+                "Product Successfully Update ho gaya! ✅",
+                "success"
+            );
+
+            cancelEdit();
+
+            await loadProducts();
+
+        }
+
+    }
+
+
+    saveButton.disabled = false;
+
+    saveButton.innerText =
         editId === null
         ? "Add Product"
         : "Update Product";
 
-        return;
-    }
-
-
-    if(editId === null){
-
-        showStatus(
-            "Product کامیابی سے Add ہو گیا! ✅",
-            "success"
-        );
-
-    }else{
-
-        showStatus(
-            "Product کامیابی سے Update ہو گیا! ✅",
-            "success"
-        );
-
-    }
-
-
-    editId = null;
-
-    clearForm();
-
-    button.disabled = false;
-
-    button.innerText =
-    "Add Product";
-
-    document.getElementById("cancelBtn")
-    .style.display = "none";
-
-
-    await loadProducts();
 }
 
 
-/* ================================
+/* =====================================================
    SHOW PRODUCTS
-================================ */
+===================================================== */
 
 function showProducts(){
 
     const box =
-    document.getElementById("products");
+        document.getElementById("products");
 
     box.innerHTML = "";
 
@@ -508,9 +569,7 @@ function showProducts(){
     if(products.length === 0){
 
         box.innerHTML =
-        "<p>No products added yet.</p>";
-
-        updateStats();
+            "<p>No products added yet.</p>";
 
         return;
     }
@@ -520,84 +579,118 @@ function showProducts(){
 
         let imageHTML = "";
 
-        if(product.image_url){
+
+        const image =
+            product["Image url"] ||
+            product.image ||
+            product.image_url ||
+            "";
+
+
+        if(image){
 
             imageHTML = `
-            <img
-                src="${escapeHTML(product.image_url)}"
-                onerror="this.style.display='none'"
-            >
+
+                <img
+                    src="${escapeHTML(image)}"
+                    onerror="this.style.display='none'"
+                >
+
             `;
 
         }
 
 
+        const name =
+            product["Name"] ||
+            product.name ||
+            "Unnamed Product";
+
+
+        const price =
+            product["Price"] ??
+            product.price ??
+            0;
+
+
+        const stock =
+            product["Stock"] ??
+            product.stock ??
+            0;
+
+
+        const category =
+            product["Category"] ||
+            product.category ||
+            "Other";
+
+
         box.innerHTML += `
 
-        <div class="product">
+            <div class="product">
 
-            ${imageHTML}
+                ${imageHTML}
 
-            <h3>
-                ${escapeHTML(product.name || "")}
-            </h3>
+                <h3>
+                    ${escapeHTML(name)}
+                </h3>
 
-            <p>
-                <b>Price:</b>
-                $${Number(product.price || 0)}
-            </p>
+                <p>
+                    <b>Price:</b>
+                    $${Number(price).toFixed(2)}
+                </p>
 
-            <p>
-                <b>Stock:</b>
-                ${Number(product.stock || 0)}
-            </p>
+                <p>
+                    <b>Stock:</b>
+                    ${stock}
+                </p>
 
-            <p>
-                <b>Category:</b>
-                ${escapeHTML(product.category || "")}
-            </p>
+                <p>
+                    <b>Category:</b>
+                    ${escapeHTML(category)}
+                </p>
 
-            <button
-                class="edit"
-                onclick="editProduct(${product.id})">
-                ✏️ Edit Product
-            </button>
+                <button
+                    class="edit"
+                    onclick="editProduct(${product.id})"
+                >
+                    ✏️ Edit Product
+                </button>
 
-            <button
-                class="delete"
-                onclick="deleteProduct(${product.id})">
-                🗑️ Delete Product
-            </button>
+                <button
+                    class="delete"
+                    onclick="deleteProduct(${product.id})"
+                >
+                    🗑️ Delete Product
+                </button>
 
-        </div>
+            </div>
 
         `;
 
     });
 
-
-    updateStats();
 }
 
 
-/* ================================
+/* =====================================================
    EDIT PRODUCT
-================================ */
+===================================================== */
 
 function editProduct(id){
 
     const product =
-    products.find(function(item){
+        products.find(function(item){
 
-        return item.id === id;
+            return Number(item.id) === Number(id);
 
-    });
+        });
 
 
     if(!product){
 
-        showStatus(
-            "Product نہیں ملا۔",
+        showMessage(
+            "Product nahi mila.",
             "error"
         );
 
@@ -605,31 +698,50 @@ function editProduct(id){
     }
 
 
-    document.getElementById("name")
-    .value = product.name || "";
+    document.getElementById("name").value =
+        product["Name"] ||
+        product.name ||
+        "";
 
-    document.getElementById("price")
-    .value = product.price || "";
 
-    document.getElementById("stock")
-    .value = product.stock || "";
+    document.getElementById("price").value =
+        product["Price"] ??
+        product.price ??
+        "";
 
-    document.getElementById("category")
-    .value = product.category || "Other";
 
-    document.getElementById("image")
-    .value = product.image_url || "";
+    document.getElementById("stock").value =
+        product["Stock"] ??
+        product.stock ??
+        "";
+
+
+    document.getElementById("category").value =
+        product["Category"] ||
+        product.category ||
+        "Other";
+
+
+    document.getElementById("image").value =
+        product["Image url"] ||
+        product.image ||
+        product.image_url ||
+        "";
 
 
     editId = product.id;
 
 
-    document.getElementById("saveBtn")
-    .innerText = "Update Product";
+    document.getElementById("formTitle").innerText =
+        "✏️ Edit Product";
 
 
-    document.getElementById("cancelBtn")
-    .style.display = "block";
+    document.getElementById("saveBtn").innerText =
+        "Update Product";
+
+
+    document.getElementById("cancelBtn").style.display =
+        "block";
 
 
     window.scrollTo({
@@ -643,31 +755,34 @@ function editProduct(id){
 }
 
 
-/* ================================
+/* =====================================================
    DELETE PRODUCT
-================================ */
+===================================================== */
 
 async function deleteProduct(id){
 
-    if(!confirm("Delete this product?")){
+    if(!confirm(
+        "Kya aap is product ko delete karna chahte hain?"
+    )){
 
         return;
     }
 
 
     const { error } =
-    await supabaseClient
-    .from("Products")
-    .delete()
-    .eq("id", id);
+        await supabaseClient
+        .from("Products")
+        .delete()
+        .eq("id",id);
 
 
     if(error){
 
         console.error(error);
 
-        showStatus(
-            "Delete error: " + error.message,
+        showMessage(
+            "Product delete nahi hua: " +
+            error.message,
             "error"
         );
 
@@ -675,42 +790,20 @@ async function deleteProduct(id){
     }
 
 
-    showStatus(
-        "Product delete ہو گیا! 🗑️",
+    showMessage(
+        "Product Delete ho gaya! 🗑️",
         "success"
     );
 
 
     await loadProducts();
+
 }
 
 
-/* ================================
-   CLEAR FORM
-================================ */
-
-function clearForm(){
-
-    document.getElementById("name")
-    .value = "";
-
-    document.getElementById("price")
-    .value = "";
-
-    document.getElementById("stock")
-    .value = "";
-
-    document.getElementById("image")
-    .value = "";
-
-    document.getElementById("category")
-    .value = "Phone";
-}
-
-
-/* ================================
+/* =====================================================
    CANCEL EDIT
-================================ */
+===================================================== */
 
 function cancelEdit(){
 
@@ -719,23 +812,48 @@ function cancelEdit(){
     clearForm();
 
 
-    document.getElementById("saveBtn")
-    .innerText = "Add Product";
+    document.getElementById("formTitle").innerText =
+        "➕ Add New Product";
 
 
-    document.getElementById("cancelBtn")
-    .style.display = "none";
+    document.getElementById("saveBtn").innerText =
+        "Add Product";
+
+
+    document.getElementById("cancelBtn").style.display =
+        "none";
+
 }
 
 
-/* ================================
+/* =====================================================
+   CLEAR FORM
+===================================================== */
+
+function clearForm(){
+
+    document.getElementById("name").value = "";
+
+    document.getElementById("price").value = "";
+
+    document.getElementById("stock").value = "";
+
+    document.getElementById("category").value =
+        "Phone";
+
+    document.getElementById("image").value = "";
+
+}
+
+
+/* =====================================================
    STATS
-================================ */
+===================================================== */
 
 function updateStats(){
 
-    document.getElementById("productCount")
-    .innerText = products.length;
+    document.getElementById("productCount").innerText =
+        products.length;
 
 
     let totalStock = 0;
@@ -744,77 +862,84 @@ function updateStats(){
     products.forEach(function(product){
 
         totalStock +=
-        Number(product.stock) || 0;
+            Number(
+                product["Stock"] ??
+                product.stock ??
+                0
+            ) || 0;
 
     });
 
 
-    document.getElementById("stockCount")
-    .innerText = totalStock;
+    document.getElementById("stockCount").innerText =
+        totalStock;
+
+
+    loadMessageCount();
+
 }
 
 
-/* ================================
+/* =====================================================
    MESSAGE COUNT
-================================ */
+===================================================== */
 
 async function loadMessageCount(){
 
     const { count, error } =
-    await supabaseClient
-    .from("support_tickets")
-    .select("*", {
-        count:"exact",
-        head:true
-    });
+        await supabaseClient
+        .from("support_tickets")
+        .select("*",{count:"exact",head:true});
 
 
     if(error){
 
-        console.error(
+        console.log(
             "Message count error:",
-            error
+            error.message
         );
 
         document.getElementById("messageCount")
-        .innerText = "0";
+            .innerText = "0";
 
         return;
     }
 
 
     document.getElementById("messageCount")
-    .innerText = count || 0;
+        .innerText = count || 0;
+
 }
 
 
-/* ================================
-   HTML SECURITY
-================================ */
+/* =====================================================
+   SECURITY / HTML ESCAPE
+===================================================== */
 
 function escapeHTML(value){
 
-    return String(value)
+    return String(value ?? "")
 
-    .replace(/&/g,"&amp;")
+        .replace(/&/g,"&amp;")
 
-    .replace(/</g,"&lt;")
+        .replace(/</g,"&lt;")
 
-    .replace(/>/g,"&gt;")
+        .replace(/>/g,"&gt;")
 
-    .replace(/"/g,"&quot;")
+        .replace(/"/g,"&quot;")
 
-    .replace(/'/g,"&#039;");
+        .replace(/'/g,"&#039;");
+
 }
 
 
-/* ================================
+/* =====================================================
    START
-================================ */
+===================================================== */
 
 loadProducts();
 
 </script>
 
 </body>
-    </html>
+</html>
