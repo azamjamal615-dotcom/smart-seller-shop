@@ -131,7 +131,7 @@ async function sendSupportMessage(){
  const textarea=document.getElementById("supportMessage"),message=textarea.value.trim(),btn=document.getElementById("sendSupportBtn");
  if(!message){result("Please write a message first.","error");return}
  btn.disabled=true;btn.textContent="Sending...";
- const payload={customer_id:customerId,message:message,status:"open"};
+ const payload={customer_id:customerId,customer_name:"Customer",message:message,status:"open"};
  const {error}=await supabaseClient.from("support_tickets").insert([payload]);
  btn.disabled=false;btn.textContent="Send Message";
  if(error){console.error(error);result("Message could not be sent: "+error.message,"error");return}
