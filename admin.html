@@ -16,7 +16,7 @@ margin:0;
 font-family:Arial,sans-serif;
 background:#f3f4f6;
 color:#172033;
-padding-bottom:75px
+padding-bottom:72px;
 }
 
 .header{
@@ -25,7 +25,7 @@ padding:14px;
 display:flex;
 align-items:center;
 gap:10px;
-border-bottom:1px solid #ddd
+border-bottom:1px solid #ddd;
 }
 
 .logo{
@@ -37,24 +37,24 @@ color:white;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:24px
+font-size:24px;
 }
 
 .header h1{
 margin:0;
-font-size:19px
+font-size:19px;
 }
 
 .header p{
 margin:3px 0 0;
 font-size:12px;
-color:#777
+color:#777;
 }
 
 .container{
 max-width:900px;
 margin:auto;
-padding:12px
+padding:12px;
 }
 
 /* TOP MENU */
@@ -63,36 +63,32 @@ padding:12px
 display:grid;
 grid-template-columns:repeat(5,1fr);
 gap:7px;
-margin-bottom:12px
-}
-
-.topMenu button,
-.bottom button{
-border:0;
-background:white;
-cursor:pointer
+margin-bottom:12px;
 }
 
 .topMenu button{
-padding:11px 4px;
+border:0;
+background:white;
+padding:10px 3px;
 border-radius:10px;
 box-shadow:0 2px 7px #ddd;
-font-size:12px
+font-size:11px;
+cursor:pointer;
 }
 
 .topMenu button.active{
 background:#713be8;
-color:white
+color:white;
 }
 
 /* PAGE */
 
 .page{
-display:none
+display:none;
 }
 
 .page.active{
-display:block
+display:block;
 }
 
 /* CARD */
@@ -102,35 +98,35 @@ background:white;
 border-radius:15px;
 padding:15px;
 margin-bottom:12px;
-box-shadow:0 2px 10px #ddd
+box-shadow:0 2px 10px #ddd;
 }
 
 .card h2{
 margin:0 0 10px;
-font-size:18px
+font-size:18px;
 }
 
 /* DASHBOARD */
 
 .welcome{
 background:#214f78;
-color:white
+color:white;
 }
 
 .welcome h2{
 margin:6px 0 10px;
-font-size:21px
+font-size:21px;
 }
 
 .welcome p{
 font-size:13px;
-line-height:1.5
+line-height:1.5;
 }
 
 .stats{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:8px
+gap:8px;
 }
 
 .stat{
@@ -138,18 +134,18 @@ background:white;
 border-radius:13px;
 padding:13px 5px;
 text-align:center;
-box-shadow:0 2px 8px #ddd
+box-shadow:0 2px 8px #ddd;
 }
 
 .stat b{
-font-size:22px
+font-size:22px;
 }
 
 .stat span{
 display:block;
 font-size:11px;
 color:#777;
-margin-top:4px
+margin-top:4px;
 }
 
 /* ITEMS */
@@ -159,16 +155,16 @@ border:1px solid #ddd;
 border-radius:11px;
 padding:12px;
 margin-top:8px;
-background:#fafafa
+background:#fafafa;
 }
 
 .item p{
 font-size:13px;
 color:#555;
-margin:5px 0
+margin:5px 0;
 }
 
-/* FORMS */
+/* FORM */
 
 input,
 select,
@@ -178,17 +174,17 @@ padding:10px;
 border:1px solid #ddd;
 border-radius:9px;
 font-size:14px;
-margin:5px 0 9px
+margin:5px 0 9px;
 }
 
 textarea{
 min-height:90px;
-resize:vertical
+resize:vertical;
 }
 
 label{
 font-size:12px;
-font-weight:bold
+font-weight:bold;
 }
 
 /* BUTTONS */
@@ -201,7 +197,7 @@ background:#713be8;
 color:white;
 cursor:pointer;
 font-size:13px;
-margin:3px
+margin:3px;
 }
 
 .green{background:#16a34a}
@@ -211,7 +207,7 @@ margin:3px
 
 .full{
 width:100%;
-margin:3px 0
+margin:3px 0;
 }
 
 /* STATUS */
@@ -222,7 +218,7 @@ padding:4px 8px;
 border-radius:15px;
 background:#fff3cd;
 color:#856404;
-font-size:11px
+font-size:11px;
 }
 
 /* PRODUCT */
@@ -232,7 +228,7 @@ width:100%;
 max-height:180px;
 object-fit:cover;
 border-radius:9px;
-margin-bottom:8px
+margin-bottom:8px;
 }
 
 /* MESSAGE */
@@ -242,17 +238,17 @@ padding:10px;
 border-radius:9px;
 margin-bottom:10px;
 font-size:13px;
-display:none
+display:none;
 }
 
 .success{
 background:#dcfce7;
-color:#166534
+color:#166534;
 }
 
 .error{
 background:#fee2e2;
-color:#991b1b
+color:#991b1b;
 }
 
 .loading,
@@ -260,7 +256,7 @@ color:#991b1b
 text-align:center;
 padding:20px;
 color:#777;
-font-size:13px
+font-size:13px;
 }
 
 /* BOTTOM */
@@ -274,24 +270,27 @@ height:67px;
 background:white;
 border-top:1px solid #ddd;
 display:flex;
-z-index:999
+z-index:999;
 }
 
 .bottom button{
 flex:1;
+border:0;
+background:white;
 font-size:10px;
-color:#555
+color:#555;
+cursor:pointer;
 }
 
 .bottom button.active{
 color:#713be8;
-font-weight:bold
+font-weight:bold;
 }
 
 .bottomIcon{
 font-size:18px;
 display:block;
-margin-bottom:3px
+margin-bottom:3px;
 }
 
 /* MOBILE */
@@ -299,25 +298,26 @@ margin-bottom:3px
 @media(max-width:600px){
 
 .topMenu{
-grid-template-columns:repeat(5,1fr)
+grid-template-columns:repeat(5,1fr);
 }
 
 .topMenu button{
-font-size:10px;
-padding:10px 2px
+font-size:9px;
+padding:9px 2px;
 }
 
 .stats{
-grid-template-columns:repeat(2,1fr)
+grid-template-columns:repeat(2,1fr);
 }
 
 .header h1{
-font-size:17px
+font-size:17px;
 }
 
 .card{
-padding:13px
+padding:13px;
 }
+
 }
 </style>
 </head>
@@ -491,29 +491,35 @@ from one place.
 <h2>📦 Add Product</h2>
 
 <label>Product Name</label>
+
 <input id="productName"
 placeholder="Smart Watch">
 
 <label>Description</label>
+
 <textarea id="productDescription"
 placeholder="Product description"></textarea>
 
 <label>Price</label>
+
 <input id="productPrice"
 type="number"
 step="0.01"
 placeholder="50">
 
 <label>Stock</label>
+
 <input id="productStock"
 type="number"
 placeholder="10">
 
 <label>Category</label>
+
 <input id="productCategory"
 placeholder="Watch">
 
 <label>Image URL</label>
+
 <input id="productImage"
 placeholder="https://...">
 
@@ -677,21 +683,18 @@ PAGE NAVIGATION
 
 function openPage(id,button){
 
-document
-.querySelectorAll(".page")
+document.querySelectorAll(".page")
 .forEach(function(page){
 page.classList.remove("active");
 });
 
-const page =
-document.getElementById(id);
+const page=document.getElementById(id);
 
 if(page){
 page.classList.add("active");
 }
 
-document
-.querySelectorAll(
+document.querySelectorAll(
 ".topMenu button,.bottom button"
 )
 .forEach(function(btn){
@@ -702,60 +705,35 @@ if(button){
 button.classList.add("active");
 }
 
-if(id==="dashboard"){
-loadDashboard();
-}
-
-if(id==="balance"){
-loadBalances();
-}
-
-if(id==="withdrawal"){
-loadWithdrawals();
-}
-
-if(id==="kyc"){
-loadKYC();
-}
-
-if(id==="orders"){
-loadOrders();
-}
-
-if(id==="products"){
-loadProducts();
-}
-
-if(id==="customers"){
-loadCustomers();
-}
-
-if(id==="messages"){
-loadMessages();
-}
+if(id==="dashboard") loadDashboard();
+if(id==="balance") loadBalances();
+if(id==="withdrawal") loadWithdrawals();
+if(id==="kyc") loadKYC();
+if(id==="orders") loadOrders();
+if(id==="products") loadProducts();
+if(id==="customers") loadCustomers();
+if(id==="messages") loadMessages();
 
 }
 
 
 /* =========================
-MESSAGE BOX
+MESSAGE
 ========================= */
 
 function showMessage(text,type){
 
-const box =
-document.getElementById("messageBox");
+const box=document.getElementById("messageBox");
 
 box.innerText=text;
 
-box.className =
-"message "+type;
+box.className="message "+type;
 
 box.style.display="block";
 
 setTimeout(function(){
 box.style.display="none";
-},4000);
+},3500);
 
 }
 
@@ -782,49 +760,33 @@ DASHBOARD
 
 async function loadDashboard(){
 
-try{
-
-const p =
-await db
+const p=await db
 .from("Products")
 .select("*",{count:"exact",head:true});
 
-const o =
-await db
+const o=await db
 .from("orders")
 .select("*",{count:"exact",head:true});
 
-const m =
-await db
+const m=await db
 .from("support_tickets")
 .select("*",{count:"exact",head:true});
 
-const w =
-await db
+const w=await db
 .from("withdrawals")
 .select("*",{count:"exact",head:true});
 
-document.getElementById("statProducts")
-.innerText =
-p.error ? 0 : (p.count || 0);
+document.getElementById("statProducts").innerText=
+p.error ? "0" : (p.count || 0);
 
-document.getElementById("statOrders")
-.innerText =
-o.error ? 0 : (o.count || 0);
+document.getElementById("statOrders").innerText=
+o.error ? "0" : (o.count || 0);
 
-document.getElementById("statMessages")
-.innerText =
-m.error ? 0 : (m.count || 0);
+document.getElementById("statMessages").innerText=
+m.error ? "0" : (m.count || 0);
 
-document.getElementById("statWithdrawals")
-.innerText =
-w.error ? 0 : (w.count || 0);
-
-}catch(e){
-
-console.log(e);
-
-}
+document.getElementById("statWithdrawals").innerText=
+w.error ? "0" : (w.count || 0);
 
 }
 
@@ -835,14 +797,11 @@ PRODUCTS
 
 async function loadProducts(){
 
-const box =
-document.getElementById("productList");
+const box=document.getElementById("productList");
 
-box.innerHTML =
-'<div class="loading">Loading...</div>';
+box.innerHTML='<div class="loading">Loading...</div>';
 
-const result =
-await db
+const result=await db
 .from("Products")
 .select("*");
 
@@ -850,18 +809,17 @@ if(result.error){
 
 console.log(result.error);
 
-box.innerHTML =
-'<div class="empty">Products table is not available.</div>';
+box.innerHTML=
+'<div class="empty">Products could not be loaded.</div>';
 
 return;
 }
 
-const data =
-result.data || [];
+const data=result.data || [];
 
 if(!data.length){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="empty">No products yet.</div>';
 
 return;
@@ -871,77 +829,68 @@ box.innerHTML="";
 
 data.forEach(function(p){
 
-const id =
-p.Id ?? p.id;
+const id=p.Id ?? p.id;
 
-const name =
-p.Name ??
-p.name ??
-"Product";
+const name=p.Name ?? p.name ?? "Product";
 
-const price =
-Number(
-p.Price ??
-p.price ??
-0
+const price=Number(
+p.Price ?? p.price ?? 0
 );
 
-const stock =
-Number(
-p.Stock ??
-p.stock ??
-0
+const stock=Number(
+p.Stock ?? p.stock ?? 0
 );
 
-const category =
-p.Category ??
-p.category ??
-"";
+const category=p.Category ??
+p.category ?? "";
 
-const image =
-p["Image url"] ??
+const image=p["Image url"] ??
 p.image_url ??
-p.image ??
-"";
+p.image ?? "";
 
-const div =
-document.createElement("div");
+const description=p.Description ??
+p.description ?? "";
+
+const div=document.createElement("div");
 
 div.className="item";
 
-let img="";
+let imageHTML="";
 
 if(image){
 
-img =
-'<img class="productImage" src="' +
-esc(image) +
+imageHTML=
+'<img class="productImage" src="'+
+esc(image)+
 '" onerror="this.style.display=\'none\'">';
 
 }
 
-div.innerHTML =
+div.innerHTML=
 
-img +
+imageHTML+
 
-"<b>📦 "+esc(name)+"</b>" +
+"<b>📦 "+esc(name)+"</b>"+
+
+"<p>"+esc(description)+"</p>"+
 
 "<p>Price: $"+
 price.toFixed(2)+
-"</p>" +
+"</p>"+
 
 "<p>Stock: "+
 stock+
-"</p>" +
+"</p>"+
 
 "<p>Category: "+
 esc(category)+
-"</p>" +
+"</p>"+
 
 '<button class="action red" '+
 'onclick="deleteProduct(\''+
 esc(id)+
-'\')">Delete</button>';
+'\')">'+
+'Delete</button>';
 
 box.appendChild(div);
 
@@ -954,33 +903,27 @@ box.appendChild(div);
 
 async function addProduct(){
 
-const name =
-document
+const name=document
 .getElementById("productName")
 .value.trim();
 
-const description =
-document
+const description=document
 .getElementById("productDescription")
 .value.trim();
 
-const price =
-Number(
-document.getElementById("productPrice").value
-);
+const price=Number(document
+.getElementById("productPrice")
+.value);
 
-const stock =
-Number(
-document.getElementById("productStock").value
-);
+const stock=Number(document
+.getElementById("productStock")
+.value);
 
-const category =
-document
+const category=document
 .getElementById("productCategory")
 .value.trim();
 
-const image =
-document
+const image=document
 .getElementById("productImage")
 .value.trim();
 
@@ -994,18 +937,15 @@ showMessage(
 return;
 }
 
-const result =
-await db
+const result=await db
 .from("Products")
 .insert({
-
 Name:name,
 Description:description,
 Price:price,
 Stock:stock,
 Category:category,
 "Image url":image
-
 });
 
 if(result.error){
@@ -1013,7 +953,6 @@ if(result.error){
 console.log(result.error);
 
 showMessage(
-"Product could not be added: "+
 result.error.message,
 "error"
 );
@@ -1047,20 +986,19 @@ if(!confirm("Delete this product?")){
 return;
 }
 
-const result =
-await db
+const result=await db
 .from("Products")
 .delete()
 .eq("Id",id);
 
 if(result.error){
 
+console.log(result.error);
+
 showMessage(
 "Product could not be deleted.",
 "error"
 );
-
-console.log(result.error);
 
 return;
 }
@@ -1082,14 +1020,12 @@ ORDERS
 
 async function loadOrders(){
 
-const box =
-document.getElementById("orderList");
+const box=document.getElementById("orderList");
 
-box.innerHTML =
+box.innerHTML=
 '<div class="loading">Loading...</div>';
 
-const result =
-await db
+const result=await db
 .from("orders")
 .select("*")
 .order("created_at",{ascending:false});
@@ -1098,18 +1034,17 @@ if(result.error){
 
 console.log(result.error);
 
-box.innerHTML =
-'<div class="empty">Orders table is not available yet.</div>';
+box.innerHTML=
+'<div class="empty">Orders could not be loaded.</div>';
 
 return;
 }
 
-const data =
-result.data || [];
+const data=result.data || [];
 
 if(!data.length){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="empty">No customer orders yet.</div>';
 
 return;
@@ -1119,35 +1054,31 @@ box.innerHTML="";
 
 data.forEach(function(order){
 
-const id =
-order.id;
+const id=order.id;
 
-const customer =
+const customer=
 order.customer_name ||
 order.customer_id ||
 "Customer";
 
-const product =
+const product=
 order.product_name ||
 "Product";
 
-const quantity =
-order.quantity ||
-1;
+const quantity=
+order.quantity || 1;
 
-const total =
-Number(
-order.total_amount ||
-order.total ||
+const total=Number(
+order.total_amount ??
+order.total ??
 0
 );
 
-const status =
+const status=
 order.status ||
 "Pending";
 
-const div =
-document.createElement("div");
+const div=document.createElement("div");
 
 div.className="item";
 
@@ -1180,19 +1111,18 @@ esc(status)+
 '<select id="orderStatus'+
 esc(id)+
 '">'+
-
-"<option>Pending</option>"+
-"<option>Processing</option>"+
-"<option>Shipped</option>"+
-"<option>Delivered</option>"+
-"<option>Cancelled</option>"+
-
-"</select>"+
+'<option value="Pending">Pending</option>'+
+'<option value="Processing">Processing</option>'+
+'<option value="Shipped">Shipped</option>'+
+'<option value="Delivered">Delivered</option>'+
+'<option value="Cancelled">Cancelled</option>'+
+'</select>'+
 
 '<button class="action" '+
 'onclick="updateOrder(\''+
 esc(id)+
-'\')">Update Status</button>';
+'\')">'+
+'Update Status</button>';
 
 box.appendChild(div);
 
@@ -1205,21 +1135,18 @@ box.appendChild(div);
 
 async function updateOrder(id){
 
-const select =
-document.getElementById(
+const select=document.getElementById(
 "orderStatus"+id
 );
 
-if(!select)return;
+if(!select){
+return;
+}
 
-const status =
-select.value;
-
-const result =
-await db
+const result=await db
 .from("orders")
 .update({
-status:status
+status:select.value
 })
 .eq("id",id);
 
@@ -1251,14 +1178,12 @@ MESSAGES
 
 async function loadMessages(){
 
-const box =
-document.getElementById("messageList");
+const box=document.getElementById("messageList");
 
-box.innerHTML =
+box.innerHTML=
 '<div class="loading">Loading...</div>';
 
-const result =
-await db
+const result=await db
 .from("support_tickets")
 .select("*")
 .order("created_at",{ascending:false});
@@ -1267,18 +1192,17 @@ if(result.error){
 
 console.log(result.error);
 
-box.innerHTML =
-'<div class="empty">Messages table is not available yet.</div>';
+box.innerHTML=
+'<div class="empty">Messages could not be loaded.</div>';
 
 return;
 }
 
-const data =
-result.data || [];
+const data=result.data || [];
 
 if(!data.length){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="empty">No customer messages yet.</div>';
 
 return;
@@ -1288,28 +1212,20 @@ box.innerHTML="";
 
 data.forEach(function(t){
 
-const id =
-t.id;
+const id=t.id;
 
-const customer =
+const customer=
 t.customer_name ||
 t.customer_id ||
 "Customer";
 
-const message =
-t.message ||
-"";
+const message=t.message || "";
 
-const reply =
-t.admin_reply ||
-"";
+const reply=t.admin_reply || "";
 
-const status =
-t.status ||
-"Pending";
+const status=t.status || "Pending";
 
-const div =
-document.createElement("div");
+const div=document.createElement("div");
 
 div.className="item";
 
@@ -1336,12 +1252,14 @@ esc(reply)+
 '<button class="action green" '+
 'onclick="replyMessage(\''+
 esc(id)+
-'\')">Send Reply</button>'+
+'\')">'+
+'Send Reply</button>'+
 
 '<button class="action red" '+
 'onclick="deleteMessage(\''+
 esc(id)+
-'\')">Delete</button>';
+'\')">'+
+'Delete</button>';
 
 box.appendChild(div);
 
@@ -1354,13 +1272,15 @@ box.appendChild(div);
 
 async function replyMessage(id){
 
-const textarea =
-document.getElementById(
+const textarea=document.getElementById(
 "reply"+id
 );
 
-const reply =
-textarea.value.trim();
+if(!textarea){
+return;
+}
+
+const reply=textarea.value.trim();
 
 if(!reply){
 
@@ -1372,14 +1292,11 @@ showMessage(
 return;
 }
 
-const result =
-await db
+const result=await db
 .from("support_tickets")
 .update({
-
 admin_reply:reply,
 status:"Replied"
-
 })
 .eq("id",id);
 
@@ -1413,8 +1330,7 @@ if(!confirm("Delete this message?")){
 return;
 }
 
-const result =
-await db
+const result=await db
 .from("support_tickets")
 .delete()
 .eq("id",id);
@@ -1448,14 +1364,14 @@ BALANCE
 
 async function loadBalances(){
 
-const box =
-document.getElementById("balanceList");
+const box=document.getElementById(
+"balanceList"
+);
 
-box.innerHTML =
+box.innerHTML=
 '<div class="loading">Loading...</div>';
 
-const result =
-await db
+const result=await db
 .from("customer_balances")
 .select("*")
 .order("updated_at",{ascending:false});
@@ -1464,18 +1380,17 @@ if(result.error){
 
 console.log(result.error);
 
-box.innerHTML =
-'<div class="empty">Balance table is not available yet.</div>';
+box.innerHTML=
+'<div class="empty">Balance could not be loaded.</div>';
 
 return;
 }
 
-const data =
-result.data || [];
+const data=result.data || [];
 
 if(!data.length){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="empty">No customer balances yet.</div>';
 
 return;
@@ -1487,16 +1402,14 @@ data.forEach(function(c){
 
 const id=c.id;
 
-const customer =
+const customer=
 c.customer_name ||
 c.customer_id ||
 "Customer";
 
-const balance =
-Number(c.balance || 0);
+const balance=Number(c.balance || 0);
 
-const div =
-document.createElement("div");
+const div=document.createElement("div");
 
 div.className="item";
 
@@ -1511,13 +1424,14 @@ balance.toFixed(2)+
 "</b></p>"+
 
 '<input id="balance'+
-id+
-'" type="number" placeholder="New balance">'+
+esc(id)+
+'" type="number" step="0.01" placeholder="New balance">'+
 
 '<button class="action" '+
 'onclick="updateBalance(\''+
-id+
-'\')">Update Balance</button>';
+esc(id)+
+'\')">'+
+'Update Balance</button>';
 
 box.appendChild(div);
 
@@ -1530,13 +1444,15 @@ box.appendChild(div);
 
 async function updateBalance(id){
 
-const input =
-document.getElementById(
+const input=document.getElementById(
 "balance"+id
 );
 
-const value =
-Number(input.value);
+if(!input){
+return;
+}
+
+const value=Number(input.value);
 
 if(!Number.isFinite(value) || value<0){
 
@@ -1548,8 +1464,7 @@ showMessage(
 return;
 }
 
-const result =
-await db
+const result=await db
 .from("customer_balances")
 .update({
 balance:value,
@@ -1585,16 +1500,14 @@ WITHDRAWALS
 
 async function loadWithdrawals(){
 
-const box =
-document.getElementById(
+const box=document.getElementById(
 "withdrawalList"
 );
 
-box.innerHTML =
+box.innerHTML=
 '<div class="loading">Loading...</div>';
 
-const result =
-await db
+const result=await db
 .from("withdrawals")
 .select("*")
 .order("created_at",{ascending:false});
@@ -1603,18 +1516,17 @@ if(result.error){
 
 console.log(result.error);
 
-box.innerHTML =
-'<div class="empty">Withdrawal table is not available yet.</div>';
+box.innerHTML=
+'<div class="empty">Withdrawal requests could not be loaded.</div>';
 
 return;
 }
 
-const data =
-result.data || [];
+const data=result.data || [];
 
 if(!data.length){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="empty">No withdrawal requests.</div>';
 
 return;
@@ -1622,8 +1534,4 @@ return;
 
 box.innerHTML="";
 
-data.forEach(function(w){
-
-const id=w.id;
-
-const div 
+data.forE
