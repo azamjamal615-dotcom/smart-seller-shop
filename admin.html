@@ -9,9 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
@@ -81,14 +79,18 @@ label{
     font-weight:bold;
 }
 
-input,
-select{
+input,select,textarea{
     width:100%;
     padding:13px;
     margin:7px 0 15px;
     border:1px solid #ddd;
     border-radius:10px;
     font-size:16px;
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
 }
 
 button{
@@ -106,6 +108,11 @@ button:hover{
     background:#0d65d9;
 }
 
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
 .cancel{
     background:#777;
     margin-top:8px;
@@ -113,6 +120,7 @@ button:hover{
 
 .delete{
     background:#e53935;
+    margin-top:5px;
 }
 
 .edit{
@@ -145,10 +153,11 @@ button:hover{
 }
 
 .message{
-    padding:12px;
+    padding:13px;
     border-radius:10px;
-    margin-bottom:12px;
+    margin-bottom:15px;
     display:none;
+    font-weight:bold;
 }
 
 .success{
@@ -162,6 +171,12 @@ button:hover{
 }
 
 .loading{
+    text-align:center;
+    padding:20px;
+    color:#777;
+}
+
+.empty{
     text-align:center;
     padding:20px;
     color:#777;
@@ -190,10 +205,10 @@ button:hover{
 
 <div class="container">
 
-    <!-- MESSAGE -->
     <div id="messageBox" class="message"></div>
 
     <!-- STATS -->
+
     <div class="stats">
 
         <div class="stat">
@@ -215,7 +230,8 @@ button:hover{
 
     <br>
 
-    <!-- ADD PRODUCT -->
+    <!-- ADD / EDIT PRODUCT -->
+
     <div class="card">
 
         <h2 id="formTitle">➕ Add New Product</h2>
@@ -227,6 +243,13 @@ button:hover{
             type="text"
             placeholder="Example: Samsung Phone"
         >
+
+        <label>Description</label>
+
+        <textarea
+            id="description"
+            placeholder="Product description"
+        ></textarea>
 
         <label>Price</label>
 
@@ -249,21 +272,13 @@ button:hover{
 
         <select id="category">
 
-            <option value="Phone">
-                Phone
-            </option>
+            <option value="Phone">Phone</option>
 
-            <option value="Laptop">
-                Laptop
-            </option>
+            <option value="Laptop">Laptop</option>
 
-            <option value="Accessories">
-                Accessories
-            </option>
+            <option value="Accessories">Accessories</option>
 
-            <option value="Other">
-                Other
-            </option>
+            <option value="Other">Other</option>
 
         </select>
 
@@ -295,6 +310,7 @@ button:hover{
 
 
     <!-- PRODUCTS -->
+
     <div class="card">
 
         <h2>📦 Products</h2>
@@ -334,7 +350,6 @@ supabase.createClient(
 ===================================================== */
 
 let products = [];
-
 let editId = null;
 
 
@@ -358,12 +373,35 @@ function showMessage(text,type){
 
         box.style.display = "none";
 
-    },4000);
+    },5000);
 }
 
 
 /* =====================================================
-   LOAD PRODUCTS FROM SUPABASE
+   GET PRODUCT ID
+   Supports both "Id" and "id"
+===================================================== */
+
+function getProductId(product){
+
+    if(product["Id"] !== undefined &&
+       product["Id"] !== null){
+
+        return product["Id"];
+    }
+
+    if(product["id"] !== undefined &&
+       product["id"] !== null){
+
+        return product["id"];
+    }
+
+    return null;
+}
+
+
+/* =====================================================
+   LOAD PRODUCTS
 ===================================================== */
 
 async function loadProducts(){
@@ -377,8 +415,7 @@ async function loadProducts(){
     const { data, error } =
         await supabaseClient
         .from("Products")
-        .select("*")
-        .order("id",{ascending:false});
+        .select("*");
 
 
     if(error){
@@ -399,6 +436,17 @@ async function loadProducts(){
 
     products = data || [];
 
+
+    /* Newest ID first */
+
+    products.sort(function(a,b){
+
+        return Number(getProductId(b) || 0) -
+               Number(getProductId(a) || 0);
+
+    });
+
+
     showProducts();
 
     updateStats();
@@ -414,6 +462,10 @@ async function saveProduct(){
 
     const name =
         document.getElementById("name")
+        .value.trim();
+
+    const description =
+        document.getElementById("description")
         .value.trim();
 
     const price =
@@ -433,7 +485,11 @@ async function saveProduct(){
         .value.trim();
 
 
-    if(!name || price === "" || stock === ""){
+    if(
+        !name ||
+        price === "" ||
+        stock === ""
+    ){
 
         showMessage(
             "Product Name, Price aur Stock zaroor bharain.",
@@ -447,6 +503,8 @@ async function saveProduct(){
     const productData = {
 
         "Name": name,
+
+        "Description": description || null,
 
         "Price": Number(price),
 
@@ -462,14 +520,15 @@ async function saveProduct(){
     const saveButton =
         document.getElementById("saveBtn");
 
+
     saveButton.disabled = true;
 
     saveButton.innerText = "Saving...";
 
 
-    /* ================================
-       ADD NEW PRODUCT
-    ================================= */
+    /* =================================================
+       ADD
+    ================================================= */
 
     if(editId === null){
 
@@ -505,17 +564,23 @@ async function saveProduct(){
     }
 
 
-    /* ================================
-       UPDATE PRODUCT
-    ================================= */
+    /* =================================================
+       UPDATE
+    ================================================= */
 
     else{
+
+        /*
+         * IMPORTANT:
+         * Your table screenshot shows "Id".
+         * Therefore update uses "Id".
+         */
 
         const { error } =
             await supabaseClient
             .from("Products")
             .update(productData)
-            .eq("id",editId);
+            .eq("Id",editId);
 
 
         if(error){
@@ -546,10 +611,17 @@ async function saveProduct(){
 
     saveButton.disabled = false;
 
-    saveButton.innerText =
-        editId === null
-        ? "Add Product"
-        : "Update Product";
+    if(editId === null){
+
+        saveButton.innerText =
+            "Add Product";
+
+    }else{
+
+        saveButton.innerText =
+            "Update Product";
+
+    }
 
 }
 
@@ -569,7 +641,7 @@ function showProducts(){
     if(products.length === 0){
 
         box.innerHTML =
-            "<p>No products added yet.</p>";
+            '<div class="empty">No products added yet.</div>';
 
         return;
     }
@@ -577,14 +649,48 @@ function showProducts(){
 
     products.forEach(function(product){
 
-        let imageHTML = "";
+        const id =
+            getProductId(product);
+
+
+        const name =
+            product["Name"] ||
+            product["name"] ||
+            "Unnamed Product";
+
+
+        const description =
+            product["Description"] ||
+            product["description"] ||
+            "";
+
+
+        const price =
+            product["Price"] ??
+            product["price"] ??
+            0;
+
+
+        const stock =
+            product["Stock"] ??
+            product["stock"] ??
+            0;
+
+
+        const category =
+            product["Category"] ||
+            product["category"] ||
+            "Other";
 
 
         const image =
             product["Image url"] ||
-            product.image ||
-            product.image_url ||
+            product["image"] ||
+            product["image_url"] ||
             "";
+
+
+        let imageHTML = "";
 
 
         if(image){
@@ -593,36 +699,13 @@ function showProducts(){
 
                 <img
                     src="${escapeHTML(image)}"
+                    alt="${escapeHTML(name)}"
                     onerror="this.style.display='none'"
                 >
 
             `;
 
         }
-
-
-        const name =
-            product["Name"] ||
-            product.name ||
-            "Unnamed Product";
-
-
-        const price =
-            product["Price"] ??
-            product.price ??
-            0;
-
-
-        const stock =
-            product["Stock"] ??
-            product.stock ??
-            0;
-
-
-        const category =
-            product["Category"] ||
-            product.category ||
-            "Other";
 
 
         box.innerHTML += `
@@ -635,6 +718,17 @@ function showProducts(){
                     ${escapeHTML(name)}
                 </h3>
 
+                ${
+                    description
+                    ?
+                    `<p>
+                        <b>Description:</b>
+                        ${escapeHTML(description)}
+                    </p>`
+                    :
+                    ""
+                }
+
                 <p>
                     <b>Price:</b>
                     $${Number(price).toFixed(2)}
@@ -642,7 +736,7 @@ function showProducts(){
 
                 <p>
                     <b>Stock:</b>
-                    ${stock}
+                    ${escapeHTML(stock)}
                 </p>
 
                 <p>
@@ -652,14 +746,14 @@ function showProducts(){
 
                 <button
                     class="edit"
-                    onclick="editProduct(${product.id})"
+                    onclick="editProduct(${Number(id)})"
                 >
                     ✏️ Edit Product
                 </button>
 
                 <button
                     class="delete"
-                    onclick="deleteProduct(${product.id})"
+                    onclick="deleteProduct(${Number(id)})"
                 >
                     🗑️ Delete Product
                 </button>
@@ -682,7 +776,8 @@ function editProduct(id){
     const product =
         products.find(function(item){
 
-            return Number(item.id) === Number(id);
+            return Number(getProductId(item)) ===
+                   Number(id);
 
         });
 
@@ -700,36 +795,43 @@ function editProduct(id){
 
     document.getElementById("name").value =
         product["Name"] ||
-        product.name ||
+        product["name"] ||
+        "";
+
+
+    document.getElementById("description").value =
+        product["Description"] ||
+        product["description"] ||
         "";
 
 
     document.getElementById("price").value =
         product["Price"] ??
-        product.price ??
+        product["price"] ??
         "";
 
 
     document.getElementById("stock").value =
         product["Stock"] ??
-        product.stock ??
+        product["stock"] ??
         "";
 
 
     document.getElementById("category").value =
         product["Category"] ||
-        product.category ||
+        product["category"] ||
         "Other";
 
 
     document.getElementById("image").value =
         product["Image url"] ||
-        product.image ||
-        product.image_url ||
+        product["image"] ||
+        product["image_url"] ||
         "";
 
 
-    editId = product.id;
+    editId =
+        getProductId(product);
 
 
     document.getElementById("formTitle").innerText =
@@ -769,11 +871,15 @@ async function deleteProduct(id){
     }
 
 
+    /*
+     * Your Supabase table shows "Id"
+     */
+
     const { error } =
         await supabaseClient
         .from("Products")
         .delete()
-        .eq("id",id);
+        .eq("Id",id);
 
 
     if(error){
@@ -834,6 +940,8 @@ function clearForm(){
 
     document.getElementById("name").value = "";
 
+    document.getElementById("description").value = "";
+
     document.getElementById("price").value = "";
 
     document.getElementById("stock").value = "";
@@ -864,7 +972,7 @@ function updateStats(){
         totalStock +=
             Number(
                 product["Stock"] ??
-                product.stock ??
+                product["stock"] ??
                 0
             ) || 0;
 
@@ -889,7 +997,10 @@ async function loadMessageCount(){
     const { count, error } =
         await supabaseClient
         .from("support_tickets")
-        .select("*",{count:"exact",head:true});
+        .select("*",{
+            count:"exact",
+            head:true
+        });
 
 
     if(error){
@@ -913,7 +1024,7 @@ async function loadMessageCount(){
 
 
 /* =====================================================
-   SECURITY / HTML ESCAPE
+   SECURITY
 ===================================================== */
 
 function escapeHTML(value){
@@ -942,4 +1053,4 @@ loadProducts();
 </script>
 
 </body>
-</html>
+    </html>
