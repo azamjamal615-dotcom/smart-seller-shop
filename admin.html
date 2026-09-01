@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
@@ -10,82 +9,77 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-*{
- box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
  margin:0;
  background:#f3f4f6;
  font-family:Arial,sans-serif;
  color:#172033;
- padding-bottom:80px;
+ padding-bottom:72px;
 }
 
 .header{
  background:white;
- padding:16px;
+ padding:13px;
  display:flex;
  align-items:center;
- gap:12px;
+ gap:10px;
  border-bottom:1px solid #ddd;
 }
 
 .logo{
- width:58px;
- height:58px;
- border-radius:16px;
+ width:48px;
+ height:48px;
+ border-radius:13px;
  background:#713be8;
  color:white;
  display:flex;
  align-items:center;
  justify-content:center;
- font-size:27px;
+ font-size:23px;
 }
 
 .header h1{
  margin:0;
- font-size:21px;
+ font-size:19px;
 }
 
 .header p{
- margin:4px 0 0;
+ margin:3px 0 0;
  color:#777;
- font-size:12px;
+ font-size:11px;
 }
 
 .container{
  max-width:900px;
  margin:auto;
- padding:14px;
+ padding:12px;
 }
 
+/* TOP MENU */
 
-/* MENU */
-
-.menu{
+.top-menu{
  display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:8px;
+ grid-template-columns:repeat(5,1fr);
+ gap:7px;
  margin-bottom:12px;
 }
 
-.menu button{
+.top-menu button{
  border:0;
  background:white;
- padding:13px 5px;
- border-radius:11px;
+ padding:11px 3px;
+ border-radius:10px;
  box-shadow:0 2px 7px #ddd;
- font-size:13px;
+ font-size:11px;
  cursor:pointer;
 }
 
-.menu button.active{
+.top-menu button.active{
  background:#713be8;
  color:white;
 }
-
 
 /* PAGES */
 
@@ -97,22 +91,20 @@ body{
  display:block;
 }
 
-
-/* CARD */
+/* CARDS */
 
 .card{
  background:white;
- border-radius:16px;
- padding:16px;
- margin-bottom:12px;
- box-shadow:0 2px 10px #ddd;
+ border-radius:14px;
+ padding:14px;
+ margin-bottom:11px;
+ box-shadow:0 2px 9px #ddd;
 }
 
 .card h2{
  margin:0 0 10px;
- font-size:19px;
+ font-size:18px;
 }
-
 
 /* WELCOME */
 
@@ -123,154 +115,188 @@ body{
 
 .welcome small{
  opacity:.8;
+ font-size:10px;
 }
 
 .welcome h2{
- font-size:22px;
- margin:7px 0 15px;
+ margin:6px 0;
+ font-size:20px;
 }
-
 
 /* STATS */
 
 .stats{
  display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:10px;
+ grid-template-columns:repeat(4,1fr);
+ gap:8px;
 }
 
 .stat{
  background:white;
- padding:15px;
- border-radius:14px;
+ padding:13px 5px;
+ text-align:center;
+ border-radius:12px;
  box-shadow:0 2px 8px #ddd;
 }
 
 .stat b{
- font-size:24px;
+ display:block;
+ font-size:21px;
 }
 
 .stat span{
- display:block;
  color:#777;
- margin-top:5px;
+ font-size:11px;
+ margin-top:4px;
+ display:block;
 }
-
 
 /* ITEMS */
 
 .item{
  border:1px solid #e2e2e2;
- border-radius:12px;
- padding:13px;
- margin-top:9px;
+ border-radius:11px;
+ padding:11px;
+ margin-top:8px;
  background:#fafafa;
 }
 
 .item b{
- font-size:16px;
+ font-size:14px;
 }
 
 .item p{
  margin:5px 0;
  color:#555;
- font-size:13px;
+ font-size:12px;
 }
 
-
-/* BUTTON */
+/* BUTTONS */
 
 button.action{
  border:0;
- border-radius:8px;
- padding:9px 12px;
+ border-radius:7px;
+ padding:8px 10px;
  background:#713be8;
  color:white;
  cursor:pointer;
- margin:3px;
+ margin:3px 2px;
+ font-size:12px;
 }
 
-button.green{
- background:#16a34a;
+button.green{background:#16a34a}
+button.red{background:#dc2626}
+button.orange{background:#ea8a00}
+button.gray{background:#64748b}
+
+button:disabled{
+ opacity:.5;
+ cursor:not-allowed;
 }
 
-button.red{
- background:#dc2626;
-}
-
-button.orange{
- background:#ea8a00;
-}
-
-
-/* FORM */
+/* FORMS */
 
 input,select,textarea{
  width:100%;
- padding:11px;
+ padding:10px;
  border:1px solid #ddd;
- border-radius:9px;
- margin:5px 0 10px;
- font-size:14px;
+ border-radius:8px;
+ margin:4px 0 9px;
+ font-size:13px;
 }
 
 textarea{
- min-height:90px;
+ min-height:80px;
+ resize:vertical;
 }
 
 label{
- font-size:13px;
+ font-size:12px;
  font-weight:bold;
 }
-
 
 /* STATUS */
 
 .status{
  display:inline-block;
- padding:5px 9px;
- border-radius:20px;
+ padding:4px 8px;
+ border-radius:15px;
  background:#fff3cd;
  color:#856404;
- font-size:12px;
+ font-size:11px;
 }
 
+/* PRODUCT */
+
+.product-image{
+ width:100%;
+ max-width:180px;
+ height:130px;
+ object-fit:cover;
+ border-radius:9px;
+ margin-top:7px;
+}
 
 /* BOTTOM */
 
 .bottom{
  position:fixed;
- bottom:0;
  left:0;
  right:0;
+ bottom:0;
+ height:68px;
  background:white;
  border-top:1px solid #ddd;
- display:flex;
- justify-content:center;
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
  z-index:100;
 }
 
 .bottom button{
- flex:1;
- max-width:130px;
  border:0;
  background:white;
- padding:9px 3px;
- font-size:11px;
  color:#555;
+ font-size:10px;
+ cursor:pointer;
 }
 
 .bottom button.active{
  color:#713be8;
+ font-weight:bold;
 }
 
+.empty{
+ text-align:center;
+ padding:22px 5px;
+ color:#777;
+ font-size:13px;
+}
+
+.loading{
+ text-align:center;
+ padding:18px;
+ color:#777;
+ font-size:13px;
+}
+
+.message{
+ padding:10px;
+ border-radius:8px;
+ margin-bottom:8px;
+ font-size:12px;
+}
 
 /* MOBILE */
 
 @media(max-width:600px){
 
- .menu{
-  grid-template-columns:repeat(2,1fr);
+ .top-menu{
+  grid-template-columns:repeat(5,1fr);
+ }
+
+ .top-menu button{
+  font-size:9px;
+  padding:10px 1px;
  }
 
  .stats{
@@ -278,16 +304,13 @@ label{
  }
 
  .header h1{
-  font-size:18px;
+  font-size:17px;
  }
-
 }
-
 </style>
 </head>
 
 <body>
-
 
 <!-- HEADER -->
 
@@ -302,51 +325,37 @@ label{
 
 </div>
 
-
 <div class="container">
 
+<!-- ================= TOP 5 MENU ================= -->
 
-<!-- MENU -->
-
-<div class="menu">
+<div class="top-menu">
 
  <button class="active"
  onclick="openPage('dashboard',this)">
- 🏠 Dashboard
+ 🏠<br>Dashboard
  </button>
 
  <button onclick="openPage('balance',this)">
- 💰 Balance
+ 💰<br>Balance
  </button>
 
  <button onclick="openPage('withdrawal',this)">
- 💸 Withdrawal
+ 💸<br>Withdrawal
  </button>
 
  <button onclick="openPage('kyc',this)">
- 🛡️ KYC
- </button>
-
- <button onclick="openPage('products',this)">
- 📦 Products
+ 🛡️<br>KYC
  </button>
 
  <button onclick="openPage('orders',this)">
- 🛒 Orders
- </button>
-
- <button onclick="openPage('messages',this)">
- 💬 Messages
- </button>
-
- <button onclick="openPage('customers',this)">
- 👥 Customers
+ 🛒<br>Orders
  </button>
 
 </div>
 
 
-<!-- DASHBOARD -->
+<!-- ================= DASHBOARD ================= -->
 
 <div id="dashboard" class="page active">
 
@@ -356,14 +365,9 @@ label{
 
   <h2>Smart Seller Shop Admin</h2>
 
-  <p>
-   یہاں سے Customer Orders، Products،
-   Messages، Balance، Withdrawal اور KYC
-   manage کریں۔
-  </p>
+  <p>Manage your shop from one place.</p>
 
  </div>
-
 
  <div class="stats">
 
@@ -392,7 +396,7 @@ label{
 </div>
 
 
-<!-- BALANCE -->
+<!-- ================= BALANCE ================= -->
 
 <div id="balance" class="page">
 
@@ -400,12 +404,8 @@ label{
 
   <h2>💰 Customer Balance</h2>
 
-  <p>
-   یہاں Customer کا balance بڑھا یا کم کیا جا سکتا ہے۔
-  </p>
-
   <div id="balanceList">
-   Loading...
+   <div class="loading">Loading...</div>
   </div>
 
  </div>
@@ -413,7 +413,7 @@ label{
 </div>
 
 
-<!-- WITHDRAWAL -->
+<!-- ================= WITHDRAWAL ================= -->
 
 <div id="withdrawal" class="page">
 
@@ -422,7 +422,7 @@ label{
   <h2>💸 Withdrawal Requests</h2>
 
   <div id="withdrawalList">
-   Loading...
+   <div class="loading">Loading...</div>
   </div>
 
  </div>
@@ -430,7 +430,7 @@ label{
 </div>
 
 
-<!-- KYC -->
+<!-- ================= KYC ================= -->
 
 <div id="kyc" class="page">
 
@@ -439,7 +439,7 @@ label{
   <h2>🛡️ KYC Verification</h2>
 
   <div id="kycList">
-   Loading...
+   <div class="loading">Loading...</div>
   </div>
 
  </div>
@@ -447,7 +447,24 @@ label{
 </div>
 
 
-<!-- PRODUCTS -->
+<!-- ================= ORDERS ================= -->
+
+<div id="orders" class="page">
+
+ <div class="card">
+
+  <h2>🛒 Customer Orders</h2>
+
+  <div id="orderList">
+   <div class="loading">Loading...</div>
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- ================= PRODUCTS ================= -->
 
 <div id="products" class="page">
 
@@ -456,51 +473,44 @@ label{
   <h2>📦 Add Product</h2>
 
   <label>Product Name</label>
-
-  <input id="productName"
-  placeholder="مثلاً Smart Watch">
+  <input id="productName" placeholder="Smart Watch">
 
   <label>Description</label>
-
   <textarea id="productDescription"
   placeholder="Product description"></textarea>
 
   <label>Price</label>
-
   <input id="productPrice"
   type="number"
+  step="0.01"
   placeholder="50">
 
   <label>Stock</label>
-
   <input id="productStock"
   type="number"
   placeholder="10">
 
   <label>Category</label>
-
   <input id="productCategory"
   placeholder="Watch">
 
   <label>Image URL</label>
-
   <input id="productImage"
   placeholder="https://...">
 
   <button class="action"
   onclick="addProduct()">
-  ➕ Product Add کریں
+  ➕ Add Product
   </button>
 
  </div>
-
 
  <div class="card">
 
   <h2>📦 Products</h2>
 
   <div id="productList">
-   Loading...
+   <div class="loading">Loading...</div>
   </div>
 
  </div>
@@ -508,45 +518,7 @@ label{
 </div>
 
 
-<!-- ORDERS -->
-
-<div id="orders" class="page">
-
- <div class="card">
-
-  <h2>🛒 Customer Orders</h2>
-
-  <p>
-   Customer کے Dashboard سے آنے والے تمام Orders یہاں دکھیں گے۔
-  </p>
-
-  <div id="orderList">
-   Loading...
-  </div>
-
- </div>
-
-</div>
-
-
-<!-- MESSAGES -->
-
-<div id="messages" class="page">
-
- <div class="card">
-
-  <h2>💬 Customer Messages</h2>
-
-  <div id="messageList">
-   Loading...
-  </div>
-
- </div>
-
-</div>
-
-
-<!-- CUSTOMERS -->
+<!-- ================= CUSTOMERS ================= -->
 
 <div id="customers" class="page">
 
@@ -555,8 +527,62 @@ label{
   <h2>👥 Customers</h2>
 
   <div id="customerList">
-   Loading...
+   <div class="loading">Loading...</div>
   </div>
+
+ </div>
+
+</div>
+
+
+<!-- ================= MESSAGES ================= -->
+
+<div id="messages" class="page">
+
+ <div class="card">
+
+  <h2>💬 Customer Messages</h2>
+
+  <div id="messageList">
+   <div class="loading">Loading...</div>
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- ================= NOTIFICATIONS ================= -->
+
+<div id="notifications" class="page">
+
+ <div class="card">
+
+  <h2>🔔 Notifications</h2>
+
+  <div id="notificationList">
+   <div class="empty">No notifications.</div>
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- ================= SETTINGS ================= -->
+
+<div id="settings" class="page">
+
+ <div class="card">
+
+  <h2>⚙️ Settings</h2>
+
+  <p>Smart Seller Shop Admin Panel</p>
+
+  <button class="action red"
+  onclick="clearLocalData()">
+  Clear Local Data
+  </button>
 
  </div>
 
@@ -565,29 +591,28 @@ label{
 </div>
 
 
-<!-- BOTTOM MENU -->
+<!-- ================= BOTTOM 5 MENU ================= -->
 
 <div class="bottom">
-
- <button class="active"
- onclick="openPage('dashboard',this)">
- 🏠<br>Dashboard
- </button>
 
  <button onclick="openPage('products',this)">
  📦<br>Products
  </button>
 
- <button onclick="openPage('orders',this)">
- 🛒<br>Orders
+ <button onclick="openPage('customers',this)">
+ 👥<br>Customers
  </button>
 
  <button onclick="openPage('messages',this)">
  💬<br>Messages
  </button>
 
- <button onclick="openPage('customers',this)">
- 👥<br>Customers
+ <button onclick="openPage('notifications',this)">
+ 🔔<br>Notifications
+ </button>
+
+ <button onclick="openPage('settings',this)">
+ ⚙️<br>Settings
  </button>
 
 </div>
@@ -595,9 +620,9 @@ label{
 
 <script>
 
-/* ==============================
+/* =====================================================
    SUPABASE
-============================== */
+===================================================== */
 
 const SUPABASE_URL =
 "https://cgrwiwzqiusvjibpjzdv.supabase.co";
@@ -612,49 +637,73 @@ supabase.createClient(
 );
 
 
-/* ==============================
-   PAGE
-============================== */
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 function openPage(id,button){
 
  document
  .querySelectorAll(".page")
- .forEach(p=>{
-  p.classList.remove("active");
+ .forEach(function(page){
+  page.classList.remove("active");
  });
 
  const page =
  document.getElementById(id);
 
- if(page){
-  page.classList.add("active");
- }
+ if(!page) return;
+
+ page.classList.add("active");
 
  document
- .querySelectorAll(".menu button,.bottom button")
- .forEach(b=>{
-  b.classList.remove("active");
+ .querySelectorAll(".top-menu button,.bottom button")
+ .forEach(function(btn){
+  btn.classList.remove("active");
  });
 
  if(button){
   button.classList.add("active");
  }
 
- if(id==="balance") loadBalances();
- if(id==="withdrawal") loadWithdrawals();
- if(id==="kyc") loadKYC();
- if(id==="products") loadProducts();
- if(id==="orders") loadOrders();
- if(id==="messages") loadMessages();
- if(id==="customers") loadCustomers();
+ if(id==="dashboard"){
+  loadDashboard();
+ }
+
+ if(id==="balance"){
+  loadBalances();
+ }
+
+ if(id==="withdrawal"){
+  loadWithdrawals();
+ }
+
+ if(id==="kyc"){
+  loadKYC();
+ }
+
+ if(id==="orders"){
+  loadOrders();
+ }
+
+ if(id==="products"){
+  loadProducts();
+ }
+
+ if(id==="customers"){
+  loadCustomers();
+ }
+
+ if(id==="messages"){
+  loadMessages();
+ }
 
 }
 
 
-/* ==============================
+/* =====================================================
    DASHBOARD
-============================== */
+===================================================== */
 
 async function loadDashboard(){
 
@@ -680,64 +729,76 @@ async function loadDashboard(){
   .from("withdrawals")
   .select("*",{count:"exact",head:true});
 
-  document.getElementById("statProducts").innerText =
+  document.getElementById(
+   "statProducts"
+  ).innerText =
   products.count || 0;
 
-  document.getElementById("statOrders").innerText =
+  document.getElementById(
+   "statOrders"
+  ).innerText =
   orders.count || 0;
 
-  document.getElementById("statMessages").innerText =
+  document.getElementById(
+   "statMessages"
+  ).innerText =
   messages.count || 0;
 
-  document.getElementById("statWithdrawals").innerText =
+  document.getElementById(
+   "statWithdrawals"
+  ).innerText =
   withdrawals.count || 0;
 
- }catch(e){
-  console.log(e);
+ }catch(error){
+
+  console.error(error);
+
  }
 
 }
 
 
-/* ==============================
+/* =====================================================
    PRODUCTS
-============================== */
+===================================================== */
 
 async function loadProducts(){
 
  const box =
  document.getElementById("productList");
 
- box.innerHTML="Loading...";
+ box.innerHTML =
+ '<div class="loading">Loading...</div>';
 
- const {data,error} =
+ const result =
  await db
  .from("Products")
- .select("*")
- .order("Id",{ascending:false});
+ .select("*");
 
- if(error){
+ if(result.error){
+
+  console.error(result.error);
 
   box.innerHTML =
-  "Products load نہیں ہو سکے۔";
+  '<div class="empty">Unable to load products.</div>';
 
-  console.log(error);
   return;
-
  }
 
- if(!data || data.length===0){
+ const data =
+ result.data || [];
+
+ if(data.length===0){
 
   box.innerHTML =
-  "ابھی کوئی Product نہیں ہے۔";
+  '<div class="empty">No products found.</div>';
 
   return;
-
  }
 
  box.innerHTML="";
 
- data.forEach(p=>{
+ data.forEach(function(p){
 
   const id =
   p.Id ?? p.id;
@@ -745,27 +806,55 @@ async function loadProducts(){
   const name =
   p.Name ?? p.name ?? "Product";
 
+  const description =
+  p.Description ?? p.description ?? "";
+
   const price =
   Number(p.Price ?? p.price ?? 0);
 
   const stock =
   Number(p.Stock ?? p.stock ?? 0);
 
+  const image =
+  p["Image url"] ??
+  p.image_url ??
+  p.image ??
+  "";
+
   const div =
   document.createElement("div");
 
   div.className="item";
 
-  div.innerHTML=`
+  let imageHTML="";
+
+  if(image){
+   imageHTML =
+   `<img class="product-image"
+   src="${escapeAttribute(image)}"
+   onerror="this.style.display='none'">`;
+  }
+
+  div.innerHTML = `
 
    <b>📦 ${escapeHtml(name)}</b>
 
-   <p>Price: $${price.toFixed(2)}</p>
+   ${imageHTML}
 
-   <p>Stock: ${stock}</p>
+   <p>
+   ${escapeHtml(description)}
+   </p>
+
+   <p>
+   Price: <b>$${price.toFixed(2)}</b>
+   </p>
+
+   <p>
+   Stock: ${stock}
+   </p>
 
    <button class="action red"
-   onclick="deleteProduct('${id}')">
+   onclick="deleteProduct('${escapeAttribute(id)}')">
    🗑️ Delete
    </button>
 
@@ -783,27 +872,43 @@ async function loadProducts(){
 async function addProduct(){
 
  const name =
- document.getElementById("productName").value.trim();
+ document.getElementById("productName")
+ .value.trim();
 
  const description =
- document.getElementById("productDescription").value.trim();
+ document.getElementById("productDescription")
+ .value.trim();
 
  const price =
- Number(document.getElementById("productPrice").value);
+ Number(
+  document.getElementById("productPrice").value
+ );
 
  const stock =
- Number(document.getElementById("productStock").value);
+ Number(
+  document.getElementById("productStock").value
+ );
 
  const category =
- document.getElementById("productCategory").value.trim();
+ document.getElementById("productCategory")
+ .value.trim();
 
  const image =
- document.getElementById("productImage").value.trim();
+ document.getElementById("productImage")
+ .value.trim();
 
 
  if(!name){
 
-  alert("Product name لکھیں۔");
+  alert("Enter product name.");
+  return;
+
+ }
+
+
+ if(isNaN(price)){
+
+  alert("Enter product price.");
   return;
 
  }
@@ -817,7 +922,7 @@ async function addProduct(){
   Name:name,
   Description:description,
   Price:price,
-  Stock:stock,
+  Stock:isNaN(stock)?0:stock,
   Category:category,
   "Image url":image
 
@@ -826,10 +931,10 @@ async function addProduct(){
 
  if(error){
 
-  console.log(error);
+  console.error(error);
 
   alert(
-   "Product add نہیں ہوا۔ Products table کے column names check کریں۔"
+   "Product could not be added."
   );
 
   return;
@@ -837,14 +942,31 @@ async function addProduct(){
  }
 
 
- alert("Product successfully add ہوگیا ✅");
+ alert("Product added successfully.");
 
- document.getElementById("productName").value="";
- document.getElementById("productDescription").value="";
- document.getElementById("productPrice").value="";
- document.getElementById("productStock").value="";
- document.getElementById("productCategory").value="";
- document.getElementById("productImage").value="";
+ document.getElementById(
+  "productName"
+ ).value="";
+
+ document.getElementById(
+  "productDescription"
+ ).value="";
+
+ document.getElementById(
+  "productPrice"
+ ).value="";
+
+ document.getElementById(
+  "productStock"
+ ).value="";
+
+ document.getElementById(
+  "productCategory"
+ ).value="";
+
+ document.getElementById(
+  "productImage"
+ ).value="";
 
  loadProducts();
  loadDashboard();
@@ -856,9 +978,9 @@ async function addProduct(){
 
 async function deleteProduct(id){
 
- if(!confirm("کیا آپ یہ Product delete کرنا چاہتے ہیں؟")){
-  return;
- }
+ if(!confirm(
+  "Delete this product?"
+  )) return;
 
  const {error} =
  await db
@@ -866,12 +988,11 @@ async function deleteProduct(id){
  .delete()
  .eq("Id",id);
 
-
  if(error){
 
-  console.log(error);
+  console.error(error);
 
-  alert("Product delete نہیں ہوا۔");
+  alert("Product could not be deleted.");
 
   return;
 
@@ -883,98 +1004,121 @@ async function deleteProduct(id){
 }
 
 
-/* ==============================
+/* =====================================================
    ORDERS
-============================== */
+===================================================== */
 
 async function loadOrders(){
 
  const box =
  document.getElementById("orderList");
 
- box.innerHTML="Loading...";
+ box.innerHTML =
+ '<div class="loading">Loading...</div>';
 
- const {data,error} =
+ const result =
  await db
  .from("orders")
  .select("*")
  .order("created_at",{ascending:false});
 
+ if(result.error){
 
- if(error){
-
-  console.log(error);
-
-  box.innerHTML =
-  "Orders load نہیں ہو سکے۔";
-
-  return;
-
- }
-
-
- if(!data || data.length===0){
+  console.error(result.error);
 
   box.innerHTML =
-  "ابھی کوئی Customer Order نہیں آیا۔";
+  '<div class="empty">Unable to load orders.</div>';
 
   return;
-
  }
 
+ const data =
+ result.data || [];
+
+ if(data.length===0){
+
+  box.innerHTML =
+  '<div class="empty">No customer orders.</div>';
+
+  return;
+ }
 
  box.innerHTML="";
 
+ data.forEach(function(order){
 
- data.forEach(order=>{
+  const id =
+  order.id;
+
+  const customer =
+  order.customer_name ||
+  order.customer_id ||
+  "Customer";
+
+  const product =
+  order.product_name || "";
+
+  const quantity =
+  order.quantity || 1;
+
+  const total =
+  Number(
+   order.total_amount ||
+   order.total ||
+   0
+  );
+
+  const status =
+  order.status ||
+  "Pending";
 
   const div =
   document.createElement("div");
 
   div.className="item";
 
-  div.innerHTML=`
+  div.innerHTML = `
 
-   <b>🛒 Order #${order.id}</b>
+   <b>🛒 Order #${escapeHtml(id)}</b>
 
    <p>
    Customer:
-   ${escapeHtml(order.customer_name || order.customer_id)}
+   ${escapeHtml(customer)}
    </p>
 
    <p>
    Product:
-   ${escapeHtml(order.product_name || "")}
+   ${escapeHtml(product)}
    </p>
 
    <p>
-   Quantity: ${order.quantity || 1}
+   Quantity: ${quantity}
    </p>
 
    <p>
    Total:
-   <b>$${Number(order.total_amount || 0).toFixed(2)}</b>
+   <b>$${total.toFixed(2)}</b>
    </p>
 
    <p>
    Status:
    <span class="status">
-   ${escapeHtml(order.status || "Pending")}
+   ${escapeHtml(status)}
    </span>
    </p>
 
-   <select id="orderStatus${order.id}">
+   <select id="orderStatus_${escapeAttribute(id)}">
 
-    <option>Pending</option>
-    <option>Processing</option>
-    <option>Shipped</option>
-    <option>Delivered</option>
-    <option>Cancelled</option>
+    <option value="Pending">Pending</option>
+    <option value="Processing">Processing</option>
+    <option value="Shipped">Shipped</option>
+    <option value="Delivered">Delivered</option>
+    <option value="Cancelled">Cancelled</option>
 
    </select>
 
    <button class="action"
-   onclick="updateOrder('${order.id}')">
+   onclick="updateOrder('${escapeAttribute(id)}')">
    Update Status
    </button>
 
@@ -991,121 +1135,149 @@ async function loadOrders(){
 
 async function updateOrder(id){
 
- const status =
+ const select =
  document.getElementById(
-  "orderStatus"+id
- ).value;
+  "orderStatus_"+id
+ );
 
+ if(!select) return;
+
+ const status =
+ select.value;
 
  const {error} =
  await db
  .from("orders")
- .update({status:status})
+ .update({
+  status:status
+ })
  .eq("id",id);
-
 
  if(error){
 
-  console.log(error);
+  console.error(error);
 
-  alert("Order status update نہیں ہوا۔");
+  alert("Order status could not be updated.");
 
   return;
 
  }
 
-
- alert("Order status update ہوگیا ✅");
+ alert("Order status updated.");
 
  loadOrders();
 
 }
 
 
-/* ==============================
+/* =====================================================
    MESSAGES
-============================== */
+===================================================== */
 
 async function loadMessages(){
 
  const box =
  document.getElementById("messageList");
 
- box.innerHTML="Loading...";
+ box.innerHTML =
+ '<div class="loading">Loading...</div>';
 
-
- const {data,error} =
+ const result =
  await db
  .from("support_tickets")
  .select("*")
  .order("created_at",{ascending:false});
 
+ if(result.error){
 
- if(error){
-
-  console.log(error);
+  console.error(result.error);
 
   box.innerHTML =
-  "Messages load نہیں ہو سکے۔";
+  '<div class="empty">Unable to load messages.</div>';
 
   return;
 
  }
 
+ const data =
+ result.data || [];
 
- if(!data || data.length===0){
+ if(data.length===0){
 
   box.innerHTML =
-  "ابھی کوئی message نہیں ہے۔";
+  '<div class="empty">No messages.</div>';
 
   return;
 
  }
-
 
  box.innerHTML="";
 
+ data.forEach(function(message){
 
- data.forEach(message=>{
+  const id =
+  message.id;
+
+  const customer =
+  message.customer_name ||
+  message.customer_id ||
+  "Customer";
+
+  const text =
+  message.message ||
+  "";
+
+  const reply =
+  message.admin_reply ||
+  "";
+
+  const status =
+  message.status ||
+  "Pending";
 
   const div =
   document.createElement("div");
 
   div.className="item";
 
+  div.innerHTML = `
 
-  div.innerHTML=`
-
-   <b>💬
-   ${escapeHtml(
-    message.customer_name ||
-    message.customer_id ||
-    "Customer"
-   )}
-   </b>
+   <b>💬 ${escapeHtml(customer)}</b>
 
    <p>
-   ${escapeHtml(message.message || "")}
+   ${escapeHtml(text)}
    </p>
 
    <p>
    Status:
    <span class="status">
-   ${escapeHtml(message.status || "Pending")}
+   ${escapeHtml(status)}
    </span>
    </p>
 
+   ${
+    reply
+    ?
+    `<div class="message"
+    style="background:#ecfdf5;color:#166534">
+    <b>Admin Reply:</b><br>
+    ${escapeHtml(reply)}
+    </div>`
+    :
+    ""
+   }
+
    <textarea
-   id="reply${message.id}"
-   placeholder="Customer کو جواب لکھیں..."></textarea>
+   id="reply_${escapeAttribute(id)}"
+   placeholder="Write reply..."></textarea>
 
    <button class="action green"
-   onclick="replyMessage('${message.id}')">
-   ↩️ جواب بھیجیں
+   onclick="replyMessage('${escapeAttribute(id)}')">
+   ↩️ Send Reply
    </button>
 
    <button class="action red"
-   onclick="deleteMessage('${message.id}')">
+   onclick="deleteMessage('${escapeAttribute(id)}')">
    🗑️ Delete
    </button>
 
@@ -1118,48 +1290,51 @@ async function loadMessages(){
 }
 
 
-/* REPLY */
+/* REPLY MESSAGE */
 
 async function replyMessage(id){
 
- const reply =
+ const textarea =
  document.getElementById(
-  "reply"+id
- ).value.trim();
+  "reply_"+id
+ );
 
+ if(!textarea) return;
+
+ const reply =
+ textarea.value.trim();
 
  if(!reply){
 
-  alert("جواب لکھیں۔");
+  alert("Write a reply first.");
   return;
 
  }
-
 
  const {error} =
  await db
  .from("support_tickets")
  .update({
+
   admin_reply:reply,
   status:"Replied"
+
  })
  .eq("id",id);
 
-
  if(error){
 
-  console.log(error);
+  console.error(error);
 
   alert(
-   "Reply نہیں گیا۔ support_tickets میں admin_reply column ہونا ضروری ہے۔"
+   "Reply could not be sent. Make sure admin_reply exists."
   );
 
   return;
 
  }
 
-
- alert("Customer کو جواب بھیج دیا گیا ✅");
+ alert("Reply sent.");
 
  loadMessages();
 
@@ -1171,10 +1346,8 @@ async function replyMessage(id){
 async function deleteMessage(id){
 
  if(!confirm(
-  "کیا آپ یہ message delete کرنا چاہتے ہیں؟"
-  )){
-  return;
- }
+  "Delete this message?"
+  )) return;
 
  const {error} =
  await db
@@ -1182,12 +1355,11 @@ async function deleteMessage(id){
  .delete()
  .eq("id",id);
 
-
  if(error){
 
-  console.log(error);
+  console.error(error);
 
-  alert("Message delete نہیں ہوا۔");
+  alert("Message could not be deleted.");
 
   return;
 
@@ -1199,357 +1371,75 @@ async function deleteMessage(id){
 }
 
 
-/* ==============================
-   BALANCES
-============================== */
+/* =====================================================
+   BALANCE
+===================================================== */
 
 async function loadBalances(){
 
  const box =
  document.getElementById("balanceList");
 
- box.innerHTML="Loading...";
+ box.innerHTML =
+ '<div class="loading">Loading...</div>';
 
-
- const {data,error} =
+ const result =
  await db
  .from("customer_balances")
  .select("*")
  .order("updated_at",{ascending:false});
 
+ if(result.error){
 
- if(error){
+  console.error(result.error);
 
-  console.log(error);
-
-  box.innerHTML="Balance load نہیں ہوا۔";
-
-  return;
-
- }
-
-
- if(!data || data.length===0){
-
-  box.innerHTML=
-  "ابھی کوئی Customer balance موجود نہیں۔";
+  box.innerHTML =
+  '<div class="empty">Unable to load balances.</div>';
 
   return;
 
  }
 
+ const data =
+ result.data || [];
+
+ if(data.length===0){
+
+  box.innerHTML =
+  '<div class="empty">No customer balances.</div>';
+
+  return;
+
+ }
 
  box.innerHTML="";
 
+ data.forEach(function(customer){
 
- data.forEach(c=>{
+  const id =
+  customer.id;
+
+  const name =
+  customer.customer_name ||
+  customer.customer_id ||
+  "Customer";
+
+  const balance =
+  Number(customer.balance || 0);
 
   const div =
   document.createElement("div");
 
   div.className="item";
 
+  div.innerHTML = `
 
-  div.innerHTML=`
-
-   <b>👤
-   ${escapeHtml(c.customer_name || c.customer_id)}
-   </b>
+   <b>👤 ${escapeHtml(name)}</b>
 
    <p>
    Current Balance:
-   <b>$${Number(c.balance || 0).toFixed(2)}</b>
+   <b>$${balance.toFixed(2)}</b>
    </p>
 
    <input
-   id="balance${c.id}"
-   type="number"
-   placeholder="نیا Balance">
-
-   <button
-   class="action"
-   onclick="updateBalance('${c.id}')">
-   💰 Balance Update
-   </button>
-
-  `;
-
-  box.appendChild(div);
-
- });
-
-}
-
-
-/* UPDATE BALANCE */
-
-async function updateBalance(id){
-
- const value =
- Number(
-  document.getElementById(
-   "balance"+id
-  ).value
- );
-
-
- if(isNaN(value) || value<0){
-
-  alert("صحیح Balance لکھیں۔");
-  return;
-
- }
-
-
- const {error} =
- await db
- .from("customer_balances")
- .update({
-  balance:value,
-  updated_at:new Date().toISOString()
- })
- .eq("id",id);
-
-
- if(error){
-
-  console.log(error);
-
-  alert("Balance update نہیں ہوا۔");
-
-  return;
-
- }
-
-
- alert("Balance update ہوگیا ✅");
-
- loadBalances();
-
-}
-
-
-/* ==============================
-   WITHDRAWALS
-============================== */
-
-async function loadWithdrawals(){
-
- const box =
- document.getElementById("withdrawalList");
-
- box.innerHTML="Loading...";
-
-
- const {data,error} =
- await db
- .from("withdrawals")
- .select("*")
- .order("created_at",{ascending:false});
-
-
- if(error){
-
-  console.log(error);
-
-  box.innerHTML=
-  "Withdrawal requests load نہیں ہوئیں۔";
-
-  return;
-
- }
-
-
- if(!data || data.length===0){
-
-  box.innerHTML=
-  "ابھی کوئی Withdrawal Request نہیں ہے۔";
-
-  return;
-
- }
-
-
- box.innerHTML="";
-
-
- data.forEach(w=>{
-
-  const div =
-  document.createElement("div");
-
-  div.className="item";
-
-
-  div.innerHTML=`
-
-   <b>💸 Withdrawal #${w.id}</b>
-
-   <p>
-   Customer:
-   ${escapeHtml(w.customer_name || w.customer_id)}
-   </p>
-
-   <p>
-   Amount:
-   <b>$${Number(w.amount || 0).toFixed(2)}</b>
-   </p>
-
-   <p>
-   Method:
-   ${escapeHtml(w.method || "")}
-   </p>
-
-   <p>
-   Account:
-   ${escapeHtml(w.account_details || "")}
-   </p>
-
-   <p>
-   Status:
-   <span class="status">
-   ${escapeHtml(w.status || "Pending")}
-   </span>
-   </p>
-
-   <select id="withdraw${w.id}">
-
-    <option>Pending</option>
-    <option>Approved</option>
-    <option>Paid</option>
-    <option>Rejected</option>
-
-   </select>
-
-   <button
-   class="action green"
-   onclick="updateWithdrawal('${w.id}')">
-   Update
-   </button>
-
-  `;
-
-  box.appendChild(div);
-
- });
-
-}
-
-
-/* UPDATE WITHDRAWAL */
-
-async function updateWithdrawal(id){
-
- const status =
- document.getElementById(
-  "withdraw"+id
- ).value;
-
-
- const {error} =
- await db
- .from("withdrawals")
- .update({status:status})
- .eq("id",id);
-
-
- if(error){
-
-  console.log(error);
-
-  alert("Withdrawal update نہیں ہوئی۔");
-
-  return;
-
- }
-
-
- alert("Withdrawal update ہوگئی ✅");
-
- loadWithdrawals();
-
-}
-
-
-/* ==============================
-   KYC
-============================== */
-
-async function loadKYC(){
-
- const box =
- document.getElementById("kycList");
-
- box.innerHTML="Loading...";
-
-
- const {data,error} =
- await db
- .from("kyc_requests")
- .select("*")
- .order("created_at",{ascending:false});
-
-
- if(error){
-
-  console.log(error);
-
-  box.innerHTML=
-  "KYC requests load نہیں ہوئیں۔";
-
-  return;
-
- }
-
-
- if(!data || data.length===0){
-
-  box.innerHTML=
-  "ابھی کوئی KYC Request نہیں ہے۔";
-
-  return;
-
- }
-
-
- box.innerHTML="";
-
-
- data.forEach(k=>{
-
-  const div =
-  document.createElement("div");
-
-  div.className="item";
-
-
-  div.innerHTML=`
-
-   <b>🛡️ KYC #${k.id}</b>
-
-   <p>
-   Customer:
-   ${escapeHtml(k.customer_name || k.customer_id)}
-   </p>
-
-   <p>
-   Document:
-   ${escapeHtml(k.document_type || "")}
-   </p>
-
-   <p>
-   Number:
-   ${escapeHtml(k.document_number || "")}
-   </p>
-
-   <p>
-   Status:
-   <span class="status">
-   ${escapeHtml(k.status || "Pending")}
-   </span>
-   </p>
-
-   <select id="kycStatus${k.id}">
-
-    <option>Pending</option>
-    <option>Approved</o
+   id="balance_${escapeAt
