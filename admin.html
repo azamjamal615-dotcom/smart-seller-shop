@@ -1,27 +1,354 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Smart Seller Shop - Admin</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>*{box-sizing:border-box}body{margin:0;background:#f3f4f6;color:#172033;font-family:Arial,sans-serif;padding-bottom:72px}.header{background:#fff;padding:14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ddd}.logo{width:50px;height:50px;border-radius:14px;background:#713be8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px}.header h1{margin:0;font-size:19px}.header p{margin:3px 0 0;color:#777;font-size:12px}.container{max-width:900px;margin:auto;padding:12px}.topMenu{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:12px}.topMenu button{padding:10px 2px;border:0;background:#fff;border-radius:10px;box-shadow:0 2px 7px #ddd;font-size:11px;cursor:pointer}.topMenu button.active{background:#713be8;color:#fff}.page{display:none}.page.active{display:block}.card{background:#fff;border-radius:15px;padding:15px;margin-bottom:12px;box-shadow:0 2px 10px #ddd}.card h2{margin:0 0 10px;font-size:18px}.welcome{background:#214f78;color:#fff}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{background:#fff;border-radius:13px;padding:13px 5px;text-align:center;box-shadow:0 2px 8px #ddd}.stat b{font-size:22px}.stat span{display:block;font-size:11px;color:#777;margin-top:4px}.item{border:1px solid #ddd;border-radius:11px;padding:12px;margin-top:8px;background:#fafafa}.item p{font-size:13px;color:#555;margin:5px 0}input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:9px;font-size:14px;margin:5px 0 9px}textarea{min-height:90px}label{font-size:12px;font-weight:bold}.action{border:0;border-radius:8px;padding:9px 12px;background:#713be8;color:#fff;cursor:pointer;font-size:13px;margin:3px}.green{background:#16a34a}.red{background:#dc2626}.gray{background:#777}.full{width:100%}.status{display:inline-block;padding:4px 8px;border-radius:15px;background:#fff3cd;color:#856404;font-size:11px}.loading,.empty{text-align:center;padding:20px;color:#777;font-size:13px}.message{display:none;padding:10px;border-radius:9px;margin-bottom:10px;font-size:13px}.success{background:#dcfce7;color:#166534}.error{background:#fee2e2;color:#991b1b}.bottom{position:fixed;bottom:0;left:0;right:0;height:67px;background:#fff;border-top:1px solid #ddd;display:flex;z-index:999}.bottom button{flex:1;border:0;background:#fff;font-size:10px;color:#555;cursor:pointer}.bottom button.active{color:#713be8;font-weight:bold}.bottomIcon{font-size:18px;display:block;margin-bottom:3px}@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.topMenu button{font-size:9px}}</style></head><body>
-<div class="header"><div class="logo">▦</div><div><h1>Smart Seller Shop</h1><p>Admin Panel</p></div></div><div class="container"><div id="messageBox" class="message"></div>
-<div class="topMenu"><button data-page="dashboard" class="active">🏠<br>Dashboard</button><button data-page="balance">💰<br>Balance</button><button data-page="withdrawal">💸<br>Withdrawal</button><button data-page="kyc">🛡️<br>KYC</button><button data-page="orders">🛒<br>Orders</button></div>
-<div id="dashboard" class="page active"><div class="card welcome"><small>WELCOME BACK</small><h2>Smart Seller Shop Admin</h2><p>Manage your shop from one place.</p></div><div class="stats"><div class="stat"><b id="statProducts">0</b><span>Products</span></div><div class="stat"><b id="statOrders">0</b><span>Orders</span></div><div class="stat"><b id="statMessages">0</b><span>Messages</span></div><div class="stat"><b id="statWithdrawals">0</b><span>Withdrawals</span></div></div></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Seller Shop - Admin</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f4f6;color:#172033;font-family:Arial,sans-serif;padding-bottom:75px}
+.header{background:#fff;padding:14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ddd}
+.logo{width:50px;height:50px;border-radius:14px;background:#713be8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px}
+.header h1{margin:0;font-size:19px}.header p{margin:3px 0 0;color:#777;font-size:12px}
+.container{max-width:900px;margin:auto;padding:12px}
+.topMenu{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:12px}
+button{font-family:inherit}
+.navBtn{border:0;background:#fff;padding:10px 3px;border-radius:10px;box-shadow:0 2px 7px #ddd;font-size:11px;cursor:pointer;color:#172033}
+.navBtn.active{background:#713be8;color:#fff}
+.page{display:none}.page.active{display:block}
+.card{background:#fff;border-radius:15px;padding:15px;margin-bottom:12px;box-shadow:0 2px 10px #ddd}
+.card h2{margin:0 0 10px;font-size:18px}
+.welcome{background:#214f78;color:#fff}.welcome h2{font-size:21px;margin:6px 0 10px}.welcome p{font-size:13px;line-height:1.5}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stat{background:#fff;border-radius:13px;padding:13px 5px;text-align:center;box-shadow:0 2px 8px #ddd}.stat b{font-size:22px}.stat span{display:block;font-size:11px;color:#777;margin-top:4px}
+.item{border:1px solid #ddd;border-radius:11px;padding:12px;margin-top:8px;background:#fafafa}.item p{font-size:13px;color:#555;margin:5px 0}
+input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:9px;font-size:14px;margin:5px 0 9px}textarea{min-height:90px}
+label{font-size:12px;font-weight:bold}.action{border:0;border-radius:8px;padding:9px 12px;background:#713be8;color:#fff;cursor:pointer;font-size:13px;margin:3px}.green{background:#16a34a}.red{background:#dc2626}.gray{background:#777}.full{width:100%;margin:3px 0}
+.status{display:inline-block;padding:4px 8px;border-radius:15px;background:#fff3cd;color:#856404;font-size:11px}
+.loading,.empty{text-align:center;padding:20px;color:#777;font-size:13px}
+.message{display:none;padding:10px;border-radius:9px;margin-bottom:10px;font-size:13px}.success{background:#dcfce7;color:#166534}.error{background:#fee2e2;color:#991b1b}
+.bottom{position:fixed;bottom:0;left:0;right:0;height:67px;background:#fff;border-top:1px solid #ddd;display:flex;z-index:999}
+.bottom button{flex:1;border:0;background:#fff;font-size:10px;color:#555;cursor:pointer}
+.bottom button.active{color:#713be8;font-weight:bold}.bottomIcon{font-size:18px;display:block;margin-bottom:3px}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.topMenu button{font-size:9px;padding:9px 1px}.header h1{font-size:17px}}
+</style>
+</head>
+
+<body>
+<div class="header">
+ <div class="logo">▦</div>
+ <div><h1>Smart Seller Shop</h1><p>Admin Panel</p></div>
+</div>
+
+<div class="container">
+<div id="messageBox" class="message"></div>
+
+<div class="topMenu">
+ <button class="navBtn active" data-page="dashboard">🏠<br>Dashboard</button>
+ <button class="navBtn" data-page="balance">💰<br>Balance</button>
+ <button class="navBtn" data-page="withdrawal">💸<br>Withdrawal</button>
+ <button class="navBtn" data-page="kyc">🛡️<br>KYC</button>
+ <button class="navBtn" data-page="orders">🛒<br>Orders</button>
+</div>
+
+<div id="dashboard" class="page active">
+ <div class="card welcome"><small>WELCOME BACK</small><h2>Smart Seller Shop Admin</h2><p>Manage your shop from one place.</p></div>
+ <div class="stats">
+  <div class="stat"><b id="statProducts">0</b><span>Products</span></div>
+  <div class="stat"><b id="statOrders">0</b><span>Orders</span></div>
+  <div class="stat"><b id="statMessages">0</b><span>Messages</span></div>
+  <div class="stat"><b id="statWithdrawals">0</b><span>Withdrawals</span></div>
+ </div>
+</div>
+
 <div id="balance" class="page"><div class="card"><h2>💰 Customer Balance</h2><div id="balanceList" class="loading">Loading...</div></div></div>
 <div id="withdrawal" class="page"><div class="card"><h2>💸 Withdrawal Requests</h2><div id="withdrawalList" class="loading">Loading...</div></div></div>
 <div id="kyc" class="page"><div class="card"><h2>🛡️ KYC Verification</h2><div id="kycList" class="loading">Loading...</div></div></div>
 <div id="orders" class="page"><div class="card"><h2>🛒 Customer Orders</h2><div id="orderList" class="loading">Loading...</div></div></div>
-<div id="products" class="page"><div class="card"><h2>📦 Add Product</h2><label>Product Name</label><input id="productName" placeholder="Smart Watch"><label>Description</label><textarea id="productDescription" placeholder="Product description"></textarea><label>Price</label><input id="productPrice" type="number" step="0.01" placeholder="50"><label>Stock</label><input id="productStock" type="number" placeholder="10"><label>Category</label><input id="productCategory" placeholder="Watch"><label>Image URL</label><input id="productImage" placeholder="https://..."><button id="addProduct" class="action full">➕ Add Product</button></div><div class="card"><h2>📦 Products</h2><div id="productList" class="loading">Loading...</div></div></div>
-<div id="customers" class="page"><div class="card"><h2>👥 Customers</h2><div id="customerList" class="loading">Loading...</div></div></div><div id="messages" class="page"><div class="card"><h2>💬 Customer Messages</h2><div id="messageList" class="loading">Loading...</div></div></div><div id="notifications" class="page"><div class="card"><h2>🔔 Notifications</h2><div class="empty">No notifications.</div></div></div><div id="settings" class="page"><div class="card"><h2>⚙️ Settings</h2><p>Smart Seller Shop Admin Panel</p><button id="refresh" class="action gray full">Refresh Panel</button></div></div></div>
-<div class="bottom"><button data-page="products" class="active"><span class="bottomIcon">📦</span>Products</button><button data-page="customers"><span class="bottomIcon">👥</span>Customers</button><button data-page="messages"><span class="bottomIcon">💬</span>Messages</button><button data-page="notifications"><span class="bottomIcon">🔔</span>Notifications</button><button data-page="settings"><span class="bottomIcon">⚙️</span>Settings</button></div>
+
+<div id="products" class="page">
+ <div class="card">
+  <h2>📦 Add Product</h2>
+  <label>Product Name</label><input id="productName" placeholder="Smart Watch">
+  <label>Description</label><textarea id="productDescription" placeholder="Product description"></textarea>
+  <label>Price</label><input id="productPrice" type="number" step="0.01" placeholder="50">
+  <label>Stock</label><input id="productStock" type="number" placeholder="10">
+  <label>Category</label><input id="productCategory" placeholder="Watch">
+  <label>Image URL</label><input id="productImage" placeholder="https://...">
+  <button id="addProductBtn" class="action full">➕ Add Product</button>
+ </div>
+ <div class="card"><h2>📦 Products</h2><div id="productList" class="loading">Loading...</div></div>
+</div>
+
+<div id="customers" class="page"><div class="card"><h2>👥 Customers</h2><div id="customerList" class="loading">Loading...</div></div></div>
+<div id="messages" class="page"><div class="card"><h2>💬 Customer Messages</h2><div id="messageList" class="loading">Loading...</div></div></div>
+<div id="notifications" class="page"><div class="card"><h2>🔔 Notifications</h2><div class="empty">No notifications.</div></div></div>
+<div id="settings" class="page"><div class="card"><h2>⚙️ Settings</h2><p>Smart Seller Shop Admin Panel</p><button id="refreshBtn" class="action gray full">Refresh Panel</button></div></div>
+</div>
+
+<div class="bottom">
+ <button class="active" data-page="products"><span class="bottomIcon">📦</span>Products</button>
+ <button data-page="customers"><span class="bottomIcon">👥</span>Customers</button>
+ <button data-page="messages"><span class="bottomIcon">💬</span>Messages</button>
+ <button data-page="notifications"><span class="bottomIcon">🔔</span>Notifications</button>
+ <button data-page="settings"><span class="bottomIcon">⚙️</span>Settings</button>
+</div>
+
+<!-- Supabase is loaded AFTER the navigation code so a CDN problem cannot break the buttons -->
 <script>
-const URL="https://cgrwiwzqiusvjibpjzdv.supabase.co",KEY="sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV",db=supabase.createClient(URL,KEY);const $=id=>document.getElementById(id);const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));function msg(t,e="success"){let b=$("messageBox");b.textContent=t;b.className="message "+e;b.style.display="block";setTimeout(()=>b.style.display="none",3500)}
-async function openPage(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));$(id)?.classList.add("active");document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===id));try{if(id==="dashboard")await dashboard();if(id==="balance")await balances();if(id==="withdrawal")await withdrawals();if(id==="kyc")await kyc();if(id==="orders")await orders();if(id==="products")await products();if(id==="customers")await customers();if(id==="messages")await messages()}catch(e){console.error(e);msg("Database error. Check Supabase tables and RLS.","error")}}
-document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>openPage(b.dataset.page));$("refresh").onclick=()=>location.reload();$("addProduct").onclick=addProduct;
-async function dashboard(){let [p,o,m,w]=await Promise.all([db.from("Products").select("*",{count:"exact",head:true}),db.from("orders").select("*",{count:"exact",head:true}),db.from("support_tickets").select("*",{count:"exact",head:true}),db.from("withdrawals").select("*",{count:"exact",head:true})]);$("statProducts").textContent=p.error?0:p.count||0;$("statOrders").textContent=o.error?0:o.count||0;$("statMessages").textContent=m.error?0:m.count||0;$("statWithdrawals").textContent=w.error?0:w.count||0)}
-async function products(){let b=$("productList");b.className="loading";b.textContent="Loading...";let r=await db.from("Products").select("*");if(r.error){b.className="empty";b.textContent="Products table is not available.";return}if(!r.data?.length){b.className="empty";b.textContent="No products yet.";return}b.className="";b.innerHTML="";r.data.forEach(p=>{let d=document.createElement("div");d.className="item";let id=p.Id??p.id,name=p.Name??p.name??"Product",price=Number(p.Price??p.price??0),stock=Number(p.Stock??p.stock??0);d.innerHTML=`<b>📦 ${esc(name)}</b><p>Price: $${price.toFixed(2)}</p><p>Stock: ${stock}</p><button class="action red">Delete</button>`;d.querySelector("button").onclick=()=>delProduct(id);b.appendChild(d)})}
-async function addProduct(){let n=$("productName").value.trim();if(!n){msg("Product name is required.","error");return}let r=await db.from("Products").insert({Name:n,Description:$("productDescription").value.trim(),Price:Number($("productPrice").value)||0,Stock:Number($("productStock").value)||0,Category:$("productCategory").value.trim(),"Image url":$("productImage").value.trim()});if(r.error){console.error(r.error);msg(r.error.message,"error");return}document.querySelectorAll("#products input,#products textarea").forEach(x=>x.value="");msg("Product added successfully.");products();dashboard()}
-async function delProduct(id){if(!confirm("Delete this product?"))return;let r=await db.from("Products").delete().eq("Id",id);if(r.error){msg("Product could not be deleted.","error");return}msg("Product deleted.");products();dashboard()}
-async function orders(){let b=$("orderList");b.className="loading";b.textContent="Loading...";let r=await db.from("orders").select("*").order("created_at",{ascending:false});if(r.error){b.className="empty";b.textContent="Orders table is not available yet.";return}if(!r.data?.length){b.className="empty";b.textContent="No customer orders yet.";return}b.className="";b.innerHTML="";r.data.forEach(o=>{let d=document.createElement("div");d.className="item";d.innerHTML=`<b>🛒 Order #${esc(o.id)}</b><p>Customer: ${esc(o.customer_name||o.customer_id||"Customer")}</p><p>Product: ${esc(o.product_name||"Product")}</p><p>Quantity: ${esc(o.quantity||1)}</p><p>Total: <b>$${Number(o.total_amount??o.total??0).toFixed(2)}</b></p><p>Status: <span class="status">${esc(o.status||"Pending")}</span></p><select><option>Pending</option><option>Processing</option><option>Shipped</option><option>Delivered</option><option>Cancelled</option></select><button class="action">Update</button>`;let s=d.querySelector("select");s.value=o.status||"Pending";d.querySelector("button").onclick=async()=>{let x=await db.from("orders").update({status:s.value}).eq("id",o.id);if(x.error)msg("Order update failed.","error");else{msg("Order status updated.");orders()}};b.appendChild(d)})}
-async function messages(){let b=$("messageList");b.className="loading";b.textContent="Loading...";let r=await db.from("support_tickets").select("*").order("created_at",{ascending:false});if(r.error){b.className="empty";b.textContent="Messages table is not available yet.";return}if(!r.data?.length){b.className="empty";b.textContent="No customer messages yet.";return}b.className="";b.innerHTML="";r.data.forEach(t=>{let d=document.createElement("div");d.className="item";d.innerHTML=`<b>💬 ${esc(t.customer_name||t.customer_id||"Customer")}</b><p>${esc(t.message||"")}</p><p>Status: <span class="status">${esc(t.status||"Pending")}</span></p><textarea>${esc(t.admin_reply||"")}</textarea><button class="action green">Send Reply</button><button class="action red">Delete</button>`;d.querySelector(".green").onclick=async()=>{let v=d.querySelector("textarea").value.trim();if(!v)return msg("Write a reply first.","error");let x=await db.from("support_tickets").update({admin_reply:v,status:"Replied"}).eq("id",t.id);if(x.error)msg("Reply failed.","error");else{msg("Reply sent.");messages()}};d.querySelector(".red").onclick=async()=>{if(!confirm("Delete this message?"))return;let x=await db.from("support_tickets").delete().eq("id",t.id);if(x.error)msg("Delete failed.","error");else messages()};b.appendChild(d)})}
-async function balances(){let b=$("balanceList");b.className="loading";b.textContent="Loading...";let r=await db.from("customer_balances").select("*").order("updated_at",{ascending:false});if(r.error){b.className="empty";b.textContent="Balance table is not available yet.";return}if(!r.data?.length){b.className="empty";b.textContent="No customer balances yet.";return}b.className="";b.innerHTML="";r.data.forEach(c=>{let d=document.createElement("div");d.className="item";d.innerHTML=`<b>👤 ${esc(c.customer_name||c.customer_id||"Customer")}</b><p>Current Balance: <b>$${Number(c.balance||0).toFixed(2)}</b></p><input type="number" min="0" placeholder="New balance"><button class="action">Update Balance</button>`;d.querySelector("button").onclick=async()=>{let v=Number(d.querySelector("input").value);if(!Number.isFinite(v)||v<0)return msg("Enter a valid balance.","error");let x=await db.from("customer_balances").update({balance:v,updated_at:new Date().toISOString()}).eq("id",c.id);if(x.error)msg("Balance update failed.","error");else{msg("Balance updated.");balances()}};b.appendChild(d)})}
-async function withdrawals(){let b=$("withdrawalList");b.className="loading";b.textContent="Loading...";let r=await db.from("withdrawals").select("*").order("created_at",{ascending:false});if(r.error){b.className="empty";b.textContent="Withdrawal table is not available yet.";return}if(!r.data?.length){b.className="empty";b.textContent="No withdrawal requests.";return}b.className="";b.innerHTML="";r.data.forEach(w=>{let d=document.createElement("div");d.className="item";d.innerHTML=`<b>💸 Withdrawal #${esc(w.id)}</b><p>Customer: ${esc(w.customer_name||w.customer_id||"Customer")}</p><p>Amount: <b>$${Number(w.amount||0).toFixed(2)}</b></p><p>Method: ${esc(w.method||"")}</p><p>Account: ${esc(w.account_details||"")}</p><p>Status: <span class="status">${esc(w.status||"Pending")}</span></p><select><option>Pending</option><option>Approved</option><option>Paid</option><option>Rejected</option></select><button class="action green">Update</button>`;let s=d.querySelector("select");s.value=w.status||"Pending";d.querySelector("button").onclick=async()=>{let x=await db.from("withdrawals").update({status:s.value}).eq("id",w.id);if(x.error)msg("Withdrawal update failed.","error");else{msg("Withdrawal updated.");withdrawals();dashboard()}};b.appendChild(d)})}
-async function kyc(){let b=$("kycList");b.className="loading";b.textContent="Loading...";let r=await db.from("kyc_requests").select("*").order("created_at",{ascending:false});if(r.error){b.className="empty";b.textContent="KYC table is not available yet.";return}if(!r.data?.length){b.className="empty";b.textContent="No KYC requests.";return}b.className="";b.innerHTML="";r.data.forEach(k=>{let d=document.createElement("div");d.className="item";d.innerHTML=`<b>🛡️ KYC #${esc(k.id)}</b><p>Customer: ${esc(k.customer_name||k.customer_id||"Customer")}</p><p>Document: ${esc(k.document_type||"")}</p><p>Number: ${esc(k.document_number||"")}</p><p>Status: <span class="status">${esc(k.status||"Pending")}</span></p><select><option>Pending</option><option>Approved</option><option>Rejected</option></select><button class="action green">Update</button>`;let s=d.querySelector("select");s.value=k.status||"Pending";d.querySelector("button").onclick=async()=>{let x=await db.from("kyc_requests").update({status:s.value}).eq("id",k.id);if(x.error)msg("KYC update failed.","error");else{msg("KYC updated.");kyc()}};b.appendChild(d)})}
-async function customers(){let b=$("customerList");b.className="loading";b.textContent="Loading...";let r=await db.from("customer_balances").select("*");if(r.error){b.className="empty";b.textContent="Customers table is not available yet.";return}if(!r.data?.length){b.className="empty";b.textContent="No customers found.";return}b.className="";b.innerHTML="";r.data.forEach(c=>{let d=document.createElement("div");d.className="item";d.innerHTML=`<b>👤 ${esc(c.customer_name||"Customer")}</b><p>Customer ID: ${esc(c.customer_id||"")}</p><p>Balance: <b>$${Number(c.balance||0).toFixed(2)}</b></p>`;b.appendChild(d)})}
-dashboard();
-</script></body></html>
+const SUPABASE_URL="https://cgrwiwzqiusvjibpjzdv.supabase.co";
+const SUPABASE_KEY="sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
+let db=null;
+
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+
+function showMessage(text,type="success"){
+ const b=$("messageBox");
+ b.textContent=text;
+ b.className="message "+type;
+ b.style.display="block";
+ clearTimeout(window.msgTimer);
+ window.msgTimer=setTimeout(()=>b.style.display="none",3500);
+}
+
+/* Navigation works without Supabase */
+function openPage(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ const page=$(id);
+ if(page) page.classList.add("active");
+
+ document.querySelectorAll("[data-page]").forEach(b=>{
+   b.classList.toggle("active",b.dataset.page===id);
+ });
+
+ if(db){
+   if(id==="dashboard") loadDashboard();
+   if(id==="balance") loadBalances();
+   if(id==="withdrawal") loadWithdrawals();
+   if(id==="kyc") loadKYC();
+   if(id==="orders") loadOrders();
+   if(id==="products") loadProducts();
+   if(id==="customers") loadCustomers();
+   if(id==="messages") loadMessages();
+ }
+}
+
+document.querySelectorAll("[data-page]").forEach(btn=>{
+ btn.addEventListener("click",function(e){
+   e.preventDefault();
+   openPage(this.dataset.page);
+ });
+});
+
+$("refreshBtn").addEventListener("click",()=>location.reload());
+
+function requireDB(){
+ if(!db){
+   showMessage("Database is still loading. Please try again.","error");
+   return false;
+ }
+ return true;
+}
+
+/* Load Supabase safely */
+function loadSupabase(){
+ const s=document.createElement("script");
+ s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+ s.onload=()=>{
+   try{
+     if(window.supabase){
+       db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+       loadDashboard();
+     }else{
+       showMessage("Supabase library could not load.","error");
+     }
+   }catch(e){
+     console.error(e);
+     showMessage("Supabase connection error.","error");
+   }
+ };
+ s.onerror=()=>{
+   showMessage("Supabase library blocked. Navigation still works.","error");
+ };
+ document.head.appendChild(s);
+}
+
+/* Database functions */
+async function loadDashboard(){
+ if(!requireDB())return;
+ try{
+  const [p,o,m,w]=await Promise.all([
+   db.from("Products").select("*",{count:"exact",head:true}),
+   db.from("orders").select("*",{count:"exact",head:true}),
+   db.from("support_tickets").select("*",{count:"exact",head:true}),
+   db.from("withdrawals").select("*",{count:"exact",head:true})
+  ]);
+  $("statProducts").textContent=p.error?0:(p.count||0);
+  $("statOrders").textContent=o.error?0:(o.count||0);
+  $("statMessages").textContent=m.error?0:(m.count||0);
+  $("statWithdrawals").textContent=w.error?0:(w.count||0);
+ }catch(e){console.error(e)}
+}
+
+async function loadProducts(){
+ if(!requireDB())return;
+ const b=$("productList");b.className="loading";b.textContent="Loading...";
+ const r=await db.from("Products").select("*");
+ if(r.error){b.className="empty";b.textContent="Products table is not available.";console.error(r.error);return}
+ if(!r.data?.length){b.className="empty";b.textContent="No products yet.";return}
+ b.className="";b.innerHTML="";
+ r.data.forEach(p=>{
+  const id=p.Id??p.id;
+  const d=document.createElement("div");d.className="item";
+  d.innerHTML="<b>📦 "+esc(p.Name??p.name??"Product")+"</b><p>Price: $"+Number(p.Price??p.price??0).toFixed(2)+"</p><p>Stock: "+Number(p.Stock??p.stock??0)+"</p><button class='action red'>Delete</button>";
+  d.querySelector("button").onclick=()=>deleteProduct(id);b.appendChild(d);
+ });
+}
+
+async function deleteProduct(id){
+ if(!requireDB()||!confirm("Delete this product?"))return;
+ const r=await db.from("Products").delete().eq("Id",id);
+ if(r.error){console.error(r.error);showMessage("Product could not be deleted.","error");return}
+ showMessage("Product deleted.");loadProducts();loadDashboard();
+}
+
+async function addProduct(){
+ if(!requireDB())return;
+ const name=$("productName").value.trim();
+ if(!name){showMessage("Product name is required.","error");return}
+ const r=await db.from("Products").insert({
+  Name:name,
+  Description:$("productDescription").value.trim(),
+  Price:Number($("productPrice").value)||0,
+  Stock:Number($("productStock").value)||0,
+  Category:$("productCategory").value.trim(),
+  "Image url":$("productImage").value.trim()
+ });
+ if(r.error){console.error(r.error);showMessage(r.error.message,"error");return}
+ document.querySelectorAll("#products input,#products textarea").forEach(x=>x.value="");
+ showMessage("Product added successfully.");loadProducts();loadDashboard();
+}
+$("addProductBtn").addEventListener("click",addProduct);
+
+async function loadOrders(){
+ if(!requireDB())return;
+ const b=$("orderList");b.className="loading";b.textContent="Loading...";
+ const r=await db.from("orders").select("*").order("created_at",{ascending:false});
+ if(r.error){b.className="empty";b.textContent="Orders table is not available yet.";return}
+ if(!r.data?.length){b.className="empty";b.textContent="No customer orders yet.";return}
+ b.className="";b.innerHTML="";
+ r.data.forEach(o=>{
+  const d=document.createElement("div");d.className="item";
+  d.innerHTML="<b>🛒 Order #"+esc(o.id)+"</b><p>Customer: "+esc(o.customer_name||o.customer_id||"Customer")+"</p><p>Product: "+esc(o.product_name||"Product")+"</p><p>Quantity: "+esc(o.quantity||1)+"</p><p>Total: <b>$"+Number(o.total_amount??o.total??0).toFixed(2)+"</b></p><p>Status: <span class='status'>"+esc(o.status||"Pending")+"</span></p><select><option>Pending</option><option>Processing</option><option>Shipped</option><option>Delivered</option><option>Cancelled</option></select><button class='action'>Update</button>";
+  const s=d.querySelector("select");s.value=o.status||"Pending";
+  d.querySelector("button").onclick=async()=>{
+   const x=await db.from("orders").update({status:s.value}).eq("id",o.id);
+   if(x.error)showMessage("Order update failed.","error");else{showMessage("Order status updated.");loadOrders()}
+  };
+  b.appendChild(d);
+ });
+}
+
+async function loadMessages(){
+ if(!requireDB())return;
+ const b=$("messageList");b.className="loading";b.textContent="Loading...";
+ const r=await db.from("support_tickets").select("*").order("created_at",{ascending:false});
+ if(r.error){b.className="empty";b.textContent="Messages table is not available yet.";return}
+ if(!r.data?.length){b.className="empty";b.textContent="No customer messages yet.";return}
+ b.className="";b.innerHTML="";
+ r.data.forEach(t=>{
+  const d=document.createElement("div");d.className="item";
+  d.innerHTML="<b>💬 "+esc(t.customer_name||t.customer_id||"Customer")+"</b><p>"+esc(t.message||"")+"</p><p>Status: <span class='status'>"+esc(t.status||"Pending")+"</span></p><textarea>"+esc(t.admin_reply||"")+"</textarea><button class='action green'>Send Reply</button><button class='action red'>Delete</button>";
+  d.querySelector(".green").onclick=async()=>{
+   const reply=d.querySelector("textarea").value.trim();
+   if(!reply){showMessage("Write a reply first.","error");return}
+   const x=await db.from("support_tickets").update({admin_reply:reply,status:"Replied"}).eq("id",t.id);
+   if(x.error)showMessage("Reply failed.","error");else{showMessage("Reply sent.");loadMessages()}
+  };
+  d.querySelector(".red").onclick=async()=>{
+   if(!confirm("Delete this message?"))return;
+   const x=await db.from("support_tickets").delete().eq("id",t.id);
+   if(x.error)showMessage("Delete failed.","error");else{showMessage("Message deleted.");loadMessages();loadDashboard()}
+  };
+  b.appendChild(d);
+ });
+}
+
+async function loadBalances(){
+ if(!requireDB())return;
+ const b=$("balanceList");b.className="loading";b.textContent="Loading...";
+ const r=await db.from("customer_balances").select("*").order("updated_at",{ascending:false});
+ if(r.error){b.className="empty";b.textContent="Balance table is not available yet.";return}
+ if(!r.data?.length){b.className="empty";b.textContent="No customer balances yet.";return}
+ b.className="";b.innerHTML="";
+ r.data.forEach(c=>{
+  const d=document.createElement("div");d.className="item";
+  d.innerHTML="<b>👤 "+esc(c.customer_name||c.customer_id||"Customer")+"</b><p>Current Balance: <b>$"+Number(c.balance||0).toFixed(2)+"</b></p><input type='number' min='0' placeholder='New balance'><button class='action'>Update Balance</button>";
+  d.querySelector("button").onclick=async()=>{
+   const v=Number(d.querySelector("input").value);
+   if(!Number.isFinite(v)||v<0){showMessage("Enter a valid balance.","error");return}
+   const x=await db.from("customer_balances").update({balance:v,updated_at:new Date().toISOString()}).eq("id",c.id);
+   if(x.error)showMessage("Balance update failed.","error");else{showMessage("Balance updated.");loadBalances()}
+  };
+  b.appendChild(d);
+ });
+}
+
+async function loadWithdrawals(){
+ if(!requireDB())return;
+ const b=$("withdrawalList");b.className="loading";b.textContent="Loading...";
+ const r=await db.from("withdrawals").select("*").order("created_at",{ascending:false});
+ if(r.error){b.className="empty";b.textContent="Withdrawal table is not available yet.";return}
+ if(!r.data?.length){b.className="empty";b.textContent="No withdrawal requests.";return}
+ b.className="";b.innerHTML="";
+ r.data.forEach(w=>{
+  const d=document.createElement("div");d.className="item";
+  d.innerHTML="<b>💸 Withdrawal #"+esc(w.id)+"</b><p>Customer: "+esc(w.customer_name||w.customer_id||"Customer")+"</p><p>Amount: <b>$"+Number(w.amount||0).toFixed(2)+"</b></p><p>Method: "+esc(w.method||"")+"</p><p>Account: "+esc(w.account_details||"")+"</p><p>Status: <span class='status'>"+esc(w.status||"Pending")+"</span></p><select><option>Pending</option><option>Approved</option><option>Paid</option><option>Rejected</option></select><button class='action green'>Update</button>";
+  const s=d.querySelector("select");s.value=w.status||"Pending";
+  d.querySelector("button").onclick=async()=>{
+   const x=await db.from("withdrawals").update({status:s.value}).eq("id",w.id);
+   if(x.error)showMessage("Withdrawal update failed.","error");else{showMessage("Withdrawal updated.");loadWithdrawals();loadDashboard()}
+  };
+  b.appendChild(d);
+ });
+}
+
+async function loadKYC(){
+ if(!requireDB())return;
+ const b=$("kycList");b.className="loading";b.textContent="Loading...";
+ const r=await db.from("kyc_requests").select("*").order("created_at",{ascending:false});
+ if(r.error){b.className="empty";b.textContent="KYC table is not available yet.";return}
+ if(!r.data?.length){b.className="empty";b.textContent="No KYC requests.";return}
+ b.className="";b.innerHTML="";
+ r.data.forEach(k=>{
+  const d=document.createElement("div");d.className="item";
+  d.innerHTML="<b>🛡️ KYC #"+esc(k.id)+"</b><p>Customer: "+esc(k.customer_name||k.customer_id||"Customer")+"</p><p>Document: "+esc(k.document_type||"")+"</p><p>Number: "+esc(k.document_number||"")+"</p><p>Status: <span class='status'>"+esc(k.status||"Pending")+"</span></p><select><option>Pending</option><option>Approved</option><option>Rejected</option></select><button class='action green'>Update</button>";
+  const s=d.querySelector("select");s.value=k.status||"Pending";
+  d.querySelector("button").onclick=async()=>{
+   const x=await db.from("kyc_requests").update({status:s.value}).eq("id",k.id);
+   if(x.error)showMessage("KYC update failed.","error");else{showMessage("KYC updated.");loadKYC()}
+  };
+  b.appendChild(d);
+ });
+}
+
+async function loadCustomers(){
+ if(!requireDB())return;
+ const b=$("customerList");b.className="loading";b.textContent="Loading...";
+ const r=await db.from("customer_balances").select("*");
+ if(r.error){b.className="empty";b.textContent="Customers table is not available yet.";return}
+ if(!r.data?.length){b.className="empty";b.textContent="No customers found.";return}
+ b.className="";b.innerHTML="";
+ r.data.forEach(c=>{
+  const d=document.createElement("div");d.className="item";
+  d.innerHTML="<b>👤 "+esc(c.customer_name||"Customer")+"</b><p>Customer ID: "+esc(c.customer_id||"")+"</p><p>Balance: <b>$"+Number(c.balance||0).toFixed(2)+"</b></p>";
+  b.appendChild(d);
+ });
+}
+
+loadSupabase();
+</script>
+</body>
+</html>
