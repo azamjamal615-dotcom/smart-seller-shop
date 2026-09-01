@@ -1,204 +1,1103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Smart Seller Shop - Admin Panel</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Seller Shop - Admin</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-*{box-sizing:border-box}
-@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+*{
+    box-sizing:border-box;
+}
 
 body{
-  margin:0;
-  font-family:'Patrick Hand',Arial,sans-serif;
-  background:#f4f5f7;
-  color:#172033;
-  font-size:15px;
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f5f7;
+    color:#172033;
+    padding-bottom:80px;
 }
-.header{
-  background:#fff;
-  color:#172033;
-  padding:14px 18px;
-  border-bottom:1px solid #e5e7eb;
-  text-align:left;
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-.header:before{
-  content:"▦";
-  width:64px;height:64px;
-  border-radius:20px;
-  background:#7040e8;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:Arial,sans-serif;
-  font-size:34px;
-  flex:none;
-}
-.header h1{margin:0;font-size:32px;line-height:1}
-.header p{margin:5px 0 0;color:#777;font-size:18px;line-height:1}
 
-.container{max-width:900px;margin:auto;padding:14px}
+/* HEADER */
+
+.header{
+    background:white;
+    padding:16px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    border-bottom:1px solid #ddd;
+}
+
+.header-icon{
+    width:58px;
+    height:58px;
+    background:#7040e8;
+    color:white;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.header h1{
+    margin:0;
+    font-size:22px;
+}
+
+.header p{
+    margin:4px 0 0;
+    color:#777;
+    font-size:13px;
+}
+
+/* MAIN */
+
+.container{
+    max-width:700px;
+    margin:auto;
+    padding:14px;
+}
+
+/* PAGE */
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+/* WELCOME */
+
+.welcome{
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    margin-bottom:12px;
+    box-shadow:0 2px 10px #ddd;
+}
+
+.welcome small{
+    color:#777;
+}
+
+.welcome h2{
+    margin:7px 0 0;
+    font-size:24px;
+}
+
+/* BALANCE */
+
+.balance-card{
+    background:linear-gradient(135deg,#173f66,#315d83);
+    color:white;
+    border-radius:22px;
+    padding:22px;
+    margin-bottom:12px;
+}
+
+.balance-label{
+    font-size:13px;
+    letter-spacing:2px;
+    opacity:.8;
+}
+
+.balance{
+    font-size:34px;
+    font-weight:bold;
+    margin:6px 0 18px;
+}
+
+.balance-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.balance-box{
+    background:rgba(255,255,255,.12);
+    border-radius:14px;
+    padding:12px;
+}
+
+.balance-box span{
+    display:block;
+    font-size:12px;
+    opacity:.8;
+}
+
+.balance-box b{
+    font-size:18px;
+}
+
+/* STATS */
 
 .stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
-  margin-bottom:10px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:12px;
 }
+
 .stat{
-  text-align:left;
-  padding:12px 13px;
-  background:#fff;
-  border-radius:14px;
-  border:1px solid #e5e7eb;
-  box-shadow:0 2px 8px rgba(0,0,0,.06);
+    background:white;
+    border-radius:15px;
+    padding:16px;
+    box-shadow:0 2px 8px #ddd;
 }
-.stat b{font-size:22px;display:block;line-height:1.1}
-.stat span{display:block;color:#777;font-size:13px;margin-top:3px}
 
-.tabs{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-bottom:12px;
+.stat b{
+    font-size:23px;
+    display:block;
 }
-.tabs button{
-  border:1px solid #e5e7eb;
-  border-radius:10px;
-  padding:11px 7px;
-  background:#fff;
-  color:#222;
-  box-shadow:0 2px 7px rgba(0,0,0,.07);
-  cursor:pointer;
-  font-family:inherit;
-  font-size:14px;
-}
-.tabs button.active{background:#7040e8;color:#fff;border-color:#7040e8}
 
-.page{display:none}
-.page.active{display:block}
+.stat span{
+    color:#777;
+    font-size:13px;
+}
+
+/* CARD */
 
 .card{
-  background:#fff;
-  border-radius:17px;
-  padding:15px;
-  margin-bottom:12px;
-  border:1px solid #e5e7eb;
-  box-shadow:0 3px 13px rgba(0,0,0,.07);
+    background:white;
+    padding:18px;
+    border-radius:18px;
+    margin-bottom:12px;
+    box-shadow:0 2px 10px #ddd;
 }
-.card h2{margin:0 0 10px;font-size:22px}
+
+.card h2{
+    margin-top:0;
+    font-size:20px;
+}
+
+/* INPUTS */
+
+label{
+    display:block;
+    margin-top:10px;
+    font-size:14px;
+    font-weight:bold;
+}
 
 input,select,textarea{
-  width:100%;
-  padding:10px 11px;
-  margin:4px 0 8px;
-  border:1px solid #ddd;
-  border-radius:9px;
-  font-family:inherit;
-  font-size:15px;
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
 }
-textarea{min-height:80px;resize:vertical}
 
-button.action{
-  width:100%;
-  padding:10px;
-  border:0;
-  border-radius:9px;
-  background:#7040e8;
-  color:#fff;
-  cursor:pointer;
-  margin-top:5px;
-  font-family:inherit;
-  font-size:15px;
+textarea{
+    min-height:100px;
 }
-.danger{background:#e53935!important}
-.green{background:#08b978!important}
-.orange{background:#ff9800!important}
-.gray{background:#777!important}
 
-.item{
-  border:1px solid #e1e4e8;
-  border-radius:12px;
-  padding:11px;
-  margin:7px 0;
-  background:#fafafa;
+/* BUTTON */
+
+.btn{
+    width:100%;
+    border:0;
+    padding:12px;
+    margin-top:10px;
+    border-radius:10px;
+    background:#7040e8;
+    color:white;
+    font-size:15px;
+    cursor:pointer;
 }
-.item p{margin:6px 0}
-.row{display:flex;justify-content:space-between;gap:8px;align-items:center}
-.reply{background:#ecfdf5;padding:9px;border-radius:9px;margin-top:7px}
-.muted{color:#777;font-size:12px}
-.empty{text-align:center;color:#777;padding:18px}
-.badge{padding:4px 8px;border-radius:15px;background:#fff3cd;color:#856404;font-size:11px}
-.error{background:#fee2e2;color:#991b1b;padding:9px;border-radius:9px}
-.success{background:#dcfce7;color:#166534;padding:9px;border-radius:9px}
+
+.btn.red{
+    background:#e53935;
+}
+
+.btn.green{
+    background:#16a34a;
+}
+
+/* PRODUCT */
+
+.product{
+    border:1px solid #ddd;
+    padding:12px;
+    border-radius:13px;
+    margin-top:10px;
+}
+
+.product img{
+    width:100%;
+    max-height:180px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.product h3{
+    margin:8px 0 5px;
+}
+
+.product p{
+    margin:5px 0;
+    color:#666;
+}
+
+/* WITHDRAWAL */
+
+.withdrawal{
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:13px;
+    margin-top:10px;
+}
+
+.pending{
+    color:#b77900;
+    font-weight:bold;
+}
+
+.approved{
+    color:#16803c;
+    font-weight:bold;
+}
+
+.rejected{
+    color:#d62828;
+    font-weight:bold;
+}
+
+/* KYC */
+
+.kyc-status{
+    background:#fff7d6;
+    color:#8a6500;
+    padding:10px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+/* MESSAGE */
+
+.message{
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:12px;
+    display:none;
+}
+
+.success{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.error{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+/* BOTTOM MENU */
+
+.bottom-menu{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:72px;
+    background:white;
+    border-top:1px solid #ddd;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    z-index:9999;
+    box-shadow:0 -2px 12px #ddd;
+}
+
+.bottom-menu button{
+    border:0;
+    background:white;
+    color:#777;
+    font-size:11px;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+}
+
+.bottom-menu button span{
+    font-size:22px;
+}
+
+.bottom-menu button.active{
+    color:#7040e8;
+    font-weight:bold;
+}
+
+.empty{
+    text-align:center;
+    padding:20px;
+    color:#777;
+}
+
+.loading{
+    text-align:center;
+    padding:20px;
+    color:#777;
+}
+
+/* MOBILE */
 
 @media(max-width:600px){
-  body{font-size:14px}
-  .header{padding:11px 14px;gap:10px}
-  .header:before{width:48px;height:48px;border-radius:15px;font-size:26px}
-  .header h1{font-size:25px}
-  .header p{font-size:14px}
-  .container{padding:10px}
-  .stats{grid-template-columns:repeat(2,1fr);gap:7px}
-  .stat{padding:10px;border-radius:12px}
-  .stat b{font-size:20px}
-  .stat span{font-size:12px}
-  .tabs{grid-template-columns:repeat(2,1fr);gap:7px}
-  .tabs button{padding:9px 5px;font-size:13px}
-  .card{padding:12px;border-radius:15px}
-  .card h2{font-size:20px}
+
+    .header h1{
+        font-size:20px;
+    }
+
+    .header-icon{
+        width:52px;
+        height:52px;
+        font-size:24px;
+    }
+
+    .container{
+        padding:10px;
+    }
+
+    .balance{
+        font-size:31px;
+    }
+
 }
+
 </style>
+
 </head>
+
 <body>
-<div class="header"><h1>Smart Seller Shop</h1><p>Admin Panel</p></div>
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <div class="header-icon">
+        ▦
+    </div>
+
+    <div>
+        <h1>Smart Seller Shop</h1>
+        <p>Admin Panel</p>
+    </div>
+
+</div>
+
+
 <div class="container">
-<div class="card" style="padding:13px 15px;margin-bottom:10px;">
-  <div style="font-size:13px;color:#777;">WELCOME BACK</div>
-  <div style="font-size:23px;font-weight:bold;line-height:1.1;">Smart Seller Shop Admin</div>
-</div>
-<div class="stats"><div class="stat"><b id="productCount">0</b><span>Products</span></div><div class="stat"><b id="messageCount">0</b><span>Messages</span></div><div class="stat"><b id="orderCount">0</b><span>Orders</span></div><div class="stat"><b id="withdrawCount">0</b><span>Withdrawals</span></div></div>
-<div class="tabs">
-<button class="active" onclick="page('products',this)">📦 Products</button><button onclick="page('messages',this)">💬 Messages</button><button onclick="page('orders',this)">🛒 Orders</button><button onclick="page('withdrawals',this)">💳 Withdrawals</button><button onclick="page('kyc',this)">🛡️ KYC</button><button onclick="page('customers',this)">👥 Customers</button>
+
+<div id="messageBox" class="message"></div>
+
+
+<!-- ================= BALANCE ================= -->
+
+<div id="balancePage" class="page active">
+
+    <div class="welcome">
+        <small>WELCOME BACK</small>
+        <h2>Smart Seller Shop Admin</h2>
+    </div>
+
+
+    <div class="balance-card">
+
+        <div class="balance-label">
+            TOTAL BALANCE
+        </div>
+
+        <div class="balance">
+            $<span id="totalBalance">0.00</span>
+        </div>
+
+
+        <div class="balance-grid">
+
+            <div class="balance-box">
+                <span>Revenue</span>
+                <b>$<span id="revenue">0.00</span></b>
+            </div>
+
+            <div class="balance-box">
+                <span>Withdrawn</span>
+                <b>$<span id="withdrawn">0.00</span></b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <b id="productCount">0</b>
+            <span>Products</span>
+        </div>
+
+        <div class="stat">
+            <b id="orderCount">0</b>
+            <span>Orders</span>
+        </div>
+
+        <div class="stat">
+            <b id="withdrawalCount">0</b>
+            <span>Withdrawals</span>
+        </div>
+
+        <div class="stat">
+            <b id="customerCount">0</b>
+            <span>Customers</span>
+        </div>
+
+    </div>
+
 </div>
 
-<section id="products" class="page active">
-<div class="card"><h2>➕ Add / Edit Product</h2><input id="pName" placeholder="Product Name"><textarea id="pDesc" placeholder="Description"></textarea><input id="pPrice" type="number" step="0.01" placeholder="Price"><input id="pStock" type="number" placeholder="Stock"><select id="pCat"><option>Phone</option><option>Laptop</option><option>Accessories</option><option>Other</option></select><input id="pImage" placeholder="Image URL"><button class="action" onclick="saveProduct()">Save Product</button><button id="cancelEdit" class="action gray" style="display:none" onclick="cancelEdit()">Cancel Edit</button></div>
-<div class="card"><h2>📦 Products</h2><div id="productsList">Loading...</div></div>
-</section>
 
-<section id="messages" class="page"><div class="card"><h2>💬 Customer Messages</h2><div id="messagesList">Loading...</div></div></section>
-<section id="orders" class="page"><div class="card"><h2>🛒 Customer Orders</h2><div id="ordersList">Loading...</div></div></section>
-<section id="withdrawals" class="page"><div class="card"><h2>💳 Withdrawal Requests</h2><div id="withdrawalsList">Loading...</div></div></section>
-<section id="kyc" class="page"><div class="card"><h2>🛡️ KYC Verification Requests</h2><div id="kycList">Loading...</div></div></section>
-<section id="customers" class="page"><div class="card"><h2>👥 Customer Balances</h2><div class="muted">Yahan customer balance manage kar sakte hain.</div><div id="customersList">Loading...</div></div></section>
+<!-- ================= WITHDRAWAL ================= -->
+
+<div id="withdrawalPage" class="page">
+
+    <div class="card">
+
+        <h2>💳 Withdrawal</h2>
+
+        <p>
+            Customer withdrawal requests yahan manage hongi.
+        </p>
+
+        <div id="withdrawals">
+
+            <div class="loading">
+                Withdrawals loading...
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
+
+
+<!-- ================= KYC ================= -->
+
+<div id="kycPage" class="page">
+
+    <div class="card">
+
+        <h2>🛡️ KYC Verification</h2>
+
+        <p>
+            Customer KYC verification requests yahan manage hongi.
+        </p>
+
+        <div id="kycList">
+
+            <div class="empty">
+                No KYC requests yet.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<div id="productsPage" class="page">
+
+    <div class="card">
+
+        <h2>📦 Add Product</h2>
+
+        <label>Product Name</label>
+        <input id="name" placeholder="Product name">
+
+        <label>Description</label>
+        <textarea id="description"
+        placeholder="Product description"></textarea>
+
+        <label>Price</label>
+        <input id="price" type="number"
+        step="0.01" placeholder="100">
+
+        <label>Stock</label>
+        <input id="stock" type="number"
+        placeholder="10">
+
+        <label>Category</label>
+        <select id="category">
+            <option>Phone</option>
+            <option>Laptop</option>
+            <option>Accessories</option>
+            <option>Other</option>
+        </select>
+
+        <label>Image URL</label>
+        <input id="image"
+        placeholder="https://example.com/image.jpg">
+
+        <button class="btn"
+        onclick="saveProduct()">
+            ➕ Add Product
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>📦 Products</h2>
+
+        <div id="products">
+
+            <div class="loading">
+                Products loading...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- ================= BOTTOM MENU ================= -->
+
+<div class="bottom-menu">
+
+    <button
+        class="active"
+        onclick="showPage('balancePage',this)">
+
+        <span>💰</span>
+        Balance
+    </button>
+
+
+    <button
+        onclick="showPage('withdrawalPage',this)">
+
+        <span>💳</span>
+        Withdrawal
+    </button>
+
+
+    <button
+        onclick="showPage('kycPage',this)">
+
+        <span>🛡️</span>
+        KYC
+    </button>
+
+
+    <button
+        onclick="showPage('productsPage',this)">
+
+        <span>📦</span>
+        Products
+    </button>
+
+</div>
+
 
 <script>
-const URL="https://cgrwiwzqiusvjibpjzdv.supabase.co",KEY="sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV",db=supabase.createClient(URL,KEY);
-let editId=null;
-const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c])),money=v=>Number(v||0).toFixed(2);
-function page(id,b){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));if(b)b.classList.add("active");({products:loadProducts,messages:loadMessages,orders:loadOrders,withdrawals:loadWithdrawals,kyc:loadKyc,customers:loadCustomers}[id]||loadProducts)()}
-async function loadProducts(){const {data,error}=await db.from("Products").select("*").order("Id",{ascending:false});productCount.textContent=(data||[]).length;if(error){productsList.innerHTML='<div class="error">'+esc(error.message)+'</div>';return}productsList.innerHTML=(data||[]).map(p=>{const id=p.Id??p.id,n=p.Name??p.name??"",pr=Number(p.Price??p.price??0),s=p.Stock??p.stock??0;return `<div class="item"><b>${esc(n)}</b><p>$${money(pr)} · Stock ${esc(s)}</p><button class="action orange" onclick="editProduct('${String(id)}')">✏️ Edit</button><button class="action danger" onclick="deleteProduct('${String(id)}')">🗑️ Delete</button></div>`}).join("")||'<div class="empty">No products.</div>'}
-async function saveProduct(){const obj={"Name":pName.value.trim(),"Description":pDesc.value.trim()||null,"Price":Number(pPrice.value||0),"Stock":Number(pStock.value||0),"Category":pCat.value,"Image url":pImage.value.trim()||null};if(!obj.Name){alert("Product name required.");return}let r=editId===null?await db.from("Products").insert(obj):await db.from("Products").update(obj).eq("Id",editId);if(r.error){alert(r.error.message);return}cancelEdit();loadProducts()}
-async function editProduct(id){const {data,error}=await db.from("Products").select("*").eq("Id",id).maybeSingle();if(error||!data){alert("Product not found.");return}editId=data.Id??data.id;pName.value=data.Name??data.name??"";pDesc.value=data.Description??data.description??"";pPrice.value=data.Price??data.price??"";pStock.value=data.Stock??data.stock??"";pCat.value=data.Category??data.category??"Other";pImage.value=data["Image url"]??data.image_url??"";cancelEdit.style.display="block"}
-function cancelEdit(){editId=null;pName.value=pDesc.value=pPrice.value=pStock.value=pImage.value="";pCat.value="Phone";cancelEdit.style.display="none"}
-async function deleteProduct(id){if(!confirm("Delete product?"))return;const {error}=await db.from("Products").delete().eq("Id",id);if(error)alert(error.message);else loadProducts()}
-async function loadMessages(){const {data,error}=await db.from("support_tickets").select("*").order("created_at",{ascending:false});messageCount.textContent=(data||[]).length;if(error){messagesList.innerHTML='<div class="error">'+esc(error.message)+'</div>';return}messagesList.innerHTML=(data||[]).map(m=>`<div class="item"><b>Customer ID:</b> ${esc(m.customer_id)}<div class="muted">${m.created_at?new Date(m.created_at).toLocaleString():""}</div><p>${esc(m.message)}</p>${m.admin_reply?`<div class="reply"><b>Admin reply:</b><br>${esc(m.admin_reply)}</div>`:""}<textarea id="reply_${esc(m.id)}" placeholder="Write reply..."></textarea><button class="action" onclick="reply('${String(m.id)}')">↩️ Send Reply</button><button class="action danger" onclick="delMsg('${String(m.id)}')">🗑️ Delete Message</button></div>`).join("")||'<div class="empty">No messages.</div>'}
-async function reply(id){const t=document.getElementById("reply_"+id);if(!t.value.trim())return;const {error}=await db.from("support_tickets").update({admin_reply:t.value.trim(),status:"Replied"}).eq("id",id);if(error)alert(error.message);else loadMessages()}
-async function delMsg(id){if(!confirm("Delete this message?"))return;const {error}=await db.from("support_tickets").delete().eq("id",id);if(error)alert(error.message);else loadMessages()}
-async function loadOrders(){const {data,error}=await db.from("orders").select("*").order("created_at",{ascending:false});orderCount.textContent=(data||[]).length;if(error){ordersList.innerHTML='<div class="error">'+esc(error.message)+'</div>';return}ordersList.innerHTML=(data||[]).map(o=>`<div class="item"><div class="row"><b>${esc(o.id)}</b><span class="badge">${esc(o.status)}</span></div><p>Customer: ${esc(o.customer_id)}<br>Total: $${money(o.total)}</p><div class="muted">${o.created_at?new Date(o.created_at).toLocaleString():""}</div><select id="os_${esc(o.id)}"><option>Pending</option><option>Processing</option><option>Shipped</option><option>Delivered</option><option>Cancelled</option></select><button class="action" onclick="updateOrder('${String(o.id)}')">Save Order Status</button></div>`).join("")||'<div class="empty">No orders.</div>'}
-async function updateOrder(id){const s=document.getElementById("os_"+id).value;const {error}=await db.from("orders").update({status:s}).eq("id",id);if(error)alert(error.message);else loadOrders()}
-async function loadWithdrawals(){const {data,error}=await db.from("withdrawal_requests").select("*").order("created_at",{ascending:false});withdrawCount.textContent=(data||[]).length;if(error){withdrawalsList.innerHTML='<div class="error">'+esc(error.message)+'</div>';return}withdrawalsList.innerHTML=(data||[]).map(r=>`<div class="item"><div class="row"><b>$${money(r.amount)}</b><span class="badge">${esc(r.status)}</span></div><p>Customer: ${esc(r.customer_id)}<br>${esc(r.method)}<br>${esc(r.account_details)}</p><input id="wn_${r.id}" placeholder="Admin note" value="${esc(r.admin_note||"")}"><select id="ws_${r.id}"><option>Pending</option><option>Approved</option><option>Processing</option><option>Paid</option><option>Rejected</option></select><button class="action green" onclick="updateWithdrawal(${r.id})">Save Withdrawal</button></div>`).join("")||'<div class="empty">No withdrawal requests.</div>'}
-async function updateWithdrawal(id){const s=document.getElementById("ws_"+id).value,n=document.getElementById("wn_"+id).value;const {error}=await db.from("withdrawal_requests").update({status:s,admin_note:n,updated_at:new Date().toISOString()}).eq("id",id);if(error)alert(error.message);else loadWithdrawals()}
-async function loadKyc(){const {data,error}=await db.from("kyc_verifications").select("*").order("created_at",{ascending:false});if(error){kycList.innerHTML='<div class="error">'+esc(error.message)+'</div>';return}kycList.innerHTML=(data||[]).map(k=>`<div class="item"><b>Customer:</b> ${esc(k.customer_id)}<p>Name: ${esc(k.full_name)}<br>DOB: ${esc(k.date_of_birth)}<br>Country: ${esc(k.country)}<br>ID Type: ${esc(k.id_type)}<br>ID Number: ${esc(k.id_number)}</p><span class="badge">${esc(k.status)}</span><input id="kn_${esc(k.customer_id)}" placeholder="Admin note" value="${esc(k.admin_note||"")}"><select id="ks_${esc(k.customer_id)}"><option>Pending</option><option>Approved</option><option>Rejected</option></select><button class="action green" onclick="updateKyc('${String(k.customer_id)}')">Save KYC Status</button></div>`).join("")||'<div class="empty">No KYC requests.</div>'}
-async function updateKyc(id){const s=document.getElementById("ks_"+id).value,n=document.getElementById("kn_"+id).value;const {error}=await db.from("kyc_verifications").update({status:s,admin_note:n,updated_at:new Date().toISOString()}).eq("customer_id",id);if(error)alert(error.message);else loadKyc()}
-async function loadCustomers(){const {data,error}=await db.from("customer_accounts").select("*").order("created_at",{ascending:false});if(error){customersList.innerHTML='<div class="error">'+esc(error.message)+'</div>';return}customersList.innerHTML=(data||[]).map(c=>`<div class="item"><b>${esc(c.customer_id)}</b><p>Balance: $${money(c.balance)}<br>Withdrawn: $${money(c.withdrawn)}<br>Status: ${esc(c.status)}</p><input id="bal_${esc(c.customer_id)}" type="number" step="0.01" value="${money(c.balance)}"><button class="action green" onclick="updateBalance('${String(c.customer_id)}')">Save Balance</button></div>`).join("")||'<div class="empty">No customers yet.</div>'}
-async function updateBalance(id){const v=Number(document.getElementById("bal_"+id).value||0);const {error}=await db.from("customer_accounts").update({balance:v,updated_at:new Date().toISOString()}).eq("customer_id",id);if(error)alert(error.message);else alert("Balance updated ✅")}
+
+/* ================= SUPABASE ================= */
+
+const SUPABASE_URL =
+"https://cgrwiwzqiusvjibpjzdv.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* ================= NAVIGATION ================= */
+
+function showPage(id,button){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(function(page){
+
+        page.classList.remove("active");
+
+    });
+
+    const page =
+    document.getElementById(id);
+
+    if(page){
+        page.classList.add("active");
+    }
+
+    document
+    .querySelectorAll(".bottom-menu button")
+    .forEach(function(btn){
+
+        btn.classList.remove("active");
+
+    });
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    if(id==="productsPage"){
+        loadProducts();
+    }
+
+    if(id==="withdrawalPage"){
+        loadWithdrawals();
+    }
+
+}
+
+
+/* ================= MESSAGE ================= */
+
+function showMessage(text,type){
+
+    const box =
+    document.getElementById("messageBox");
+
+    box.innerText = text;
+
+    box.className =
+    "message " + type;
+
+    box.style.display = "block";
+
+    setTimeout(function(){
+
+        box.style.display = "none";
+
+    },5000);
+
+}
+
+
+/* ================= PRODUCTS ================= */
+
+async function loadProducts(){
+
+    const box =
+    document.getElementById("products");
+
+    box.innerHTML =
+    '<div class="loading">Products loading...</div>';
+
+    const result =
+    await supabaseClient
+    .from("Products")
+    .select("*");
+
+    if(result.error){
+
+        console.error(result.error);
+
+        box.innerHTML =
+        '<div class="empty">Products could not be loaded.</div>';
+
+        return;
+
+    }
+
+    const data =
+    result.data || [];
+
+    document.getElementById(
+        "productCount"
+    ).innerText =
+    data.length;
+
+    if(data.length===0){
+
+        box.innerHTML =
+        '<div class="empty">No products yet.</div>';
+
+        return;
+
+    }
+
+    box.innerHTML="";
+
+
+    data.forEach(function(product){
+
+        const id =
+        product.Id ??
+        product.id;
+
+        const name =
+        product.Name ??
+        product.name ??
+        "Product";
+
+        const description =
+        product.Description ??
+        product.description ??
+        "";
+
+        const price =
+        Number(
+            product.Price ??
+            product.price ??
+            0
+        );
+
+        const stock =
+        Number(
+            product.Stock ??
+            product.stock ??
+            0
+        );
+
+        const image =
+        product["Image url"] ??
+        product.image ??
+        product.image_url ??
+        "";
+
+        const div =
+        document.createElement("div");
+
+        div.className="product";
+
+        if(image){
+
+            const img =
+            document.createElement("img");
+
+            img.src=image;
+
+            img.onerror=function(){
+
+                this.style.display="none";
+
+            };
+
+            div.appendChild(img);
+
+        }
+
+        div.innerHTML +=
+        "<h3>"+escapeHTML(name)+"</h3>" +
+        "<p>"+escapeHTML(description)+"</p>" +
+        "<p><b>Price:</b> $"+
+        price.toFixed(2)+"</p>" +
+        "<p><b>Stock:</b> "+
+        stock+"</p>" +
+
+        "<button class='btn red' " +
+        "onclick='deleteProduct(\""+
+        id+"\")'>" +
+        "🗑️ Delete</button>";
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* ================= ADD PRODUCT ================= */
+
+async function saveProduct(){
+
+    const name =
+    document.getElementById("name")
+    .value.trim();
+
+    const description =
+    document.getElementById("description")
+    .value.trim();
+
+    const price =
+    document.getElementById("price")
+    .value;
+
+    const stock =
+    document.getElementById("stock")
+    .value;
+
+    const category =
+    document.getElementById("category")
+    .value;
+
+    const image =
+    document.getElementById("image")
+    .value.trim();
+
+
+    if(!name || price==="" || stock===""){
+
+        showMessage(
+            "Name, Price aur Stock zaroori hain.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const productData = {
+
+        "Name":name,
+
+        "Description":
+        description || null,
+
+        "Price":
+        Number(price),
+
+        "Stock":
+        Number(stock),
+
+        "Category":
+        category,
+
+        "Image url":
+        image || null
+
+    };
+
+
+    const result =
+    await supabaseClient
+    .from("Products")
+    .insert([productData]);
+
+
+    if(result.error){
+
+        console.error(result.error);
+
+        showMessage(
+            "Product save nahi hua: "+
+            result.error.message,
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    showMessage(
+        "Product successfully added ✅",
+        "success"
+    );
+
+
+    document.getElementById("name").value="";
+    document.getElementById("description").value="";
+    document.getElementById("price").value="";
+    document.getElementById("stock").value="";
+    document.getElementById("image").value="";
+
+
+    loadProducts();
+
+}
+
+
+/* ================= DELETE PRODUCT ================= */
+
+async function deleteProduct(id){
+
+    if(!confirm(
+        "Kya aap ye product delete karna chahte hain?"
+    )){
+        return;
+    }
+
+
+    const result =
+    await supabaseClient
+    .from("Products")
+    .delete()
+    .eq("Id",id);
+
+
+    if(result.error){
+
+        showMessage(
+            "Product delete nahi hua: "+
+            result.error.message,
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    showMessage(
+        "Product delete ho gaya ✅",
+        "success"
+    );
+
+    loadProducts();
+
+}
+
+
+/* ================= WITHDRAWALS ================= */
+
+async function loadWithdrawals(){
+
+    const box =
+    document.getElementById("withdrawals");
+
+    box.innerHTML =
+    '<div class="loading">Withdrawals loading...</div>';
+
+
+    const result =
+    await supabaseClient
+    .from("withdrawals")
+    .select("*")
+    .order("created_at",{ascending:false});
+
+
+    if(result.error){
+
+        box.innerHTML =
+        '<div class="empty">Withdrawal table abhi available nahi hai.</div>';
+
+        return;
+
+    }
+
+
+    const data =
+    result.data || [];
+
+
+    document.getElementById(
+        "withdrawalCount"
+    ).innerText =
+    data.length;
+
+
+    if(!data.length){
+
+        box.innerHTML =
+        '<div class="empty">No withdrawal requests.</div>';
+
+        return;
+
+    }
+
+
+    box.innerHTML="";
+
+
+    data.forEach(function(item){
+
+        const div =
+        document.createElement("div");
+
+        div.className="withdrawal";
+
+        div.innerHTML =
+        "<b>Customer:</b> "+
+        escapeHTML(
+            item.customer_id ||
+            item.customerId ||
+            "Customer"
+        ) +
+
+        "<br><br><b>Amount:</b> $"+
+        Number(item.amount || 0).toFixed(2) +
+
+        "<br><br><b>Status:</b> "+
+        escapeHTML(
+            item.status || "pending"
+        );
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* ================= KYC ================= */
+
+async function loadKYC(){
+
+    return;
+
+}
+
+
+/* ================= STATS ================= */
+
+async function loadStats(){
+
+    const products =
+    await supabaseClient
+    .from("Products")
+    .select("*",{count:"exact",head:true});
+
+    if(!products.error){
+
+        document.getElementById(
+            "productCount"
+        ).innerText =
+        products.count || 0;
+
+    }
+
+}
+
+
+/* ================= ESCAPE ================= */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ================= START ================= */
+
 loadProducts();
+loadStats();
+
 </script>
-</body></html>
+
+</body>
+</html>
