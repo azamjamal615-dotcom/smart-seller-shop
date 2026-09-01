@@ -10,228 +10,148 @@
 
 <style>
 *{
-  box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f3f4f6;
-  color:#222;
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f3f4f6;
+    color:#222;
 }
 
 .header{
-  background:#111827;
-  color:white;
-  padding:20px 15px;
-  text-align:center;
-  position:sticky;
-  top:0;
-  z-index:100;
+    background:#111827;
+    color:white;
+    padding:22px 15px;
+    text-align:center;
 }
 
 .header h1{
-  margin:0;
-  font-size:27px;
+    margin:0;
+    font-size:28px;
 }
 
 .header p{
-  margin:6px 0 0;
-  color:#ccc;
+    margin:7px 0 0;
+    color:#ccc;
 }
 
 .container{
-  max-width:900px;
-  margin:auto;
-  padding:15px;
+    max-width:900px;
+    margin:auto;
+    padding:15px;
 }
 
-.topbar{
-  display:flex;
-  gap:10px;
-  margin-bottom:18px;
+.top{
+    background:white;
+    padding:18px;
+    border-radius:15px;
+    margin-bottom:18px;
+    box-shadow:0 3px 15px #ddd;
 }
 
-.topbar button{
-  flex:1;
-  border:0;
-  border-radius:10px;
-  padding:13px;
-  font-size:16px;
-  cursor:pointer;
-}
-
-.cartBtn{
-  background:#111827;
-  color:white;
-}
-
-.serviceBtn{
-  background:#1877f2;
-  color:white;
-}
-
-.card{
-  background:white;
-  padding:18px;
-  margin-bottom:18px;
-  border-radius:16px;
-  box-shadow:0 3px 15px rgba(0,0,0,0.08);
-}
-
-.sectionTitle{
-  margin:0 0 15px;
+.search{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
 }
 
 .products{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
 }
 
 .product{
-  background:white;
-  border:1px solid #e5e7eb;
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 3px 12px rgba(0,0,0,0.06);
+    background:white;
+    border-radius:15px;
+    padding:15px;
+    box-shadow:0 3px 15px #ddd;
 }
 
 .product img{
-  width:100%;
-  height:210px;
-  object-fit:cover;
-  display:block;
-  background:#eee;
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:10px;
 }
 
-.productInfo{
-  padding:14px;
-}
-
-.product h3{
-  margin:0 0 7px;
-  font-size:19px;
+.product h2{
+    font-size:20px;
+    margin:12px 0 7px;
 }
 
 .description{
-  color:#666;
-  font-size:14px;
-  min-height:38px;
-  margin:7px 0;
+    color:#666;
+    font-size:14px;
+    min-height:20px;
 }
 
 .price{
-  font-size:20px;
-  font-weight:bold;
-  margin:10px 0;
+    font-size:21px;
+    font-weight:bold;
+    margin:10px 0;
 }
 
 .stock{
-  color:#555;
-  font-size:14px;
+    color:#555;
+    margin-bottom:10px;
 }
 
 .category{
-  display:inline-block;
-  background:#eef2ff;
-  padding:5px 9px;
-  border-radius:8px;
-  font-size:12px;
-  margin-top:7px;
+    display:inline-block;
+    background:#e5e7eb;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:13px;
+    margin-bottom:10px;
 }
 
-.addBtn{
-  width:100%;
-  padding:12px;
-  border:0;
-  border-radius:9px;
-  background:#1877f2;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-  margin-top:12px;
+button{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    background:#1877f2;
+    color:white;
+    font-size:16px;
 }
 
-.addBtn:disabled{
-  background:#999;
-  cursor:not-allowed;
+.service{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    background:#16a34a;
+    color:white;
+    padding:15px;
+    border-radius:10px;
+    text-decoration:none;
 }
 
-.loading{
-  text-align:center;
-  padding:30px;
-  color:#777;
-}
-
-.error{
-  background:#fee2e2;
-  color:#991b1b;
-  padding:14px;
-  border-radius:10px;
-  margin-bottom:15px;
-}
-
+.loading,
 .empty{
-  text-align:center;
-  padding:30px;
-  color:#777;
-}
-
-.cartItem{
-  border-bottom:1px solid #ddd;
-  padding:12px 0;
-}
-
-.cartItem:last-child{
-  border-bottom:0;
-}
-
-.cartItem strong{
-  display:block;
-  margin-bottom:5px;
-}
-
-.removeBtn{
-  background:#e53935;
-  color:white;
-  border:0;
-  padding:7px 10px;
-  border-radius:7px;
-  margin-top:7px;
-}
-
-.total{
-  font-size:20px;
-  font-weight:bold;
-  margin-top:15px;
-}
-
-.serviceLink{
-  display:block;
-  text-align:center;
-  text-decoration:none;
-  background:#1877f2;
-  color:white;
-  padding:14px;
-  border-radius:10px;
-  font-size:17px;
+    background:white;
+    padding:25px;
+    text-align:center;
+    border-radius:15px;
 }
 
 @media(max-width:600px){
 
-  .products{
-    grid-template-columns:1fr;
-  }
+    .products{
+        grid-template-columns:1fr;
+    }
 
-  .product img{
-    height:230px;
-  }
+    .product img{
+        height:230px;
+    }
 
-  .header h1{
-    font-size:24px;
-  }
-
+    .header h1{
+        font-size:25px;
+    }
 }
 </style>
 </head>
@@ -239,573 +159,291 @@ body{
 <body>
 
 <div class="header">
-  <h1>Smart Seller Shop</h1>
-  <p>Online Shopping</p>
+    <h1>Smart Seller Shop</h1>
+    <p>Online Shopping</p>
 </div>
 
 <div class="container">
 
-  <!-- TOP BUTTONS -->
-  <div class="topbar">
-
-    <button class="cartBtn" onclick="showCart()">
-      🛒 Cart (<span id="cartCount">0</span>)
-    </button>
-
-    <button class="serviceBtn" onclick="goToService()">
-      💬 Customer Service
-    </button>
-
-  </div>
-
-
-  <!-- MESSAGE -->
-  <div id="errorBox"></div>
-
-
-  <!-- PRODUCTS -->
-  <div class="card">
-
-    <h2 class="sectionTitle">
-      🛍️ Products
-    </h2>
+    <div class="top">
+        <input
+            id="search"
+            class="search"
+            type="text"
+            placeholder="🔎 Search product..."
+            oninput="filterProducts()"
+        >
+    </div>
 
     <div id="products" class="products">
-
-      <div class="loading">
-        Products loading...
-      </div>
-
+        <div class="loading">
+            Products loading...
+        </div>
     </div>
 
-  </div>
-
-
-  <!-- CART -->
-  <div class="card" id="cartBox" style="display:none">
-
-    <h2 class="sectionTitle">
-      🛒 Your Cart
-    </h2>
-
-    <div id="cartItems"></div>
-
-    <div id="cartTotal" class="total">
-      Total: $0.00
-    </div>
-
-    <br>
-
-    <a class="serviceLink" href="customer-service.html">
-      💳 Payment / Customer Service
+    <a class="service" href="customer-service.html">
+        💬 Customer Service
     </a>
-
-  </div>
 
 </div>
 
-
 <script>
 
-/* =====================================================
-   SUPABASE CONNECTION
-===================================================== */
+/* ================================
+   SUPABASE
+================================ */
 
 const SUPABASE_URL =
-  "https://cgrwiwzqiusvjibpjzdv.supabase.co";
+"https://cgrwiwzqiusvjibpjzdv.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
+"sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
 
 const supabaseClient =
-  supabase.createClient(
+supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
-  );
+);
 
 
-/* =====================================================
+/* ================================
    VARIABLES
-===================================================== */
+================================ */
 
 let products = [];
 
-let cart =
-  JSON.parse(
-    localStorage.getItem("smartSellerCart")
-  ) || [];
 
-
-/* =====================================================
-   HTML SECURITY
-===================================================== */
-
-function escapeHTML(value){
-
-  return String(value ?? "")
-
-    .replace(/&/g,"&amp;")
-
-    .replace(/</g,"&lt;")
-
-    .replace(/>/g,"&gt;")
-
-    .replace(/"/g,"&quot;")
-
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* =====================================================
+/* ================================
    LOAD PRODUCTS
-===================================================== */
+================================ */
 
 async function loadProducts(){
 
-  const box =
-    document.getElementById("products");
-
-  box.innerHTML =
-    '<div class="loading">Products loading...</div>';
-
-
-  const { data, error } =
-    await supabaseClient
-
-      .from("Products")
-
-      .select("*")
-
-      .order("id",{
-        ascending:false
-      });
-
-
-  if(error){
-
-    console.error(error);
+    const box =
+        document.getElementById("products");
 
     box.innerHTML =
-      '<div class="error">' +
-      'Products load nahi ho rahe.' +
-      '</div>';
+        '<div class="loading">Products loading...</div>';
 
-    document.getElementById("errorBox").innerHTML =
-      '<div class="error">' +
-      escapeHTML(error.message) +
-      '</div>';
-
-    return;
-  }
+    const {data,error} =
+        await supabaseClient
+        .from("Products")
+        .select("*")
+        .order("id",{ascending:false});
 
 
-  products = data || [];
+    if(error){
 
-  showProducts();
+        console.error(error);
 
+        box.innerHTML = `
+            <div class="empty">
+                ❌ Products load nahi ho rahe.
+                <br><br>
+                ${escapeHTML(error.message)}
+            </div>
+        `;
+
+        return;
+    }
+
+
+    products = data || [];
+
+    showProducts(products);
 }
 
 
-/* =====================================================
+/* ================================
    SHOW PRODUCTS
-===================================================== */
+================================ */
 
-function showProducts(){
+function showProducts(list){
 
-  const box =
-    document.getElementById("products");
+    const box =
+        document.getElementById("products");
 
-  box.innerHTML = "";
-
-
-  if(products.length === 0){
-
-    box.innerHTML =
-      '<div class="empty">' +
-      'Abhi koi product available nahi hai.' +
-      '</div>';
-
-    return;
-  }
+    box.innerHTML = "";
 
 
-  products.forEach(function(product){
+    if(!list.length){
 
-    const id = product.id;
+        box.innerHTML = `
+            <div class="empty">
+                🛍️ No products found.
+            </div>
+        `;
 
-    const name =
-      product["Name"] ||
-      product.name ||
-      "Unnamed Product";
-
-
-    const description =
-      product["Description"] ||
-      product.description ||
-      "No description available";
-
-
-    const price =
-      product["Price"] ??
-      product.price ??
-      0;
-
-
-    const stock =
-      product["Stock"] ??
-      product.stock ??
-      0;
-
-
-    const category =
-      product["Category"] ||
-      product.category ||
-      "Other";
-
-
-    const image =
-      product["Image url"] ||
-      product.image ||
-      product.image_url ||
-      "";
-
-
-    let imageHTML = "";
-
-    if(image){
-
-      imageHTML =
-        '<img src="' +
-        escapeHTML(image) +
-        '" alt="' +
-        escapeHTML(name) +
-        '" onerror="this.style.display=\'none\'">';
-
-    }else{
-
-      imageHTML =
-        '<div style="height:210px;background:#eee;' +
-        'display:flex;align-items:center;' +
-        'justify-content:center;color:#888">' +
-        'No Image' +
-        '</div>';
-
+        return;
     }
 
 
-    const outOfStock =
-      Number(stock) <= 0;
+    list.forEach(function(product){
+
+        const name =
+            product["Name"] ??
+            product.name ??
+            "Product";
 
 
-    box.innerHTML += `
-
-      <div class="product">
-
-        ${imageHTML}
-
-        <div class="productInfo">
-
-          <h3>
-            ${escapeHTML(name)}
-          </h3>
-
-          <div class="description">
-            ${escapeHTML(description)}
-          </div>
-
-          <div class="price">
-            $${Number(price).toFixed(2)}
-          </div>
-
-          <div class="stock">
-            Stock: ${Number(stock)}
-          </div>
-
-          <span class="category">
-            ${escapeHTML(category)}
-          </span>
-
-          <button
-            class="addBtn"
-            onclick="addToCart(${id})"
-            ${outOfStock ? "disabled" : ""}
-          >
-            ${outOfStock
-              ? "Out of Stock"
-              : "🛒 Add to Cart"}
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-  });
-
-}
+        const price =
+            product["Price"] ??
+            product.price ??
+            0;
 
 
-/* =====================================================
-   ADD TO CART
-===================================================== */
-
-function addToCart(id){
-
-  const product =
-    products.find(function(item){
-
-      return Number(item.id) === Number(id);
-
-    });
+        const stock =
+            product["Stock"] ??
+            product.stock ??
+            0;
 
 
-  if(!product){
-
-    alert("Product nahi mila.");
-
-    return;
-  }
+        const category =
+            product["Category"] ??
+            product.category ??
+            "Other";
 
 
-  const stock =
-    Number(
-      product["Stock"] ??
-      product.stock ??
-      0
-    );
+        const image =
+            product["Image url"] ??
+            product["Image URL"] ??
+            product.image ??
+            product.image_url ??
+            "";
 
 
-  if(stock <= 0){
-
-    alert("Ye product out of stock hai.");
-
-    return;
-  }
+        const description =
+            product["Description"] ??
+            product.description ??
+            "";
 
 
-  const existing =
-    cart.find(function(item){
+        let imageHTML = "";
 
-      return Number(item.id) === Number(id);
+        if(image){
+
+            imageHTML = `
+                <img
+                    src="${escapeHTML(image)}"
+                    alt="${escapeHTML(name)}"
+                    onerror="this.style.display='none'"
+                >
+            `;
+        }
+
+
+        box.innerHTML += `
+
+            <div class="product">
+
+                ${imageHTML}
+
+                <span class="category">
+                    ${escapeHTML(category)}
+                </span>
+
+                <h2>
+                    ${escapeHTML(name)}
+                </h2>
+
+                <div class="description">
+                    ${escapeHTML(description)}
+                </div>
+
+                <div class="price">
+                    $${Number(price).toFixed(2)}
+                </div>
+
+                <div class="stock">
+                    📦 Stock: ${Number(stock)}
+                </div>
+
+                <button onclick="buyProduct('${escapeHTML(name)}')">
+                    🛒 Buy / Order
+                </button>
+
+            </div>
+
+        `;
 
     });
 
-
-  if(existing){
-
-    if(existing.quantity >= stock){
-
-      alert("Available stock se zyada add nahi kar sakte.");
-
-      return;
-    }
-
-    existing.quantity++;
-
-  }else{
-
-    cart.push({
-
-      id:product.id,
-
-      name:
-        product["Name"] ||
-        product.name ||
-        "Product",
-
-      price:
-        Number(
-          product["Price"] ??
-          product.price ??
-          0
-        ),
-
-      quantity:1
-
-    });
-
-  }
+}
 
 
-  saveCart();
+/* ================================
+   SEARCH
+================================ */
 
-  updateCartCount();
+function filterProducts(){
 
-  alert("Product cart mein add ho gaya! 🛒");
+    const search =
+        document.getElementById("search")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+        products.filter(function(product){
+
+            const name =
+                String(
+                    product["Name"] ??
+                    product.name ??
+                    ""
+                ).toLowerCase();
+
+
+            const category =
+                String(
+                    product["Category"] ??
+                    product.category ??
+                    ""
+                ).toLowerCase();
+
+
+            return name.includes(search) ||
+                   category.includes(search);
+
+        });
+
+
+    showProducts(filtered);
+}
+
+
+/* ================================
+   BUY
+================================ */
+
+function buyProduct(name){
+
+    window.location.href =
+        "customer-service.html?product=" +
+        encodeURIComponent(name);
 
 }
 
 
-/* =====================================================
-   SAVE CART
-===================================================== */
+/* ================================
+   SECURITY
+================================ */
 
-function saveCart(){
+function escapeHTML(value){
 
-  localStorage.setItem(
-    "smartSellerCart",
-    JSON.stringify(cart)
-  );
-
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 }
 
 
-/* =====================================================
-   CART COUNT
-===================================================== */
-
-function updateCartCount(){
-
-  let count = 0;
-
-  cart.forEach(function(item){
-
-    count += Number(item.quantity) || 0;
-
-  });
-
-
-  document.getElementById("cartCount")
-    .innerText = count;
-
-}
-
-
-/* =====================================================
-   SHOW CART
-===================================================== */
-
-function showCart(){
-
-  const box =
-    document.getElementById("cartBox");
-
-  box.style.display = "block";
-
-  renderCart();
-
-
-  box.scrollIntoView({
-    behavior:"smooth"
-  });
-
-}
-
-
-/* =====================================================
-   RENDER CART
-===================================================== */
-
-function renderCart(){
-
-  const box =
-    document.getElementById("cartItems");
-
-  const totalBox =
-    document.getElementById("cartTotal");
-
-
-  box.innerHTML = "";
-
-
-  if(cart.length === 0){
-
-    box.innerHTML =
-      '<div class="empty">' +
-      'Cart abhi empty hai.' +
-      '</div>';
-
-    totalBox.innerText =
-      "Total: $0.00";
-
-    return;
-  }
-
-
-  let total = 0;
-
-
-  cart.forEach(function(item,index){
-
-    const itemTotal =
-      Number(item.price) *
-      Number(item.quantity);
-
-
-    total += itemTotal;
-
-
-    box.innerHTML += `
-
-      <div class="cartItem">
-
-        <strong>
-          ${escapeHTML(item.name)}
-        </strong>
-
-        <div>
-          $${Number(item.price).toFixed(2)}
-          × ${item.quantity}
-          =
-          $${itemTotal.toFixed(2)}
-        </div>
-
-        <button
-          class="removeBtn"
-          onclick="removeFromCart(${index})"
-        >
-          🗑️ Remove
-        </button>
-
-      </div>
-
-    `;
-
-  });
-
-
-  totalBox.innerText =
-    "Total: $" + total.toFixed(2);
-
-}
-
-
-/* =====================================================
-   REMOVE FROM CART
-===================================================== */
-
-function removeFromCart(index){
-
-  cart.splice(index,1);
-
-  saveCart();
-
-  updateCartCount();
-
-  renderCart();
-
-}
-
-
-/* =====================================================
-   CUSTOMER SERVICE
-===================================================== */
-
-function goToService(){
-
-  window.location.href =
-    "customer-service.html";
-
-}
-
-
-/* =====================================================
+/* ================================
    START
-===================================================== */
-
-updateCartCount();
+================================ */
 
 loadProducts();
 
