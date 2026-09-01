@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Smart Seller Shop - Customer Dashboard</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Smart Seller Shop</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
@@ -24,18 +29,18 @@ body{
     background:#111827;
     color:white;
     text-align:center;
-    padding:20px 10px;
+    padding:18px 10px;
 }
 
 .header h1{
     margin:0;
-    font-size:22px;
+    font-size:24px;
 }
 
 .header p{
     margin:5px 0 0;
     color:#cbd5e1;
-    font-size:13px;
+    font-size:12px;
 }
 
 .container{
@@ -44,7 +49,8 @@ body{
     padding:14px;
 }
 
-/* MENU */
+
+/* ================= MENU ================= */
 
 .menu{
     display:grid;
@@ -57,11 +63,15 @@ body{
     border:0;
     background:white;
     color:#222;
-    padding:13px 8px;
+    padding:14px 7px;
     border-radius:10px;
     box-shadow:0 2px 8px #ddd;
     font-size:14px;
     cursor:pointer;
+}
+
+.menu button:active{
+    transform:scale(.98);
 }
 
 .menu button.active{
@@ -69,7 +79,8 @@ body{
     color:white;
 }
 
-/* PAGES */
+
+/* ================= PAGE ================= */
 
 .page{
     display:none;
@@ -79,7 +90,8 @@ body{
     display:block;
 }
 
-/* CARD */
+
+/* ================= CARD ================= */
 
 .card{
     background:white;
@@ -93,7 +105,8 @@ body{
     margin-top:0;
 }
 
-/* WELCOME */
+
+/* ================= WELCOME ================= */
 
 .welcome{
     padding:24px;
@@ -103,7 +116,8 @@ body{
     margin-top:0;
 }
 
-/* STATS */
+
+/* ================= STATS ================= */
 
 .stats{
     display:grid;
@@ -129,7 +143,8 @@ body{
     color:#777;
 }
 
-/* PRODUCTS */
+
+/* ================= PRODUCTS ================= */
 
 .product-grid{
     display:grid;
@@ -178,11 +193,17 @@ body{
     font-size:15px;
 }
 
+.action:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
 .danger{
     background:#e53935;
 }
 
-/* CART */
+
+/* ================= CART ================= */
 
 .cart-item{
     background:#f8fafc;
@@ -199,10 +220,16 @@ body{
     margin-top:15px;
 }
 
-/* SERVICE */
+
+/* ================= SERVICE ================= */
 
 .service-title{
-    font-size:25px;
+    font-size:26px;
+}
+
+.service-text{
+    color:#666;
+    line-height:1.5;
 }
 
 textarea{
@@ -234,9 +261,11 @@ textarea:focus{
 
 .send-btn:disabled{
     opacity:.6;
+    cursor:not-allowed;
 }
 
-/* MESSAGE RESULT */
+
+/* ================= MESSAGE ================= */
 
 .message-box{
     padding:13px;
@@ -256,13 +285,15 @@ textarea:focus{
     color:#991b1b;
 }
 
-/* SUPPORT */
+
+/* ================= SUPPORT ================= */
 
 .support-message{
     border:1px solid #ddd;
-    padding:14px;
+    padding:15px;
     border-radius:12px;
     margin-top:10px;
+    background:#fafafa;
 }
 
 .support-message .reply{
@@ -270,16 +301,25 @@ textarea:focus{
     padding:12px;
     border-radius:10px;
     margin-top:10px;
+    color:#166534;
 }
 
-/* PROFILE */
+.support-date{
+    color:#888;
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+
+/* ================= PROFILE ================= */
 
 .profile-row{
     padding:15px;
     border-bottom:1px solid #eee;
 }
 
-/* ORDERS */
+
+/* ================= ORDERS ================= */
 
 .order-box{
     border:1px solid #ddd;
@@ -297,7 +337,23 @@ textarea:focus{
     color:#856404;
 }
 
-/* MOBILE */
+
+/* ================= LOADING ================= */
+
+.loading{
+    text-align:center;
+    padding:20px;
+    color:#777;
+}
+
+.empty{
+    text-align:center;
+    padding:25px;
+    color:#777;
+}
+
+
+/* ================= MOBILE ================= */
 
 @media(max-width:600px){
 
@@ -322,12 +378,16 @@ textarea:focus{
     }
 
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- HEADER -->
+
+<!-- ================= HEADER ================= -->
 
 <div class="header">
 
@@ -340,40 +400,49 @@ textarea:focus{
 
 <div class="container">
 
+
 <!-- ================= MENU ================= -->
 
 <div class="menu">
 
-    <button class="active"
-            onclick="showPage('dashboard',this)">
+    <button
+        class="active"
+        onclick="showPage('dashboard',this)">
         🏠 Dashboard
     </button>
 
-    <button onclick="showPage('productsPage',this)">
+    <button
+        onclick="showPage('productsPage',this)">
         📦 Products
     </button>
 
-    <button onclick="showPage('cartPage',this)">
+    <button
+        onclick="showPage('cartPage',this)">
         🛒 Cart <span id="cartMenuCount">0</span>
     </button>
 
-    <button onclick="showPage('ordersPage',this)">
+    <button
+        onclick="showPage('ordersPage',this)">
         📦 My Orders
     </button>
 
-    <button onclick="showPage('notificationsPage',this)">
+    <button
+        onclick="showPage('notificationsPage',this)">
         🔔 Notifications
     </button>
 
-    <button onclick="showPage('profilePage',this)">
+    <button
+        onclick="showPage('profilePage',this)">
         👤 Profile
     </button>
 
-    <button onclick="showPage('servicePage',this)">
+    <button
+        onclick="showPage('servicePage',this)">
         💬 Customer Service
     </button>
 
-    <button onclick="logout()">
+    <button
+        onclick="logout()">
         🚪 Logout
     </button>
 
@@ -440,10 +509,13 @@ textarea:focus{
 
         <h2>📦 Products</h2>
 
-        <div id="products"
-             class="product-grid">
+        <div
+            id="products"
+            class="product-grid">
 
-            <p>Loading products...</p>
+            <div class="loading">
+                Products loading...
+            </div>
 
         </div>
 
@@ -469,10 +541,11 @@ textarea:focus{
 
         </div>
 
-        <button class="action"
-                onclick="placeOrder()">
+        <button
+            class="action"
+            onclick="placeOrder()">
 
-            Place Order
+            📦 Place Order
 
         </button>
 
@@ -491,7 +564,9 @@ textarea:focus{
 
         <div id="orders">
 
-            <p>No orders yet.</p>
+            <div class="empty">
+                No orders yet.
+            </div>
 
         </div>
 
@@ -508,9 +583,11 @@ textarea:focus{
 
         <h2>🔔 Notifications</h2>
 
-        <p>
+        <div class="empty">
+
             You currently have no new notifications.
-        </p>
+
+        </div>
 
     </div>
 
@@ -526,11 +603,21 @@ textarea:focus{
         <h2>👤 Profile</h2>
 
         <div class="profile-row">
-            Customer Account
+
+            👤 Customer Account
+
         </div>
 
         <div class="profile-row">
-            Smart Seller Shop Customer
+
+            🛍️ Smart Seller Shop Customer
+
+        </div>
+
+        <div class="profile-row">
+
+            💬 Customer Service Available
+
         </div>
 
     </div>
@@ -542,23 +629,30 @@ textarea:focus{
 
 <div id="servicePage" class="page">
 
+
     <div class="card">
 
         <h2 class="service-title">
+
             💬 Customer Service
+
         </h2>
 
-        <p>
-            For payment details, orders, or any help,
-            send us a message.
+
+        <p class="service-text">
+
+            Payment details, orders, or any help?
+            Send us a message.
+
         </p>
 
-        <!-- ONLY MESSAGE -->
+
+        <!-- ONLY MESSAGE BOX -->
 
         <textarea
             id="supportMessage"
-            placeholder="Write your message here..."
-        ></textarea>
+            placeholder="Write your message here...">
+        </textarea>
 
 
         <button
@@ -571,14 +665,15 @@ textarea:focus{
         </button>
 
 
-        <div id="serviceResult"
-             class="message-box">
+        <div
+            id="serviceResult"
+            class="message-box">
         </div>
 
     </div>
 
 
-    <!-- SUPPORT MESSAGES -->
+    <!-- SUPPORT HISTORY -->
 
     <div class="card">
 
@@ -588,7 +683,9 @@ textarea:focus{
 
         <div id="supportMessages">
 
-            No messages yet.
+            <div class="loading">
+                Messages loading...
+            </div>
 
         </div>
 
@@ -601,6 +698,7 @@ textarea:focus{
 
 
 <script>
+
 
 /* =====================================================
    SUPABASE
@@ -627,6 +725,7 @@ let customerId =
 localStorage.getItem(
     "smartSellerCustomerId"
 );
+
 
 if(!customerId){
 
@@ -662,12 +761,42 @@ try{
         );
 
     if(!Array.isArray(cart)){
+
         cart = [];
+
     }
 
-}catch(e){
+}catch(error){
 
     cart = [];
+
+}
+
+
+/* =====================================================
+   ORDERS
+===================================================== */
+
+let orders = [];
+
+try{
+
+    orders =
+        JSON.parse(
+            localStorage.getItem(
+                "smartSellerOrders"
+            ) || "[]"
+        );
+
+    if(!Array.isArray(orders)){
+
+        orders = [];
+
+    }
+
+}catch(error){
+
+    orders = [];
 
 }
 
@@ -691,11 +820,14 @@ function showPage(pageId,button){
         document.getElementById(pageId);
 
 
-    if(page){
+    if(!page){
 
-        page.classList.add("active");
+        return;
 
     }
+
+
+    page.classList.add("active");
 
 
     document
@@ -710,6 +842,13 @@ function showPage(pageId,button){
     if(button){
 
         button.classList.add("active");
+
+    }
+
+
+    if(pageId === "productsPage"){
+
+        loadProducts();
 
     }
 
@@ -744,26 +883,17 @@ function showPage(pageId,button){
 async function loadProducts(){
 
     const box =
-        document.getElementById(
-            "products"
-        );
+        document.getElementById("products");
 
 
     box.innerHTML =
-        "<p>Loading products...</p>";
+        '<div class="loading">Products loading...</div>';
 
 
-    const result =
+    const {data,error} =
         await supabaseClient
         .from("Products")
         .select("*");
-
-
-    const data =
-        result.data;
-
-    const error =
-        result.error;
 
 
     if(error){
@@ -771,7 +901,7 @@ async function loadProducts(){
         console.error(error);
 
         box.innerHTML =
-            "<p>Products could not be loaded.</p>";
+            '<div class="empty">Products could not be loaded.</div>';
 
         return;
 
@@ -791,7 +921,7 @@ async function loadProducts(){
     if(list.length === 0){
 
         box.innerHTML =
-            "<p>No products available.</p>";
+            '<div class="empty">No products available.</div>';
 
         return;
 
@@ -849,17 +979,6 @@ async function loadProducts(){
             "";
 
 
-        const productData = {
-
-            id:id,
-
-            name:name,
-
-            price:price
-
-        };
-
-
         const div =
             document.createElement("div");
 
@@ -898,13 +1017,17 @@ async function loadProducts(){
         div.appendChild(title);
 
 
-        const desc =
-            document.createElement("p");
+        if(description){
 
-        desc.innerText =
-            description;
+            const desc =
+                document.createElement("p");
 
-        div.appendChild(desc);
+            desc.innerText =
+                description;
+
+            div.appendChild(desc);
+
+        }
 
 
         const priceEl =
@@ -936,9 +1059,7 @@ async function loadProducts(){
             categoryEl.innerText =
                 "Category: " + category;
 
-            div.appendChild(
-                categoryEl
-            );
+            div.appendChild(categoryEl);
 
         }
 
@@ -949,32 +1070,39 @@ async function loadProducts(){
         button.className =
             "action";
 
-        button.innerText =
-            "🛒 Add to Cart";
 
+        if(stock > 0){
 
-        button.onclick =
-            function(){
+            button.innerText =
+                "🛒 Add to Cart";
 
-                addToCart(
-                    productData
-                );
+            button.onclick =
+                function(){
 
-            };
+                    addToCart({
 
+                        id:id,
 
-        if(stock <= 0){
+                        name:name,
 
-            button.disabled = true;
+                        price:price
+
+                    });
+
+                };
+
+        }else{
 
             button.innerText =
                 "Out of Stock";
+
+            button.disabled =
+                true;
 
         }
 
 
         div.appendChild(button);
-
 
         box.appendChild(div);
 
@@ -1000,7 +1128,8 @@ function addToCart(product){
 
     if(existing){
 
-        existing.quantity++;
+        existing.quantity =
+            Number(existing.quantity) + 1;
 
     }else{
 
@@ -1040,7 +1169,6 @@ function saveCart(){
         JSON.stringify(cart)
     );
 
-
     updateCartCount();
 
 }
@@ -1063,32 +1191,16 @@ function updateCartCount(){
     });
 
 
-    const menuCount =
-        document.getElementById(
-            "cartMenuCount"
-        );
+    document.getElementById(
+        "cartMenuCount"
+    ).innerText =
+        count;
 
 
-    const dashboardCount =
-        document.getElementById(
-            "dashboardCart"
-        );
-
-
-    if(menuCount){
-
-        menuCount.innerText =
-            count;
-
-    }
-
-
-    if(dashboardCount){
-
-        dashboardCount.innerText =
-            count;
-
-    }
+    document.getElementById(
+        "dashboardCart"
+    ).innerText =
+        count;
 
 }
 
@@ -1108,7 +1220,7 @@ function showCart(){
     if(cart.length === 0){
 
         box.innerHTML =
-            "<p>Your cart is empty.</p>";
+            '<div class="empty">Your cart is empty.</div>';
 
         document.getElementById(
             "cartTotal"
@@ -1126,125 +1238,93 @@ function showCart(){
     let total = 0;
 
 
-    cart.forEach(
-        function(item,index){
+    cart.forEach(function(item,index){
 
-            const itemTotal =
-                Number(item.price) *
-                Number(item.quantity);
+        const quantity =
+            Number(item.quantity) || 1;
 
 
-            total += itemTotal;
+        const price =
+            Number(item.price) || 0;
 
 
-            const div =
-                document.createElement(
-                    "div"
-                );
+        const itemTotal =
+            price * quantity;
 
 
-            div.className =
-                "cart-item";
+        total += itemTotal;
 
 
-            const name =
-                document.createElement(
-                    "b"
-                );
+        const div =
+            document.createElement("div");
 
-            name.innerText =
-                item.name;
+        div.className =
+            "cart-item";
 
 
-            div.appendChild(name);
+        const name =
+            document.createElement("b");
+
+        name.innerText =
+            item.name;
+
+        div.appendChild(name);
 
 
-            const price =
-                document.createElement(
-                    "p"
-                );
+        const priceEl =
+            document.createElement("p");
 
-            price.innerText =
-                "Price: $" +
-                Number(
-                    item.price
-                ).toFixed(2);
+        priceEl.innerText =
+            "Price: $" +
+            price.toFixed(2);
+
+        div.appendChild(priceEl);
 
 
-            div.appendChild(price);
+        const quantityEl =
+            document.createElement("p");
+
+        quantityEl.innerText =
+            "Quantity: " +
+            quantity;
+
+        div.appendChild(quantityEl);
 
 
-            const quantity =
-                document.createElement(
-                    "p"
-                );
+        const remove =
+            document.createElement("button");
 
-            quantity.innerText =
-                "Quantity: " +
-                item.quantity;
+        remove.className =
+            "action danger";
 
-
-            div.appendChild(
-                quantity
-            );
+        remove.innerText =
+            "Remove";
 
 
-            const remove =
-                document.createElement(
-                    "button"
-                );
+        remove.onclick =
+            function(){
+
+                cart.splice(index,1);
+
+                saveCart();
+
+                showCart();
+
+            };
 
 
-            remove.className =
-                "action danger";
+        div.appendChild(remove);
 
 
-            remove.innerText =
-                "Remove";
+        box.appendChild(div);
 
-
-            remove.onclick =
-                function(){
-
-                    removeCartItem(
-                        index
-                    );
-
-                };
-
-
-            div.appendChild(
-                remove
-            );
-
-
-            box.appendChild(
-                div
-            );
-
-        }
-    );
+    });
 
 
     document.getElementById(
         "cartTotal"
     ).innerText =
         total.toFixed(2);
-
-}
-
-
-/* =====================================================
-   REMOVE CART ITEM
-===================================================== */
-
-function removeCartItem(index){
-
-    cart.splice(index,1);
-
-    saveCart();
-
-    showCart();
 
 }
 
@@ -1266,83 +1346,5 @@ function placeOrder(){
     }
 
 
-    const orders =
-        JSON.parse(
-            localStorage.getItem(
-                "smartSellerOrders"
-            ) || "[]"
-        );
-
-
     const total =
-        cart.reduce(
-            function(sum,item){
-
-                return sum +
-                    Number(item.price) *
-                    Number(item.quantity);
-
-            },
-            0
-        );
-
-
-    orders.push({
-
-        id:
-            "ORDER-" +
-            Date.now(),
-
-        items:
-            JSON.parse(
-                JSON.stringify(cart)
-            ),
-
-        total:
-            total,
-
-        status:
-            "Pending",
-
-        date:
-            new Date()
-            .toLocaleString()
-
-    });
-
-
-    localStorage.setItem(
-        "smartSellerOrders",
-        JSON.stringify(orders)
-    );
-
-
-    cart = [];
-
-
-    saveCart();
-
-
-    showCart();
-
-
-    alert(
-        "Order placed successfully! ✅"
-    );
-
-}
-
-
-/* =====================================================
-   LOAD ORDERS
-===================================================== */
-
-function loadOrders(){
-
-    const box =
-        document.getElementById(
-            "orders"
-        );
-
-
-    let orders = [];
+        cart.redu
