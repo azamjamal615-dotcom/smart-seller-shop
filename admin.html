@@ -9,315 +9,345 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f3f4f6;
-color:#172033;
-padding-bottom:72px;
+  margin:0;
+  background:#f3f4f6;
+  color:#172033;
+  font-family:Arial,sans-serif;
+  padding-bottom:75px;
 }
 
 .header{
-background:white;
-padding:14px;
-display:flex;
-align-items:center;
-gap:10px;
-border-bottom:1px solid #ddd;
+  background:#fff;
+  padding:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid #ddd;
 }
 
 .logo{
-width:50px;
-height:50px;
-border-radius:14px;
-background:#713be8;
-color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:24px;
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:#713be8;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
 }
 
 .header h1{
-margin:0;
-font-size:19px;
+  margin:0;
+  font-size:18px;
 }
 
 .header p{
-margin:3px 0 0;
-font-size:12px;
-color:#777;
+  margin:3px 0 0;
+  font-size:11px;
+  color:#777;
 }
 
 .container{
-max-width:900px;
-margin:auto;
-padding:12px;
+  width:100%;
+  max-width:900px;
+  margin:auto;
+  padding:10px;
 }
 
 /* TOP MENU */
 
 .topMenu{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:7px;
-margin-bottom:12px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:6px;
+  margin-bottom:10px;
 }
 
 .topMenu button{
-border:0;
-background:white;
-padding:10px 3px;
-border-radius:10px;
-box-shadow:0 2px 7px #ddd;
-font-size:11px;
-cursor:pointer;
+  border:0;
+  background:#fff;
+  border-radius:10px;
+  padding:9px 3px;
+  min-height:48px;
+  font-size:10px;
+  color:#172033;
+  box-shadow:0 2px 6px #ddd;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .topMenu button.active{
-background:#713be8;
-color:white;
+  background:#713be8;
+  color:#fff;
 }
 
 /* PAGE */
 
 .page{
-display:none;
+  display:none;
 }
 
 .page.active{
-display:block;
+  display:block;
 }
 
-/* CARD */
+/* CARDS */
 
 .card{
-background:white;
-border-radius:15px;
-padding:15px;
-margin-bottom:12px;
-box-shadow:0 2px 10px #ddd;
+  background:#fff;
+  border-radius:15px;
+  padding:14px;
+  margin-bottom:10px;
+  box-shadow:0 2px 8px #ddd;
 }
 
 .card h2{
-margin:0 0 10px;
-font-size:18px;
+  margin:0 0 10px;
+  font-size:17px;
 }
 
-/* DASHBOARD */
-
 .welcome{
-background:#214f78;
-color:white;
+  background:#214f78;
+  color:#fff;
+}
+
+.welcome small{
+  font-size:10px;
 }
 
 .welcome h2{
-margin:6px 0 10px;
-font-size:21px;
+  margin:5px 0 8px;
+  font-size:20px;
 }
 
 .welcome p{
-font-size:13px;
-line-height:1.5;
+  margin:0;
+  font-size:12px;
+  line-height:1.5;
 }
 
+/* STATS */
+
 .stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
 }
 
 .stat{
-background:white;
-border-radius:13px;
-padding:13px 5px;
-text-align:center;
-box-shadow:0 2px 8px #ddd;
+  background:#fff;
+  border-radius:12px;
+  padding:11px 4px;
+  text-align:center;
+  box-shadow:0 2px 7px #ddd;
 }
 
 .stat b{
-font-size:22px;
+  display:block;
+  font-size:20px;
 }
 
 .stat span{
-display:block;
-font-size:11px;
-color:#777;
-margin-top:4px;
+  display:block;
+  margin-top:3px;
+  color:#777;
+  font-size:10px;
 }
 
 /* ITEMS */
 
 .item{
-border:1px solid #ddd;
-border-radius:11px;
-padding:12px;
-margin-top:8px;
-background:#fafafa;
+  background:#fafafa;
+  border:1px solid #ddd;
+  border-radius:11px;
+  padding:11px;
+  margin-top:8px;
+}
+
+.item b{
+  font-size:14px;
 }
 
 .item p{
-font-size:13px;
-color:#555;
-margin:5px 0;
+  margin:5px 0;
+  font-size:12px;
+  color:#555;
 }
 
 /* FORM */
 
+label{
+  display:block;
+  font-size:11px;
+  font-weight:bold;
+  margin-top:6px;
+}
+
 input,
 select,
 textarea{
-width:100%;
-padding:10px;
-border:1px solid #ddd;
-border-radius:9px;
-font-size:14px;
-margin:5px 0 9px;
+  width:100%;
+  padding:9px;
+  margin:4px 0 7px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:13px;
+  outline:none;
 }
 
 textarea{
-min-height:90px;
-resize:vertical;
-}
-
-label{
-font-size:12px;
-font-weight:bold;
+  min-height:75px;
+  resize:vertical;
 }
 
 /* BUTTONS */
 
 .action{
-border:0;
-border-radius:8px;
-padding:9px 12px;
-background:#713be8;
-color:white;
-cursor:pointer;
-font-size:13px;
-margin:3px;
+  border:0;
+  border-radius:8px;
+  padding:8px 11px;
+  margin:3px;
+  background:#713be8;
+  color:#fff;
+  font-size:12px;
+  cursor:pointer;
 }
 
-.green{background:#16a34a}
-.red{background:#dc2626}
-.orange{background:#ea8a00}
-.gray{background:#777}
+.green{
+  background:#16a34a;
+}
+
+.red{
+  background:#dc2626;
+}
+
+.orange{
+  background:#ea8a00;
+}
+
+.gray{
+  background:#777;
+}
 
 .full{
-width:100%;
-margin:3px 0;
+  width:100%;
+  margin:4px 0;
 }
 
 /* STATUS */
 
 .status{
-display:inline-block;
-padding:4px 8px;
-border-radius:15px;
-background:#fff3cd;
-color:#856404;
-font-size:11px;
+  display:inline-block;
+  padding:4px 7px;
+  border-radius:15px;
+  background:#fff3cd;
+  color:#856404;
+  font-size:10px;
 }
 
-/* PRODUCT */
+/* IMAGE */
 
 .productImage{
-width:100%;
-max-height:180px;
-object-fit:cover;
-border-radius:9px;
-margin-bottom:8px;
+  width:100%;
+  max-height:170px;
+  object-fit:cover;
+  border-radius:8px;
+  margin-bottom:7px;
 }
 
 /* MESSAGE */
 
-.message{
-padding:10px;
-border-radius:9px;
-margin-bottom:10px;
-font-size:13px;
-display:none;
+.messageBox{
+  display:none;
+  padding:9px;
+  margin-bottom:8px;
+  border-radius:8px;
+  font-size:12px;
 }
 
 .success{
-background:#dcfce7;
-color:#166534;
+  background:#dcfce7;
+  color:#166534;
 }
 
 .error{
-background:#fee2e2;
-color:#991b1b;
+  background:#fee2e2;
+  color:#991b1b;
 }
 
 .loading,
 .empty{
-text-align:center;
-padding:20px;
-color:#777;
-font-size:13px;
+  text-align:center;
+  padding:18px 5px;
+  color:#777;
+  font-size:12px;
 }
 
 /* BOTTOM */
 
 .bottom{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-height:67px;
-background:white;
-border-top:1px solid #ddd;
-display:flex;
-z-index:999;
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  height:66px;
+  background:#fff;
+  border-top:1px solid #ddd;
+  display:flex;
+  z-index:9999;
 }
 
 .bottom button{
-flex:1;
-border:0;
-background:white;
-font-size:10px;
-color:#555;
-cursor:pointer;
+  flex:1;
+  border:0;
+  background:#fff;
+  color:#555;
+  font-size:10px;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .bottom button.active{
-color:#713be8;
-font-weight:bold;
+  color:#713be8;
+  font-weight:bold;
 }
 
 .bottomIcon{
-font-size:18px;
-display:block;
-margin-bottom:3px;
+  display:block;
+  font-size:17px;
+  margin-bottom:3px;
 }
 
 /* MOBILE */
 
 @media(max-width:600px){
 
-.topMenu{
-grid-template-columns:repeat(5,1fr);
-}
+  .topMenu{
+    grid-template-columns:repeat(5,1fr);
+  }
 
-.topMenu button{
-font-size:9px;
-padding:9px 2px;
-}
+  .topMenu button{
+    font-size:9px;
+    padding:8px 2px;
+  }
 
-.stats{
-grid-template-columns:repeat(2,1fr);
-}
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-.header h1{
-font-size:17px;
-}
+  .header h1{
+    font-size:17px;
+  }
 
-.card{
-padding:13px;
-}
-
+  .card{
+    padding:12px;
+  }
 }
 </style>
 </head>
@@ -328,43 +358,42 @@ padding:13px;
 
 <div class="header">
 
-<div class="logo">▦</div>
+  <div class="logo">▦</div>
 
-<div>
-<h1>Smart Seller Shop</h1>
-<p>Admin Panel</p>
-</div>
+  <div>
+    <h1>Smart Seller Shop</h1>
+    <p>Admin Panel</p>
+  </div>
 
 </div>
 
 <div class="container">
 
-<div id="messageBox" class="message"></div>
+<div id="messageBox" class="messageBox"></div>
 
 <!-- TOP 5 MENU -->
 
 <div class="topMenu">
 
-<button class="active"
-onclick="openPage('dashboard',this)">
-🏠<br>Dashboard
-</button>
+  <button class="active" data-page="dashboard">
+    🏠<br>Dashboard
+  </button>
 
-<button onclick="openPage('balance',this)">
-💰<br>Balance
-</button>
+  <button data-page="balance">
+    💰<br>Balance
+  </button>
 
-<button onclick="openPage('withdrawal',this)">
-💸<br>Withdrawal
-</button>
+  <button data-page="withdrawal">
+    💸<br>Withdrawal
+  </button>
 
-<button onclick="openPage('kyc',this)">
-🛡️<br>KYC
-</button>
+  <button data-page="kyc">
+    🛡️<br>KYC
+  </button>
 
-<button onclick="openPage('orders',this)">
-🛒<br>Orders
-</button>
+  <button data-page="orders">
+    🛒<br>Orders
+  </button>
 
 </div>
 
@@ -373,43 +402,42 @@ onclick="openPage('dashboard',this)">
 
 <div id="dashboard" class="page active">
 
-<div class="card welcome">
+  <div class="card welcome">
 
-<small>WELCOME BACK</small>
+    <small>WELCOME BACK</small>
 
-<h2>Smart Seller Shop Admin</h2>
+    <h2>Smart Seller Shop Admin</h2>
 
-<p>
-Manage customers, products, orders,
-messages, balance, withdrawal and KYC
-from one place.
-</p>
+    <p>
+      Manage products, customers, orders,
+      messages, balance, withdrawal and KYC.
+    </p>
 
-</div>
+  </div>
 
-<div class="stats">
+  <div class="stats">
 
-<div class="stat">
-<b id="statProducts">0</b>
-<span>Products</span>
-</div>
+    <div class="stat">
+      <b id="statProducts">0</b>
+      <span>Products</span>
+    </div>
 
-<div class="stat">
-<b id="statOrders">0</b>
-<span>Orders</span>
-</div>
+    <div class="stat">
+      <b id="statOrders">0</b>
+      <span>Orders</span>
+    </div>
 
-<div class="stat">
-<b id="statMessages">0</b>
-<span>Messages</span>
-</div>
+    <div class="stat">
+      <b id="statMessages">0</b>
+      <span>Messages</span>
+    </div>
 
-<div class="stat">
-<b id="statWithdrawals">0</b>
-<span>Withdrawals</span>
-</div>
+    <div class="stat">
+      <b id="statWithdrawals">0</b>
+      <span>Withdrawals</span>
+    </div>
 
-</div>
+  </div>
 
 </div>
 
@@ -418,15 +446,15 @@ from one place.
 
 <div id="balance" class="page">
 
-<div class="card">
+  <div class="card">
 
-<h2>💰 Customer Balance</h2>
+    <h2>💰 Customer Balance</h2>
 
-<div id="balanceList">
-<div class="loading">Loading...</div>
-</div>
+    <div id="balanceList">
+      <div class="loading">Loading...</div>
+    </div>
 
-</div>
+  </div>
 
 </div>
 
@@ -435,15 +463,15 @@ from one place.
 
 <div id="withdrawal" class="page">
 
-<div class="card">
+  <div class="card">
 
-<h2>💸 Withdrawal Requests</h2>
+    <h2>💸 Withdrawal Requests</h2>
 
-<div id="withdrawalList">
-<div class="loading">Loading...</div>
-</div>
+    <div id="withdrawalList">
+      <div class="loading">Loading...</div>
+    </div>
 
-</div>
+  </div>
 
 </div>
 
@@ -452,15 +480,15 @@ from one place.
 
 <div id="kyc" class="page">
 
-<div class="card">
+  <div class="card">
 
-<h2>🛡️ KYC Verification</h2>
+    <h2>🛡️ KYC Verification</h2>
 
-<div id="kycList">
-<div class="loading">Loading...</div>
-</div>
+    <div id="kycList">
+      <div class="loading">Loading...</div>
+    </div>
 
-</div>
+  </div>
 
 </div>
 
@@ -469,15 +497,15 @@ from one place.
 
 <div id="orders" class="page">
 
-<div class="card">
+  <div class="card">
 
-<h2>🛒 Customer Orders</h2>
+    <h2>🛒 Customer Orders</h2>
 
-<div id="orderList">
-<div class="loading">Loading...</div>
-</div>
+    <div id="orderList">
+      <div class="loading">Loading...</div>
+    </div>
 
-</div>
+  </div>
 
 </div>
 
@@ -486,59 +514,52 @@ from one place.
 
 <div id="products" class="page">
 
-<div class="card">
+  <div class="card">
 
-<h2>📦 Add Product</h2>
+    <h2>📦 Add Product</h2>
 
-<label>Product Name</label>
+    <label>Product Name</label>
+    <input id="productName" placeholder="Smart Watch">
 
-<input id="productName"
-placeholder="Smart Watch">
+    <label>Description</label>
+    <textarea id="productDescription"
+      placeholder="Product description"></textarea>
 
-<label>Description</label>
+    <label>Price</label>
+    <input id="productPrice"
+      type="number"
+      step="0.01"
+      placeholder="50">
 
-<textarea id="productDescription"
-placeholder="Product description"></textarea>
+    <label>Stock</label>
+    <input id="productStock"
+      type="number"
+      placeholder="10">
 
-<label>Price</label>
+    <label>Category</label>
+    <input id="productCategory"
+      placeholder="Watch">
 
-<input id="productPrice"
-type="number"
-step="0.01"
-placeholder="50">
+    <label>Image URL</label>
+    <input id="productImage"
+      placeholder="https://example.com/image.jpg">
 
-<label>Stock</label>
+    <button class="action full"
+      id="addProductButton">
+      ➕ Add Product
+    </button>
 
-<input id="productStock"
-type="number"
-placeholder="10">
+  </div>
 
-<label>Category</label>
+  <div class="card">
 
-<input id="productCategory"
-placeholder="Watch">
+    <h2>📦 Products</h2>
 
-<label>Image URL</label>
+    <div id="productList">
+      <div class="loading">Loading...</div>
+    </div>
 
-<input id="productImage"
-placeholder="https://...">
-
-<button class="action full"
-onclick="addProduct()">
-➕ Add Product
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>📦 Products</h2>
-
-<div id="productList">
-<div class="loading">Loading...</div>
-</div>
-
-</div>
+  </div>
 
 </div>
 
@@ -547,15 +568,15 @@ onclick="addProduct()">
 
 <div id="customers" class="page">
 
-<div class="card">
+  <div class="card">
 
-<h2>👥 Customers</h2>
+    <h2>👥 Customers</h2>
 
-<div id="customerList">
-<div class="loading">Loading...</div>
-</div>
+    <div id="customerList">
+      <div class="loading">Loading...</div>
+    </div>
 
-</div>
+  </div>
 
 </div>
 
@@ -564,15 +585,15 @@ onclick="addProduct()">
 
 <div id="messages" class="page">
 
-<div class="card">
+  <div class="card">
 
-<h2>💬 Customer Messages</h2>
+    <h2>💬 Customer Messages</h2>
 
-<div id="messageList">
-<div class="loading">Loading...</div>
-</div>
+    <div id="messageList">
+      <div class="loading">Loading...</div>
+    </div>
 
-</div>
+  </div>
 
 </div>
 
@@ -581,19 +602,15 @@ onclick="addProduct()">
 
 <div id="notifications" class="page">
 
-<div class="card">
+  <div class="card">
 
-<h2>🔔 Notifications</h2>
+    <h2>🔔 Notifications</h2>
 
-<div id="notificationList">
+    <div class="empty">
+      No notifications.
+    </div>
 
-<div class="empty">
-No notifications.
-</div>
-
-</div>
-
-</div>
+  </div>
 
 </div>
 
@@ -602,23 +619,20 @@ No notifications.
 
 <div id="settings" class="page">
 
-<div class="card">
+  <div class="card">
 
-<h2>⚙️ Settings</h2>
+    <h2>⚙️ Settings</h2>
 
-<p>Smart Seller Shop Admin Panel</p>
+    <p style="font-size:12px;">
+      Smart Seller Shop Admin Panel
+    </p>
 
-<button class="action gray full"
-onclick="clearLocalData()">
-Clear Local Data
-</button>
+    <button class="action gray full"
+      onclick="location.reload()">
+      🔄 Refresh Panel
+    </button>
 
-<button class="action red full"
-onclick="location.reload()">
-Refresh Panel
-</button>
-
-</div>
+  </div>
 
 </div>
 
@@ -629,40 +643,39 @@ Refresh Panel
 
 <div class="bottom">
 
-<button class="active"
-onclick="openPage('products',this)">
-<span class="bottomIcon">📦</span>
-Products
-</button>
+  <button data-page="products">
+    <span class="bottomIcon">📦</span>
+    Products
+  </button>
 
-<button onclick="openPage('customers',this)">
-<span class="bottomIcon">👥</span>
-Customers
-</button>
+  <button data-page="customers">
+    <span class="bottomIcon">👥</span>
+    Customers
+  </button>
 
-<button onclick="openPage('messages',this)">
-<span class="bottomIcon">💬</span>
-Messages
-</button>
+  <button data-page="messages">
+    <span class="bottomIcon">💬</span>
+    Messages
+  </button>
 
-<button onclick="openPage('notifications',this)">
-<span class="bottomIcon">🔔</span>
-Notifications
-</button>
+  <button data-page="notifications">
+    <span class="bottomIcon">🔔</span>
+    Notifications
+  </button>
 
-<button onclick="openPage('settings',this)">
-<span class="bottomIcon">⚙️</span>
-Settings
-</button>
+  <button data-page="settings">
+    <span class="bottomIcon">⚙️</span>
+    Settings
+  </button>
 
 </div>
 
 
 <script>
 
-/* =========================
-SUPABASE
-========================= */
+/* =========================================
+   SUPABASE
+========================================= */
 
 const SUPABASE_URL =
 "https://cgrwiwzqiusvjibpjzdv.supabase.co";
@@ -672,308 +685,450 @@ const SUPABASE_KEY =
 
 const db =
 supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
 
-/* =========================
-PAGE NAVIGATION
-========================= */
-
-function openPage(id,button){
-
-document.querySelectorAll(".page")
-.forEach(function(page){
-page.classList.remove("active");
-});
-
-const page=document.getElementById(id);
-
-if(page){
-page.classList.add("active");
-}
-
-document.querySelectorAll(
-".topMenu button,.bottom button"
-)
-.forEach(function(btn){
-btn.classList.remove("active");
-});
-
-if(button){
-button.classList.add("active");
-}
-
-if(id==="dashboard") loadDashboard();
-if(id==="balance") loadBalances();
-if(id==="withdrawal") loadWithdrawals();
-if(id==="kyc") loadKYC();
-if(id==="orders") loadOrders();
-if(id==="products") loadProducts();
-if(id==="customers") loadCustomers();
-if(id==="messages") loadMessages();
-
-}
-
-
-/* =========================
-MESSAGE
-========================= */
-
-function showMessage(text,type){
-
-const box=document.getElementById("messageBox");
-
-box.innerText=text;
-
-box.className="message "+type;
-
-box.style.display="block";
-
-setTimeout(function(){
-box.style.display="none";
-},3500);
-
-}
-
-
-/* =========================
-ESCAPE
-========================= */
+/* =========================================
+   SAFE HTML
+========================================= */
 
 function esc(value){
 
-return String(value ?? "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
 
-/* =========================
-DASHBOARD
-========================= */
+/* =========================================
+   MESSAGE
+========================================= */
+
+function showMessage(text,type){
+
+  const box =
+    document.getElementById("messageBox");
+
+  box.innerText = text;
+
+  box.className =
+    "messageBox " + type;
+
+  box.style.display = "block";
+
+  setTimeout(function(){
+    box.style.display = "none";
+  },3500);
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+function openPage(id){
+
+  document
+    .querySelectorAll(".page")
+    .forEach(function(page){
+      page.classList.remove("active");
+    });
+
+  const target =
+    document.getElementById(id);
+
+  if(!target){
+    return;
+  }
+
+  target.classList.add("active");
+
+  document
+    .querySelectorAll(
+      ".topMenu button,.bottom button"
+    )
+    .forEach(function(button){
+
+      button.classList.remove("active");
+
+      if(button.dataset.page === id){
+        button.classList.add("active");
+      }
+
+    });
+
+  if(id === "dashboard"){
+    loadDashboard();
+  }
+
+  if(id === "balance"){
+    loadBalances();
+  }
+
+  if(id === "withdrawal"){
+    loadWithdrawals();
+  }
+
+  if(id === "kyc"){
+    loadKYC();
+  }
+
+  if(id === "orders"){
+    loadOrders();
+  }
+
+  if(id === "products"){
+    loadProducts();
+  }
+
+  if(id === "customers"){
+    loadCustomers();
+  }
+
+  if(id === "messages"){
+    loadMessages();
+  }
+}
+
+
+/* =========================================
+   BUTTON EVENTS
+   ========================================= */
+
+document
+  .querySelectorAll(
+    ".topMenu button,.bottom button"
+  )
+  .forEach(function(button){
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        const page =
+          this.dataset.page;
+
+        openPage(page);
+
+      }
+    );
+
+  });
+
+
+/* =========================================
+   DASHBOARD
+========================================= */
 
 async function loadDashboard(){
 
-const p=await db
-.from("Products")
-.select("*",{count:"exact",head:true});
+  try{
 
-const o=await db
-.from("orders")
-.select("*",{count:"exact",head:true});
+    const p =
+      await db
+      .from("Products")
+      .select("*",{count:"exact",head:true});
 
-const m=await db
-.from("support_tickets")
-.select("*",{count:"exact",head:true});
+    const o =
+      await db
+      .from("orders")
+      .select("*",{count:"exact",head:true});
 
-const w=await db
-.from("withdrawals")
-.select("*",{count:"exact",head:true});
+    const m =
+      await db
+      .from("support_tickets")
+      .select("*",{count:"exact",head:true});
 
-document.getElementById("statProducts").innerText=
-p.error ? "0" : (p.count || 0);
+    const w =
+      await db
+      .from("withdrawals")
+      .select("*",{count:"exact",head:true});
 
-document.getElementById("statOrders").innerText=
-o.error ? "0" : (o.count || 0);
+    document.getElementById(
+      "statProducts"
+    ).innerText =
+      p.error ? "0" : (p.count || 0);
 
-document.getElementById("statMessages").innerText=
-m.error ? "0" : (m.count || 0);
+    document.getElementById(
+      "statOrders"
+    ).innerText =
+      o.error ? "0" : (o.count || 0);
 
-document.getElementById("statWithdrawals").innerText=
-w.error ? "0" : (w.count || 0);
+    document.getElementById(
+      "statMessages"
+    ).innerText =
+      m.error ? "0" : (m.count || 0);
+
+    document.getElementById(
+      "statWithdrawals"
+    ).innerText =
+      w.error ? "0" : (w.count || 0);
+
+  }catch(error){
+
+    console.log(error);
+
+  }
 
 }
 
 
-/* =========================
-PRODUCTS
-========================= */
+/* =========================================
+   PRODUCTS
+========================================= */
 
 async function loadProducts(){
 
-const box=document.getElementById("productList");
+  const box =
+    document.getElementById("productList");
 
-box.innerHTML='<div class="loading">Loading...</div>';
+  box.innerHTML =
+    '<div class="loading">Loading...</div>';
 
-const result=await db
-.from("Products")
-.select("*");
+  const result =
+    await db
+    .from("Products")
+    .select("*");
 
-if(result.error){
+  if(result.error){
 
-console.log(result.error);
+    console.log(result.error);
 
-box.innerHTML=
-'<div class="empty">Products could not be loaded.</div>';
+    box.innerHTML =
+      '<div class="empty">Products could not be loaded.</div>';
 
-return;
-}
+    return;
+  }
 
-const data=result.data || [];
+  const data =
+    result.data || [];
 
-if(!data.length){
+  if(!data.length){
 
-box.innerHTML=
-'<div class="empty">No products yet.</div>';
+    box.innerHTML =
+      '<div class="empty">No products yet.</div>';
 
-return;
-}
+    return;
+  }
 
-box.innerHTML="";
+  box.innerHTML = "";
 
-data.forEach(function(p){
+  data.forEach(function(product){
 
-const id=p.Id ?? p.id;
+    const id =
+      product.Id ??
+      product.id;
 
-const name=p.Name ?? p.name ?? "Product";
+    const name =
+      product.Name ??
+      product.name ??
+      "Product";
 
-const price=Number(
-p.Price ?? p.price ?? 0
-);
+    const description =
+      product.Description ??
+      product.description ??
+      "";
 
-const stock=Number(
-p.Stock ?? p.stock ?? 0
-);
+    const price =
+      Number(
+        product.Price ??
+        product.price ??
+        0
+      );
 
-const category=p.Category ??
-p.category ?? "";
+    const stock =
+      Number(
+        product.Stock ??
+        product.stock ??
+        0
+      );
 
-const image=p["Image url"] ??
-p.image_url ??
-p.image ?? "";
+    const category =
+      product.Category ??
+      product.category ??
+      "";
 
-const description=p.Description ??
-p.description ?? "";
+    const image =
+      product["Image url"] ??
+      product.image_url ??
+      product.image ??
+      "";
 
-const div=document.createElement("div");
+    const div =
+      document.createElement("div");
 
-div.className="item";
+    div.className = "item";
 
-let imageHTML="";
+    let imageHTML = "";
 
-if(image){
+    if(image){
 
-imageHTML=
-'<img class="productImage" src="'+
-esc(image)+
-'" onerror="this.style.display=\'none\'">';
+      imageHTML =
+        '<img class="productImage" src="' +
+        esc(image) +
+        '" onerror="this.style.display=\'none\'">';
 
-}
+    }
 
-div.innerHTML=
+    div.innerHTML =
 
-imageHTML+
+      imageHTML +
 
-"<b>📦 "+esc(name)+"</b>"+
+      "<b>📦 " +
+      esc(name) +
+      "</b>" +
 
-"<p>"+esc(description)+"</p>"+
+      "<p>" +
+      esc(description) +
+      "</p>" +
 
-"<p>Price: $"+
-price.toFixed(2)+
-"</p>"+
+      "<p>Price: <b>$" +
+      price.toFixed(2) +
+      "</b></p>" +
 
-"<p>Stock: "+
-stock+
-"</p>"+
+      "<p>Stock: " +
+      stock +
+      "</p>" +
 
-"<p>Category: "+
-esc(category)+
-"</p>"+
+      "<p>Category: " +
+      esc(category) +
+      "</p>" +
 
-'<button class="action red" '+
-'onclick="deleteProduct(\''+
-esc(id)+
-'\')">'+
-'Delete</button>';
+      '<button class="action red" ' +
+      'onclick="deleteProduct(' +
+      JSON.stringify(id) +
+      ')">' +
+      'Delete' +
+      '</button>';
 
-box.appendChild(div);
+    box.appendChild(div);
 
-});
+  });
 
 }
 
 
 /* ADD PRODUCT */
 
+document
+  .getElementById("addProductButton")
+  .addEventListener("click",addProduct);
+
+
 async function addProduct(){
 
-const name=document
-.getElementById("productName")
-.value.trim();
+  const name =
+    document
+    .getElementById("productName")
+    .value.trim();
 
-const description=document
-.getElementById("productDescription")
-.value.trim();
+  const description =
+    document
+    .getElementById("productDescription")
+    .value.trim();
 
-const price=Number(document
-.getElementById("productPrice")
-.value);
+  const price =
+    Number(
+      document
+      .getElementById("productPrice")
+      .value
+    );
 
-const stock=Number(document
-.getElementById("productStock")
-.value);
+  const stock =
+    Number(
+      document
+      .getElementById("productStock")
+      .value
+    );
 
-const category=document
-.getElementById("productCategory")
-.value.trim();
+  const category =
+    document
+    .getElementById("productCategory")
+    .value.trim();
 
-const image=document
-.getElementById("productImage")
-.value.trim();
+  const image =
+    document
+    .getElementById("productImage")
+    .value.trim();
 
-if(!name){
 
-showMessage(
-"Product name is required.",
-"error"
-);
+  if(!name){
 
-return;
-}
+    showMessage(
+      "Product name is required.",
+      "error"
+    );
 
-const result=await db
-.from("Products")
-.insert({
-Name:name,
-Description:description,
-Price:price,
-Stock:stock,
-Category:category,
-"Image url":image
-});
+    return;
+  }
 
-if(result.error){
 
-console.log(result.error);
+  const result =
+    await db
+    .from("Products")
+    .insert({
 
-showMessage(
-result.error.message,
-"error"
-);
+      Name:name,
+      Description:description,
+      Price:price || 0,
+      Stock:stock || 0,
+      Category:category,
+      "Image url":image
 
-return;
-}
+    });
 
-showMessage(
-"Product added successfully.",
-"success"
-);
 
-document.getElementById("productName").value="";
-document.getElementById("productDescription").value="";
-document.getElementById("productPrice").value="";
-document.getElementById("productStock").value="";
-document.getElementById("productCategory").value="";
-document.getElementById("productImage").value="";
+  if(result.error){
 
-loadProducts();
-loadDashboard();
+    console.log(result.error);
+
+    showMessage(
+      "Product could not be added.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  showMessage(
+    "Product added successfully.",
+    "success"
+  );
+
+
+  document.getElementById(
+    "productName"
+  ).value = "";
+
+  document.getElementById(
+    "productDescription"
+  ).value = "";
+
+  document.getElementById(
+    "productPrice"
+  ).value = "";
+
+  document.getElementById(
+    "productStock"
+  ).value = "";
+
+  document.getElementById(
+    "productCategory"
+  ).value = "";
+
+  document.getElementById(
+    "productImage"
+  ).value = "";
+
+
+  loadProducts();
+  loadDashboard();
 
 }
 
@@ -982,151 +1137,172 @@ loadDashboard();
 
 async function deleteProduct(id){
 
-if(!confirm("Delete this product?")){
-return;
+  if(!confirm("Delete this product?")){
+    return;
+  }
+
+  const result =
+    await db
+    .from("Products")
+    .delete()
+    .eq("Id",id);
+
+  if(result.error){
+
+    console.log(result.error);
+
+    showMessage(
+      "Product could not be deleted.",
+      "error"
+    );
+
+    return;
+  }
+
+  showMessage(
+    "Product deleted.",
+    "success"
+  );
+
+  loadProducts();
+  loadDashboard();
+
 }
 
-const result=await db
-.from("Products")
-.delete()
-.eq("Id",id);
 
-if(result.error){
-
-console.log(result.error);
-
-showMessage(
-"Product could not be deleted.",
-"error"
-);
-
-return;
-}
-
-showMessage(
-"Product deleted.",
-"success"
-);
-
-loadProducts();
-loadDashboard();
-
-}
-
-
-/* =========================
-ORDERS
-========================= */
+/* =========================================
+   ORDERS
+========================================= */
 
 async function loadOrders(){
 
-const box=document.getElementById("orderList");
+  const box =
+    document.getElementById("orderList");
 
-box.innerHTML=
-'<div class="loading">Loading...</div>';
+  box.innerHTML =
+    '<div class="loading">Loading...</div>';
 
-const result=await db
-.from("orders")
-.select("*")
-.order("created_at",{ascending:false});
+  const result =
+    await db
+    .from("orders")
+    .select("*")
+    .order("created_at",{ascending:false});
 
-if(result.error){
+  if(result.error){
 
-console.log(result.error);
+    console.log(result.error);
 
-box.innerHTML=
-'<div class="empty">Orders could not be loaded.</div>';
+    box.innerHTML =
+      '<div class="empty">Orders could not be loaded.</div>';
 
-return;
-}
+    return;
+  }
 
-const data=result.data || [];
+  const data =
+    result.data || [];
 
-if(!data.length){
+  if(!data.length){
 
-box.innerHTML=
-'<div class="empty">No customer orders yet.</div>';
+    box.innerHTML =
+      '<div class="empty">No customer orders yet.</div>';
 
-return;
-}
+    return;
+  }
 
-box.innerHTML="";
+  box.innerHTML = "";
 
-data.forEach(function(order){
+  data.forEach(function(order){
 
-const id=order.id;
+    const id =
+      order.id;
 
-const customer=
-order.customer_name ||
-order.customer_id ||
-"Customer";
+    const customer =
+      order.customer_name ||
+      order.customer_id ||
+      "Customer";
 
-const product=
-order.product_name ||
-"Product";
+    const product =
+      order.product_name ||
+      "Product";
 
-const quantity=
-order.quantity || 1;
+    const quantity =
+      order.quantity ||
+      1;
 
-const total=Number(
-order.total_amount ??
-order.total ??
-0
-);
+    const total =
+      Number(
+        order.total_amount ??
+        order.total ??
+        0
+      );
 
-const status=
-order.status ||
-"Pending";
+    const status =
+      order.status ||
+      "Pending";
 
-const div=document.createElement("div");
+    const div =
+      document.createElement("div");
 
-div.className="item";
+    div.className = "item";
 
-div.innerHTML=
+    div.innerHTML =
 
-"<b>🛒 Order #"+
-esc(id)+
-"</b>"+
+      "<b>🛒 Order #" +
+      esc(id) +
+      "</b>" +
 
-"<p>Customer: "+
-esc(customer)+
-"</p>"+
+      "<p>Customer: " +
+      esc(customer) +
+      "</p>" +
 
-"<p>Product: "+
-esc(product)+
-"</p>"+
+      "<p>Product: " +
+      esc(product) +
+      "</p>" +
 
-"<p>Quantity: "+
-quantity+
-"</p>"+
+      "<p>Quantity: " +
+      esc(quantity) +
+      "</p>" +
 
-"<p>Total: <b>$"+
-total.toFixed(2)+
-"</b></p>"+
+      "<p>Total: <b>$" +
+      total.toFixed(2) +
+      "</b></p>" +
 
-"<p>Status: <span class='status'>"+
-esc(status)+
-"</span></p>"+
+      "<p>Status: " +
+      "<span class='status'>" +
+      esc(status) +
+      "</span></p>" +
 
-'<select id="orderStatus'+
-esc(id)+
-'">'+
-'<option value="Pending">Pending</option>'+
-'<option value="Processing">Processing</option>'+
-'<option value="Shipped">Shipped</option>'+
-'<option value="Delivered">Delivered</option>'+
-'<option value="Cancelled">Cancelled</option>'+
-'</select>'+
+      '<select id="orderStatus_' +
+      esc(id) +
+      '">' +
 
-'<button class="action" '+
-'onclick="updateOrder(\''+
-esc(id)+
-'\')">'+
-'Update Status</button>';
+      '<option value="Pending">Pending</option>' +
+      '<option value="Processing">Processing</option>' +
+      '<option value="Shipped">Shipped</option>' +
+      '<option value="Delivered">Delivered</option>' +
+      '<option value="Cancelled">Cancelled</option>' +
 
-box.appendChild(div);
+      '</select>' +
 
-});
+      '<button class="action" ' +
+      'onclick="updateOrder(' +
+      JSON.stringify(id) +
+      ')">' +
+      'Update Status' +
+      '</button>';
+
+    box.appendChild(div);
+
+    const select =
+      document.getElementById(
+        "orderStatus_" + id
+      );
+
+    if(select){
+      select.value = status;
+    }
+
+  });
 
 }
 
@@ -1135,403 +1311,72 @@ box.appendChild(div);
 
 async function updateOrder(id){
 
-const select=document.getElementById(
-"orderStatus"+id
-);
+  const select =
+    document.getElementById(
+      "orderStatus_" + id
+    );
 
-if(!select){
-return;
+  if(!select){
+    return;
+  }
+
+  const result =
+    await db
+    .from("orders")
+    .update({
+      status:select.value
+    })
+    .eq("id",id);
+
+  if(result.error){
+
+    console.log(result.error);
+
+    showMessage(
+      "Order status could not be updated.",
+      "error"
+    );
+
+    return;
+  }
+
+  showMessage(
+    "Order status updated.",
+    "success"
+  );
+
+  loadOrders();
+
 }
 
-const result=await db
-.from("orders")
-.update({
-status:select.value
-})
-.eq("id",id);
 
-if(result.error){
-
-console.log(result.error);
-
-showMessage(
-"Order status could not be updated.",
-"error"
-);
-
-return;
-}
-
-showMessage(
-"Order status updated.",
-"success"
-);
-
-loadOrders();
-
-}
-
-
-/* =========================
-MESSAGES
-========================= */
+/* =========================================
+   MESSAGES / CUSTOMER SERVICE
+========================================= */
 
 async function loadMessages(){
 
-const box=document.getElementById("messageList");
+  const box =
+    document.getElementById("messageList");
 
-box.innerHTML=
-'<div class="loading">Loading...</div>';
+  box.innerHTML =
+    '<div class="loading">Loading...</div>';
 
-const result=await db
-.from("support_tickets")
-.select("*")
-.order("created_at",{ascending:false});
+  const result =
+    await db
+    .from("support_tickets")
+    .select("*")
+    .order("created_at",{ascending:false});
 
-if(result.error){
+  if(result.error){
 
-console.log(result.error);
+    console.log(result.error);
 
-box.innerHTML=
-'<div class="empty">Messages could not be loaded.</div>';
+    box.innerHTML =
+      '<div class="empty">Messages could not be loaded.</div>';
 
-return;
-}
+    return;
+  }
 
-const data=result.data || [];
-
-if(!data.length){
-
-box.innerHTML=
-'<div class="empty">No customer messages yet.</div>';
-
-return;
-}
-
-box.innerHTML="";
-
-data.forEach(function(t){
-
-const id=t.id;
-
-const customer=
-t.customer_name ||
-t.customer_id ||
-"Customer";
-
-const message=t.message || "";
-
-const reply=t.admin_reply || "";
-
-const status=t.status || "Pending";
-
-const div=document.createElement("div");
-
-div.className="item";
-
-div.innerHTML=
-
-"<b>💬 "+
-esc(customer)+
-"</b>"+
-
-"<p>"+
-esc(message)+
-"</p>"+
-
-"<p>Status: <span class='status'>"+
-esc(status)+
-"</span></p>"+
-
-'<textarea id="reply'+
-esc(id)+
-'" placeholder="Write reply...">'+
-esc(reply)+
-'</textarea>'+
-
-'<button class="action green" '+
-'onclick="replyMessage(\''+
-esc(id)+
-'\')">'+
-'Send Reply</button>'+
-
-'<button class="action red" '+
-'onclick="deleteMessage(\''+
-esc(id)+
-'\')">'+
-'Delete</button>';
-
-box.appendChild(div);
-
-});
-
-}
-
-
-/* REPLY */
-
-async function replyMessage(id){
-
-const textarea=document.getElementById(
-"reply"+id
-);
-
-if(!textarea){
-return;
-}
-
-const reply=textarea.value.trim();
-
-if(!reply){
-
-showMessage(
-"Write a reply first.",
-"error"
-);
-
-return;
-}
-
-const result=await db
-.from("support_tickets")
-.update({
-admin_reply:reply,
-status:"Replied"
-})
-.eq("id",id);
-
-if(result.error){
-
-console.log(result.error);
-
-showMessage(
-"Reply could not be sent.",
-"error"
-);
-
-return;
-}
-
-showMessage(
-"Reply sent successfully.",
-"success"
-);
-
-loadMessages();
-
-}
-
-
-/* DELETE MESSAGE */
-
-async function deleteMessage(id){
-
-if(!confirm("Delete this message?")){
-return;
-}
-
-const result=await db
-.from("support_tickets")
-.delete()
-.eq("id",id);
-
-if(result.error){
-
-console.log(result.error);
-
-showMessage(
-"Message could not be deleted.",
-"error"
-);
-
-return;
-}
-
-showMessage(
-"Message deleted.",
-"success"
-);
-
-loadMessages();
-loadDashboard();
-
-}
-
-
-/* =========================
-BALANCE
-========================= */
-
-async function loadBalances(){
-
-const box=document.getElementById(
-"balanceList"
-);
-
-box.innerHTML=
-'<div class="loading">Loading...</div>';
-
-const result=await db
-.from("customer_balances")
-.select("*")
-.order("updated_at",{ascending:false});
-
-if(result.error){
-
-console.log(result.error);
-
-box.innerHTML=
-'<div class="empty">Balance could not be loaded.</div>';
-
-return;
-}
-
-const data=result.data || [];
-
-if(!data.length){
-
-box.innerHTML=
-'<div class="empty">No customer balances yet.</div>';
-
-return;
-}
-
-box.innerHTML="";
-
-data.forEach(function(c){
-
-const id=c.id;
-
-const customer=
-c.customer_name ||
-c.customer_id ||
-"Customer";
-
-const balance=Number(c.balance || 0);
-
-const div=document.createElement("div");
-
-div.className="item";
-
-div.innerHTML=
-
-"<b>👤 "+
-esc(customer)+
-"</b>"+
-
-"<p>Current Balance: <b>$"+
-balance.toFixed(2)+
-"</b></p>"+
-
-'<input id="balance'+
-esc(id)+
-'" type="number" step="0.01" placeholder="New balance">'+
-
-'<button class="action" '+
-'onclick="updateBalance(\''+
-esc(id)+
-'\')">'+
-'Update Balance</button>';
-
-box.appendChild(div);
-
-});
-
-}
-
-
-/* UPDATE BALANCE */
-
-async function updateBalance(id){
-
-const input=document.getElementById(
-"balance"+id
-);
-
-if(!input){
-return;
-}
-
-const value=Number(input.value);
-
-if(!Number.isFinite(value) || value<0){
-
-showMessage(
-"Enter a valid balance.",
-"error"
-);
-
-return;
-}
-
-const result=await db
-.from("customer_balances")
-.update({
-balance:value,
-updated_at:new Date().toISOString()
-})
-.eq("id",id);
-
-if(result.error){
-
-console.log(result.error);
-
-showMessage(
-"Balance could not be updated.",
-"error"
-);
-
-return;
-}
-
-showMessage(
-"Balance updated.",
-"success"
-);
-
-loadBalances();
-
-}
-
-
-/* =========================
-WITHDRAWALS
-========================= */
-
-async function loadWithdrawals(){
-
-const box=document.getElementById(
-"withdrawalList"
-);
-
-box.innerHTML=
-'<div class="loading">Loading...</div>';
-
-const result=await db
-.from("withdrawals")
-.select("*")
-.order("created_at",{ascending:false});
-
-if(result.error){
-
-console.log(result.error);
-
-box.innerHTML=
-'<div class="empty">Withdrawal requests could not be loaded.</div>';
-
-return;
-}
-
-const data=result.data || [];
-
-if(!data.length){
-
-box.innerHTML=
-'<div class="empty">No withdrawal requests.</div>';
-
-return;
-}
-
-box.innerHTML="";
-
-data.forE
+  const data =
+    resu
