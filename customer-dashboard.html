@@ -153,8 +153,24 @@ async function sendMessage(){
  const email=getEmail(),message=document.getElementById("customerMessage").value.trim(),status=document.getElementById("serviceStatus"),button=document.getElementById("sendButton");
  if(!email||!message){status.className="error";status.innerText="Please enter your email and message.";return}
  button.disabled=true;button.innerText="Sending...";status.className="";status.innerText="Sending...";
- const {error}=await supabaseClient.from("support_tickets").insert([{customer_email:email,message:message,subject:"Customer Service",status:"pending"}]);
- if(error){console.error(error);status.className="error";status.innerText="Message could not be sent. Please try again."}
+ let result=await supabaseClient
+  .from("support_tickets")
+  .insert([{customer_email:email,message:message}]);
+
+// If the existing table requires status, try again with status.
+// This fallback also avoids failure when optional columns such as subject
+// have not been created yet.
+if(result.error && /status/i.test(result.error.message||"")){
+  result=await supabaseClient
+    .from("support_tickets")
+    .insert([{customer_email:email,message:message,status:"pending"}]);
+}
+const {error}=result;
+ if(error){
+  console.error(error);
+  status.className="error";
+  status.innerText="Message could not be sent: "+(error.message||"Please check Supabase table/policies.");
+}
  else{localStorage.setItem("smartSellerCustomerEmail",email);status.className="success";status.innerText="Message sent successfully ✅";document.getElementById("customerMessage").value="";await loadMyMessages()}
  button.disabled=false;button.innerText="Send Message";
 }
