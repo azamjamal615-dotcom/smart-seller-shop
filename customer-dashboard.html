@@ -7,7 +7,7 @@ background:#f3f4f6;
 color:#172033;
 font-family:Arial,sans-serif;
 font-size:13px;
-padding-bottom:20px
+padding-bottom:10px
 }
 
 .header{
@@ -16,20 +16,29 @@ color:#fff;
 text-align:center;
 padding:10px 8px
 }
-.header h1{margin:0;font-size:17px}
-.header p{margin:3px 0 0;color:#cbd5e1;font-size:10px}
+
+.header h1{
+margin:0;
+font-size:17px
+}
+
+.header p{
+margin:3px 0 0;
+color:#cbd5e1;
+font-size:10px
+}
 
 .container{
-max-width:650px;
+max-width:900px;
 margin:auto;
-padding:7px
+padding:8px
 }
 
 .menu{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:5px;
-margin-bottom:8px
+gap:6px;
+margin-bottom:9px
 }
 
 .menu button{
@@ -40,7 +49,8 @@ padding:8px 4px;
 border-radius:8px;
 box-shadow:0 1px 5px #ddd;
 font-size:11px;
-cursor:pointer
+cursor:pointer;
+line-height:15px
 }
 
 .menu button.active{
@@ -48,20 +58,25 @@ background:#1877f2;
 color:#fff
 }
 
-.page{display:none}
-.page.active{display:block}
+.page{
+display:none
+}
+
+.page.active{
+display:block
+}
 
 .card{
 background:#fff;
 border-radius:12px;
 padding:11px;
-margin-bottom:8px;
-box-shadow:0 2px 7px #ddd
+margin-bottom:9px;
+box-shadow:0 2px 8px #ddd
 }
 
 .card h2{
-margin:0 0 7px;
-font-size:15px
+font-size:15px;
+margin:0 0 8px
 }
 
 .hero{
@@ -76,13 +91,13 @@ margin-bottom:9px
 display:flex;
 align-items:center;
 gap:9px;
-margin:5px 0 12px
+margin:6px 0 12px
 }
 
 .avatar{
-width:43px;
-height:43px;
-border-radius:14px;
+width:42px;
+height:42px;
+border-radius:13px;
 background:#466a88;
 border:2px solid #6687a2;
 display:flex;
@@ -94,7 +109,7 @@ font-weight:bold
 
 .customer-line h2{
 margin:0 0 3px;
-font-size:17px
+font-size:16px
 }
 
 .customer-line p{
@@ -112,17 +127,17 @@ gap:7px
 .money{
 background:rgba(255,255,255,.13);
 border:1px solid rgba(255,255,255,.15);
-border-radius:13px;
+border-radius:12px;
 padding:9px 10px
 }
 
 .money-label{
 color:#d7e2eb;
-font-size:10px
+font-size:9px
 }
 
 .money-value{
-font-size:18px;
+font-size:17px;
 font-weight:bold;
 margin-top:4px
 }
@@ -138,53 +153,52 @@ margin-top:9px
 border:1px solid rgba(255,255,255,.25);
 background:rgba(255,255,255,.13);
 color:#fff;
-border-radius:15px;
+border-radius:12px;
 padding:7px 10px;
-font-size:11px;
+font-size:10px;
 cursor:pointer
 }
 
 .stats{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:6px
+gap:7px
 }
 
 .stat{
 background:#fff;
 border-radius:12px;
-padding:10px 5px;
-box-shadow:0 1px 6px #ddd;
-text-align:center
+padding:9px;
+box-shadow:0 1px 6px #ddd
 }
 
 .stat h3{
 margin:4px 0 2px;
-font-size:17px
+font-size:16px
 }
 
 .stat p{
 margin:0;
 color:#777;
-font-size:10px
+font-size:9px
 }
 
 .product-grid{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:7px
+gap:8px
 }
 
 .product{
 background:#fff;
 border-radius:10px;
-padding:7px;
+padding:8px;
 box-shadow:0 1px 6px #ddd
 }
 
 .product img{
 width:100%;
-height:120px;
+height:110px;
 object-fit:cover;
 border-radius:7px
 }
@@ -201,7 +215,8 @@ font-size:10px
 
 .price{
 font-weight:bold;
-color:#1877f2
+color:#1877f2;
+font-size:13px!important
 }
 
 .action{
@@ -214,8 +229,13 @@ cursor:pointer;
 font-size:11px
 }
 
-.green{background:#16a34a}
-.red{background:#dc2626}
+.green{
+background:#16a34a
+}
+
+.red{
+background:#dc2626
+}
 
 input,select,textarea{
 width:100%;
@@ -226,13 +246,13 @@ font-size:12px;
 margin:3px 0 7px
 }
 
-textarea{
-min-height:65px
-}
-
 label{
 font-size:10px;
 font-weight:bold
+}
+
+textarea{
+min-height:65px
 }
 
 .total{
@@ -244,7 +264,7 @@ margin:9px 0
 
 .box{
 border:1px solid #ddd;
-border-radius:9px;
+border-radius:8px;
 padding:9px;
 margin-bottom:7px;
 background:#fafafa
@@ -261,14 +281,14 @@ padding:3px 6px;
 border-radius:12px;
 background:#fef3c7;
 color:#92400e;
-font-size:10px;
+font-size:9px;
 font-weight:bold
 }
 
 .success{
 background:#dcfce7;
 color:#166534;
-padding:8px;
+padding:7px;
 border-radius:7px;
 margin-top:7px;
 font-size:11px
@@ -277,7 +297,7 @@ font-size:11px
 .error{
 background:#fee2e2;
 color:#991b1b;
-padding:8px;
+padding:7px;
 border-radius:7px;
 margin-top:7px;
 font-size:11px
@@ -297,7 +317,8 @@ padding:6px
 }
 
 .menu{
-gap:4px
+gap:5px;
+margin-bottom:7px
 }
 
 .menu button{
@@ -310,35 +331,57 @@ padding:12px;
 border-radius:14px
 }
 
-.money-grid{
-gap:5px
-}
-
-.money{
-padding:8px
-}
-
-.money-value{
-font-size:17px
-}
-
-.quick button{
-padding:6px 8px;
-font-size:10px
-}
-
 .product-grid{
+grid-template-columns:repeat(2,1fr);
 gap:6px
 }
 
 .product img{
-height:105px
+height:95px
 }
 
 .card{
 padding:9px;
-margin-bottom:7px
+border-radius:10px
+}
+
+.stats{
+gap:5px
+}
+
+.stat{
+padding:7px
+}
+
+.stat h3{
+font-size:14px
+}
+
+.quick button{
+padding:6px 8px;
+font-size:9px
 }
 
 }
-</style>
+
+@media(max-width:380px){
+
+.menu button{
+font-size:9px;
+padding:6px 2px
+}
+
+.product img{
+height:85px
+}
+
+.customer-line h2{
+font-size:14px
+}
+
+.money-value{
+font-size:15px
+}
+
+}
+  </style>
