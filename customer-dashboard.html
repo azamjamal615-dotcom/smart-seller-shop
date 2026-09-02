@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Smart Seller Shop - Customer</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -12,260 +12,79 @@
 
 body{
 margin:0;
-background:#f3f4f6;
-color:#172033;
 font-family:Arial,sans-serif;
-font-size:13px;
-padding-bottom:20px
-}
-
-button,input,select,textarea{
-font-family:inherit
+background:#f3f4f6;
+color:#172033
 }
 
 .header{
 background:#111827;
-color:white;
-padding:14px;
-text-align:center
+color:#fff;
+text-align:center;
+padding:18px 10px
 }
 
 .header h1{
 margin:0;
-font-size:20px
+font-size:22px
 }
 
 .header p{
-margin:4px 0 0;
+margin:5px 0 0;
 color:#cbd5e1;
-font-size:11px
+font-size:12px
 }
 
 .container{
-max-width:800px;
+max-width:900px;
 margin:auto;
-padding:10px
+padding:12px
 }
-
-/* AUTH */
-
-.auth{
-max-width:430px;
-margin:25px auto
-}
-
-.auth .logo{
-width:65px;
-height:65px;
-border-radius:18px;
-background:#1877f2;
-color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:25px;
-font-weight:bold;
-margin:0 auto 12px
-}
-
-.auth h2{
-text-align:center;
-margin:5px 0
-}
-
-.auth .sub{
-text-align:center;
-color:#777;
-font-size:11px;
-margin-bottom:15px
-}
-
-/* CARDS */
 
 .card{
-background:white;
-border-radius:14px;
-padding:14px;
-margin-bottom:10px;
-box-shadow:0 2px 9px #ddd
+background:#fff;
+border-radius:15px;
+padding:18px;
+margin-bottom:12px;
+box-shadow:0 2px 10px #ddd
 }
 
 .card h2{
-margin:0 0 10px;
-font-size:17px
-}
-
-/* MENU */
-
-.menu{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:7px;
-margin-bottom:10px
-}
-
-.menu button{
-border:0;
-background:white;
-padding:10px 4px;
-border-radius:9px;
-box-shadow:0 1px 6px #ddd;
-font-size:10px;
-cursor:pointer
-}
-
-.menu button.active{
-background:#1877f2;
-color:white
-}
-
-/* PAGES */
-
-.page{
-display:none
-}
-
-.page.active{
-display:block
-}
-
-/* HERO */
-
-.hero{
-background:linear-gradient(135deg,#123e64,#285579);
-color:white;
-border-radius:16px;
-padding:16px;
-margin-bottom:10px
-}
-
-.customer-line{
-display:flex;
-align-items:center;
-gap:10px;
-margin:8px 0 14px
-}
-
-.avatar{
-width:48px;
-height:48px;
-border-radius:14px;
-background:#466a88;
-border:2px solid #7694ad;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:22px;
-font-weight:bold
-}
-
-.customer-line h2{
-margin:0 0 3px;
-font-size:18px
-}
-
-.customer-line p{
-margin:0;
-font-size:10px;
-color:#dce8f1
-}
-
-/* MONEY */
-
-.money-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:7px
-}
-
-.money{
-background:rgba(255,255,255,.13);
-border:1px solid rgba(255,255,255,.18);
-border-radius:11px;
-padding:10px
-}
-
-.money-label{
-font-size:9px;
-color:#dce8f1
-}
-
-.money-value{
-font-size:17px;
-font-weight:bold;
-margin-top:5px
-}
-
-/* STATS */
-
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:7px;
-margin-bottom:10px
-}
-
-.stat{
-background:white;
-border-radius:12px;
-padding:12px;
-box-shadow:0 1px 7px #ddd;
-text-align:center
-}
-
-.stat b{
-font-size:17px
-}
-
-.stat span{
-display:block;
-font-size:10px;
-color:#777;
-margin-top:3px
-}
-
-/* FORM */
-
-label{
-font-size:11px;
-font-weight:bold;
-display:block;
-margin-top:5px
+margin:0 0 12px
 }
 
 input,select,textarea{
 width:100%;
-padding:10px;
+padding:12px;
 border:1px solid #ddd;
 border-radius:8px;
-font-size:12px;
-margin:4px 0 8px;
-background:white
+margin:5px 0 10px;
+font-size:14px
 }
 
 textarea{
-min-height:75px;
+min-height:100px;
 resize:vertical
 }
 
-.action{
-border:0;
-background:#1877f2;
-color:white;
-padding:9px 13px;
-border-radius:8px;
+label{
 font-size:12px;
+font-weight:bold
+}
+
+button{
 cursor:pointer
 }
 
-.action:disabled{
-opacity:.5;
-cursor:not-allowed
-}
-
-.full{
+.action{
 width:100%;
-margin-top:4px
+border:0;
+background:#1877f2;
+color:#fff;
+padding:12px;
+border-radius:8px;
+font-size:14px;
+margin-top:6px
 }
 
 .green{
@@ -277,252 +96,291 @@ background:#dc2626
 }
 
 .gray{
-background:#6b7280
+background:#475569
 }
 
-/* PRODUCTS */
+.auth{
+max-width:450px;
+margin:35px auto
+}
+
+.auth-tabs{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:6px;
+margin-bottom:15px
+}
+
+.auth-tabs button{
+border:0;
+padding:12px;
+border-radius:8px;
+background:#e5e7eb
+}
+
+.auth-tabs button.active{
+background:#1877f2;
+color:white
+}
+
+.auth-page{
+display:none
+}
+
+.auth-page.active{
+display:block
+}
+
+.menu{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;
+margin-bottom:12px
+}
+
+.menu button{
+border:0;
+background:#fff;
+padding:11px 5px;
+border-radius:9px;
+box-shadow:0 1px 6px #ddd;
+font-size:12px
+}
+
+.menu button.active{
+background:#1877f2;
+color:white
+}
+
+.page{
+display:none
+}
+
+.page.active{
+display:block
+}
+
+.hero{
+background:linear-gradient(135deg,#123e64,#285579);
+color:#fff;
+border-radius:16px;
+padding:18px;
+margin-bottom:12px
+}
+
+.hero h2{
+margin:0 0 5px
+}
+
+.money-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;
+margin-top:15px
+}
+
+.money{
+background:rgba(255,255,255,.13);
+border:1px solid rgba(255,255,255,.18);
+border-radius:10px;
+padding:11px
+}
+
+.money small{
+color:#dbeafe
+}
+
+.money strong{
+display:block;
+font-size:18px;
+margin-top:5px
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px
+}
+
+.stat{
+background:#fff;
+border-radius:12px;
+padding:12px;
+text-align:center;
+box-shadow:0 1px 7px #ddd
+}
+
+.stat strong{
+font-size:20px
+}
+
+.stat p{
+margin:5px 0 0;
+font-size:11px;
+color:#777
+}
 
 .product-grid{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:8px
+gap:10px
 }
 
 .product{
-background:white;
-border-radius:11px;
-padding:8px;
-box-shadow:0 1px 7px #ddd
+border:1px solid #ddd;
+border-radius:12px;
+padding:10px;
+background:#fff
 }
 
 .product img{
 width:100%;
-height:125px;
+height:170px;
 object-fit:cover;
 border-radius:8px
 }
 
 .product h3{
-font-size:13px;
-margin:7px 0 3px
+font-size:14px;
+margin:8px 0 4px
 }
 
 .product p{
-font-size:11px;
-margin:3px 0
+font-size:12px;
+margin:5px 0;
+color:#666
 }
 
 .price{
-font-size:14px!important;
-font-weight:bold;
-color:#1877f2
+color:#1877f2!important;
+font-size:17px!important;
+font-weight:bold
 }
-
-/* BOX */
 
 .box{
 border:1px solid #ddd;
 background:#fafafa;
-border-radius:9px;
-padding:10px;
+border-radius:10px;
+padding:12px;
 margin-bottom:8px
-}
-
-.box p{
-margin:5px 0;
-font-size:11px
 }
 
 .status{
 display:inline-block;
-padding:4px 7px;
-border-radius:15px;
+padding:5px 9px;
+border-radius:20px;
 background:#fef3c7;
 color:#92400e;
-font-size:10px;
+font-size:11px;
 font-weight:bold
 }
-
-.approved{
-background:#dcfce7;
-color:#166534
-}
-
-.rejected{
-background:#fee2e2;
-color:#991b1b
-}
-
-/* ALERT */
 
 .success{
 background:#dcfce7;
 color:#166534;
-padding:9px;
+padding:10px;
 border-radius:8px;
-font-size:11px;
-margin-top:7px
+margin-top:8px;
+font-size:12px
 }
 
 .error{
 background:#fee2e2;
 color:#991b1b;
-padding:9px;
+padding:10px;
 border-radius:8px;
-font-size:11px;
-margin-top:7px
+margin-top:8px;
+font-size:12px
 }
 
 .empty{
 text-align:center;
+padding:20px;
 color:#777;
-padding:18px;
-font-size:11px
-}
-
-.hidden{
-display:none!important
-}
-
-.small{
-font-size:10px;
-color:#777
-}
-
-/* QUICK */
-
-.quick{
-display:flex;
-gap:6px;
-flex-wrap:wrap;
-margin-top:11px
-}
-
-.quick button{
-border:1px solid rgba(255,255,255,.3);
-background:rgba(255,255,255,.13);
-color:white;
-border-radius:15px;
-padding:7px 10px;
-font-size:10px
-}
-
-/* CART */
-
-.cart-row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:8px;
-padding:9px 0;
-border-bottom:1px solid #eee
-}
-
-.cart-row:last-child{
-border-bottom:0
-}
-
-.cart-name{
-font-weight:bold;
 font-size:12px
 }
 
-.cart-price{
-font-size:11px;
-color:#777
+.profile-row{
+padding:11px 0;
+border-bottom:1px solid #eee;
+font-size:13px
 }
-
-.total{
-text-align:right;
-font-size:17px;
-font-weight:bold;
-margin:12px 0
-}
-
-/* TOP USER */
-
-.userbar{
-background:white;
-padding:8px 10px;
-border-radius:10px;
-margin-bottom:9px;
-box-shadow:0 1px 6px #ddd;
-display:flex;
-align-items:center;
-justify-content:space-between;
-font-size:10px
-}
-
-.online{
-color:#16a34a;
-font-weight:bold
-}
-
-/* MOBILE */
 
 @media(max-width:600px){
-
-.container{
-padding:7px
-}
-
-.money-grid{
-grid-template-columns:1fr 1fr
-}
-
-.money:last-child{
-grid-column:1 / -1
-}
-
-.menu button{
-font-size:9px;
-padding:9px 2px
-}
-
-.product-grid{
+.menu{
 grid-template-columns:repeat(2,1fr)
 }
 
-.hero{
-padding:13px
+.product-grid{
+grid-template-columns:1fr
+}
+
+.money-grid{
+grid-template-columns:1fr
 }
 
 .stats{
 grid-template-columns:repeat(3,1fr)
 }
-
 }
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-AUTH SCREEN
-===================================================== -->
-
-<div id="authScreen">
-
 <div class="header">
 <h1>Smart Seller Shop</h1>
 <p>Customer Account</p>
 </div>
 
-<div class="container auth">
+<!-- AUTH -->
 
-<div class="card">
+<div id="authSection" class="container">
 
-<div class="logo">SS</div>
+<div class="card auth">
 
-<h2 id="authTitle">Customer Login</h2>
+<div class="auth-tabs">
+<button id="loginTab" class="active" onclick="showAuth('login')">
+🔑 Login
+</button>
 
-<div class="sub" id="authSubtitle">
-Login to your Smart Seller account
+<button id="registerTab" onclick="showAuth('register')">
+📝 Register
+</button>
 </div>
 
-<div id="authError"></div>
+<!-- LOGIN -->
 
-<div id="registerFields" class="hidden">
+<div id="loginPage" class="auth-page active">
+
+<h2>🔑 Customer Login</h2>
+
+<label>Email</label>
+<input id="loginEmail" type="email" placeholder="your@email.com">
+
+<label>Password</label>
+<input id="loginPassword" type="password" placeholder="Password">
+
+<button class="action" onclick="login()">
+🔑 Login
+</button>
+
+<div id="loginResult"></div>
+
+<p style="text-align:center;font-size:12px">
+Don't have an account?
+<a href="#" onclick="showAuth('register');return false">
+Create Account
+</a>
+</p>
+
+</div>
+
+<!-- REGISTER -->
+
+<div id="registerPage" class="auth-page">
+
+<h2>📝 Create Customer Account</h2>
 
 <label>Full Name</label>
 <input id="registerName" placeholder="Your full name">
@@ -530,67 +388,36 @@ Login to your Smart Seller account
 <label>Phone</label>
 <input id="registerPhone" placeholder="Phone number">
 
-</div>
-
 <label>Email</label>
-<input id="authEmail" type="email" placeholder="Email address">
+<input id="registerEmail" type="email" placeholder="your@email.com">
 
 <label>Password</label>
-<input id="authPassword" type="password" placeholder="Password">
+<input id="registerPassword" type="password" placeholder="Minimum 6 characters">
 
-<button id="authButton" class="action full">
-🔐 Login
+<label>Confirm Password</label>
+<input id="registerPassword2" type="password" placeholder="Confirm password">
+
+<button class="action green" onclick="register()">
+📝 Create Account
 </button>
 
-<button id="toggleAuth" class="action gray full">
-Create New Account
-</button>
-
-</div>
-
-<div class="card">
-<p class="small">
-Your account is protected by Supabase Authentication.
-</p>
-</div>
+<div id="registerResult"></div>
 
 </div>
 
 </div>
-
-
-<!-- =====================================================
-CUSTOMER APP
-===================================================== -->
-
-<div id="appScreen" class="hidden">
-
-<div class="header">
-<h1>Smart Seller Shop</h1>
-<p>Customer Dashboard</p>
 </div>
+
+
+<!-- DASHBOARD -->
+
+<div id="appSection" style="display:none">
 
 <div class="container">
 
-<div class="userbar">
-
-<span>
-🟢 <span class="online">Logged In</span>
-</span>
-
-<span id="topEmail">
-Customer
-</span>
-
-</div>
-
-
-<!-- MENU -->
-
 <div class="menu">
 
-<button class="active"
-onclick="showPage('dashboardPage',this)">
+<button class="active" onclick="showPage('dashboard',this)">
 🏠 Dashboard
 </button>
 
@@ -623,7 +450,7 @@ onclick="showPage('dashboardPage',this)">
 </button>
 
 <button onclick="showPage('servicePage',this)">
-💬 Service
+💬 Support
 </button>
 
 <button onclick="logout()">
@@ -633,275 +460,161 @@ onclick="showPage('dashboardPage',this)">
 </div>
 
 
-<!-- =====================================================
-DASHBOARD
-===================================================== -->
+<!-- DASHBOARD -->
 
-<section id="dashboardPage" class="page active">
+<div id="dashboard" class="page active">
 
 <div class="hero">
 
-<div style="font-size:10px;letter-spacing:2px">
+<p style="margin:0;font-size:11px">
 WELCOME BACK
-</div>
+</p>
 
-<div class="customer-line">
-
-<div class="avatar" id="avatar">
-C
-</div>
-
-<div>
-
-<h2 id="customerName">
-Smart Seller Customer
+<h2 id="welcomeName">
+Customer
 </h2>
 
-<p>⭐ Verified Customer Account</p>
-
-</div>
-
-</div>
-
+<p id="customerEmail" style="font-size:11px"></p>
 
 <div class="money-grid">
 
 <div class="money">
-
-<div class="money-label">
-💳 BALANCE
+<small>💳 BALANCE</small>
+<strong>$<span id="balance">0.00</span></strong>
 </div>
-
-<div class="money-value">
-$<span id="balance">0.00</span>
-</div>
-
-</div>
-
 
 <div class="money">
-
-<div class="money-label">
-📈 PROFIT
+<small>📈 PROFIT</small>
+<strong>$<span id="profit">0.00</span></strong>
 </div>
-
-<div class="money-value">
-$<span id="profit">0.00</span>
-</div>
-
-</div>
-
 
 <div class="money">
-
-<div class="money-label">
-🛡️ GUARANTEE
-</div>
-
-<div class="money-value">
-$<span id="guarantee">0.00</span>
+<small>🛡️ GUARANTEE</small>
+<strong>$<span id="guarantee">0.00</span></strong>
 </div>
 
 </div>
 
 </div>
-
-
-<div class="quick">
-
-<button onclick="showPage('depositPage',null)">
-＋ Deposit
-</button>
-
-<button onclick="showPage('withdrawPage',null)">
-💸 Withdraw
-</button>
-
-<button onclick="showPage('productsPage',null)">
-📦 Products
-</button>
-
-<button onclick="showPage('servicePage',null)">
-💬 Admin
-</button>
-
-</div>
-
-</div>
-
 
 <div class="stats">
 
 <div class="stat">
-
-<b id="orderCount">
-0
-</b>
-
-<span>Orders</span>
-
+<strong id="productTotal">0</strong>
+<p>Products</p>
 </div>
 
 <div class="stat">
-
-<b id="spent">
-$0.00
-</b>
-
-<span>Total Spent</span>
-
+<strong id="cartTotalCount">0</strong>
+<p>Cart Items</p>
 </div>
 
 <div class="stat">
-
-<b id="depositCount">
-0
-</b>
-
-<span>Deposits</span>
+<strong id="orderTotal">0</strong>
+<p>Orders</p>
+</div>
 
 </div>
 
 </div>
 
-</section>
 
+<!-- PRODUCTS -->
 
-<!-- =====================================================
-PRODUCTS
-===================================================== -->
-
-<section id="productsPage" class="page">
+<div id="productsPage" class="page">
 
 <div class="card">
 
 <h2>📦 Products</h2>
 
 <div id="products" class="product-grid">
-
-<div class="empty">
-Loading products...
+<div class="empty">Loading...</div>
 </div>
 
 </div>
 
 </div>
 
-</section>
 
+<!-- CART -->
 
-<!-- =====================================================
-CART
-===================================================== -->
-
-<section id="cartPage" class="page">
+<div id="cartPage" class="page">
 
 <div class="card">
 
 <h2>🛒 My Cart</h2>
 
-<div id="cartItems">
-<div class="empty">Cart is empty.</div>
-</div>
+<div id="cartItems"></div>
 
-<div class="total">
-Total: $<span id="cartTotal">0.00</span>
-</div>
+<h3 style="text-align:right">
+Total: $<span id="cartAmount">0.00</span>
+</h3>
 
-<button id="placeOrderBtn"
-class="action green full"
-onclick="placeOrder()">
+<button class="action" onclick="placeOrder()">
 📦 Place Order
 </button>
 
 </div>
 
-</section>
+</div>
 
 
-<!-- =====================================================
-ORDERS
-===================================================== -->
+<!-- ORDERS -->
 
-<section id="ordersPage" class="page">
+<div id="ordersPage" class="page">
 
 <div class="card">
 
 <h2>📋 My Orders</h2>
 
 <div id="orders">
-<div class="empty">Loading...</div>
+<div class="empty">No orders yet.</div>
 </div>
 
 </div>
 
-</section>
+</div>
 
 
-<!-- =====================================================
-DEPOSIT
-===================================================== -->
+<!-- DEPOSIT -->
 
-<section id="depositPage" class="page">
+<div id="depositPage" class="page">
 
 <div class="card">
 
 <h2>💰 Deposit Money</h2>
 
-<p class="small">
-Payment karne ke baad transaction details submit karein.
-Admin verify karke balance add karega.
+<p style="font-size:12px">
+Payment کرنے کے بعد transaction details یہاں submit کریں۔
+Admin verification کے بعد balance update ہوگا۔
 </p>
 
 <label>Amount</label>
-
-<input
-id="depositAmount"
-type="number"
-min="1"
-step="0.01"
-placeholder="100">
+<input id="depositAmount" type="number" min="1" placeholder="100">
 
 <label>Payment Method</label>
 
 <select id="depositMethod">
-
-<option value="">
-Select Method
-</option>
-
+<option value="">Select method</option>
 <option>Bank Transfer</option>
 <option>UPI</option>
 <option>Mobile Wallet</option>
 <option>Other</option>
-
 </select>
 
 <label>Transaction ID</label>
-
-<input
-id="transactionId"
-placeholder="Transaction ID">
+<input id="depositTransaction" placeholder="Transaction ID">
 
 <label>Note</label>
+<textarea id="depositNote" placeholder="Optional note"></textarea>
 
-<textarea
-id="depositNote"
-placeholder="Optional note">
-</textarea>
-
-<button
-class="action green"
-onclick="submitDeposit()">
-
+<button class="action" onclick="submitDeposit()">
 💳 Submit Deposit
-
 </button>
 
 <div id="depositResult"></div>
 
 </div>
-
 
 <div class="card">
 
@@ -913,55 +626,48 @@ onclick="submitDeposit()">
 
 </div>
 
-</section>
+</div>
 
 
-<!-- =====================================================
-WITHDRAW
-===================================================== -->
+<!-- WITHDRAW -->
 
-<section id="withdrawPage" class="page">
+<div id="withdrawPage" class="page">
 
 <div class="card">
 
 <h2>💸 Withdraw Money</h2>
 
-<p class="small">
-Withdrawal request admin review karega.
-</p>
-
 <div class="box">
 
-<p>
-Available Balance:
-<b>$<span id="withdrawBalance">
-0.00
-</span></b>
-</p>
+<b>Available Balance</b>
+
+<h2>$<span id="withdrawBalance">0.00</span></h2>
 
 </div>
 
-<label>Amount</label>
+<label>Withdraw Amount</label>
 
 <input
 id="withdrawAmount"
 type="number"
 min="1"
 step="0.01"
-placeholder="50">
+placeholder="50"
+>
 
 <label>Withdrawal Method</label>
 
 <select id="withdrawMethod">
 
 <option value="">
-Select Method
+Select method
 </option>
 
 <option>Bank Transfer</option>
+
 <option>UPI</option>
+
 <option>Mobile Wallet</option>
-<option>Other</option>
 
 </select>
 
@@ -969,113 +675,98 @@ Select Method
 
 <textarea
 id="withdrawAccount"
-placeholder="Account number / UPI / wallet details">
-</textarea>
+placeholder="Account number / UPI ID / wallet details"
+></textarea>
 
-<button
-class="action red"
-onclick="submitWithdrawal()">
-
+<button class="action green" onclick="submitWithdraw()">
 💸 Submit Withdrawal
-
 </button>
 
 <div id="withdrawResult"></div>
 
 </div>
 
-
 <div class="card">
 
-<h2>📋 My Withdrawals</h2>
+<h2>🧾 My Withdrawals</h2>
 
-<div id="withdrawalList">
+<div id="withdrawList">
 <div class="empty">Loading...</div>
 </div>
 
 </div>
 
-</section>
+</div>
 
 
-<!-- =====================================================
-KYC
-===================================================== -->
+<!-- KYC -->
 
-<section id="kycPage" class="page">
+<div id="kycPage" class="page">
 
 <div class="card">
 
 <h2>🪪 KYC Verification</h2>
 
-<p class="small">
-Apni correct information submit karein.
-Admin KYC verify karega.
+<p style="font-size:12px">
+اپنی KYC information submit کریں۔ Admin verification کے بعد status update ہوگا۔
 </p>
 
 <label>Full Name</label>
-
-<input id="kycName"
-placeholder="Full legal name">
+<input id="kycName">
 
 <label>ID Type</label>
 
 <select id="kycType">
 
 <option value="">
-Select ID Type
+Select ID type
 </option>
 
 <option>Passport</option>
+
 <option>National ID</option>
+
 <option>Driving License</option>
+
 <option>Other</option>
 
 </select>
 
 <label>ID Number</label>
 
-<input
-id="kycNumber"
-placeholder="ID number">
+<input id="kycNumber" placeholder="ID Number">
 
 <label>Document URL</label>
 
 <input
 id="kycDocument"
-placeholder="https://...">
+placeholder="Document link (optional)"
+>
 
-<button
-class="action green"
-onclick="submitKYC()">
-
+<button class="action" onclick="submitKyc()">
 🪪 Submit KYC
-
 </button>
 
 <div id="kycResult"></div>
 
 </div>
 
-
 <div class="card">
 
 <h2>📋 KYC Status</h2>
 
-<div id="kycList">
+<div id="kycStatus">
 <div class="empty">Loading...</div>
 </div>
 
 </div>
 
-</section>
+</div>
 
 
-<!-- =====================================================
-PROFILE
-===================================================== -->
+<!-- PROFILE -->
 
-<section id="profilePage" class="page">
+<div id="profilePage" class="page">
 
 <div class="card">
 
@@ -1091,53 +782,22 @@ PROFILE
 
 <label>Email</label>
 
-<input id="profileEmail" readonly>
+<input id="profileEmail" disabled>
 
-<button
-class="action green"
-onclick="updateProfile()">
-
+<button class="action" onclick="saveProfile()">
 💾 Save Profile
-
 </button>
 
 <div id="profileResult"></div>
 
 </div>
 
-
-<div class="card">
-
-<h2>🔐 Account</h2>
-
-<p>
-Customer ID:
-</p>
-
-<p>
-<b id="customerIdText">
--
-</b>
-</p>
-
-<button
-class="action red full"
-onclick="logout()">
-
-🚪 Logout
-
-</button>
-
 </div>
 
-</section>
 
+<!-- SUPPORT -->
 
-<!-- =====================================================
-CUSTOMER SERVICE
-===================================================== -->
-
-<section id="servicePage" class="page">
+<div id="servicePage" class="page">
 
 <div class="card">
 
@@ -1145,45 +805,34 @@ CUSTOMER SERVICE
 
 <textarea
 id="supportMessage"
-placeholder="Write your message to admin...">
-</textarea>
+placeholder="Write your message..."
+></textarea>
 
-<button
-class="action"
-onclick="sendMessage()">
-
+<button class="action" onclick="sendSupport()">
 📨 Send Message
-
 </button>
 
-<div id="serviceResult"></div>
+<div id="supportResult"></div>
 
 </div>
-
 
 <div class="card">
 
 <h2>💬 My Messages</h2>
 
-<div id="supportMessages">
+<div id="supportList">
 <div class="empty">Loading...</div>
 </div>
 
 </div>
 
-</section>
-
-
 </div>
 
+</div>
 </div>
 
 
 <script>
-
-/* =====================================================
-SUPABASE
-===================================================== */
 
 const SUPABASE_URL =
 "https://cgrwiwzqiusvjibpjzdv.supabase.co";
@@ -1197,193 +846,111 @@ SUPABASE_URL,
 SUPABASE_KEY
 );
 
+let currentUser=null;
 
-/* =====================================================
-GLOBAL
-===================================================== */
-
-let currentUser = null;
-
-let cart =
-JSON.parse(
-localStorage.getItem("smartSellerCart") || "[]"
-);
+let cart=[];
 
 
-/* =====================================================
-HELPERS
-===================================================== */
+/* AUTH TABS */
 
-function $(id){
-return document.getElementById(id);
-}
+function showAuth(type){
 
-
-function esc(v){
-
-return String(v ?? "").replace(
-/[&<>"']/g,
-m => ({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[m])
-);
-
-}
-
-
-function showResult(id,text,type){
-
-const box=$(id);
-
-box.className=type;
-
-box.textContent=text;
-
-}
-
-
-function statusHTML(status){
-
-const s=String(status || "Pending");
-
-let cls="status";
-
-if(s.toLowerCase()==="approved" ||
-s.toLowerCase()==="completed" ||
-s.toLowerCase()==="replied"){
-
-cls+=" approved";
-
-}
-
-if(s.toLowerCase()==="rejected"){
-
-cls+=" rejected";
-
-}
-
-return `
-<span class="${cls}">
-${esc(s)}
-</span>
-`;
-
-}
-
-
-/* =====================================================
-AUTH MODE
-===================================================== */
-
-let registerMode=false;
-
-
-$("toggleAuth").onclick=function(){
-
-registerMode=!registerMode;
-
-$("registerFields")
+document
+.getElementById("loginPage")
 .classList.toggle(
-"hidden",
-!registerMode
+"active",
+type==="login"
 );
 
-if(registerMode){
+document
+.getElementById("registerPage")
+.classList.toggle(
+"active",
+type==="register"
+);
 
-$("authTitle").textContent=
-"Create Customer Account";
+document
+.getElementById("loginTab")
+.classList.toggle(
+"active",
+type==="login"
+);
 
-$("authSubtitle").textContent=
-"Register your Smart Seller account";
-
-$("authButton").textContent=
-"📝 Register";
-
-$("toggleAuth").textContent=
-"Already have an account? Login";
-
-}else{
-
-$("authTitle").textContent=
-"Customer Login";
-
-$("authSubtitle").textContent=
-"Login to your Smart Seller account";
-
-$("authButton").textContent=
-"🔐 Login";
-
-$("toggleAuth").textContent=
-"Create New Account";
+document
+.getElementById("registerTab")
+.classList.toggle(
+"active",
+type==="register"
+);
 
 }
 
-};
 
+/* REGISTER */
 
-$("authButton").onclick=async function(){
+async function register(){
 
-const email=
-$("authEmail").value.trim();
+const name =
+document.getElementById("registerName")
+.value.trim();
 
-const password=
-$("authPassword").value;
+const phone =
+document.getElementById("registerPhone")
+.value.trim();
 
-$("authError").innerHTML="";
+const email =
+document.getElementById("registerEmail")
+.value.trim();
 
-if(!email){
+const password =
+document.getElementById("registerPassword")
+.value;
 
-showResult(
-"authError",
-"Email enter karein.",
-"error"
-);
+const password2 =
+document.getElementById("registerPassword2")
+.value;
+
+const result =
+document.getElementById("registerResult");
+
+result.className="";
+
+if(!name||!email||!password){
+
+result.className="error";
+
+result.textContent =
+"Name, Email اور Password لازمی ہیں۔";
 
 return;
 
 }
 
-if(password.length < 6){
+if(password.length<6){
 
-showResult(
-"authError",
-"Password kam az kam 6 characters ka hona chahiye.",
-"error"
-);
+result.className="error";
+
+result.textContent =
+"Password کم از کم 6 characters کا ہونا چاہیے۔";
 
 return;
 
 }
 
+if(password!==password2){
 
-$("authButton").disabled=true;
+result.className="error";
 
+result.textContent =
+"Passwords match نہیں کر رہے۔";
+
+return;
+
+}
 
 try{
 
-if(registerMode){
-
-const name=
-$("registerName").value.trim();
-
-const phone=
-$("registerPhone").value.trim();
-
-if(!name){
-
-throw new Error(
-"Full name enter karein."
-);
-
-}
-
-
-const {data,error}=
-
+const {data,error} =
 await db.auth.signUp({
 
 email:email,
@@ -1399,25 +966,113 @@ phone:phone
 
 });
 
-
 if(error)throw error;
 
+if(data.user){
+
+currentUser=data.user;
+
+await createCustomerData(
+data.user,
+name,
+phone,
+email
+);
+
+result.className="success";
+
+result.textContent =
+"Account successfully create ہو گیا۔";
 
 if(data.session){
 
-await loadApp(data.user);
+openDashboard();
 
 }else{
 
-$("authError").innerHTML=
-'<div class="success">Account create ho gaya. Agar email confirmation enabled hai to pehle email verify karein, phir Login karein. ✅</div>';
+result.textContent =
+"Account بن گیا ہے۔ اگر Email confirmation enabled ہے تو پہلے email confirm کریں، پھر Login کریں۔";
+
+showAuth("login");
 
 }
 
-}else{
+}
 
-const {data,error}=
+}catch(error){
 
+console.error(error);
+
+result.className="error";
+
+result.textContent =
+error.message||"Registration failed.";
+
+}
+
+}
+
+
+/* CREATE CUSTOMER DATA */
+
+async function createCustomerData(
+user,
+name,
+phone,
+email
+){
+
+await db
+.from("customer_profiles")
+.upsert({
+
+id:user.id,
+
+full_name:name,
+
+phone:phone,
+
+email:email
+
+});
+
+await db
+.from("customer_balances")
+.upsert({
+
+customer_id:user.id,
+
+balance:0,
+
+profit:0,
+
+guarantee:0
+
+});
+
+}
+
+
+/* LOGIN */
+
+async function login(){
+
+const email =
+document.getElementById("loginEmail")
+.value.trim();
+
+const password =
+document.getElementById("loginPassword")
+.value;
+
+const result =
+document.getElementById("loginResult");
+
+result.className="";
+
+try{
+
+const {data,error} =
 await db.auth.signInWithPassword({
 
 email:email,
@@ -1428,151 +1083,468 @@ password:password
 
 if(error)throw error;
 
-await loadApp(data.user);
+currentUser=data.user;
 
-}
-
-}catch(e){
-
-showResult(
-"authError",
-e.message,
-"error"
+await createCustomerData(
+data.user,
+data.user.user_metadata?.full_name||
+"Smart Seller Customer",
+data.user.user_metadata?.phone||
+"",
+data.user.email||email
 );
 
+openDashboard();
+
+}catch(error){
+
+console.error(error);
+
+result.className="error";
+
+result.textContent =
+error.message||"Login failed.";
+
 }
 
-$("authButton").disabled=false;
-
-};
+}
 
 
-/* =====================================================
-CHECK SESSION
-===================================================== */
+/* SESSION */
 
 async function checkSession(){
 
-const {
-data
-}=await db.auth.getSession();
+const {data} =
+await db.auth.getSession();
 
 if(data.session){
 
-await loadApp(
-data.session.user
+currentUser=data.session.user;
+
+await createCustomerData(
+
+currentUser,
+
+currentUser.user_metadata?.full_name||
+"Smart Seller Customer",
+
+currentUser.user_metadata?.phone||
+"",
+
+currentUser.email||""
+
 );
+
+openDashboard();
 
 }else{
 
-$("authScreen")
-.classList.remove("hidden");
+document.getElementById("authSection")
+.style.display="block";
 
-$("appScreen")
-.classList.add("hidden");
-
-}
+document.getElementById("appSection")
+.style.display="none";
 
 }
-
-
-/* =====================================================
-LOAD APP
-===================================================== */
-
-async function loadApp(user){
-
-currentUser=user;
-
-$("authScreen")
-.classList.add("hidden");
-
-$("appScreen")
-.classList.remove("hidden");
-
-
-$("topEmail").textContent=
-user.email || "Customer";
-
-
-$("customerIdText").textContent=
-user.id;
-
-
-await ensureCustomerData();
-
-await Promise.all([
-
-loadProfile(),
-
-loadBalance(),
-
-loadProducts(),
-
-loadDeposits(),
-
-loadWithdrawals(),
-
-loadKYC(),
-
-loadOrders(),
-
-loadMessages()
-
-]);
-
-updateCart();
 
 }
 
 
-/* =====================================================
-ENSURE PROFILE/BALANCE
-===================================================== */
+/* OPEN DASHBOARD */
 
-async function ensureCustomerData(){
+function openDashboard(){
 
-const user=currentUser;
+document.getElementById("authSection")
+.style.display="none";
 
-const profile=
+document.getElementById("appSection")
+.style.display="block";
+
+loadAll();
+
+}
+
+
+/* NAVIGATION */
+
+function showPage(id,button){
+
+document
+.querySelectorAll(".page")
+.forEach(p=>
+p.classList.remove("active")
+);
+
+const page=
+document.getElementById(id);
+
+if(page)
+page.classList.add("active");
+
+document
+.querySelectorAll(".menu button")
+.forEach(b=>
+b.classList.remove("active")
+);
+
+if(button)
+button.classList.add("active");
+
+if(id==="productsPage")
+loadProducts();
+
+if(id==="cartPage")
+renderCart();
+
+if(id==="ordersPage")
+loadOrders();
+
+if(id==="depositPage")
+loadDeposits();
+
+if(id==="withdrawPage")
+loadWithdrawals();
+
+if(id==="kycPage")
+loadKyc();
+
+if(id==="profilePage")
+loadProfile();
+
+if(id==="servicePage")
+loadSupport();
+
+}
+
+
+/* LOAD ALL */
+
+async function loadAll(){
+
+loadProfile();
+loadBalance();
+loadProducts();
+loadOrders();
+loadDeposits();
+loadWithdrawals();
+loadKyc();
+loadSupport();
+
+}
+
+
+/* PROFILE */
+
+async function loadProfile(){
+
+if(!currentUser)return;
+
+const {data,error}=
 await db
 .from("customer_profiles")
-.select("id")
-.eq("id",user.id)
+.select("*")
+.eq("id",currentUser.id)
 .maybeSingle();
 
+if(error){
 
-if(!profile.data){
+console.error(error);
+return;
 
+}
+
+const name =
+data?.full_name||
+currentUser.user_metadata?.full_name||
+"Smart Seller Customer";
+
+document.getElementById("welcomeName")
+.textContent=name;
+
+document.getElementById("customerEmail")
+.textContent=
+currentUser.email||"";
+
+document.getElementById("profileName")
+.value=name;
+
+document.getElementById("profilePhone")
+.value=data?.phone||"";
+
+document.getElementById("profileEmail")
+.value=currentUser.email||"";
+
+}
+
+
+/* SAVE PROFILE */
+
+async function saveProfile(){
+
+const name=
+document.getElementById("profileName")
+.value.trim();
+
+const phone=
+document.getElementById("profilePhone")
+.value.trim();
+
+const result=
+document.getElementById("profileResult");
+
+if(!name){
+
+result.className="error";
+
+result.textContent="Name required.";
+
+return;
+
+}
+
+const {error}=
 await db
 .from("customer_profiles")
-.insert({
+.upsert({
 
-id:user.id,
+id:currentUser.id,
 
-full_name:
-user.user_metadata?.full_name ||
-"Smart Seller Customer",
+full_name:name,
 
-phone:
-user.user_metadata?.phone || "",
+phone:phone,
 
-email:user.email
+email:currentUser.email
+
+});
+
+if(error){
+
+result.className="error";
+
+result.textContent=error.message;
+
+return;
+
+}
+
+result.className="success";
+
+result.textContent=
+"Profile successfully saved! ✅";
+
+loadProfile();
+
+}
+
+
+/* BALANCE */
+
+async function loadBalance(){
+
+if(!currentUser)return;
+
+const {data,error}=
+await db
+.from("customer_balances")
+.select("*")
+.eq("customer_id",currentUser.id)
+.maybeSingle();
+
+if(error){
+
+console.error(error);
+return;
+
+}
+
+const balance=
+Number(data?.balance||0);
+
+const profit=
+Number(data?.profit||0);
+
+const guarantee=
+Number(data?.guarantee||0);
+
+document.getElementById("balance")
+.textContent=
+balance.toFixed(2);
+
+document.getElementById("profit")
+.textContent=
+profit.toFixed(2);
+
+document.getElementById("guarantee")
+.textContent=
+guarantee.toFixed(2);
+
+document.getElementById("withdrawBalance")
+.textContent=
+balance.toFixed(2);
+
+}
+
+
+/* PRODUCTS */
+
+async function loadProducts(){
+
+const box=
+document.getElementById("products");
+
+box.innerHTML=
+'<div class="empty">Loading products...</div>';
+
+const {data,error}=
+await db
+.from("products")
+.select("*")
+.eq("is_active",true)
+.order("created_at",{ascending:false});
+
+if(error){
+
+console.error(error);
+
+box.innerHTML=
+'<div class="error">Products load نہیں ہوئے۔</div>';
+
+return;
+
+}
+
+document.getElementById("productTotal")
+.textContent=(data||[]).length;
+
+if(!data?.length){
+
+box.innerHTML=
+'<div class="empty">No products available.</div>';
+
+return;
+
+}
+
+box.innerHTML="";
+
+data.forEach(p=>{
+
+const div=
+document.createElement("div");
+
+div.className="product";
+
+if(p.image_url){
+
+const img=
+document.createElement("img");
+
+img.src=p.image_url;
+
+img.onerror=()=>
+img.style.display="none";
+
+div.appendChild(img);
+
+}
+
+div.innerHTML+=
+"<h3>"+esc(p.name)+"</h3>"+
+"<p>"+esc(p.description||"")+"</p>"+
+"<p class='price'>$"+
+Number(p.price||0).toFixed(2)+
+"</p>"+
+"<p>Stock: "+Number(p.stock||0)+"</p>";
+
+const btn=
+document.createElement("button");
+
+btn.className="action";
+
+btn.textContent=
+Number(p.stock)>0
+?"🛒 Add to Cart"
+:"Out of Stock";
+
+btn.disabled=
+Number(p.stock)<=0;
+
+btn.onclick=()=>{
+
+addToCart({
+
+id:p.id,
+
+name:p.name,
+
+price:Number(p.price||0),
+
+quantity:1
+
+});
+
+};
+
+div.appendChild(btn);
+
+box.appendChild(div);
 
 });
 
 }
 
 
-const balance=
-await db
-.from("customer_balances")
-.select("id")
-.eq("customer_id",user.id)
-.maybeSingle();
+/* CART */
+
+function addToCart(product){
+
+const old=
+cart.find(
+x=>String(x.id)===String(product.id)
+);
+
+if(old){
+
+old.quantity++;
+
+}else{
+
+cart.push(product);
+
+}
+
+localStorage.setItem(
+"smartSellerCart",
+JSON.stringify(cart)
+);
+
+updateCart();
+
+alert("Product added to cart! ✅");
+
+}
 
 
-if(!balance.data){
+function updateCart(){
 
-await db
-.from("customer_
+document.getElementById("cartCount")
+.textContent=
+cart.reduce(
+(a,x)=>a+Number(x.quantity||0),
+0
+);
+
+document.getElementById("cartTotalCount")
+.textContent=
+cart.reduce(
+(a,x)=>a+Number(x.quantity||0),
+0
+);
+
+}
+
+
+function renderCart(){
+
+const box=
+docume
