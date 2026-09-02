@@ -9,433 +9,122 @@
 
 <style>
 *{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f4f6;color:#172033}
+.header{background:#111827;color:white;padding:18px 12px;text-align:center}
+.header h1{margin:0;font-size:23px}
+.header p{margin:5px 0 0;font-size:12px;color:#cbd5e1}
+.container{max-width:950px;margin:auto;padding:12px}
 
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f3f4f6;
-color:#172033
-}
+.auth{max-width:430px;margin:35px auto}
+.auth .logo{text-align:center;font-size:45px;margin-bottom:8px}
+.auth h2{text-align:center;margin:5px 0 20px}
 
-.header{
-background:#111827;
-color:white;
-padding:18px 12px;
-text-align:center
-}
-
-.header h1{
-margin:0;
-font-size:23px
-}
-
-.header p{
-margin:5px 0 0;
-font-size:12px;
-color:#cbd5e1
-}
-
-.container{
-max-width:950px;
-margin:auto;
-padding:12px
-}
-
-/* AUTH */
-
-.auth{
-max-width:430px;
-margin:35px auto
-}
-
-.auth .logo{
-text-align:center;
-font-size:45px;
-margin-bottom:8px
-}
-
-.auth h2{
-text-align:center;
-margin:5px 0 20px
-}
-
-.card{
-background:white;
-border-radius:15px;
-padding:18px;
-margin-bottom:14px;
-box-shadow:0 2px 12px #ddd
-}
+.card{background:white;border-radius:15px;padding:18px;margin-bottom:14px;box-shadow:0 2px 12px #ddd}
 
 input,select,textarea{
-width:100%;
-padding:12px;
-border:1px solid #ddd;
-border-radius:8px;
-margin:5px 0 12px;
-font-size:14px;
-outline:none
+width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;
+margin:5px 0 12px;font-size:14px;outline:none
 }
-
-input:focus,
-select:focus,
-textarea:focus{
-border-color:#1877f2
-}
-
-label{
-font-size:12px;
-font-weight:bold
-}
+input:focus,select:focus,textarea:focus{border-color:#1877f2}
+label{font-size:12px;font-weight:bold}
 
 .btn{
-width:100%;
-border:0;
-background:#1877f2;
-color:white;
-padding:12px;
-border-radius:8px;
-font-size:14px;
-cursor:pointer;
-margin-top:5px
+width:100%;border:0;background:#1877f2;color:white;padding:12px;
+border-radius:8px;font-size:14px;cursor:pointer;margin-top:5px
 }
+.btn.green{background:#16a34a}
+.btn.red{background:#dc2626}
+.btn.gray{background:#64748b}
+.btn:disabled{opacity:.6}
 
-.btn:hover{
-opacity:.9
-}
+.link{text-align:center;margin-top:15px;color:#1877f2;cursor:pointer;font-size:13px}
 
-.btn.green{
-background:#16a34a
-}
-
-.btn.red{
-background:#dc2626
-}
-
-.btn.gray{
-background:#64748b
-}
-
-.link{
-text-align:center;
-margin-top:15px;
-color:#1877f2;
-cursor:pointer;
-font-size:13px
-}
-
-.msg{
-display:none;
-padding:10px;
-border-radius:8px;
-margin-top:10px;
-font-size:12px
-}
-
-.msg.success{
-display:block;
-background:#dcfce7;
-color:#166534
-}
-
-.msg.error{
-display:block;
-background:#fee2e2;
-color:#991b1b
-}
-
-/* MENU */
+.msg{display:none;padding:10px;border-radius:8px;margin-top:10px;font-size:12px}
+.msg.success{display:block;background:#dcfce7;color:#166534}
+.msg.error{display:block;background:#fee2e2;color:#991b1b}
 
 .menu{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px;
-margin-bottom:14px
+display:grid;grid-template-columns:repeat(4,1fr);
+gap:8px;margin-bottom:14px
 }
-
 .menu button{
-border:0;
-background:white;
-padding:12px 5px;
-border-radius:9px;
-box-shadow:0 1px 6px #ddd;
-cursor:pointer;
-font-size:12px
+border:0;background:white;padding:12px 5px;border-radius:9px;
+box-shadow:0 1px 6px #ddd;cursor:pointer;font-size:12px
 }
+.menu button.active{background:#1877f2;color:white}
 
-.menu button.active{
-background:#1877f2;
-color:white
-}
+.page{display:none}
+.page.active{display:block}
 
-.page{
-display:none
-}
-
-.page.active{
-display:block
-}
-
-/* DASHBOARD */
-
-.welcome{
-background:linear-gradient(135deg,#123e64,#285579);
-color:white
-}
-
-.customer{
-display:flex;
-align-items:center;
-gap:12px
-}
-
+.welcome{background:linear-gradient(135deg,#123e64,#285579);color:white}
+.customer{display:flex;align-items:center;gap:12px}
 .avatar{
-width:50px;
-height:50px;
-border-radius:14px;
-background:#466a88;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:22px;
-font-weight:bold
+width:50px;height:50px;border-radius:14px;background:#466a88;
+display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:bold
 }
+.customer h2{margin:0;font-size:19px}
+.customer p{margin:4px 0;font-size:11px;color:#dbeafe}
 
-.customer h2{
-margin:0;
-font-size:19px
-}
+.money-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.money{background:rgba(255,255,255,.13);padding:12px;border-radius:10px}
+.money small{color:#dbeafe;font-size:10px}
+.money strong{display:block;font-size:19px;margin-top:5px}
 
-.customer p{
-margin:4px 0;
-font-size:11px;
-color:#dbeafe
-}
-
-.money-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:8px;
-margin-top:18px
-}
-
-.money{
-background:rgba(255,255,255,.13);
-padding:12px;
-border-radius:10px
-}
-
-.money small{
-color:#dbeafe;
-font-size:10px
-}
-
-.money strong{
-display:block;
-font-size:19px;
-margin-top:5px
-}
-
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:9px
-}
-
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
 .stat{
-background:white;
-border-radius:12px;
-padding:15px;
-text-align:center;
+background:white;border-radius:12px;padding:15px;text-align:center;
 box-shadow:0 1px 7px #ddd
 }
+.stat strong{font-size:22px}
+.stat p{margin:5px 0 0;color:#777;font-size:11px}
 
-.stat strong{
-font-size:22px
-}
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.product{background:white;padding:10px;border-radius:12px;box-shadow:0 2px 8px #ddd}
+.product img{width:100%;height:180px;object-fit:cover;border-radius:8px}
+.product h3{font-size:14px;margin:8px 0 4px}
+.product p{font-size:12px;margin:4px 0;color:#666}
+.price{color:#1877f2!important;font-size:18px!important;font-weight:bold}
 
-.stat p{
-margin:5px 0 0;
-color:#777;
-font-size:11px
-}
-
-/* PRODUCTS */
-
-.product-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px
-}
-
-.product{
-background:white;
-padding:10px;
-border-radius:12px;
-box-shadow:0 2px 8px #ddd
-}
-
-.product img{
-width:100%;
-height:180px;
-object-fit:cover;
-border-radius:8px
-}
-
-.product h3{
-font-size:14px;
-margin:8px 0 4px
-}
-
-.product p{
-font-size:12px;
-margin:4px 0;
-color:#666
-}
-
-.price{
-color:#1877f2!important;
-font-size:18px!important;
-font-weight:bold
-}
-
-/* BOX */
-
-.box{
-background:#fafafa;
-border:1px solid #ddd;
-padding:12px;
-border-radius:10px;
-margin-bottom:9px
+.box,.cart-row{
+background:#fafafa;border:1px solid #ddd;padding:12px;
+border-radius:10px;margin-bottom:9px
 }
 
 .status{
-display:inline-block;
-padding:4px 9px;
-border-radius:15px;
-background:#fef3c7;
-color:#92400e;
-font-size:10px;
-font-weight:bold
+display:inline-block;padding:4px 9px;border-radius:15px;
+background:#fef3c7;color:#92400e;font-size:10px;font-weight:bold
 }
+.empty{text-align:center;padding:25px;color:#777;font-size:12px}
 
-.success-status{
-background:#dcfce7;
-color:#166534
-}
+.profile-row{padding:12px 0;border-bottom:1px solid #eee;font-size:13px}
+.total{text-align:right;font-size:19px;font-weight:bold;margin:15px 0}
+textarea{min-height:110px;resize:vertical}
 
-.danger-status{
-background:#fee2e2;
-color:#991b1b
-}
-
-.empty{
-text-align:center;
-padding:25px;
-color:#777;
-font-size:12px
-}
-
-/* PROFILE */
-
-.profile-row{
-padding:12px 0;
-border-bottom:1px solid #eee;
-font-size:13px
-}
-
-.profile-row:last-child{
-border-bottom:0
-}
-
-/* CART */
-
-.cart-row{
-background:#fafafa;
-border:1px solid #ddd;
-border-radius:10px;
-padding:12px;
-margin-bottom:8px
-}
-
-.total{
-text-align:right;
-font-size:19px;
-font-weight:bold;
-margin:15px 0
-}
-
-textarea{
-min-height:110px;
-resize:vertical
-}
-
-/* QUICK */
-
-.quick{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:7px;
-margin-top:12px
-}
-
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
 .quick button{
 border:1px solid rgba(255,255,255,.3);
-background:rgba(255,255,255,.13);
-color:white;
-border-radius:8px;
-padding:9px 4px;
-font-size:11px
+background:rgba(255,255,255,.13);color:white;
+border-radius:8px;padding:9px 4px;font-size:11px
 }
 
-/* KYC */
-
 .kyc-note{
-background:#eff6ff;
-color:#1e40af;
-padding:10px;
-border-radius:8px;
-font-size:11px;
-margin-bottom:12px
+background:#eff6ff;color:#1e40af;padding:10px;
+border-radius:8px;font-size:11px;margin-bottom:12px
 }
 
 @media(max-width:650px){
-
-.menu{
-grid-template-columns:repeat(3,1fr)
-}
-
-.menu button{
-font-size:10px;
-padding:10px 3px
-}
-
-.money-grid{
-grid-template-columns:1fr 1fr 1fr
-}
-
-.money strong{
-font-size:16px
-}
-
-.product-grid{
-grid-template-columns:1fr
-}
-
-.product img{
-height:220px
-}
-
-.quick{
-grid-template-columns:1fr
-}
+.menu{grid-template-columns:repeat(3,1fr)}
+.menu button{font-size:10px;padding:10px 3px}
+.product-grid{grid-template-columns:1fr}
+.product img{height:220px}
+.quick{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<!-- AUTH SCREEN -->
+<!-- ================= AUTH ================= -->
 
 <div id="authScreen">
 
@@ -445,7 +134,6 @@ grid-template-columns:1fr
 </div>
 
 <div class="container">
-
 <div class="auth">
 
 <div class="card">
@@ -454,17 +142,17 @@ grid-template-columns:1fr
 
 <h2 id="authTitle">Customer Login</h2>
 
+<!-- LOGIN -->
+
 <div id="loginForm">
 
-<label>Email</label>
-<input id="loginEmail" type="email" placeholder="Enter email">
+<label>Email / Gmail</label>
+<input id="loginEmail" type="email" placeholder="Enter your Gmail">
 
 <label>Password</label>
 <input id="loginPassword" type="password" placeholder="Enter password">
 
-<button class="btn" onclick="login()">
-🔑 Login
-</button>
+<button class="btn" onclick="login()">🔑 Login</button>
 
 <div id="loginMsg" class="msg"></div>
 
@@ -474,6 +162,7 @@ Create New Account
 
 </div>
 
+<!-- REGISTER -->
 
 <div id="registerForm" style="display:none">
 
@@ -483,8 +172,8 @@ Create New Account
 <label>Phone</label>
 <input id="registerPhone" placeholder="Phone number">
 
-<label>Email</label>
-<input id="registerEmail" type="email" placeholder="Email address">
+<label>Email / Gmail</label>
+<input id="registerEmail" type="email" placeholder="Your Gmail">
 
 <label>Password</label>
 <input id="registerPassword" type="password" placeholder="Create password">
@@ -505,15 +194,12 @@ Already have an account? Login
 </div>
 
 </div>
-
 </div>
-
 </div>
-
 </div>
 
 
-<!-- CUSTOMER PANEL -->
+<!-- ================= CUSTOMER PANEL ================= -->
 
 <div id="customerPanel" style="display:none">
 
@@ -528,45 +214,27 @@ Already have an account? Login
 
 <div class="menu">
 
-<button class="active" onclick="showPage('dashboard',this)">
-🏠 Dashboard
-</button>
+<button class="active" onclick="showPage('dashboard',this)">🏠 Dashboard</button>
 
-<button onclick="showPage('productsPage',this)">
-📦 Products
-</button>
+<button onclick="showPage('productsPage',this)">📦 Products</button>
 
 <button onclick="showPage('cartPage',this)">
 🛒 Cart <span id="cartCount">0</span>
 </button>
 
-<button onclick="showPage('ordersPage',this)">
-📋 Orders
-</button>
+<button onclick="showPage('ordersPage',this)">📋 Orders</button>
 
-<button onclick="showPage('depositPage',this)">
-💰 Deposit
-</button>
+<button onclick="showPage('depositPage',this)">💰 Deposit</button>
 
-<button onclick="showPage('withdrawPage',this)">
-💸 Withdraw
-</button>
+<button onclick="showPage('withdrawPage',this)">💸 Withdraw</button>
 
-<button onclick="showPage('kycPage',this)">
-🪪 KYC
-</button>
+<button onclick="showPage('kycPage',this)">🪪 KYC</button>
 
-<button onclick="showPage('profilePage',this)">
-👤 Profile
-</button>
+<button onclick="showPage('profilePage',this)">👤 Profile</button>
 
-<button onclick="showPage('servicePage',this)">
-💬 Support
-</button>
+<button onclick="showPage('servicePage',this)">💬 Support</button>
 
-<button onclick="logout()">
-🚪 Logout
-</button>
+<button onclick="logout()">🚪 Logout</button>
 
 </div>
 
@@ -583,24 +251,14 @@ WELCOME BACK
 
 <div class="customer">
 
-<div class="avatar" id="avatar">
-C
-</div>
+<div class="avatar" id="avatar">C</div>
 
 <div>
-
-<h2 id="dashName">
-Smart Seller Customer
-</h2>
-
-<p id="dashEmail">
-Customer
-</p>
-
+<h2 id="dashName">Smart Seller Customer</h2>
+<p id="dashEmail">Customer</p>
 </div>
 
 </div>
-
 
 <div class="money-grid">
 
@@ -621,20 +279,13 @@ Customer
 
 </div>
 
-
 <div class="quick">
 
-<button onclick="showPage('depositPage')">
-＋ Deposit
-</button>
+<button onclick="showPage('depositPage')">＋ Deposit</button>
 
-<button onclick="showPage('withdrawPage')">
-💸 Withdraw
-</button>
+<button onclick="showPage('withdrawPage')">💸 Withdraw</button>
 
-<button onclick="showPage('productsPage')">
-📦 Products
-</button>
+<button onclick="showPage('productsPage')">📦 Products</button>
 
 </div>
 
@@ -672,9 +323,7 @@ Customer
 <h2>📦 Products</h2>
 
 <div id="products" class="product-grid">
-<div class="empty">
-Products loading...
-</div>
+<div class="empty">Products loading...</div>
 </div>
 
 </div>
@@ -714,9 +363,7 @@ Total: $<span id="cartTotal">0.00</span>
 <h2>📋 My Orders</h2>
 
 <div id="ordersBox">
-<div class="empty">
-Loading...
-</div>
+<div class="empty">Loading...</div>
 </div>
 
 </div>
@@ -764,7 +411,6 @@ Admin verify karne ke baad balance update karega.
 
 </div>
 
-
 <div class="card">
 
 <h2>🧾 Deposit History</h2>
@@ -810,7 +456,8 @@ Available Balance:
 
 <label>Account Details</label>
 
-<textarea id="withdrawAccount" placeholder="Account number / UPI ID / Wallet number"></textarea>
+<textarea id="withdrawAccount"
+placeholder="Account number / UPI ID / Wallet number"></textarea>
 
 <button class="btn red" onclick="submitWithdrawal()">
 💸 Submit Withdrawal
@@ -819,7 +466,6 @@ Available Balance:
 <div id="withdrawMsg" class="msg"></div>
 
 </div>
-
 
 <div class="card">
 
@@ -872,7 +518,6 @@ Available Balance:
 <div id="kycMsg" class="msg"></div>
 
 </div>
-
 
 <div class="card">
 
@@ -938,7 +583,6 @@ placeholder="Write your message..."></textarea>
 
 </div>
 
-
 <div class="card">
 
 <h2>💬 My Messages</h2>
@@ -952,7 +596,6 @@ placeholder="Write your message..."></textarea>
 </div>
 
 </div>
-
 </div>
 
 
@@ -992,39 +635,31 @@ HELPERS
 ========================= */
 
 function esc(value){
-
 return String(value ?? "")
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
-
 }
 
+function money(value){
+return Number(value || 0).toFixed(2);
+}
 
 function showMsg(id,text,type){
 
-const box =
-document.getElementById(id);
+const box=document.getElementById(id);
 
-box.className =
-"msg "+type;
+box.className="msg "+type;
 
 box.textContent=text;
 
 }
 
 
-function money(value){
-
-return Number(value || 0).toFixed(2);
-
-}
-
-
 /* =========================
-AUTH
+AUTH SCREEN
 ========================= */
 
 function showRegister(){
@@ -1038,7 +673,6 @@ document.getElementById("authTitle").textContent=
 
 }
 
-
 function showLogin(){
 
 document.getElementById("registerForm").style.display="none";
@@ -1051,23 +685,26 @@ document.getElementById("authTitle").textContent=
 }
 
 
+/* =========================
+REGISTER
+========================= */
+
 async function register(){
 
-const name =
+const name=
 document.getElementById("registerName").value.trim();
 
-const phone =
+const phone=
 document.getElementById("registerPhone").value.trim();
 
-const email =
+const email=
 document.getElementById("registerEmail").value.trim();
 
-const password =
+const password=
 document.getElementById("registerPassword").value;
 
-const password2 =
+const password2=
 document.getElementById("registerPassword2").value;
-
 
 if(!name || !email || !password){
 
@@ -1078,11 +715,9 @@ showMsg(
 );
 
 return;
-
 }
 
-
-if(password.length < 6){
+if(password.length<6){
 
 showMsg(
 "registerMsg",
@@ -1091,11 +726,9 @@ showMsg(
 );
 
 return;
-
 }
 
-
-if(password !== password2){
+if(password!==password2){
 
 showMsg(
 "registerMsg",
@@ -1104,16 +737,11 @@ showMsg(
 );
 
 return;
-
 }
-
 
 try{
 
-const {
-data,
-error
-} =
+const {data,error}=
 await db.auth.signUp({
 
 email:email,
@@ -1128,45 +756,43 @@ phone:phone
 
 });
 
-
 if(error) throw error;
 
 
 /*
-Profile automatically create
+اگر email verification ON ہے
+تو user بن جائے گا لیکن session فوراً نہیں ملے گا۔
 */
 
 if(data.user){
 
-await db
-.from("customer_profiles")
-.insert({
+/*
+اگر session available ہو تو profile/balance بنائیں۔
+*/
 
-id:data.user.id,
-full_name:name,
-phone:phone,
-email:email
+if(data.session){
 
-});
+await createCustomerRecords(
+data.user,
+name,
+phone,
+email
+);
 
+}else{
 
-await db
-.from("customer_balances")
-.insert({
-
-customer_id:data.user.id,
-balance:0,
-profit:0,
-guarantee:0
-
-});
+/*
+Email verification کے بعد login پر
+یہ records create ہو جائیں گے۔
+*/
 
 }
 
+}
 
 showMsg(
 "registerMsg",
-"Account create ho gaya. Ab email verification complete karke login karein.",
+"Account create ho gaya. Apni Gmail check karein aur verification link par click karein. Phir login karein.",
 "success"
 );
 
@@ -1185,14 +811,68 @@ error.message || "Registration failed.",
 }
 
 
+/* =========================
+CREATE CUSTOMER RECORDS
+========================= */
+
+async function createCustomerRecords(user,name,phone,email){
+
+if(!user)return;
+
+
+/* PROFILE */
+
+const profileResult=
+await db
+.from("customer_profiles")
+.upsert({
+
+id:user.id,
+full_name:name || "Smart Seller Customer",
+phone:phone || "",
+email:email || user.email || ""
+
+},{onConflict:"id"});
+
+
+if(profileResult.error){
+console.error("Profile:",profileResult.error);
+}
+
+
+/* BALANCE */
+
+const balanceResult=
+await db
+.from("customer_balances")
+.upsert({
+
+customer_id:user.id,
+balance:0,
+profit:0,
+guarantee:0
+
+},{onConflict:"customer_id"});
+
+
+if(balanceResult.error){
+console.error("Balance:",balanceResult.error);
+}
+
+}
+
+
+/* =========================
+LOGIN
+========================= */
+
 async function login(){
 
-const email =
+const email=
 document.getElementById("loginEmail").value.trim();
 
-const password =
+const password=
 document.getElementById("loginPassword").value;
-
 
 if(!email || !password){
 
@@ -1203,27 +883,36 @@ showMsg(
 );
 
 return;
-
 }
-
 
 try{
 
-const {
-data,
-error
-} =
+const {data,error}=
 await db.auth.signInWithPassword({
 
-email,
-password
+email:email,
+password:password
 
 });
 
-
-if(error) throw error;
+if(error)throw error;
 
 currentUser=data.user;
+
+
+/*
+اگر verification کے بعد profile/balance
+موجود نہ ہوں تو یہاں create ہوں گے۔
+*/
+
+const meta=currentUser.user_metadata || {};
+
+await createCustomerRecords(
+currentUser,
+meta.full_name || "Smart Seller Customer",
+meta.phone || "",
+currentUser.email || email
+);
 
 await openCustomerPanel();
 
@@ -1231,9 +920,18 @@ await openCustomerPanel();
 
 console.error(error);
 
+let message=error.message || "Login failed.";
+
+if(message.toLowerCase().includes("email not confirmed")){
+
+message=
+"پہلے اپنی Gmail میں Supabase verification email کھول کر Email Verify کریں، پھر Login کریں۔";
+
+}
+
 showMsg(
 "loginMsg",
-error.message || "Login failed.",
+message,
 "error"
 );
 
@@ -1241,6 +939,73 @@ error.message || "Login failed.",
 
 }
 
+
+/* =========================
+START
+========================= */
+
+async function start(){
+
+const {data,error}=
+await db.auth.getSession();
+
+if(error){
+console.error(error);
+return;
+}
+
+if(data.session){
+
+currentUser=data.session.user;
+
+await openCustomerPanel();
+
+}else{
+
+document.getElementById("authScreen").style.display="block";
+
+document.getElementById("customerPanel").style.display="none";
+
+}
+
+}
+
+
+/* =========================
+CUSTOMER PANEL
+========================= */
+
+async function openCustomerPanel(){
+
+document.getElementById("authScreen").style.display="none";
+
+document.getElementById("customerPanel").style.display="block";
+
+const meta=currentUser.user_metadata || {};
+
+await createCustomerRecords(
+currentUser,
+meta.full_name || "Smart Seller Customer",
+meta.phone || "",
+currentUser.email || ""
+);
+
+await loadProfile();
+
+await loadBalance();
+
+await loadProducts();
+
+await loadOrders();
+
+updateCart();
+
+}
+
+
+/* =========================
+LOGOUT
+========================= */
 
 async function logout(){
 
@@ -1258,49 +1023,6 @@ showLogin();
 
 
 /* =========================
-START
-========================= */
-
-async function start(){
-
-const {
-data
-} =
-await db.auth.getSession();
-
-if(data.session){
-
-currentUser=data.session.user;
-
-await openCustomerPanel();
-
-}else{
-
-document.getElementById("authScreen").style.display="block";
-
-}
-
-}
-
-
-async function openCustomerPanel(){
-
-document.getElementById("authScreen").style.display="none";
-
-document.getElementById("customerPanel").style.display="block";
-
-await loadProfile();
-
-await loadBalance();
-
-await loadProducts();
-
-updateCart();
-
-}
-
-
-/* =========================
 NAVIGATION
 ========================= */
 
@@ -1308,51 +1030,35 @@ function showPage(id,button){
 
 document
 .querySelectorAll(".page")
-.forEach(p=>
-p.classList.remove("active")
-);
+.forEach(p=>p.classList.remove("active"));
 
-const page=
-document.getElementById(id);
+const page=document.getElementById(id);
 
 if(!page)return;
 
 page.classList.add("active");
 
-
 document
 .querySelectorAll(".menu button")
-.forEach(b=>
-b.classList.remove("active")
-);
+.forEach(b=>b.classList.remove("active"));
 
-if(button)
-button.classList.add("active");
+if(button)button.classList.add("active");
 
+if(id==="productsPage")loadProducts();
 
-if(id==="productsPage")
-loadProducts();
+if(id==="cartPage")renderCart();
 
-if(id==="cartPage")
-renderCart();
+if(id==="ordersPage")loadOrders();
 
-if(id==="ordersPage")
-loadOrders();
+if(id==="depositPage")loadDeposits();
 
-if(id==="depositPage")
-loadDeposits();
+if(id==="withdrawPage")loadWithdrawals();
 
-if(id==="withdrawPage")
-loadWithdrawals();
+if(id==="kycPage")loadKYC();
 
-if(id==="kycPage")
-loadKYC();
+if(id==="profilePage")loadProfile();
 
-if(id==="profilePage")
-loadProfile();
-
-if(id==="servicePage")
-loadSupport();
+if(id==="servicePage")loadSupport();
 
 }
 
@@ -1365,18 +1071,13 @@ async function loadProfile(){
 
 if(!currentUser)return;
 
-
-const {
-data,
-error
-} =
+const {data,error}=
 await db
 .from("customer_profiles")
 .select("*")
 .eq("id",currentUser.id)
 .maybeSingle();
 
-
 if(error){
 
 console.error(error);
@@ -1384,155 +1085,37 @@ return;
 
 }
 
+const meta=currentUser.user_metadata || {};
 
-if(data){
+const name=
+data?.full_name ||
+meta.full_name ||
+"Smart Seller Customer";
 
-document.getElementById("profileName").value=
-data.full_name || "";
+const phone=
+data?.phone ||
+meta.phone ||
+"";
 
-document.getElementById("profilePhone").value=
-data.phone || "";
+const email=
+currentUser.email || data?.email || "";
 
-document.getElementById("profileEmail").value=
-currentUser.email || data.email || "";
+document.getElementById("profileName").value=name;
 
-document.getElementById("dashName").textContent=
-data.full_name || "Customer";
+document.getElementById("profilePhone").value=phone;
 
-document.getElementById("dashEmail").textContent=
-currentUser.email || "";
+document.getElementById("profileEmail").value=email;
+
+document.getElementById("dashName").textContent=name;
+
+document.getElementById("dashEmail").textContent=email;
 
 document.getElementById("avatar").textContent=
-(data.full_name || "C")
-.trim()
-.charAt(0)
-.toUpperCase();
-
-}
-
-}
-
-
-async function saveProfile(){
-
-if(!currentUser)return;
-
-
-const name =
-document.getElementById("profileName").value.trim();
-
-const phone =
-document.getElementById("profilePhone").value.trim();
-
-
-if(!name){
-
-showMsg(
-"profileMsg",
-"Name required hai.",
-"error"
-);
-
-return;
-
-}
-
-
-const {
-error
-} =
-await db
-.from("customer_profiles")
-.update({
-
-full_name:name,
-phone:phone,
-updated_at:new Date().toISOString()
-
-})
-.eq("id",currentUser.id);
-
-
-if(error){
-
-showMsg(
-"profileMsg",
-error.message,
-"error"
-);
-
-return;
-
-}
-
-
-showMsg(
-"profileMsg",
-"Profile successfully updated. ✅",
-"success"
-);
-
-await loadProfile();
+name.trim().charAt(0).toUpperCase() || "C";
 
 }
 
 
 /* =========================
-BALANCE
-========================= */
-
-async function loadBalance(){
-
-if(!currentUser)return;
-
-
-let {
-data,
-error
-} =
-await db
-.from("customer_balances")
-.select("*")
-.eq("customer_id",currentUser.id)
-.maybeSingle();
-
-
-if(error){
-
-console.error(error);
-return;
-
-}
-
-
-if(!data){
-
-const result =
-await db
-.from("customer_balances")
-.insert({
-
-customer_id:currentUser.id,
-balance:0,
-profit:0,
-guarantee:0
-
-})
-.select()
-.single();
-
-data=result.data;
-
-}
-
-
-if(!data)return;
-
-
-document.getElementById("balance").textContent=
-money(data.balance);
-
-document.getElementById("profit").textContent=
-money(data.profit);
-
-document.getElementById("guaran
+SAVE PROFILE
+==================
