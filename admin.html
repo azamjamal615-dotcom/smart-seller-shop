@@ -8,9 +8,10 @@
 *{box-sizing:border-box}
 body{margin:0;background:#f3f4f6;color:#172033;font-family:Arial,sans-serif;padding-bottom:78px}
 .header{background:#fff;padding:14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:20}
-.logo{width:50px;height:50px;border-radius:14px;background:#713be8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:bold}
+.logo{width:50px;height:50px;border-radius:14px;background:#713be8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:bold}
 .header h1{margin:0;font-size:19px}.header p{margin:3px 0 0;color:#777;font-size:12px}
-.connection{margin-left:auto;padding:6px 9px;border-radius:14px;background:#fff3cd;color:#856404;font-size:11px}.connection.ok{background:#dcfce7;color:#166534}.connection.bad{background:#fee2e2;color:#991b1b}
+.connection{margin-left:auto;padding:6px 9px;border-radius:14px;background:#fff3cd;color:#856404;font-size:11px}
+.connection.ok{background:#dcfce7;color:#166534}.connection.bad{background:#fee2e2;color:#991b1b}
 .container{max-width:900px;margin:auto;padding:12px}
 .topMenu{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:12px}
 .navBtn{border:0;background:#fff;padding:10px 3px;border-radius:10px;box-shadow:0 2px 7px #ddd;font-size:11px;cursor:pointer;color:#172033}
@@ -20,33 +21,44 @@ body{margin:0;background:#f3f4f6;color:#172033;font-family:Arial,sans-serif;padd
 .card h2{margin:0 0 10px;font-size:18px}
 .welcome{background:#214f78;color:#fff}.welcome h2{font-size:21px;margin:6px 0 10px}.welcome p{font-size:13px;line-height:1.5}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.stat{background:#fff;border-radius:13px;padding:13px 5px;text-align:center;box-shadow:0 2px 8px #ddd}.stat b{font-size:22px}.stat span{display:block;font-size:11px;color:#777;margin-top:4px}
-input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:9px;font-size:14px;margin:5px 0 9px}textarea{min-height:90px}
-label{font-size:12px;font-weight:bold}
-.action{border:0;border-radius:8px;padding:9px 12px;background:#713be8;color:#fff;cursor:pointer;font-size:13px;margin:3px}.action:disabled{opacity:.5}
-.green{background:#16a34a}.red{background:#dc2626}.gray{background:#777}.full{width:100%;margin:3px 0}
-.item{border:1px solid #ddd;border-radius:11px;padding:12px;margin-top:8px;background:#fafafa}.item p{font-size:13px;color:#555;margin:5px 0}
+.stat{background:#fff;border-radius:13px;padding:13px 5px;text-align:center;box-shadow:0 2px 8px #ddd}
+.stat b{font-size:22px}.stat span{display:block;font-size:11px;color:#777;margin-top:4px}
+input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:9px;font-size:14px;margin:5px 0 9px}
+textarea{min-height:90px}label{font-size:12px;font-weight:bold}
+.action{border:0;border-radius:8px;padding:9px 12px;background:#713be8;color:#fff;cursor:pointer;font-size:13px;margin:3px}
+.action:disabled{opacity:.5}.green{background:#16a34a}.red{background:#dc2626}.gray{background:#777}.full{width:100%;margin:3px 0}
+.item{border:1px solid #ddd;border-radius:11px;padding:12px;margin-top:8px;background:#fafafa}
+.item p{font-size:13px;color:#555;margin:5px 0}
 .item img{max-width:100%;height:140px;object-fit:cover;border-radius:8px;display:block;margin-bottom:8px}
-.status{display:inline-block;padding:4px 8px;border-radius:15px;background:#fff3cd;color:#856404;font-size:11px}.status.approved{background:#dcfce7;color:#166534}.status.rejected{background:#fee2e2;color:#991b1b}
+.status{display:inline-block;padding:4px 8px;border-radius:15px;background:#fff3cd;color:#856404;font-size:11px}
+.status.approved{background:#dcfce7;color:#166534}.status.rejected{background:#fee2e2;color:#991b1b}
 .loading,.empty{text-align:center;padding:20px;color:#777;font-size:13px}
 .errorBox{padding:12px;border-radius:9px;background:#fee2e2;color:#991b1b;font-size:12px;word-break:break-word}
-.message{display:none;padding:10px;border-radius:9px;margin-bottom:10px;font-size:13px}.message.success{background:#dcfce7;color:#166534}.message.error{background:#fee2e2;color:#991b1b}
+.message{display:none;padding:10px;border-radius:9px;margin-bottom:10px;font-size:13px}
+.message.success{background:#dcfce7;color:#166534}.message.error{background:#fee2e2;color:#991b1b}
 .bottom{position:fixed;bottom:0;left:0;right:0;height:67px;background:#fff;border-top:1px solid #ddd;display:flex;z-index:999}
-.bottom button{flex:1;border:0;background:#fff;font-size:10px;color:#555;cursor:pointer}.bottom button.active{color:#713be8;font-weight:bold}.bottomIcon{font-size:18px;display:block;margin-bottom:3px}
+.bottom button{flex:1;border:0;background:#fff;font-size:10px;color:#555;cursor:pointer}
+.bottom button.active{color:#713be8;font-weight:bold}.bottomIcon{font-size:18px;display:block;margin-bottom:3px}
 @media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.topMenu{grid-template-columns:repeat(3,1fr)}.topMenu button{font-size:9px;padding:9px 1px}.header h1{font-size:17px}.connection{font-size:9px}}
 </style>
 </head>
 <body>
-<div class="header"><div class="logo">SS</div><div><h1>Smart Seller Shop</h1><p>Admin Panel</p></div><span id="connection" class="connection">Starting...</span></div>
+<div class="header">
+<div class="logo">SS</div>
+<div><h1>Smart Seller Shop</h1><p>Admin Panel</p></div>
+<span id="connection" class="connection">Checking...</span>
+</div>
+
 <div class="container">
 <div id="messageBox" class="message"></div>
+
 <div class="topMenu">
-<button type="button" class="navBtn active" data-page="dashboard">Dashboard</button>
-<button type="button" class="navBtn" data-page="balance">Balance</button>
-<button type="button" class="navBtn" data-page="deposits">Deposits</button>
-<button type="button" class="navBtn" data-page="withdrawals">Withdrawals</button>
-<button type="button" class="navBtn" data-page="kyc">KYC</button>
-<button type="button" class="navBtn" data-page="orders">Orders</button>
+<button class="navBtn active" data-page="dashboard">Dashboard</button>
+<button class="navBtn" data-page="balance">Balance</button>
+<button class="navBtn" data-page="deposits">Deposits</button>
+<button class="navBtn" data-page="withdrawals">Withdrawals</button>
+<button class="navBtn" data-page="kyc">KYC</button>
+<button class="navBtn" data-page="orders">Orders</button>
 </div>
 
 <section id="dashboard" class="page active">
@@ -57,7 +69,7 @@ label{font-size:12px;font-weight:bold}
 <div class="stat"><b id="statMessages">0</b><span>Messages</span></div>
 <div class="stat"><b id="statWithdrawals">0</b><span>Withdrawals</span></div>
 </div>
-<div class="card"><h2>Connection Status</h2><div id="connectionDetails">Starting...</div></div>
+<div class="card"><h2>Connection Status</h2><div id="connectionDetails">Checking...</div></div>
 </section>
 
 <section id="balance" class="page"><div class="card"><h2>Customer Balance</h2><div id="balanceList" class="loading">Loading...</div></div></section>
@@ -67,14 +79,15 @@ label{font-size:12px;font-weight:bold}
 <section id="orders" class="page"><div class="card"><h2>Customer Orders</h2><div id="orderList" class="loading">Loading...</div></div></section>
 
 <section id="products" class="page">
-<div class="card"><h2>Add Product</h2>
+<div class="card">
+<h2>Add Product</h2>
 <label>Product Name</label><input id="productName" placeholder="Product name">
 <label>Description</label><textarea id="productDescription" placeholder="Product description"></textarea>
 <label>Price</label><input id="productPrice" type="number" step="0.01" min="0" placeholder="0">
 <label>Stock</label><input id="productStock" type="number" min="0" placeholder="0">
 <label>Category</label><input id="productCategory" placeholder="Category">
 <label>Image URL</label><input id="productImage" placeholder="https://...">
-<button type="button" id="addProduct" class="action full">Add Product</button>
+<button id="addProduct" class="action full">Add Product</button>
 </div>
 <div class="card"><h2>Products</h2><div id="productList" class="loading">Loading...</div></div>
 </section>
@@ -82,15 +95,15 @@ label{font-size:12px;font-weight:bold}
 <section id="customers" class="page"><div class="card"><h2>Customers</h2><div id="customerList" class="loading">Loading...</div></div></section>
 <section id="messages" class="page"><div class="card"><h2>Customer Messages</h2><div id="messageList" class="loading">Loading...</div></div></section>
 <section id="notifications" class="page"><div class="card"><h2>Notifications</h2><div class="empty">No notifications.</div></div></section>
-<section id="settings" class="page"><div class="card"><h2>Settings</h2><p>Smart Seller Shop Admin Panel</p><button type="button" id="refresh" class="action gray full">Refresh Panel</button></div></section>
+<section id="settings" class="page"><div class="card"><h2>Settings</h2><p>Smart Seller Shop Admin Panel</p><button id="refresh" class="action gray full">Refresh Panel</button></div></section>
 </div>
 
 <div class="bottom">
-<button type="button" data-page="products"><span class="bottomIcon">📦</span>Products</button>
-<button type="button" data-page="customers"><span class="bottomIcon">👥</span>Customers</button>
-<button type="button" data-page="messages"><span class="bottomIcon">💬</span>Messages</button>
-<button type="button" data-page="notifications"><span class="bottomIcon">🔔</span>Notifications</button>
-<button type="button" data-page="settings"><span class="bottomIcon">⚙️</span>Settings</button>
+<button data-page="products"><span class="bottomIcon">📦</span>Products</button>
+<button data-page="customers"><span class="bottomIcon">👥</span>Customers</button>
+<button data-page="messages"><span class="bottomIcon">💬</span>Messages</button>
+<button data-page="notifications"><span class="bottomIcon">🔔</span>Notifications</button>
+<button data-page="settings"><span class="bottomIcon">⚙️</span>Settings</button>
 </div>
 
 <script>
@@ -99,139 +112,164 @@ label{font-size:12px;font-weight:bold}
 const SUPABASE_URL="https://cgrwiwzqiusvjibpjzdv.supabase.co";
 const SUPABASE_KEY="sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
 const REST=SUPABASE_URL+"/rest/v1/";
-const RPC=SUPABASE_URL+"/rest/v1/rpc/";
 const $=id=>document.getElementById(id);
 
 function esc(v){
- return String(v==null?"":v).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+ return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
 }
-function msg(text,type){
- const b=$("messageBox");b.textContent=text;b.className="message "+(type||"success");b.style.display="block";
- clearTimeout(window.msgTimer);window.msgTimer=setTimeout(()=>b.style.display="none",4000);
+function msg(t,type="success"){
+ const b=$("messageBox");b.textContent=t;b.className="message "+type;b.style.display="block";
+ clearTimeout(window.mt);window.mt=setTimeout(()=>b.style.display="none",4000);
 }
-function setConnection(text,ok){
- const e=$("connection");e.textContent=text;e.className="connection "+(ok?"ok":"bad");$("connectionDetails").textContent=text;
+function setConnection(t,ok){
+ $("connection").textContent=t;
+ $("connection").className="connection "+(ok?"ok":"bad");
+ $("connectionDetails").textContent=t;
 }
-async function request(url,options={}){
- const headers={apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,Accept:"application/json"};
- if(options.body!==undefined){headers["Content-Type"]="application/json";headers.Prefer=options.prefer||"return=representation";}
- const response=await fetch(url,{method:options.method||"GET",headers,body:options.body===undefined?undefined:JSON.stringify(options.body)});
- const raw=await response.text();
- let data=null;try{data=raw?JSON.parse(raw):null}catch(_){}
- if(!response.ok)throw new Error((data&&data.message)||raw||("HTTP "+response.status));
+function show(id,text,cls="empty"){
+ const b=$(id);b.className=cls;b.textContent=text;
+}
+
+async function api(table,options={}){
+ const method=options.method||"GET";
+ const body=options.body;
+ const query=options.query||"";
+ const h={
+  "apikey":SUPABASE_KEY,
+  "Authorization":"Bearer "+SUPABASE_KEY,
+  "Accept":"application/json"
+ };
+ if(body!==undefined){
+  h["Content-Type"]="application/json";
+  h["Prefer"]=options.prefer||"return=representation";
+ }
+ const r=await fetch(REST+table+query,{method,headers:h,body:body===undefined?undefined:JSON.stringify(body)});
+ const text=await r.text();
+ let data=null;
+ try{data=text?JSON.parse(text):null}catch(e){}
+ if(!r.ok){
+  const detail=data?.message||data?.error||data?.hint||text||("HTTP "+r.status);
+  throw new Error(detail);
+ }
  return data;
-}
-async function getTable(table,query=""){
- return request(REST+table+query);
-}
-async function patchTable(table,query,body){
- return request(REST+table+query,{method:"PATCH",body,prefer:"return=minimal"});
-}
-async function deleteTable(table,query){
- return request(REST+table+query,{method:"DELETE",prefer:"return=minimal"});
-}
-async function postTable(table,body){
- return request(REST+table,{method:"POST",body});
 }
 
 function openPage(id){
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
  const p=$(id);if(p)p.classList.add("active");
- document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
- const loaders={dashboard:loadDashboard,balance:loadBalances,deposits:loadDeposits,withdrawals:loadWithdrawals,kyc:loadKYC,orders:loadOrders,products:loadProducts,customers:loadCustomers,messages:loadMessages};
+ document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===id));
+ const loaders={
+  dashboard:loadDashboard,balance:loadBalances,deposits:loadDeposits,
+  withdrawals:loadWithdrawals,kyc:loadKYC,orders:loadOrders,
+  products:loadProducts,customers:loadCustomers,messages:loadMessages
+ };
  if(loaders[id])loaders[id]().catch(e=>msg(e.message,"error"));
 }
-document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();openPage(b.dataset.page)}));
+
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
 $("refresh").addEventListener("click",()=>location.reload());
 $("addProduct").addEventListener("click",addProduct);
 
 async function init(){
  setConnection("Connecting...",false);
  try{
-   await request(SUPABASE_URL+"/rest/v1/",{});
-   setConnection("Connected",true);
-   await loadDashboard();
+  await api("products","?select=id&limit=1");
+  setConnection("Connected",true);
+  await loadDashboard();
  }catch(e){
-   console.error(e);
-   setConnection("Connection error",false);
-   $("connectionDetails").innerHTML='<div class="errorBox">'+esc(e.message)+"</div>";
-   msg("Database connection failed. Menus are still available.","error");
+  console.error(e);
+  setConnection("Database error",false);
+  $("connectionDetails").innerHTML='<div class="errorBox">'+esc(e.message)+'</div>';
  }
 }
 
 async function loadDashboard(){
  const results=await Promise.allSettled([
-   getTable("products","?select=id"),
-   getTable("orders","?select=id"),
-   getTable("support_tickets","?select=id"),
-   getTable("withdrawals","?select=id")
+  api("products","?select=id"),
+  api("orders","?select=id"),
+  api("support_tickets","?select=id"),
+  api("withdrawals","?select=id")
  ]);
- $("statProducts").textContent=results[0].status==="fulfilled"?(results[0].value||[]).length:"0";
- $("statOrders").textContent=results[1].status==="fulfilled"?(results[1].value||[]).length:"0";
- $("statMessages").textContent=results[2].status==="fulfilled"?(results[2].value||[]).length:"0";
- $("statWithdrawals").textContent=results[3].status==="fulfilled"?(results[3].value||[]).length:"0";
+ $("statProducts").textContent=results[0].status==="fulfilled"?(results[0].value?.length||0):"!";
+ $("statOrders").textContent=results[1].status==="fulfilled"?(results[1].value?.length||0):"!";
+ $("statMessages").textContent=results[2].status==="fulfilled"?(results[2].value?.length||0):"!";
+ $("statWithdrawals").textContent=results[3].status==="fulfilled"?(results[3].value?.length||0):"!";
 }
 
 async function loadProducts(){
  const b=$("productList");b.className="loading";b.textContent="Loading...";
  try{
-  const r=await getTable("products","?select=*&order=id.desc");
-  if(!r||!r.length){b.className="empty";b.textContent="No products found.";return}
+  const r=await api("products","?select=*&order=id.desc");
+  if(!r?.length)return show("productList","No products found.");
   b.className="";b.innerHTML="";
   r.forEach(p=>{
    const d=document.createElement("div");d.className="item";
-   const im=p.image_url||p.image||p["Image url"]||"";
+   const im=p.image_url||p.image||"";
    d.innerHTML=(im?'<img src="'+esc(im)+'" onerror="this.style.display=\'none\'">':"")+
-    "<b>"+esc(p.name||p.Name||"Product")+"</b>"+
-    "<p>Price: $"+Number(p.price??p.Price??0).toFixed(2)+"</p>"+
-    "<p>Stock: "+esc(p.stock??p.Stock??0)+"</p>"+
-    '<button type="button" class="action red">Delete</button>';
+    "<b>"+esc(p.name||"Product")+"</b>"+
+    "<p>Price: $"+Number(p.price||0).toFixed(2)+"</p>"+
+    "<p>Stock: "+esc(p.stock??0)+"</p>"+
+    '<button class="action red">Delete</button>';
    d.querySelector("button").onclick=async()=>{
     if(!confirm("Delete this product?"))return;
-    try{await deleteTable("products","?id=eq."+encodeURIComponent(p.id));msg("Product deleted.");loadProducts();loadDashboard()}
-    catch(e){msg(e.message,"error")}
+    try{
+     await api("products",{method:"DELETE",query:"?id=eq."+encodeURIComponent(p.id),prefer:"return=minimal"});
+     msg("Product deleted.");loadProducts();loadDashboard();
+    }catch(e){msg(e.message,"error")}
    };
    b.appendChild(d);
   });
- }catch(e){b.className="errorBox";b.textContent="Products error: "+e.message}
+ }catch(e){show("productList","Products error: "+e.message,"errorBox")}
 }
 
 async function addProduct(){
  const name=$("productName").value.trim();
- if(!name){msg("Product name is required.","error");return}
+ if(!name)return msg("Product name is required.","error");
  try{
-  await postTable("products",{name,description:$("productDescription").value.trim(),price:Number($("productPrice").value)||0,stock:Number($("productStock").value)||0,category:$("productCategory").value.trim(),image_url:$("productImage").value.trim(),is_active:true});
+  await api("products",{
+   method:"POST",
+   body:{
+    name:name,
+    description:$("productDescription").value.trim(),
+    price:Number($("productPrice").value)||0,
+    stock:Number($("productStock").value)||0,
+    category:$("productCategory").value.trim(),
+    image_url:$("productImage").value.trim(),
+    is_active:true
+   }
+  });
   document.querySelectorAll("#products input,#products textarea").forEach(x=>x.value="");
   msg("Product added successfully.");loadProducts();loadDashboard();
- }catch(e){msg("Product add failed: "+e.message,"error")}
+ }catch(e){msg(e.message,"error")}
 }
 
 async function loadBalances(){
  const b=$("balanceList");b.className="loading";b.textContent="Loading...";
  try{
-  const r=await getTable("customer_balances","?select=*&order=updated_at.desc");
-  if(!r||!r.length){b.className="empty";b.textContent="No customer balances.";return}
+  const r=await api("customer_balances","?select=*&order=updated_at.desc");
+  if(!r?.length)return show("balanceList","No customer balances.");
   b.className="";b.innerHTML="";
   r.forEach(c=>{
    const d=document.createElement("div");d.className="item";
-   d.innerHTML="<b>Customer</b><p>ID: "+esc(c.customer_id)+"</p><p>Balance: <b>$"+Number(c.balance||0).toFixed(2)+"</b></p>"+
-   '<input type="number" min="0" step="0.01" placeholder="New balance"><button type="button" class="action">Update</button>';
+   d.innerHTML="<b>Customer</b><p>ID: "+esc(c.customer_id)+"</p><p>Balance: <b>$"+Number(c.balance||0).toFixed(2)+"</b></p><input type='number' min='0' step='0.01' placeholder='New balance'><button class='action'>Update</button>";
    d.querySelector("button").onclick=async()=>{
     const v=Number(d.querySelector("input").value);
-    if(!Number.isFinite(v)||v<0){msg("Enter a valid balance.","error");return}
-    try{await patchTable("customer_balances","?id=eq."+encodeURIComponent(c.id),{balance:v,updated_at:new Date().toISOString()});msg("Balance updated.");loadBalances()}
-    catch(e){msg(e.message,"error")}
+    if(!Number.isFinite(v)||v<0)return msg("Enter a valid balance.","error");
+    try{
+     await api("customer_balances",{method:"PATCH",query:"?id=eq."+encodeURIComponent(c.id),body:{balance:v,updated_at:new Date().toISOString()},prefer:"return=minimal"});
+     msg("Balance updated.");loadBalances();
+    }catch(e){msg(e.message,"error")}
    };
    b.appendChild(d);
   });
- }catch(e){b.className="errorBox";b.textContent="Balance error: "+e.message}
+ }catch(e){show("balanceList","Balance error: "+e.message,"errorBox")}
 }
 
 async function loadDeposits(){
  const b=$("depositList");b.className="loading";b.textContent="Loading...";
  try{
-  const r=await getTable("deposit_requests","?select=*&order=created_at.desc");
-  if(!r||!r.length){b.className="empty";b.textContent="No deposit requests.";return}
+  const r=await api("deposit_requests","?select=*&order=created_at.desc");
+  if(!r?.length)return show("depositList","No deposit requests.");
   b.className="";b.innerHTML="";
   r.forEach(x=>{
    const d=document.createElement("div");d.className="item";
@@ -243,79 +281,92 @@ async function loadDeposits(){
     "<p>Payment Method: "+esc(x.payment_method||x.method||"")+"</p>"+
     "<p>Transaction ID: "+esc(x.transaction_id||x.trx_id||"")+"</p>"+
     '<p>Status: <span class="status '+(s==="Approved"?"approved":s==="Rejected"?"rejected":"")+'">'+esc(s)+'</span></p>'+
-    (pending?'<button type="button" class="action green approve">Approve</button><button type="button" class="action red reject">Reject</button>':"");
+    (pending?'<button class="action green approve">Approve</button><button class="action red reject">Reject</button>':"");
    const a=d.querySelector(".approve"),q=d.querySelector(".reject");
    if(a)a.onclick=async()=>{
     if(!confirm("Approve this deposit and credit the customer balance?"))return;
     a.disabled=true;q.disabled=true;
     try{
-      await request(RPC+"approve_deposit",{method:"POST",body:{p_deposit_id:x.id}});
-      msg("Deposit approved successfully.");loadDeposits();loadBalances();loadDashboard();
+     await api("rpc/approve_deposit",{method:"POST",body:{p_deposit_id:x.id}});
+     msg("Deposit approved successfully.");loadDeposits();loadBalances();loadDashboard();
     }catch(e){msg("Approval failed: "+e.message,"error");a.disabled=false;q.disabled=false}
    };
    if(q)q.onclick=async()=>{
     if(!confirm("Reject this deposit request?"))return;
     a.disabled=true;q.disabled=true;
     try{
-      await patchTable("deposit_requests","?id=eq."+encodeURIComponent(x.id)+"&status=eq.Pending",{status:"Rejected"});
-      msg("Deposit rejected.");loadDeposits();loadDashboard();
+     await api("deposit_requests",{method:"PATCH",query:"?id=eq."+encodeURIComponent(x.id)+"&status=eq.Pending",body:{status:"Rejected"},prefer:"return=minimal"});
+     msg("Deposit rejected.");loadDeposits();loadDashboard();
     }catch(e){msg(e.message,"error");a.disabled=false;q.disabled=false}
    };
    b.appendChild(d);
   });
- }catch(e){b.className="errorBox";b.textContent="Deposit error: "+e.message}
+ }catch(e){show("depositList","Deposit error: "+e.message,"errorBox")}
 }
 
 async function loadWithdrawals(){
  const b=$("withdrawalList");b.className="loading";b.textContent="Loading...";
  try{
-  const r=await getTable("withdrawals","?select=*&order=created_at.desc");
-  if(!r||!r.length){b.className="empty";b.textContent="No withdrawal requests.";return}
+  const r=await api("withdrawals","?select=*&order=created_at.desc");
+  if(!r?.length)return show("withdrawalList","No withdrawal requests.");
   b.className="";b.innerHTML="";
   r.forEach(w=>{
    const d=document.createElement("div");d.className="item";const s=w.status||"Pending";
-   d.innerHTML="<b>Withdrawal #"+esc(w.id)+"</b><p>Customer: "+esc(w.customer_name||w.customer_id||"Customer")+"</p><p>Amount: <b>$"+Number(w.amount||0).toFixed(2)+"</b></p><p>Method: "+esc(w.method||w.payment_method||"")+"</p><p>Account: "+esc(w.account_details||w.account||"")+"</p><p>Status: <span class='status'>"+esc(s)+"</span></p>"+
-   '<select><option>Pending</option><option>Processing</option><option>Approved</option><option>Rejected</option><option>Completed</option></select><button type="button" class="action">Update</button>';
+   d.innerHTML="<b>Withdrawal #"+esc(w.id)+"</b><p>Customer: "+esc(w.customer_name||w.customer_id||"Customer")+"</p><p>Amount: <b>$"+Number(w.amount||0).toFixed(2)+"</b></p><p>Method: "+esc(w.method||w.payment_method||"")+"</p><p>Account: "+esc(w.account_details||w.account||"")+"</p><p>Status: <span class='status'>"+esc(s)+"</span></p><select><option>Pending</option><option>Processing</option><option>Approved</option><option>Rejected</option><option>Completed</option></select><button class='action'>Update</button>";
    const sel=d.querySelector("select");sel.value=s;
    d.querySelector("button").onclick=async()=>{
-    try{await patchTable("withdrawals","?id=eq."+encodeURIComponent(w.id),{status:sel.value});msg("Withdrawal status updated.");loadWithdrawals();loadDashboard()}
+    try{await api("withdrawals",{method:"PATCH",query:"?id=eq."+encodeURIComponent(w.id),body:{status:sel.value},prefer:"return=minimal"});msg("Withdrawal status updated.");loadWithdrawals();loadDashboard()}
     catch(e){msg(e.message,"error")}
    };
    b.appendChild(d);
   });
- }catch(e){b.className="errorBox";b.textContent="Withdrawal error: "+e.message}
+ }catch(e){show("withdrawalList","Withdrawal error: "+e.message,"errorBox")}
 }
 
 async function loadKYC(){
  const b=$("kycList");b.className="loading";b.textContent="Loading...";
  try{
-  const r=await getTable("kyc_requests","?select=*&order=created_at.desc");
-  if(!r||!r.length){b.className="empty";b.textContent="No KYC requests.";return}
+  const r=await api("kyc_requests","?select=*&order=created_at.desc");
+  if(!r?.length)return show("kycList","No KYC requests.");
   b.className="";b.innerHTML="";
   r.forEach(k=>{
    const d=document.createElement("div");d.className="item";const s=k.status||"Pending";
-   d.innerHTML="<b>KYC Request</b><p>Customer: "+esc(k.customer_name||k.customer_id||"Customer")+"</p><p>ID Type: "+esc(k.id_type||"")+"</p><p>ID Number: "+esc(k.id_number||"")+"</p><p>Status: <span class='status'>"+esc(s)+"</span></p>"+
-   '<select><option>Pending</option><option>Approved</option><option>Rejected</option></select><button type="button" class="action">Update</button>';
+   d.innerHTML="<b>KYC Request</b><p>Customer: "+esc(k.customer_name||k.customer_id||"Customer")+"</p><p>ID Type: "+esc(k.id_type||"")+"</p><p>ID Number: "+esc(k.id_number||"")+"</p><p>Status: <span class='status'>"+esc(s)+"</span></p><select><option>Pending</option><option>Approved</option><option>Rejected</option></select><button class='action'>Update</button>";
    const sel=d.querySelector("select");sel.value=s;
    d.querySelector("button").onclick=async()=>{
-    try{await patchTable("kyc_requests","?id=eq."+encodeURIComponent(k.id),{status:sel.value});msg("KYC status updated.");loadKYC()}
+    try{await api("kyc_requests",{method:"PATCH",query:"?id=eq."+encodeURIComponent(k.id),body:{status:sel.value},prefer:"return=minimal"});msg("KYC status updated.");loadKYC()}
     catch(e){msg(e.message,"error")}
    };
    b.appendChild(d);
   });
- }catch(e){b.className="errorBox";b.textContent="KYC error: "+e.message}
+ }catch(e){show("kycList","KYC error: "+e.message,"errorBox")}
 }
 
 async function loadOrders(){
  const b=$("orderList");b.className="loading";b.textContent="Loading...";
  try{
-  const r=await getTable("orders","?select=*&order=created_at.desc");
-  if(!r||!r.length){b.className="empty";b.textContent="No customer orders.";return}
+  const r=await api("orders","?select=*&order=created_at.desc");
+  if(!r?.length)return show("orderList","No customer orders.");
   b.className="";b.innerHTML="";
   r.forEach(o=>{
    const d=document.createElement("div");d.className="item";const s=o.status||"Pending";
-   d.innerHTML="<b>Order #"+esc(o.id)+"</b><p>Customer: "+esc(o.customer_name||o.customer_id||"Customer")+"</p><p>Product: "+esc(o.product_name||"Product")+"</p><p>Quantity: "+esc(o.quantity||1)+"</p><p>Total: <b>$"+Number(o.total_amount??o.total??0).toFixed(2)+"</b></p><p>Status: <span class='status'>"+esc(s)+"</span></p>"+
-   '<select><option>Pending</option><option>Processing</option><option>Shipped</option><option>Delivered</option><option>Cancelled</option></select><button type="button" class="action">Update</button>';
+   d.innerHTML="<b>Order #"+esc(o.id)+"</b><p>Customer: "+esc(o.customer_name||o.customer_id||"Customer")+"</p><p>Product: "+esc(o.product_name||"Product")+"</p><p>Quantity: "+esc(o.quantity||1)+"</p><p>Total: <b>$"+Number(o.total_amount??o.total??0).toFixed(2)+"</b></p><p>Status: <span class='status'>"+esc(s)+"</span></p><select><option>Pending</option><option>Processing</option><option>Shipped</option><option>Delivered</option><option>Cancelled</option></select><button class='action'>Update</button>";
    const sel=d.querySelector("select");sel.value=s;
    d.querySelector("button").onclick=async()=>{
-    try{await patchTable("orders","?id=eq."+encodeURIComponent(o
+    try{await api("orders",{method:"PATCH",query:"?id=eq."+encodeURIComponent(o.id),body:{status:sel.value},prefer:"return=minimal"});msg("Order status updated.");loadOrders()}
+    catch(e){msg(e.message,"error")}
+   };
+   b.appendChild(d);
+  });
+ }catch(e){show("orderList","Orders error: "+e.message,"errorBox")}
+}
+
+async function loadMessages(){
+ const b=$("messageList");b.className="loading";b.textContent="Loading...";
+ try{
+  const r=await api("support_tickets","?select=*&order=created_at.desc");
+  if(!r?.length)return show("messageList","No customer messages.");
+  b.className="";b.innerHTML="";
+  r.forEach(t=>{
+   const d=document.createElement("div");d.className="item";
+   d.innerHTML="
