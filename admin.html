@@ -143,7 +143,6 @@ function errText(e){
 async function request(path,options={}){
   const headers={
     "apikey":SUPABASE_KEY,
-    "Authorization":"Bearer "+SUPABASE_KEY,
     "Content-Type":"application/json",
     ...(options.headers||{})
   };
@@ -195,7 +194,6 @@ async function countRows(table){
     method:"HEAD",
     headers:{
       "apikey":SUPABASE_KEY,
-      "Authorization":"Bearer "+SUPABASE_KEY,
       "Prefer":"count=exact"
     }
   });
@@ -224,15 +222,17 @@ $("refreshBtn").addEventListener("click",()=>location.reload());
 $("addProductBtn").addEventListener("click",addProduct);
 
 async function init(){
-  setConnection(false,"Checking...");
+  setConnection(false,"Connecting...");
   try{
-    await countRows("products");
+    const test=await request(API+"/products?select=id&limit=1",{headers:{"Accept":"application/json"}});
     setConnection(true,"Connected");
     await loadDashboard();
   }catch(e){
-    console.error(e);
-    setConnection(false,"DB error");
-    msg("Database connection failed: "+errText(e),"error");
+    console.error("Supabase connection error:",e);
+    setConnection(false,"Connection error");
+    msg("Supabase error: "+errText(e),"error");
+    const b=$("messageBox");
+    b.title=errText(e);
   }
 }
 
@@ -405,5 +405,4 @@ async function loadKYC(){
     if(!rows.length){b.className="empty";b.textContent="No KYC requests.";return}
     b.className="";b.innerHTML="";
     rows.forEach(k=>{
-      const d=document.createElement("div");d.className="item";
-      const status=k.status|
+      const d=document.createE
