@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Smart Seller Shop - Customer Dashboard</title>
+<title>Smart Seller Shop - Customer</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
@@ -15,40 +16,132 @@ background:#f3f4f6;
 color:#172033;
 font-family:Arial,sans-serif;
 font-size:13px;
-padding-bottom:15px
+padding-bottom:20px
 }
+
+button,input,select,textarea{font-family:inherit}
 
 .header{
 background:#111827;
 color:#fff;
 text-align:center;
-padding:10px 8px
+padding:14px 8px
 }
 
-.header h1{margin:0;font-size:18px}
-.header p{margin:3px 0 0;color:#cbd5e1;font-size:10px}
+.header h1{
+margin:0;
+font-size:19px
+}
+
+.header p{
+margin:4px 0 0;
+color:#cbd5e1;
+font-size:11px
+}
 
 .container{
-max-width:760px;
+max-width:800px;
 margin:auto;
 padding:8px
 }
+
+.hidden{display:none!important}
+
+.card{
+background:#fff;
+border-radius:13px;
+padding:13px;
+margin-bottom:9px;
+box-shadow:0 2px 8px #ddd
+}
+
+.card h2{
+margin:0 0 10px;
+font-size:17px
+}
+
+.auth{
+max-width:430px;
+margin:25px auto
+}
+
+.auth h2{
+text-align:center
+}
+
+.auth-tabs{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:5px;
+margin-bottom:10px
+}
+
+.auth-tabs button{
+border:0;
+padding:10px;
+background:#eee;
+border-radius:8px;
+cursor:pointer
+}
+
+.auth-tabs button.active{
+background:#1877f2;
+color:#fff
+}
+
+label{
+font-size:11px;
+font-weight:bold;
+display:block;
+margin-top:5px
+}
+
+input,select,textarea{
+width:100%;
+padding:9px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:12px;
+margin:4px 0 8px
+}
+
+textarea{min-height:80px}
+
+.action{
+border:0;
+background:#1877f2;
+color:#fff;
+padding:9px 13px;
+border-radius:8px;
+cursor:pointer;
+font-size:12px
+}
+
+.action:disabled{
+opacity:.5;
+cursor:not-allowed
+}
+
+.green{background:#16a34a}
+.red{background:#dc2626}
+.gray{background:#6b7280}
+.full{width:100%}
 
 .menu{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:6px;
-margin-bottom:8px
+margin-bottom:9px
 }
 
 .menu button{
 border:0;
 background:#fff;
 color:#222;
-padding:8px 4px;
-border-radius:8px;
+padding:9px 4px;
+border-radius:9px;
 box-shadow:0 1px 5px #ddd;
-font-size:11px;
+font-size:10px;
 cursor:pointer
 }
 
@@ -59,19 +152,6 @@ color:#fff
 
 .page{display:none}
 .page.active{display:block}
-
-.card{
-background:#fff;
-border-radius:12px;
-padding:12px;
-margin-bottom:8px;
-box-shadow:0 2px 8px #ddd
-}
-
-.card h2{
-margin:0 0 7px;
-font-size:16px
-}
 
 .hero{
 background:linear-gradient(135deg,#123e64,#285579);
@@ -85,19 +165,19 @@ margin-bottom:9px
 display:flex;
 align-items:center;
 gap:10px;
-margin:6px 0 12px
+margin:7px 0 13px
 }
 
 .avatar{
-width:42px;
-height:42px;
+width:45px;
+height:45px;
 border-radius:13px;
 background:#466a88;
 border:2px solid #6687a2;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:21px;
+font-size:20px;
 font-weight:bold
 }
 
@@ -108,32 +188,32 @@ font-size:17px
 
 .customer-line p{
 margin:0;
-color:#e4edf5;
+color:#dce7f0;
 font-size:10px
 }
 
 .money-grid{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:repeat(3,1fr);
 gap:7px
 }
 
 .money{
 background:rgba(255,255,255,.13);
-border:1px solid rgba(255,255,255,.15);
+border:1px solid rgba(255,255,255,.16);
 border-radius:12px;
-padding:9px 10px
+padding:10px
 }
 
 .money-label{
 color:#d7e2eb;
-font-size:10px
+font-size:9px
 }
 
 .money-value{
-font-size:18px;
+font-size:17px;
 font-weight:bold;
-margin-top:4px
+margin-top:5px
 }
 
 .quick{
@@ -149,25 +229,26 @@ background:rgba(255,255,255,.13);
 color:#fff;
 border-radius:14px;
 padding:7px 10px;
-font-size:11px;
+font-size:10px;
 cursor:pointer
 }
 
 .stats{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:6px
+gap:7px
 }
 
 .stat{
 background:#fff;
 border-radius:12px;
-padding:9px;
-box-shadow:0 1px 7px #ddd
+padding:10px;
+box-shadow:0 1px 7px #ddd;
+text-align:center
 }
 
 .stat h3{
-margin:3px 0 2px;
+margin:3px 0;
 font-size:16px
 }
 
@@ -192,7 +273,7 @@ box-shadow:0 1px 7px #ddd
 
 .product img{
 width:100%;
-height:120px;
+height:125px;
 object-fit:cover;
 border-radius:7px
 }
@@ -212,46 +293,10 @@ font-weight:bold;
 color:#1877f2
 }
 
-.action{
-border:0;
-background:#1877f2;
-color:#fff;
-padding:8px 12px;
-border-radius:7px;
-cursor:pointer;
-font-size:12px
-}
-
-.green{background:#16a34a}
-.red{background:#dc2626}
-
-input,select,textarea{
-width:100%;
-padding:8px;
-border:1px solid #ddd;
-border-radius:7px;
-font-size:12px;
-margin:3px 0 7px
-}
-
-textarea{min-height:65px}
-
-label{
-font-size:11px;
-font-weight:bold
-}
-
-.total{
-text-align:right;
-font-size:16px;
-font-weight:bold;
-margin:9px 0
-}
-
 .box{
 border:1px solid #ddd;
 border-radius:9px;
-padding:9px;
+padding:10px;
 margin-bottom:7px;
 background:#fafafa
 }
@@ -263,7 +308,7 @@ font-size:11px
 
 .status{
 display:inline-block;
-padding:3px 6px;
+padding:4px 7px;
 border-radius:15px;
 background:#fef3c7;
 color:#92400e;
@@ -271,39 +316,121 @@ font-size:10px;
 font-weight:bold
 }
 
+.status.approved{
+background:#dcfce7;
+color:#166534
+}
+
+.status.rejected{
+background:#fee2e2;
+color:#991b1b
+}
+
+.status.processing{
+background:#dbeafe;
+color:#1e40af
+}
+
+.message{
+padding:9px;
+border-radius:8px;
+font-size:11px;
+margin-top:7px
+}
+
 .success{
 background:#dcfce7;
-color:#166534;
-padding:8px;
-border-radius:7px;
-margin-top:7px;
-font-size:11px
+color:#166534
 }
 
 .error{
 background:#fee2e2;
-color:#991b1b;
-padding:8px;
-border-radius:7px;
-margin-top:7px;
-font-size:11px
+color:#991b1b
 }
 
 .empty{
 text-align:center;
 color:#777;
-padding:15px;
+padding:17px;
 font-size:11px
 }
 
-small{font-size:9px}
+.total{
+text-align:right;
+font-size:17px;
+font-weight:bold;
+margin:10px 0
+}
+
+.profile-head{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.profile-avatar{
+width:55px;
+height:55px;
+border-radius:15px;
+background:#1877f2;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:23px;
+font-weight:bold
+}
+
+.kpi{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:7px
+}
+
+.kpi-box{
+background:#f8fafc;
+border:1px solid #e5e7eb;
+border-radius:10px;
+padding:10px
+}
+
+.kpi-box span{
+display:block;
+font-size:10px;
+color:#777
+}
+
+.kpi-box b{
+font-size:16px;
+display:block;
+margin-top:4px
+}
 
 @media(max-width:600px){
-.container{padding:6px}
-.menu{grid-template-columns:repeat(3,1fr)}
-.menu button{font-size:10px;padding:7px 2px}
-.product-grid{grid-template-columns:repeat(2,1fr)}
-.hero{padding:12px}
+
+.container{
+padding:6px
+}
+
+.menu{
+grid-template-columns:repeat(3,1fr)
+}
+
+.money-grid{
+grid-template-columns:1fr 1fr
+}
+
+.money:last-child{
+grid-column:1/3
+}
+
+.product-grid{
+grid-template-columns:repeat(2,1fr)
+}
+
+.hero{
+padding:12px
+}
 }
 </style>
 </head>
@@ -315,19 +442,115 @@ small{font-size:9px}
 <p>Customer Dashboard</p>
 </div>
 
+<!-- AUTH -->
+
+<div id="authScreen" class="container">
+
+<div class="card auth">
+
+<h2>Smart Seller Shop</h2>
+
+<div class="auth-tabs">
+<button id="loginTab" class="active" onclick="showAuth('login')">
+Login
+</button>
+
+<button id="registerTab" onclick="showAuth('register')">
+Create Account
+</button>
+</div>
+
+<div id="authMessage"></div>
+
+<div id="loginForm">
+
+<label>Email</label>
+<input id="loginEmail" type="email" placeholder="Enter your email">
+
+<label>Password</label>
+<input id="loginPassword" type="password" placeholder="Enter your password">
+
+<button class="action full" onclick="login()">
+Login
+</button>
+
+</div>
+
+<div id="registerForm" class="hidden">
+
+<label>Full Name</label>
+<input id="registerName" placeholder="Your full name">
+
+<label>Email</label>
+<input id="registerEmail" type="email" placeholder="Your email">
+
+<label>Password</label>
+<input id="registerPassword" type="password" placeholder="Minimum 6 characters">
+
+<label>Confirm Password</label>
+<input id="registerPassword2" type="password" placeholder="Confirm password">
+
+<button class="action green full" onclick="register()">
+Create Account
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- APP -->
+
+<div id="app" class="hidden">
+
 <div class="container">
 
 <div class="menu">
-<button class="active" onclick="showPage('dashboard',this)">🏠 Dashboard</button>
-<button onclick="showPage('productsPage',this)">📦 Products</button>
-<button onclick="showPage('cartPage',this)">🛒 Cart <span id="cartCount">0</span></button>
-<button onclick="showPage('ordersPage',this)">📦 My Orders</button>
-<button onclick="showPage('addMoneyPage',this)">💰 Add Money</button>
-<button onclick="showPage('notificationsPage',this)">🔔 Notifications</button>
-<button onclick="showPage('profilePage',this)">👤 Profile</button>
-<button onclick="showPage('servicePage',this)">💬 Customer Service</button>
-<button onclick="logout()">🚪 Logout</button>
+
+<button class="active" onclick="showPage('dashboard',this)">
+🏠 Dashboard
+</button>
+
+<button onclick="showPage('productsPage',this)">
+📦 Products
+</button>
+
+<button onclick="showPage('cartPage',this)">
+🛒 Cart <span id="cartCount">0</span>
+</button>
+
+<button onclick="showPage('ordersPage',this)">
+📦 Orders
+</button>
+
+<button onclick="showPage('depositPage',this)">
+💰 Deposit
+</button>
+
+<button onclick="showPage('withdrawPage',this)">
+💸 Withdraw
+</button>
+
+<button onclick="showPage('kycPage',this)">
+🛡️ KYC
+</button>
+
+<button onclick="showPage('profilePage',this)">
+👤 Profile
+</button>
+
+<button onclick="showPage('servicePage',this)">
+💬 Support
+</button>
+
+<button onclick="logout()">
+🚪 Logout
+</button>
+
 </div>
+
 
 <!-- DASHBOARD -->
 
@@ -335,17 +558,26 @@ small{font-size:9px}
 
 <div class="hero">
 
-<div style="font-size:10px;letter-spacing:2px;color:#d9e5ef;font-weight:bold">
+<div style="font-size:10px;letter-spacing:2px;font-weight:bold">
 WELCOME BACK
 </div>
 
 <div class="customer-line">
 
-<div class="avatar" id="avatar">C</div>
+<div class="avatar" id="avatar">
+C
+</div>
 
 <div>
-<h2 id="customerName">Smart Seller Customer</h2>
-<p>⭐ Customer account</p>
+
+<h2 id="customerName">
+Customer
+</h2>
+
+<p id="customerEmail">
+customer@email.com
+</p>
+
 </div>
 
 </div>
@@ -353,32 +585,59 @@ WELCOME BACK
 <div class="money-grid">
 
 <div class="money">
-<div class="money-label">💳 BALANCE</div>
-<div class="money-value">$<span id="balance">0.00</span></div>
+
+<div class="money-label">
+💳 BALANCE
+</div>
+
+<div class="money-value">
+$<span id="balance">0.00</span>
+</div>
+
 </div>
 
 <div class="money">
-<div class="money-label">🛡️ GUARANTEE</div>
-<div class="money-value">$<span id="guarantee">0.00</span></div>
+
+<div class="money-label">
+📈 PROFIT
+</div>
+
+<div class="money-value">
+$<span id="profit">0.00</span>
+</div>
+
+</div>
+
+<div class="money">
+
+<div class="money-label">
+🛡️ GUARANTEE
+</div>
+
+<div class="money-value">
+$<span id="guarantee">0.00</span>
+</div>
+
 </div>
 
 </div>
 
 <div class="quick">
 
-<button onclick="showPage('addMoneyPage',null)">
-＋ Add Money
+<button onclick="showPage('depositPage',null)">
+＋ Deposit
+</button>
+
+<button onclick="showPage('withdrawPage',null)">
+＋ Withdraw
 </button>
 
 <button onclick="showPage('productsPage',null)">
-＋ Browse Products
-</button>
-
-<button onclick="showPage('servicePage',null)">
-💬 Message Admin
+Browse Products
 </button>
 
 </div>
+
 </div>
 
 <div class="stats">
@@ -402,57 +661,6 @@ WELCOME BACK
 
 </div>
 
-<!-- ADD MONEY -->
-
-<div id="addMoneyPage" class="page">
-
-<div class="card">
-
-<h2>💰 Add Money</h2>
-
-<p>
-Payment karne ke baad transaction details submit karein.
-Admin verify karke balance mein amount add karega.
-</p>
-
-<label>Amount</label>
-<input id="depositAmount" type="number" min="1" step="0.01" placeholder="50">
-
-<label>Payment Method</label>
-
-<select id="depositMethod">
-<option value="">Select method</option>
-<option>Bank Transfer</option>
-<option>UPI</option>
-<option>Mobile Wallet</option>
-<option>Other</option>
-</select>
-
-<label>Transaction ID</label>
-<input id="transactionId" placeholder="Payment transaction ID">
-
-<label>Note</label>
-<textarea id="depositNote" placeholder="Optional payment note"></textarea>
-
-<button class="action" onclick="submitDeposit()">
-💳 Submit Deposit
-</button>
-
-<div id="depositResult"></div>
-
-</div>
-
-<div class="card">
-
-<h2>🧾 My Deposit Requests</h2>
-
-<div id="depositList">
-<div class="empty">Loading...</div>
-</div>
-
-</div>
-
-</div>
 
 <!-- PRODUCTS -->
 
@@ -470,6 +678,7 @@ Admin verify karke balance mein amount add karega.
 
 </div>
 
+
 <!-- CART -->
 
 <div id="cartPage" class="page">
@@ -484,13 +693,14 @@ Admin verify karke balance mein amount add karega.
 Total: $<span id="cartTotal">0.00</span>
 </div>
 
-<button class="action" onclick="placeOrder()">
-📦 Place Order
+<button class="action full" onclick="placeOrder()">
+Place Order
 </button>
 
 </div>
 
 </div>
+
 
 <!-- ORDERS -->
 
@@ -506,21 +716,190 @@ Total: $<span id="cartTotal">0.00</span>
 
 </div>
 
-<!-- NOTIFICATIONS -->
 
-<div id="notificationsPage" class="page">
+<!-- DEPOSIT -->
+
+<div id="depositPage" class="page">
 
 <div class="card">
 
-<h2>🔔 Notifications</h2>
+<h2>💰 Deposit Money</h2>
 
-<div class="empty">
-No new notifications.
+<p>
+Submit your payment transaction and wait for admin approval.
+</p>
+
+<label>Amount</label>
+<input id="depositAmount" type="number" min="1" step="0.01" placeholder="50">
+
+<label>Payment Method</label>
+
+<select id="depositMethod">
+
+<option value="">
+Select method
+</option>
+
+<option>Bank Transfer</option>
+<option>UPI</option>
+<option>Mobile Wallet</option>
+<option>Other</option>
+
+</select>
+
+<label>Transaction ID</label>
+
+<input id="transactionId" placeholder="Transaction ID">
+
+<label>Note</label>
+
+<textarea id="depositNote" placeholder="Optional note"></textarea>
+
+<button class="action green" onclick="submitDeposit()">
+Submit Deposit
+</button>
+
+<div id="depositResult"></div>
+
+</div>
+
+<div class="card">
+
+<h2>My Deposit Requests</h2>
+
+<div id="depositList">
+<div class="empty">Loading...</div>
 </div>
 
 </div>
 
 </div>
+
+
+<!-- WITHDRAW -->
+
+<div id="withdrawPage" class="page">
+
+<div class="card">
+
+<h2>💸 Withdraw Money</h2>
+
+<div class="kpi">
+
+<div class="kpi-box">
+<span>Available Balance</span>
+<b>$<span id="withdrawBalance">0.00</span></b>
+</div>
+
+<div class="kpi-box">
+<span>Profit</span>
+<b>$<span id="withdrawProfit">0.00</span></b>
+</div>
+
+</div>
+
+<br>
+
+<label>Amount</label>
+
+<input
+id="withdrawAmount"
+type="number"
+min="1"
+step="0.01"
+placeholder="Enter withdrawal amount">
+
+<label>Payment Method</label>
+
+<select id="withdrawMethod">
+
+<option value="">
+Select method
+</option>
+
+<option>Bank Transfer</option>
+<option>UPI</option>
+<option>Mobile Wallet</option>
+<option>Other</option>
+
+</select>
+
+<label>Account Details</label>
+
+<textarea
+id="withdrawAccount"
+placeholder="Enter bank account, UPI ID or wallet details"></textarea>
+
+<button class="action green" onclick="submitWithdrawal()">
+Submit Withdrawal
+</button>
+
+<div id="withdrawResult"></div>
+
+</div>
+
+<div class="card">
+
+<h2>My Withdrawal Requests</h2>
+
+<div id="withdrawalList">
+<div class="empty">Loading...</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- KYC -->
+
+<div id="kycPage" class="page">
+
+<div class="card">
+
+<h2>🛡️ KYC Verification</h2>
+
+<label>Full Name</label>
+
+<input id="kycName" placeholder="Full legal name">
+
+<label>ID Type</label>
+
+<select id="kycType">
+
+<option value="">Select ID type</option>
+
+<option>Passport</option>
+<option>National ID</option>
+<option>Driving License</option>
+<option>Other</option>
+
+</select>
+
+<label>ID Number</label>
+
+<input id="kycNumber" placeholder="ID number">
+
+<button class="action" onclick="submitKYC()">
+Submit KYC
+</button>
+
+<div id="kycResult"></div>
+
+</div>
+
+<div class="card">
+
+<h2>KYC Status</h2>
+
+<div id="kycStatus">
+<div class="empty">Loading...</div>
+</div>
+
+</div>
+
+</div>
+
 
 <!-- PROFILE -->
 
@@ -528,20 +907,50 @@ No new notifications.
 
 <div class="card">
 
-<h2>👤 Profile</h2>
+<h2>👤 My Profile</h2>
 
-<p>Smart Seller Shop Customer</p>
+<div class="profile-head">
 
-<p>
-Customer ID:
-<b id="showCustomerId"></b>
+<div class="profile-avatar" id="profileAvatar">
+C
+</div>
+
+<div>
+
+<b id="profileNameTitle">
+Customer
+</b>
+
+<p id="profileEmailTitle">
+-
 </p>
 
 </div>
 
 </div>
 
-<!-- SERVICE -->
+<br>
+
+<label>Full Name</label>
+
+<input id="profileName">
+
+<label>Email</label>
+
+<input id="profileEmail" disabled>
+
+<button class="action" onclick="saveProfile()">
+Save Profile
+</button>
+
+<div id="profileResult"></div>
+
+</div>
+
+</div>
+
+
+<!-- SUPPORT -->
 
 <div id="servicePage" class="page">
 
@@ -549,20 +958,21 @@ Customer ID:
 
 <h2>💬 Customer Service</h2>
 
-<textarea id="supportMessage"
-placeholder="Write your message here..."></textarea>
+<textarea
+id="supportMessage"
+placeholder="Write your message to admin"></textarea>
 
 <button class="action" onclick="sendMessage()">
 Send Message
 </button>
 
-<div id="result"></div>
+<div id="supportResult"></div>
 
 </div>
 
 <div class="card">
 
-<h2>💬 My Support Messages</h2>
+<h2>My Messages</h2>
 
 <div id="supportMessages">
 <div class="empty">Loading...</div>
@@ -574,7 +984,13 @@ Send Message
 
 </div>
 
+</div>
+
+
 <script>
+
+"use strict";
+
 
 const SUPABASE_URL =
 "https://cgrwiwzqiusvjibpjzdv.supabase.co";
@@ -583,35 +999,22 @@ const SUPABASE_KEY =
 "sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
 
 const db =
-supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-
-let customerId =
-localStorage.getItem("smartSellerCustomerId");
-
-if(!customerId){
-
-customerId =
-"customer_"+Date.now()+"_"+Math.random().toString(36).slice(2,9);
-
-localStorage.setItem(
-"smartSellerCustomerId",
-customerId
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
+let currentUser=null;
+
+let profile=null;
+
+let cart=[];
+
+
+function $(id){
+return document.getElementById(id);
 }
 
-document.getElementById("showCustomerId").textContent =
-customerId;
-
-let cart =
-JSON.parse(
-localStorage.getItem("smartSellerCart")||"[]"
-);
-
-let orders =
-JSON.parse(
-localStorage.getItem("smartSellerOrders")||"[]"
-);
 
 function esc(v){
 
@@ -628,329 +1031,537 @@ m=>({
 
 }
 
-function showPage(id,btn){
 
-document
-.querySelectorAll(".page")
-.forEach(x=>x.classList.remove("active"));
+function showAuth(type){
 
-document
-.getElementById(id)
-?.classList.add("active");
+$("loginForm").classList.toggle(
+"hidden",
+type!=="login"
+);
 
-document
-.querySelectorAll(".menu button")
-.forEach(x=>x.classList.remove("active"));
+$("registerForm").classList.toggle(
+"hidden",
+type!=="register"
+);
 
-if(btn)btn.classList.add("active");
+$("loginTab").classList.toggle(
+"active",
+type==="login"
+);
 
-if(id==="productsPage")loadProducts();
-if(id==="cartPage")renderCart();
-if(id==="ordersPage")renderOrders();
-if(id==="servicePage")loadMessages();
-if(id==="addMoneyPage")loadDeposits();
+$("registerTab").classList.toggle(
+"active",
+type==="register"
+);
 
 }
 
-function updateDashboard(){
 
-document.getElementById("cartCount").textContent =
-cart.reduce(
-(a,x)=>a+(+x.quantity||0),
-0
-);
+function authMessage(text,type="error"){
 
-document.getElementById("orderCount").textContent =
-orders.length;
+const b=$("authMessage");
 
-document.getElementById("spent").textContent =
-"$"+orders.reduce(
-(a,x)=>a+(+x.total||0),
-0
-).toFixed(2);
+b.className="message "+type;
+
+b.textContent=text;
 
 }
 
-function saveCart(){
 
-localStorage.setItem(
-"smartSellerCart",
-JSON.stringify(cart)
+async function register(){
+
+const name=$("registerName").value.trim();
+
+const email=$("registerEmail").value.trim();
+
+const password=$("registerPassword").value;
+
+const password2=$("registerPassword2").value;
+
+
+if(!name)
+return authMessage("Full name is required.");
+
+if(!email)
+return authMessage("Email is required.");
+
+if(password.length<6)
+return authMessage("Password must contain at least 6 characters.");
+
+if(password!==password2)
+return authMessage("Passwords do not match.");
+
+
+try{
+
+const {data,error}=
+
+await db.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+data:{
+full_name:name
+}
+}
+
+});
+
+
+if(error)
+throw error;
+
+
+if(data.user){
+
+await createProfile(
+data.user,
+name
 );
+
+}
+
+
+if(data.session){
+
+authMessage(
+"Account created successfully.",
+"success"
+);
+
+await startApp(data.user);
+
+}else{
+
+authMessage(
+"Account created. Check your email to confirm your account.",
+"success"
+);
+
+}
+
+}catch(e){
+
+console.error(e);
+
+authMessage(e.message||"Registration failed.");
+
+}
+
+}
+
+
+async function login(){
+
+const email=$("loginEmail").value.trim();
+
+const password=$("loginPassword").value;
+
+
+if(!email||!password){
+
+authMessage("Enter email and password.");
+
+return;
+
+}
+
+
+try{
+
+const {data,error}=
+
+await db.auth.signInWithPassword({
+
+email,
+password
+
+});
+
+
+if(error)
+throw error;
+
+
+await startApp(data.user);
+
+}catch(e){
+
+console.error(e);
+
+authMessage(
+e.message||"Login failed."
+);
+
+}
+
+}
+
+
+async function logout(){
+
+await db.auth.signOut();
+
+currentUser=null;
+
+profile=null;
+
+$("app").classList.add("hidden");
+
+$("authScreen").classList.remove("hidden");
+
+showAuth("login");
+
+}
+
+
+async function createProfile(user,name){
+
+const {data,error}=
+
+await db
+.from("customer_profiles")
+.upsert({
+
+id:user.id,
+
+full_name:name,
+
+email:user.email
+
+},{onConflict:"id"});
+
+if(error)
+console.error("Profile:",error);
+
+}
+
+
+async function startApp(user){
+
+currentUser=user;
+
+$("authScreen").classList.add("hidden");
+
+$("app").classList.remove("hidden");
+
+await loadProfile();
+
+await loadBalance();
+
+await loadProducts();
+
+await loadDeposits();
+
+await loadWithdrawals();
+
+await loadKYC();
+
+await loadMessages();
+
+await loadOrders();
 
 updateDashboard();
 
 }
 
-function addToCart(p){
 
-let x =
-cart.find(
-i=>String(i.id)===String(p.id)
-);
+async function loadProfile(){
 
-if(x)x.quantity++;
-else cart.push({...p,quantity:1});
+if(!currentUser)
+return;
 
-saveCart();
 
-alert("Product added to cart! ✅");
+const {data,error}=
 
-}
+await db
+.from("customer_profiles")
+.select("*")
+.eq("id",currentUser.id)
+.maybeSingle();
 
-function renderCart(){
 
-let b =
-document.getElementById("cartItemsBox");
+if(error){
 
-let total=0;
-
-b.innerHTML="";
-
-if(!cart.length){
-
-b.innerHTML =
-'<div class="empty">Your cart is empty.</div>';
-
-document.getElementById("cartTotal")
-.textContent="0.00";
+console.error(error);
 
 return;
 
 }
 
-cart.forEach((x,i)=>{
 
-let q=+x.quantity||1;
-let p=+x.price||0;
+if(!data){
 
-total+=q*p;
+await createProfile(
+currentUser,
+currentUser.user_metadata?.full_name||
+"Customer"
+);
 
-let d=document.createElement("div");
-
-d.className="box";
-
-d.innerHTML=
-"<b>"+esc(x.name)+"</b>"+
-"<p>Price: $"+p.toFixed(2)+"</p>"+
-"<p>Quantity: "+q+"</p>";
-
-let r=document.createElement("button");
-
-r.className="action red";
-r.textContent="Remove";
-
-r.onclick=()=>{
-
-cart.splice(i,1);
-saveCart();
-renderCart();
-
+profile={
+id:currentUser.id,
+full_name:currentUser.user_metadata?.full_name||
+"Customer",
+email:currentUser.email
 };
 
-d.appendChild(r);
-b.appendChild(d);
+}else{
 
-});
-
-document.getElementById("cartTotal")
-.textContent=total.toFixed(2);
+profile=data;
 
 }
 
-function placeOrder(){
 
-if(!cart.length){
+const name=
+profile.full_name||
+currentUser.user_metadata?.full_name||
+"Customer";
 
-alert("Your cart is empty.");
+const email=
+profile.email||
+currentUser.email||
+"";
+
+
+$("customerName").textContent=name;
+
+$("customerEmail").textContent=email;
+
+$("profileNameTitle").textContent=name;
+
+$("profileEmailTitle").textContent=email;
+
+$("profileName").value=name;
+
+$("profileEmail").value=email;
+
+const first=
+name.trim().charAt(0).toUpperCase()||"C";
+
+$("avatar").textContent=first;
+
+$("profileAvatar").textContent=first;
+
+}
+
+
+async function saveProfile(){
+
+if(!currentUser)
 return;
 
-}
 
-let total =
-cart.reduce(
-(a,x)=>a+(+x.price||0)*(+x.quantity||1),
-0
-);
+const name=
+$("profileName").value.trim();
 
-orders.push({
 
-id:"ORDER-"+Date.now(),
+if(!name){
 
-items:
-JSON.parse(JSON.stringify(cart)),
+$("profileResult").className="message error";
 
-total:total,
-
-status:"Pending",
-
-date:new Date().toLocaleString()
-
-});
-
-localStorage.setItem(
-"smartSellerOrders",
-JSON.stringify(orders)
-);
-
-cart=[];
-
-saveCart();
-
-renderCart();
-
-alert("Order placed successfully! ✅");
-
-}
-
-function renderOrders(){
-
-let b=document.getElementById("orders");
-
-b.innerHTML="";
-
-if(!orders.length){
-
-b.innerHTML =
-'<div class="empty">No orders yet.</div>';
+$("profileResult").textContent=
+"Full name is required.";
 
 return;
 
 }
 
-orders.slice().reverse().forEach(o=>{
 
-let d=document.createElement("div");
+const {error}=
 
-d.className="box";
+await db
+.from("customer_profiles")
+.upsert({
 
-d.innerHTML=
-"<b>"+esc(o.id)+"</b>"+
-"<p>Total: $"+(+o.total||0).toFixed(2)+"</p>"+
-"<p>Status: <b>"+esc(o.status||"Pending")+"</b></p>"+
-"<small>"+esc(o.date||"")+"</small>";
+id:currentUser.id,
 
-b.appendChild(d);
+full_name:name,
+
+email:currentUser.email,
+
+updated_at:new Date().toISOString()
+
+},{onConflict:"id"});
+
+
+if(error){
+
+console.error(error);
+
+$("profileResult").className="message error";
+
+$("profileResult").textContent=
+error.message;
+
+return;
+
+}
+
+
+await db.auth.updateUser({
+
+data:{
+full_name:name
+}
 
 });
 
+
+$("profileResult").className=
+"message success";
+
+$("profileResult").textContent=
+"Profile saved successfully.";
+
+await loadProfile();
+
 }
+
 
 async function loadBalance(){
+
+if(!currentUser)
+return;
+
 
 let {data,error}=
 
 await db
 .from("customer_balances")
-.select("balance,customer_name")
-.eq("customer_id",customerId)
+.select("*")
+.eq("customer_id",currentUser.id)
 .maybeSingle();
+
 
 if(error){
 
 console.error(error);
+
 return;
 
 }
 
+
 if(!data){
 
-let r =
+const insert=
+
 await db
 .from("customer_balances")
 .insert({
 
-customer_id:customerId,
+customer_id:currentUser.id,
 
 customer_name:
-"Smart Seller Customer",
+profile?.full_name||
+"Customer",
 
-balance:0
+balance:0,
 
-});
+profit:0,
 
-if(r.error)console.error(r.error);
+guarantee:0
 
-document.getElementById("balance")
-.textContent="0.00";
+})
+.select()
+.single();
+
+
+if(insert.error){
+
+console.error(insert.error);
 
 return;
 
 }
 
-document.getElementById("balance")
-.textContent =
-Number(data.balance||0).toFixed(2);
-
-if(data.customer_name){
-
-document.getElementById("customerName")
-.textContent=data.customer_name;
-
-document.getElementById("avatar")
-.textContent =
-data.customer_name.trim().charAt(0).toUpperCase()||"C";
+data=insert.data;
 
 }
 
+
+const balance=
+Number(data.balance||0);
+
+const profit=
+Number(data.profit||0);
+
+const guarantee=
+Number(data.guarantee||0);
+
+
+$("balance").textContent=
+balance.toFixed(2);
+
+$("profit").textContent=
+profit.toFixed(2);
+
+$("guarantee").textContent=
+guarantee.toFixed(2);
+
+$("withdrawBalance").textContent=
+balance.toFixed(2);
+
+$("withdrawProfit").textContent=
+profit.toFixed(2);
+
 }
+
 
 async function submitDeposit(){
 
-let amount =
-Number(
-document.getElementById("depositAmount").value
+if(!currentUser)
+return;
+
+
+const amount=
+Number($("depositAmount").value);
+
+const method=
+$("depositMethod").value;
+
+const transaction=
+$("transactionId").value.trim();
+
+const note=
+$("depositNote").value.trim();
+
+
+if(!Number.isFinite(amount)||amount<=0)
+return setResult(
+"depositResult",
+"Enter a valid amount.",
+false
 );
 
-let method =
-document.getElementById("depositMethod").value;
+if(!method)
+return setResult(
+"depositResult",
+"Select a payment method.",
+false
+);
 
-let transaction =
-document.getElementById("transactionId")
-.value.trim();
+if(!transaction)
+return setResult(
+"depositResult",
+"Enter transaction ID.",
+false
+);
 
-let note =
-document.getElementById("depositNote")
-.value.trim();
 
-let out =
-document.getElementById("depositResult");
-
-if(!Number.isFinite(amount)||amount<=0){
-
-out.className="error";
-out.textContent="Valid amount enter karein.";
-return;
-
-}
-
-if(!method){
-
-out.className="error";
-out.textContent="Payment method select karein.";
-return;
-
-}
-
-if(!transaction){
-
-out.className="error";
-out.textContent="Transaction ID enter karein.";
-return;
-
-}
-
-let {error}=
+const {error}=
 
 await db
 .from("deposit_requests")
 .insert({
 
-customer_id:customerId,
+customer_id:currentUser.id,
 
 customer_name:
-document.getElementById("customerName")
-.textContent,
+profile?.full_name||"Customer",
 
 amount:amount,
 
@@ -964,320 +1575,58 @@ status:"Pending"
 
 });
 
+
 if(error){
 
 console.error(error);
 
-out.className="error";
-
-out.textContent =
-"Deposit request submit nahi hui: "+
-error.message;
+setResult(
+"depositResult",
+error.message,
+false
+);
 
 return;
 
 }
 
-document.getElementById("depositAmount").value="";
-document.getElementById("transactionId").value="";
-document.getElementById("depositNote").value="";
 
-out.className="success";
+$("depositAmount").value="";
 
-out.textContent =
-"Deposit request submit ho gayi. Admin approval ka wait karein. ✅";
+$("transactionId").value="";
+
+$("depositNote").value="";
+
+
+setResult(
+"depositResult",
+"Deposit request submitted successfully.",
+true
+);
 
 loadDeposits();
 
 }
 
+
 async function loadDeposits(){
 
-let b =
-document.getElementById("depositList");
+if(!currentUser)
+return;
 
-b.innerHTML =
-'<div class="empty">Loading...</div>';
 
-let {data,error}=
+const b=$("depositList");
+
+const {data,error}=
 
 await db
 .from("deposit_requests")
 .select("*")
-.eq("customer_id",customerId)
+.eq("customer_id",currentUser.id)
 .order("created_at",{ascending:false});
 
-if(error){
-
-console.error(error);
-
-b.innerHTML =
-'<div class="error">Deposit table load nahi hui.</div>';
-
-return;
-
-}
-
-if(!data?.length){
-
-b.innerHTML =
-'<div class="empty">No deposit requests yet.</div>';
-
-return;
-
-}
-
-b.innerHTML="";
-
-data.forEach(x=>{
-
-let d=document.createElement("div");
-
-d.className="box";
-
-d.innerHTML=
-"<b>💰 $"+Number(x.amount||0).toFixed(2)+"</b>"+
-"<p>Method: "+esc(x.payment_method||"")+"</p>"+
-"<p>Transaction: "+esc(x.transaction_id||"")+"</p>"+
-"<p>Status: <span class=\"status\">"+
-esc(x.status||"Pending")+
-"</span></p>"+
-"<small>"+esc(x.created_at||"")+"</small>";
-
-b.appendChild(d);
-
-});
-
-}
-
-async function loadProducts(){
-
-let b=document.getElementById("products");
-
-b.innerHTML =
-'<div class="empty">Loading...</div>';
-
-let {data,error}=
-
-await db
-.from("Products")
-.select("*");
 
 if(error){
 
-console.error(error);
-
-b.innerHTML =
-'<div class="empty">Products could not be loaded.</div>';
-
-return;
-
-}
-
-document.getElementById("productCount")
-.textContent=(data||[]).length;
-
-if(!data?.length){
-
-b.innerHTML =
-'<div class="empty">No products available.</div>';
-
-return;
-
-}
-
-b.innerHTML="";
-
-data.forEach(p=>{
-
-let id=p.Id??p.id;
-
-let name =
-p.Name??p.name??"Product";
-
-let price =
-+(p.Price??p.price??0);
-
-let stock =
-+(p.Stock??p.stock??0);
-
-let img =
-p["Image url"]??
-p.image_url??
-p.image??"";
-
-let d=document.createElement("div");
-
-d.className="product";
-
-if(img){
-
-d.innerHTML =
-'<img src="'+esc(img)+'" alt="">';
-
-}
-
-d.innerHTML +=
-"<h3>"+esc(name)+"</h3>"+
-"<p class=\"price\">$"+
-price.toFixed(2)+
-"</p>"+
-"<p>Stock: "+
-stock+
-"</p>";
-
-let bt=document.createElement("button");
-
-bt.className="action";
-
-bt.textContent =
-stock>0
-?"🛒 Add to Cart"
-:"Out of Stock";
-
-bt.disabled=stock<=0;
-
-bt.onclick=()=>addToCart({
-id:id,
-name:name,
-price:price
-});
-
-d.appendChild(bt);
-
-b.appendChild(d);
-
-});
-
-}
-
-async function sendMessage(){
-
-let text =
-document.getElementById("supportMessage")
-.value.trim();
-
-let r =
-document.getElementById("result");
-
-if(!text){
-
-r.className="error";
-r.textContent="Please write a message.";
-return;
-
-}
-
-let {error}=
-
-await db
-.from("support_tickets")
-.insert({
-
-customer_id:customerId,
-
-message:text,
-
-status:"open"
-
-});
-
-if(error){
-
-console.error(error);
-
-r.className="error";
-r.textContent="Message could not be sent.";
-
-return;
-
-}
-
-document.getElementById("supportMessage")
-.value="";
-
-r.className="success";
-
-r.textContent =
-"Message sent successfully! ✅";
-
-loadMessages();
-
-}
-
-async function loadMessages(){
-
-let b =
-document.getElementById("supportMessages");
-
-b.innerHTML =
-'<div class="empty">Loading...</div>';
-
-let {data,error}=
-
-await db
-.from("support_tickets")
-.select("*")
-.eq("customer_id",customerId)
-.order("created_at",{ascending:false});
-
-if(error||!data?.length){
-
-b.innerHTML =
-'<div class="empty">No messages yet.</div>';
-
-return;
-
-}
-
-b.innerHTML="";
-
-data.forEach(x=>{
-
-let d=document.createElement("div");
-
-d.className="box";
-
-let reply =
-x.admin_reply||
-x.reply||
-"";
-
-d.innerHTML =
-"<b>You:</b>"+
-"<p>"+esc(x.message||"")+"</p>"+
-(
-reply
-?
-'<div class="success"><b>Admin:</b><p>'+
-esc(reply)+
-'</p></div>'
-:""
-);
-
-b.appendChild(d);
-
-});
-
-}
-
-function logout(){
-
-localStorage.removeItem(
-"smartSellerCustomerId"
-);
-
-alert("Logged out.");
-
-location.href="index.html";
-
-}
-
-updateDashboard();
-loadBalance();
-loadProducts();
-
-</script>
-
-</body>
-  </html>
+b.innerHTML=
+'<div clas
