@@ -15,7 +15,7 @@ body{
  background:#f3f4f6;
  color:#172033;
  font-family:Arial,sans-serif;
- padding-bottom:72px
+ padding-bottom:75px
 }
 
 .header{
@@ -42,16 +42,8 @@ body{
  font-size:22px
 }
 
-.header h1{
- margin:0;
- font-size:18px
-}
-
-.header p{
- margin:3px 0 0;
- color:#777;
- font-size:11px
-}
+.header h1{margin:0;font-size:18px}
+.header p{margin:3px 0 0;color:#777;font-size:11px}
 
 .container{
  max-width:900px;
@@ -85,13 +77,8 @@ body{
  color:#fff
 }
 
-.page{
- display:none
-}
-
-.page.active{
- display:block
-}
+.page{display:none}
+.page.active{display:block}
 
 .card{
  background:#fff;
@@ -116,9 +103,7 @@ body{
  font-size:19px
 }
 
-.welcome p{
- font-size:12px
-}
+.welcome p{font-size:12px}
 
 .stats{
  display:grid;
@@ -134,9 +119,7 @@ body{
  box-shadow:0 2px 7px #ddd
 }
 
-.stat b{
- font-size:20px
-}
+.stat b{font-size:20px}
 
 .stat span{
  display:block;
@@ -156,7 +139,7 @@ body{
 .item p{
  font-size:12px;
  color:#555;
- margin:4px 0
+ margin:5px 0
 }
 
 input,select,textarea{
@@ -168,10 +151,7 @@ input,select,textarea{
  margin:4px 0 8px
 }
 
-textarea{
- min-height:75px;
- resize:vertical
-}
+textarea{min-height:75px}
 
 label{
  font-size:11px;
@@ -190,29 +170,15 @@ label{
 }
 
 .action:disabled{
- opacity:.6;
+ opacity:.5;
  cursor:not-allowed
 }
 
-.green{
- background:#16a34a
-}
-
-.red{
- background:#dc2626
-}
-
-.gray{
- background:#777
-}
-
-.orange{
- background:#ea580c
-}
-
-.full{
- width:100%
-}
+.green{background:#16a34a}
+.red{background:#dc2626}
+.gray{background:#777}
+.orange{background:#ea580c}
+.full{width:100%}
 
 .status{
  display:inline-block;
@@ -223,16 +189,12 @@ label{
  font-size:10px
 }
 
-.status.approved,
-.status.paid,
-.status.replied,
-.status.delivered{
+.status.approved{
  background:#dcfce7;
  color:#166534
 }
 
-.status.rejected,
-.status.cancelled{
+.status.rejected{
  background:#fee2e2;
  color:#991b1b
 }
@@ -263,18 +225,21 @@ label{
  color:#991b1b
 }
 
-.notice{
- background:#eff6ff;
- color:#1d4ed8;
- padding:9px;
- border-radius:8px;
- font-size:11px;
- margin-bottom:9px
+.depositPending{
+ border-left:4px solid #f59e0b
+}
+
+.depositApproved{
+ border-left:4px solid #16a34a
+}
+
+.depositRejected{
+ border-left:4px solid #dc2626
 }
 
 .productImage{
  width:100%;
- max-height:180px;
+ max-height:160px;
  object-fit:cover;
  border-radius:8px;
  margin-bottom:7px
@@ -309,9 +274,14 @@ label{
  margin-bottom:2px
 }
 
+.small{
+ font-size:11px;
+ color:#777
+}
+
 hr{
  border:0;
- border-top:1px solid #ddd;
+ border-top:1px solid #eee;
  margin:10px 0
 }
 
@@ -337,6 +307,7 @@ hr{
 
 <div class="header">
  <div class="logo">▦</div>
+
  <div>
   <h1>Smart Seller Shop</h1>
   <p>Admin Panel</p>
@@ -412,7 +383,7 @@ hr{
 
 </div>
 
-<div class="card">
+<div class="card" style="margin-top:10px">
 <h2>💵 Pending Deposits</h2>
 <div id="dashboardDeposits" class="loading">
 Loading...
@@ -447,10 +418,10 @@ Loading...
 
 <h2>💵 Customer Deposit Requests</h2>
 
-<div class="notice">
+<p class="small">
 Customer نے Add Money سے جو payment request بھیجی ہے وہ یہاں نظر آئے گی۔
-Approve صرف ایک دفعہ ہوگا۔ دوبارہ Approve کرنے سے balance دوبارہ add نہیں ہوگا۔
-</div>
+Approve کرنے کے بعد وہ دوبارہ approve نہیں ہو سکے گی۔
+</p>
 
 <div id="depositRequestList" class="loading">
 Loading...
@@ -518,7 +489,7 @@ Loading...
 
 <div class="card">
 
-<h2 id="productFormTitle">📦 Add Product</h2>
+<h2>📦 Add Product</h2>
 
 <label>Product Name</label>
 <input id="productName" placeholder="Smart Watch">
@@ -542,9 +513,7 @@ Loading...
 ➕ Add Product
 </button>
 
-<button id="cancelProductEdit"
-class="action gray full"
-style="display:none">
+<button id="cancelEdit" class="action gray full" style="display:none">
 Cancel Edit
 </button>
 
@@ -606,12 +575,8 @@ Loading...
 
 <h2>🔔 Notifications</h2>
 
-<div class="notice">
-Notifications will appear here.
-</div>
-
 <div id="notificationList" class="empty">
-No notifications yet.
+Notifications will appear here.
 </div>
 
 </div>
@@ -627,12 +592,9 @@ No notifications yet.
 
 <h2>⚙️ Settings</h2>
 
-<p>
-Smart Seller Shop Admin Panel
-</p>
+<p>Smart Seller Shop Admin Panel</p>
 
-<button id="refresh"
-class="action gray full">
+<button id="refresh" class="action gray full">
 🔄 Refresh Panel
 </button>
 
@@ -677,9 +639,9 @@ Settings
 
 <script>
 
-/* =========================================================
+/* =====================================================
    SUPABASE
-========================================================= */
+===================================================== */
 
 const SUPABASE_URL =
 "https://cgrwiwzqiusvjibpjzdv.supabase.co";
@@ -694,111 +656,104 @@ supabase.createClient(
 );
 
 
-/* =========================================================
+/* =====================================================
    HELPERS
-========================================================= */
+===================================================== */
 
 const $ = id =>
 document.getElementById(id);
 
 const esc = value =>
 String(value ?? "")
-.replace(/[&<>"']/g,function(m){
- return {
-  "&":"&amp;",
-  "<":"&lt;",
-  ">":"&gt;",
-  '"':"&quot;",
-  "'":"&#039;"
- }[m];
-});
+.replace(
+ /[&<>"']/g,
+ function(m){
+  return {
+   "&":"&amp;",
+   "<":"&lt;",
+   ">":"&gt;",
+   '"':"&quot;",
+   "'":"&#039;"
+  }[m];
+ }
+);
 
 
 function msg(text,type="success"){
 
- const box=$("messageBox");
+ const box =
+ $("messageBox");
 
- box.textContent=text;
+ box.textContent =
+ text;
 
- box.className=
- "message "+
- type;
+ box.className =
+ "message " + type;
 
- box.style.display="block";
+ box.style.display =
+ "block";
 
- clearTimeout(window.msgTimer);
+ clearTimeout(
+  window.messageTimer
+ );
 
- window.msgTimer=
- setTimeout(function(){
-  box.style.display="none";
- },4000);
+ window.messageTimer =
+ setTimeout(
+  function(){
+   box.style.display =
+   "none";
+  },
+  4000
+ );
 }
 
 
-function statusClass(status){
+function setLoading(id){
 
- const s=String(status||"")
- .toLowerCase();
+ const box =
+ $(id);
 
- if(
-  s==="approved"||
-  s==="paid"||
-  s==="replied"||
-  s==="delivered"
- ){
-  return "status approved";
- }
+ if(!box)return;
 
- if(
-  s==="rejected"||
-  s==="cancelled"
- ){
-  return "status rejected";
- }
+ box.className =
+ "loading";
 
- return "status";
+ box.textContent =
+ "Loading...";
 }
 
 
-function getId(row){
+function setEmpty(id,text){
 
- return row?.id ??
- row?.Id ??
- null;
+ const box =
+ $(id);
+
+ if(!box)return;
+
+ box.className =
+ "empty";
+
+ box.textContent =
+ text;
 }
 
 
-function getValue(row,...keys){
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
 
- for(const key of keys){
-
-  if(
-   row &&
-   row[key] !== undefined &&
-   row[key] !== null
-  ){
-   return row[key];
-  }
-
- }
-
- return null;
-}
-
-
-/* =========================================================
-   PAGE SYSTEM
-========================================================= */
-
-async function openPage(id){
+async function openPage(pageId){
 
  document
  .querySelectorAll(".page")
- .forEach(function(page){
-  page.classList.remove("active");
- });
+ .forEach(
+  function(page){
+   page.classList.remove("active");
+  }
+ );
 
- const page=$(id);
+ const page =
+ $(pageId);
 
  if(page){
   page.classList.add("active");
@@ -806,81 +761,90 @@ async function openPage(id){
 
  document
  .querySelectorAll("[data-page]")
- .forEach(function(button){
-
-  button.classList.toggle(
-   "active",
-   button.dataset.page===id
-  );
-
- });
-
-
- try{
-
-  if(id==="dashboard")
-   await dashboard();
-
-  else if(id==="balance")
-   await balances();
-
-  else if(id==="deposits")
-   await deposits();
-
-  else if(id==="withdrawal")
-   await withdrawals();
-
-  else if(id==="kyc")
-   await kyc();
-
-  else if(id==="orders")
-   await orders();
-
-  else if(id==="products")
-   await products();
-
-  else if(id==="customers")
-   await customers();
-
-  else if(id==="messages")
-   await messages();
-
- }catch(error){
-
-  console.error(error);
-
-  msg(
-   "Database error: "+error.message,
-   "error"
-  );
-
- }
-
-}
-
-
-/* =========================================================
-   MENU EVENTS
-========================================================= */
-
-document
-.querySelectorAll("[data-page]")
-.forEach(function(button){
-
- button.addEventListener(
-  "click",
-  function(){
-   openPage(
-    button.dataset.page
+ .forEach(
+  function(button){
+   button.classList.toggle(
+    "active",
+    button.dataset.page === pageId
    );
   }
  );
 
-});
+ try{
+
+  if(pageId === "dashboard")
+   await dashboard();
+
+  else if(pageId === "balance")
+   await balances();
+
+  else if(pageId === "deposits")
+   await deposits();
+
+  else if(pageId === "withdrawal")
+   await withdrawals();
+
+  else if(pageId === "kyc")
+   await kyc();
+
+  else if(pageId === "orders")
+   await orders();
+
+  else if(pageId === "products")
+   await products();
+
+  else if(pageId === "customers")
+   await customers();
+
+  else if(pageId === "messages")
+   await messages();
+
+  else if(pageId === "notifications")
+   await notifications();
+
+ }catch(error){
+
+  console.error(
+   "PAGE ERROR:",
+   error
+  );
+
+  msg(
+   "Page load error: " +
+   (error.message || error),
+   "error"
+  );
+ }
+}
 
 
-$("refresh")
-.addEventListener(
+/* =====================================================
+   ALL MENU BUTTONS
+===================================================== */
+
+document
+.querySelectorAll("[data-page]")
+.forEach(
+ function(button){
+
+  button.addEventListener(
+   "click",
+   function(){
+    openPage(
+     button.dataset.page
+    );
+   }
+  );
+
+ }
+);
+
+
+/* =====================================================
+   REFRESH
+===================================================== */
+
+$("refresh").addEventListener(
  "click",
  function(){
   location.reload();
@@ -888,76 +852,84 @@ $("refresh")
 );
 
 
-/* =========================================================
+/* =====================================================
    DASHBOARD
-========================================================= */
+===================================================== */
 
 async function dashboard(){
 
- const [
-  productsResult,
-  ordersResult,
-  messagesResult,
-  withdrawalsResult
- ] =
- await Promise.all([
+ const results =
+ await Promise.allSettled([
 
-  db
-  .from("Products")
+  db.from("Products")
   .select("*",{count:"exact",head:true}),
 
-  db
-  .from("orders")
+  db.from("orders")
   .select("*",{count:"exact",head:true}),
 
-  db
-  .from("support_tickets")
+  db.from("support_tickets")
   .select("*",{count:"exact",head:true}),
 
-  db
-  .from("withdrawals")
+  db.from("withdrawals")
   .select("*",{count:"exact",head:true})
 
  ]);
 
+ const p =
+ results[0].status === "fulfilled"
+ ? results[0].value
+ : null;
+
+ const o =
+ results[1].status === "fulfilled"
+ ? results[1].value
+ : null;
+
+ const m =
+ results[2].status === "fulfilled"
+ ? results[2].value
+ : null;
+
+ const w =
+ results[3].status === "fulfilled"
+ ? results[3].value
+ : null;
 
  $("statProducts").textContent =
- productsResult.error
- ? "0"
- : productsResult.count || 0;
-
+ p && !p.error
+ ? (p.count || 0)
+ : "0";
 
  $("statOrders").textContent =
- ordersResult.error
- ? "0"
- : ordersResult.count || 0;
-
+ o && !o.error
+ ? (o.count || 0)
+ : "0";
 
  $("statMessages").textContent =
- messagesResult.error
- ? "0"
- : messagesResult.count || 0;
-
+ m && !m.error
+ ? (m.count || 0)
+ : "0";
 
  $("statWithdrawals").textContent =
- withdrawalsResult.error
- ? "0"
- : withdrawalsResult.count || 0;
+ w && !w.error
+ ? (w.count || 0)
+ : "0";
 
 
- await dashboardPendingDeposits();
-
+ await dashboardDeposits();
 }
 
 
-async function dashboardPendingDeposits(){
+async function dashboardDeposits(){
 
- const box=$("dashboardDeposits");
+ const box =
+ $("dashboardDeposits");
 
- box.className="loading";
- box.textContent="Loading...";
+ setLoading(
+  "dashboardDeposits"
+ );
 
- const result=
+ const result =
  await db
  .from("deposit_requests")
  .select("*")
@@ -965,22 +937,26 @@ async function dashboardPendingDeposits(){
  .order(
   "created_at",
   {ascending:false}
- );
+ )
+ .limit(5);
 
  if(result.error){
 
-  box.className="empty";
-  box.textContent=
-  "Deposit requests table is not available.";
+  setEmpty(
+   "dashboardDeposits",
+   "Deposit requests table available نہیں ہے."
+  );
 
   return;
  }
 
- if(!result.data?.length){
+ if(!result.data ||
+ !result.data.length){
 
-  box.className="empty";
-  box.textContent=
-  "No pending deposits.";
+  setEmpty(
+   "dashboardDeposits",
+   "No pending deposits."
+  );
 
   return;
  }
@@ -988,486 +964,204 @@ async function dashboardPendingDeposits(){
  box.className="";
  box.innerHTML="";
 
- result.data
- .slice(0,5)
- .forEach(function(x){
+ result.data.forEach(
+  function(item){
 
-  const d=
-  document.createElement("div");
+   const div =
+   document.createElement("div");
 
-  d.className="item";
+   div.className =
+   "item depositPending";
 
-  d.innerHTML=`
+   div.innerHTML =
 
-  <b>💵 Deposit Request</b>
+   "<b>💵 Deposit Request</b>" +
 
-  <p>
-  Customer:
-  ${esc(
-   getValue(
-    x,
-    "customer_name",
-    "customer_id"
-   ) || "Customer"
-  )}
-  </p>
+   "<p>Customer: <b>" +
+   esc(
+    item.customer_name ||
+    item.customer_id ||
+    "Customer"
+   ) +
+   "</b></p>" +
 
-  <p>
-  Amount:
-  <b>
-  $${Number(
-   x.amount||0
-  ).toFixed(2)}
-  </b>
-  </p>
+   "<p>Amount: <b>$" +
+   Number(item.amount || 0)
+   .toFixed(2) +
+   "</b></p>" +
 
-  <p>
-  Status:
-  <span class="status">
-  Pending
-  </span>
-  </p>
+   "<p>Status: Pending</p>" +
 
-  `;
+   "<button class='action' data-open-deposit='1'>" +
+   "Open Deposits" +
+   "</button>";
 
-  box.appendChild(d);
+   div
+   .querySelector("button")
+   .onclick =
+   function(){
+    openPage("deposits");
+   };
 
- });
-
+   box.appendChild(div);
+  }
+ );
 }
 
 
-/* =========================================================
-   PRODUCTS
-========================================================= */
+/* =====================================================
+   BALANCES
+===================================================== */
 
-let editingProductId=null;
+async function balances(){
 
+ setLoading(
+  "balanceList"
+ );
 
-async function products(){
-
- const box=$("productList");
-
- box.className="loading";
- box.textContent="Loading...";
-
- const result=
+ const result =
  await db
- .from("Products")
- .select("*");
+ .from("customer_balances")
+ .select("*")
+ .order(
+  "updated_at",
+  {ascending:false}
+ );
 
  if(result.error){
 
-  box.className="empty";
+  setEmpty(
+   "balanceList",
+   "Balance table is not available: " +
+   result.error.message
+  );
 
-  box.innerHTML=
-  "Products table is not available.<br><br>"+
-  esc(result.error.message);
+  return;
+ }
+
+ if(!result.data ||
+ !result.data.length){
+
+  setEmpty(
+   "balanceList",
+   "No customer balances yet."
+  );
 
   return;
  }
 
- if(!result.data?.length){
-
-  box.className="empty";
-  box.textContent=
-  "No products yet.";
-
-  return;
- }
+ const box =
+ $("balanceList");
 
  box.className="";
  box.innerHTML="";
 
- result.data.forEach(function(p){
+ result.data.forEach(
+  function(customer){
 
-  const id=
-  getValue(p,"Id","id");
+   const div =
+   document.createElement("div");
 
-  const name=
-  getValue(p,"Name","name")
-  ||"Product";
+   div.className =
+   "item";
 
-  const description=
-  getValue(
-   p,
-   "Description",
-   "description"
-  )||"";
+   div.innerHTML =
 
-  const price=
-  Number(
-   getValue(
-    p,
-    "Price",
-    "price"
-   )||0
-  );
+   "<b>👤 " +
+   esc(
+    customer.customer_name ||
+    customer.customer_id ||
+    "Customer"
+   ) +
+   "</b>" +
 
-  const stock=
-  Number(
-   getValue(
-    p,
-    "Stock",
-    "stock"
-   )||0
-  );
+   "<p>Customer ID: " +
+   esc(customer.customer_id || "") +
+   "</p>" +
 
-  const category=
-  getValue(
-   p,
-   "Category",
-   "category"
-  )||"";
+   "<p>Current Balance: <b>$" +
+   Number(customer.balance || 0)
+   .toFixed(2) +
+   "</b></p>" +
 
-  const image=
-  getValue(
-   p,
-   "Image url",
-   "image_url",
-   "image"
-  )||"";
+   "<input type='number' min='0' " +
+   "placeholder='New balance'>" +
 
+   "<button class='action'>" +
+   "Update Balance" +
+   "</button>";
 
-  const d=
-  document.createElement("div");
+   div
+   .querySelector("button")
+   .onclick =
+   async function(){
 
-  d.className="item";
+    const input =
+    div.querySelector("input");
 
-  d.innerHTML=
+    const amount =
+    Number(input.value);
 
-  (image
-  ?
-  `<img
-   class="productImage"
-   src="${esc(image)}"
-   onerror="this.style.display='none'"
-  >`
-  :"")
-  +
+    if(!Number.isFinite(amount) ||
+       amount < 0){
 
-  `<b>📦 ${esc(name)}</b>
+     msg(
+      "Valid balance enter کریں.",
+      "error"
+     );
 
-  <p>
-  Description:
-  ${esc(description)}
-  </p>
+     return;
+    }
 
-  <p>
-  Price:
-  <b>$${price.toFixed(2)}</b>
-  </p>
+    const update =
+    await db
+    .from("customer_balances")
+    .update({
+     balance:amount,
+     updated_at:
+      new Date().toISOString()
+    })
+    .eq(
+     "id",
+     customer.id
+    );
 
-  <p>
-  Stock:
-  ${esc(stock)}
-  </p>
+    if(update.error){
 
-  <p>
-  Category:
-  ${esc(category)}
-  </p>
+     msg(
+      update.error.message,
+      "error"
+     );
 
-  <button
-   class="action orange editProductBtn">
-   ✏️ Edit
-  </button>
+     return;
+    }
 
-  <button
-   class="action red deleteProductBtn">
-   🗑️ Delete
-  </button>`;
+    msg(
+     "Balance updated successfully."
+    );
 
+    await balances();
+   };
 
-  d.querySelector(".editProductBtn")
-  .onclick=function(){
-
-   editProduct(p);
-
-  };
-
-
-  d.querySelector(".deleteProductBtn")
-  .onclick=function(){
-
-   delProduct(id);
-
-  };
-
-
-  box.appendChild(d);
-
- });
-
+   box.appendChild(div);
+  }
+ );
 }
 
 
-function editProduct(p){
+/* =====================================================
+   DEPOSITS
+===================================================== */
 
- editingProductId=
- getValue(p,"Id","id");
+async function deposits(){
 
- $("productName").value=
- getValue(
-  p,
-  "Name",
-  "name"
- )||"";
-
- $("productDescription").value=
- getValue(
-  p,
-  "Description",
-  "description"
- )||"";
-
- $("productPrice").value=
- getValue(
-  p,
-  "Price",
-  "price"
- )??"";
-
- $("productStock").value=
- getValue(
-  p,
-  "Stock",
-  "stock"
- )??"";
-
- $("productCategory").value=
- getValue(
-  p,
-  "Category",
-  "category"
- )||"";
-
- $("productImage").value=
- getValue(
-  p,
-  "Image url",
-  "image_url",
-  "image"
- )||"";
-
- $("productFormTitle").textContent=
- "✏️ Edit Product";
-
- $("addProduct").textContent=
- "Update Product";
-
- $("cancelProductEdit")
- .style.display="block";
-
- window.scrollTo({
-  top:0,
-  behavior:"smooth"
- });
-
-}
-
-
-$("addProduct")
-.addEventListener(
- "click",
- addProduct
-);
-
-
-$("cancelProductEdit")
-.addEventListener(
- "click",
- cancelProductEdit
-);
-
-
-function cancelProductEdit(){
-
- editingProductId=null;
-
- $("productName").value="";
- $("productDescription").value="";
- $("productPrice").value="";
- $("productStock").value="";
- $("productCategory").value="";
- $("productImage").value="";
-
- $("productFormTitle").textContent=
- "📦 Add Product";
-
- $("addProduct").textContent=
- "➕ Add Product";
-
- $("cancelProductEdit")
- .style.display="none";
-
-}
-
-
-async function addProduct(){
-
- const name=
- $("productName")
- .value
- .trim();
-
- if(!name){
-
-  msg(
-   "Product name is required.",
-   "error"
-  );
-
-  return;
- }
-
- const data={
-
-  Name:name,
-
-  Description:
-  $("productDescription")
-  .value
-  .trim() || null,
-
-  Price:
-  Number(
-   $("productPrice").value
-  ) || 0,
-
-  Stock:
-  Number(
-   $("productStock").value
-  ) || 0,
-
-  Category:
-  $("productCategory")
-  .value
-  .trim() || null,
-
-  "Image url":
-  $("productImage")
-  .value
-  .trim() || null
-
- };
-
-
- const button=$("addProduct");
-
- button.disabled=true;
- button.textContent=
- editingProductId===null
- ? "Adding..."
- : "Updating...";
-
-
- let result;
-
-
- if(editingProductId===null){
-
-  result=
-  await db
-  .from("Products")
-  .insert([data]);
-
- }else{
-
-  result=
-  await db
-  .from("Products")
-  .update(data)
-  .eq(
-   "Id",
-   editingProductId
-  );
-
- }
-
-
- button.disabled=false;
-
-
- if(result.error){
-
-  console.error(result.error);
-
-  msg(
-   result.error.message,
-   "error"
-  );
-
-  return;
- }
-
-
- msg(
-  editingProductId===null
-  ? "Product added successfully."
-  : "Product updated successfully."
+ setLoading(
+  "depositRequestList"
  );
 
-
- cancelProductEdit();
-
- await products();
-
- await dashboard();
-
-}
-
-
-async function delProduct(id){
-
- if(!confirm(
-  "Delete this product?"
- ))return;
-
-
- const result=
+ const result =
  await db
- .from("Products")
- .delete()
- .eq("Id",id);
-
-
- if(result.error){
-
-  msg(
-   result.error.message,
-   "error"
-  );
-
-  return;
- }
-
-
- msg(
-  "Product deleted."
- );
-
- await products();
-
- await dashboard();
-
-}
-
-
-/* =========================================================
-   ORDERS
-========================================================= */
-
-async function orders(){
-
- const box=$("orderList");
-
- box.className="loading";
- box.textContent="Loading...";
-
- const result=
- await db
- .from("orders")
+ .from("deposit_requests")
  .select("*")
  .order(
   "created_at",
@@ -1476,81 +1170,250 @@ async function orders(){
 
  if(result.error){
 
-  box.className="empty";
+  setEmpty(
+   "depositRequestList",
+   "Deposit requests load نہیں ہو رہیں: " +
+   result.error.message
+  );
 
-  box.textContent=
-  "Orders table is not available yet.";
+  return;
+ }
+
+ if(!result.data ||
+ !result.data.length){
+
+  setEmpty(
+   "depositRequestList",
+   "No deposit requests yet."
+  );
 
   return;
  }
 
- if(!result.data?.length){
-
-  box.className="empty";
-  box.textContent=
-  "No customer orders yet.";
-
-  return;
- }
+ const box =
+ $("depositRequestList");
 
  box.className="";
  box.innerHTML="";
 
+ result.data.forEach(
+  function(request){
 
- result.data.forEach(function(o){
+   const div =
+   document.createElement("div");
 
-  const d=
-  document.createElement("div");
+   div.className =
+   "item " +
+   (
+    request.status === "Approved"
+    ? "depositApproved"
+    :
+    request.status === "Rejected"
+    ? "depositRejected"
+    : "depositPending"
+   );
 
-  d.className="item";
+   const status =
+   request.status || "Pending";
+
+   div.innerHTML =
+
+   "<b>💵 Deposit Request #" +
+   esc(request.id) +
+   "</b>" +
+
+   "<p>Customer: <b>" +
+   esc(
+    request.customer_name ||
+    request.customer_id ||
+    "Customer"
+   ) +
+   "</b></p>" +
+
+   "<p>Customer ID: " +
+   esc(request.customer_id || "") +
+   "</p>" +
+
+   "<p>Amount: <b>$" +
+   Number(request.amount || 0)
+   .toFixed(2) +
+   "</b></p>" +
+
+   "<p>Payment Method: " +
+   esc(
+    request.payment_method || ""
+   ) +
+   "</p>" +
+
+   "<p>Transaction ID: <b>" +
+   esc(
+    request.transaction_id || ""
+   ) +
+   "</b></p>" +
+
+   "<p>Note: " +
+   esc(request.note || "") +
+   "</p>" +
+
+   "<p>Status: " +
+   "<span class='status'>" +
+   esc(status) +
+   "</span></p>" +
+
+   "<p class='small'>" +
+   esc(request.created_at || "") +
+   "</p>" +
+
+   (
+    status === "Pending"
+    ?
+
+    "<select class='depositStatus'>" +
+
+    "<option value='Pending'>Pending</option>" +
+
+    "<option value='Approved'>Approved</option>" +
+
+    "<option value='Rejected'>Rejected</option>" +
+
+    "</select>" +
+
+    "<button class='action green depositUpdate'>" +
+    "Update" +
+    "</button>"
+
+    :
+
+    "<p><b>یہ request پہلے ہی " +
+    esc(status) +
+    " ہو چکی ہے۔</b></p>"
+   );
 
 
-  const status=
-  o.status||"Pending";
+   const updateButton =
+   div.querySelector(
+    ".depositUpdate"
+   );
+
+   if(updateButton){
+
+    updateButton.onclick =
+    async function(){
+
+     const select =
+     div.querySelector(
+      ".depositStatus"
+     );
+
+     const newStatus =
+     select.value;
+
+     await updateDeposit(
+      request,
+      newStatus,
+      updateButton
+     );
+    };
+   }
+
+   box.appendChild(div);
+  }
+ );
+}
 
 
-  d.innerHTML=`
+/* =====================================================
+   DEPOSIT UPDATE
+   IMPORTANT:
+   APPROVE صرف Pending request پر ہوگا.
+===================================================== */
 
-  <b>
-  🛒 Order #${esc(o.id)}
-  </b>
+async function updateDeposit(
+ request,
+ newStatus,
+ button
+){
 
-  <p>
-  Customer:
-  ${esc(
-   o.customer_name||
-   o.customer_id||
-   "Customer"
-  )}
-  </p>
+ if(request.status !== "Pending"){
 
-  <p>
-  Product:
-  ${esc(
-   o.product_name||
-   "Product"
-  )}
-  </p>
+  msg(
+   "یہ deposit پہلے ہی process ہو چکا ہے.",
+   "error"
+  );
 
-  <p>
-  Quantity:
-  ${esc(
-   o.quantity||1
-  )}
-  </p>
+  return;
+ }
 
-  <p>
-  Total:
-  <b>
-  $${Number(
-   o.total_amount??
-   o.total??
-   0
-  ).toFixed(2)}
-  </b>
-  </p>
+ if(newStatus === "Pending"){
 
-  <p>
-  Status:
-  <span class="${statusClass(status)}">
-  ${es
+  msg(
+   "Pending سے کوئی action نہیں لیا گیا."
+  );
+
+  return;
+ }
+
+ if(!confirm(
+  "کیا آپ اس deposit کو " +
+  newStatus +
+  " کرنا چاہتے ہیں؟"
+ ))return;
+
+ button.disabled=true;
+
+ /*
+  STEP 1:
+  پہلے request کا status Pending سے
+  Approved/Rejected کریں۔
+
+  اس سے دوبارہ Approve ہونے کا خطرہ
+  بہت کم ہو جاتا ہے۔
+ */
+
+ const statusUpdate =
+ await db
+ .from("deposit_requests")
+ .update({
+  status:newStatus
+ })
+ .eq(
+  "id",
+  request.id
+ )
+ .eq(
+  "status",
+  "Pending"
+ );
+
+ if(statusUpdate.error){
+
+  button.disabled=false;
+
+  msg(
+   statusUpdate.error.message,
+   "error"
+  );
+
+  return;
+ }
+
+
+ /*
+  REJECTED
+ */
+
+ if(newStatus === "Rejected"){
+
+  msg(
+   "Deposit request rejected."
+  );
+
+  await deposits();
+  await dashboardDeposits();
+
+  return;
+ }
+
+
+ /*
+  APPROVED
