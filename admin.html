@@ -2,442 +2,1708 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Smart Seller Shop - Admin Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Seller Shop - Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f3f4f6;color:#172033;font-family:Arial,sans-serif;padding-bottom:78px}
-.header{background:#fff;padding:14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:20}
-.logo{width:48px;height:48px;border-radius:13px;background:#713be8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:bold}
-.header h1{margin:0;font-size:19px}.header p{margin:3px 0 0;color:#777;font-size:12px}
-.connection{margin-left:auto;font-size:11px;padding:6px 9px;border-radius:14px;background:#fff3cd;color:#856404}
-.connection.ok{background:#dcfce7;color:#166534}.connection.bad{background:#fee2e2;color:#991b1b}
-.container{max-width:900px;margin:auto;padding:12px}
-.topMenu{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:12px}
-button{font-family:inherit}
-.navBtn{border:0;background:#fff;padding:10px 3px;border-radius:10px;box-shadow:0 2px 7px #ddd;font-size:11px;cursor:pointer;color:#172033}
-.navBtn.active{background:#713be8;color:#fff}
-.page{display:none}.page.active{display:block}
-.card{background:#fff;border-radius:15px;padding:15px;margin-bottom:12px;box-shadow:0 2px 10px #ddd}
-.card h2{margin:0 0 10px;font-size:18px}
-.welcome{background:#214f78;color:#fff}.welcome h2{font-size:21px;margin:6px 0 10px}.welcome p{font-size:13px;line-height:1.5}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.stat{background:#fff;border-radius:13px;padding:13px 5px;text-align:center;box-shadow:0 2px 8px #ddd}.stat b{font-size:22px}.stat span{display:block;font-size:11px;color:#777;margin-top:4px}
-.item{border:1px solid #ddd;border-radius:11px;padding:12px;margin-top:8px;background:#fafafa}.item p{font-size:13px;color:#555;margin:5px 0}
-.item img{max-width:100%;height:120px;object-fit:cover;border-radius:8px}
-input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:9px;font-size:14px;margin:5px 0 9px}
-textarea{min-height:90px}label{font-size:12px;font-weight:bold}
-.action{border:0;border-radius:8px;padding:9px 12px;background:#713be8;color:#fff;cursor:pointer;font-size:13px;margin:3px}
-.action:disabled{opacity:.55;cursor:not-allowed}
-.green{background:#16a34a}.red{background:#dc2626}.gray{background:#777}.full{width:100%;margin:3px 0}
-.status{display:inline-block;padding:4px 8px;border-radius:15px;background:#fff3cd;color:#856404;font-size:11px}
-.status.approved{background:#dcfce7;color:#166534}.status.rejected{background:#fee2e2;color:#991b1b}
-.loading,.empty{text-align:center;padding:20px;color:#777;font-size:13px}
-.message{display:none;padding:10px;border-radius:9px;margin-bottom:10px;font-size:13px}
-.success{background:#dcfce7;color:#166534}.error{background:#fee2e2;color:#991b1b}
-.errorBox{white-space:pre-wrap;text-align:left;background:#fff1f2;color:#991b1b;border:1px solid #fecdd3;border-radius:9px;padding:12px}
-.small{font-size:11px;color:#777}
-.bottom{position:fixed;bottom:0;left:0;right:0;height:67px;background:#fff;border-top:1px solid #ddd;display:flex;z-index:999}
-.bottom button{flex:1;border:0;background:#fff;font-size:10px;color:#555;cursor:pointer}
-.bottom button.active{color:#713be8;font-weight:bold}.bottomIcon{font-size:18px;display:block;margin-bottom:3px}
-.diag{font-size:12px;line-height:1.5;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px;margin-top:10px}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f5f7;
+color:#172033;
+padding-bottom:80px
+}
+
+.header{
+background:#fff;
+padding:14px;
+display:flex;
+align-items:center;
+gap:12px;
+border-bottom:1px solid #ddd;
+position:sticky;
+top:0;
+z-index:100
+}
+
+.logo{
+width:48px;
+height:48px;
+border-radius:12px;
+background:#713be8;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold
+}
+
+.header h1{
+margin:0;
+font-size:18px
+}
+
+.header p{
+margin:4px 0 0;
+font-size:12px;
+color:#777
+}
+
+.connection{
+margin-left:auto;
+padding:7px 10px;
+border-radius:20px;
+font-size:11px;
+background:#fff3cd;
+color:#856404
+}
+
+.connection.ok{
+background:#dcfce7;
+color:#166534
+}
+
+.connection.bad{
+background:#fee2e2;
+color:#991b1b
+}
+
+.container{
+max-width:950px;
+margin:auto;
+padding:14px
+}
+
+.menu{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin-bottom:14px
+}
+
+.menu button{
+border:0;
+background:white;
+padding:13px 5px;
+border-radius:12px;
+box-shadow:0 2px 8px #ddd;
+font-size:12px;
+cursor:pointer
+}
+
+.menu button.active{
+background:#713be8;
+color:white
+}
+
+.page{
+display:none
+}
+
+.page.active{
+display:block
+}
+
+.card{
+background:white;
+padding:16px;
+border-radius:15px;
+margin-bottom:14px;
+box-shadow:0 2px 10px #ddd
+}
+
+.card h2{
+margin:0 0 12px;
+font-size:18px
+}
+
+.welcome{
+background:#24547d;
+color:white
+}
+
+.welcome h2{
+font-size:22px
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px
+}
+
+.stat{
+background:white;
+padding:18px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 2px 8px #ddd
+}
+
+.stat b{
+display:block;
+font-size:26px
+}
+
+.stat span{
+font-size:12px;
+color:#777
+}
+
+input,textarea,select{
+width:100%;
+padding:11px;
+margin:5px 0 10px;
+border:1px solid #ddd;
+border-radius:9px;
+font-size:14px
+}
+
+textarea{
+min-height:90px
+}
+
+label{
+font-size:12px;
+font-weight:bold
+}
+
+button.action{
+border:0;
+padding:10px 14px;
+border-radius:9px;
+background:#713be8;
+color:white;
+cursor:pointer;
+margin:3px
+}
+
+button.green{
+background:#16a34a
+}
+
+button.red{
+background:#dc2626
+}
+
+button.gray{
+background:#666
+}
+
+button:disabled{
+opacity:.5
+}
+
+.full{
+width:100%
+}
+
+.item{
+border:1px solid #ddd;
+background:#fafafa;
+padding:13px;
+border-radius:11px;
+margin-top:9px
+}
+
+.item p{
+font-size:13px;
+color:#555;
+margin:6px 0
+}
+
+.status{
+display:inline-block;
+padding:5px 9px;
+border-radius:20px;
+background:#fff3cd;
+color:#856404;
+font-size:11px
+}
+
+.status.approved{
+background:#dcfce7;
+color:#166534
+}
+
+.status.rejected{
+background:#fee2e2;
+color:#991b1b
+}
+
+.loading{
+padding:20px;
+text-align:center;
+color:#777
+}
+
+.empty{
+padding:20px;
+text-align:center;
+color:#777
+}
+
+.errorBox{
+background:#fee2e2;
+color:#991b1b;
+padding:12px;
+border-radius:10px;
+font-size:12px;
+word-break:break-word
+}
+
+.message{
+display:none;
+padding:12px;
+border-radius:10px;
+margin-bottom:12px;
+font-size:13px
+}
+
+.message.success{
+background:#dcfce7;
+color:#166534
+}
+
+.message.error{
+background:#fee2e2;
+color:#991b1b
+}
+
+.bottom{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:65px;
+background:white;
+border-top:1px solid #ddd;
+display:flex;
+z-index:999
+}
+
+.bottom button{
+flex:1;
+border:0;
+background:white;
+font-size:10px;
+color:#555;
+cursor:pointer
+}
+
+.bottom button.active{
+color:#713be8;
+font-weight:bold
+}
+
+.icon{
+display:block;
+font-size:18px;
+margin-bottom:3px
+}
+
 @media(max-width:600px){
- .stats{grid-template-columns:repeat(2,1fr)}
- .topMenu{grid-template-columns:repeat(3,1fr)}
- .topMenu button{font-size:9px;padding:9px 1px}
- .header h1{font-size:17px}
+
+.container{
+padding:10px
+}
+
+.header h1{
+font-size:17px
+}
+
+.menu{
+grid-template-columns:repeat(3,1fr)
+}
+
+.menu button{
+font-size:10px
+}
+
 }
 </style>
 </head>
+
 <body>
 
 <div class="header">
-  <div class="logo">SS</div>
-  <div><h1>Smart Seller Shop</h1><p>Admin Panel</p></div>
-  <span id="connection" class="connection">Checking...</span>
+
+<div class="logo">SS</div>
+
+<div>
+<h1>Smart Seller Shop</h1>
+<p>Admin Panel</p>
 </div>
+
+<div id="connection" class="connection">
+Starting...
+</div>
+
+</div>
+
 
 <div class="container">
-<div id="messageBox" class="message"></div>
 
-<div class="topMenu">
-<button type="button" class="navBtn active" data-page="dashboard">Dashboard</button>
-<button type="button" class="navBtn" data-page="balance">Balance</button>
-<button type="button" class="navBtn" data-page="deposits">Deposits</button>
-<button type="button" class="navBtn" data-page="withdrawal">Withdrawals</button>
-<button type="button" class="navBtn" data-page="kyc">KYC</button>
-<button type="button" class="navBtn" data-page="orders">Orders</button>
+<div id="message" class="message"></div>
+
+
+<div class="menu">
+
+<button class="active" data-page="dashboard">
+Dashboard
+</button>
+
+<button data-page="balance">
+Balance
+</button>
+
+<button data-page="deposits">
+Deposits
+</button>
+
+<button data-page="withdrawals">
+Withdrawals
+</button>
+
+<button data-page="kyc">
+KYC
+</button>
+
+<button data-page="orders">
+Orders
+</button>
+
 </div>
 
-<div id="dashboard" class="page active">
-<div class="card welcome"><small>WELCOME BACK</small><h2>Smart Seller Shop Admin</h2><p>Manage products, deposits, balances, withdrawals, KYC, orders and customer messages.</p></div>
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="page active">
+
+<div class="card welcome">
+
+<div>WELCOME BACK</div>
+
+<h2>Smart Seller Shop Admin</h2>
+
+<p>
+Manage products, customers, deposits, balances,
+withdrawals, KYC, orders and messages.
+</p>
+
+</div>
+
+
 <div class="stats">
-<div class="stat"><b id="statProducts">0</b><span>Products</span></div>
-<div class="stat"><b id="statOrders">0</b><span>Orders</span></div>
-<div class="stat"><b id="statMessages">0</b><span>Messages</span></div>
-<div class="stat"><b id="statWithdrawals">0</b><span>Withdrawals</span></div>
+
+<div class="stat">
+<b id="productsCount">0</b>
+<span>Products</span>
 </div>
+
+<div class="stat">
+<b id="ordersCount">0</b>
+<span>Orders</span>
+</div>
+
+<div class="stat">
+<b id="messagesCount">0</b>
+<span>Messages</span>
+</div>
+
+<div class="stat">
+<b id="withdrawalsCount">0</b>
+<span>Withdrawals</span>
+</div>
+
+</div>
+
+
 <div class="card">
+
 <h2>Connection Status</h2>
-<div id="diagnostic" class="diag">Checking Supabase...</div>
-</div>
-</div>
 
-<div id="balance" class="page"><div class="card"><h2>Customer Balance</h2><div id="balanceList" class="loading">Loading...</div></div></div>
-
-<div id="deposits" class="page">
-<div class="card"><h2>Customer Deposit Requests</h2><p class="small">Only Pending requests can be approved. Approval must be handled by the Supabase RPC function.</p><div id="depositRequestList" class="loading">Loading...</div></div>
+<div id="connectionDetails">
+Checking Supabase...
 </div>
 
-<div id="withdrawal" class="page"><div class="card"><h2>Withdrawal Requests</h2><div id="withdrawalList" class="loading">Loading...</div></div></div>
-<div id="kyc" class="page"><div class="card"><h2>KYC Verification</h2><div id="kycList" class="loading">Loading...</div></div></div>
-<div id="orders" class="page"><div class="card"><h2>Customer Orders</h2><div id="orderList" class="loading">Loading...</div></div></div>
+</div>
 
-<div id="products" class="page">
+</section>
+
+
+
+<!-- BALANCE -->
+
+<section id="balance" class="page">
+
 <div class="card">
-<h2>Add Product</h2>
-<label>Product Name</label><input id="productName" placeholder="Smart Watch">
-<label>Description</label><textarea id="productDescription" placeholder="Product description"></textarea>
-<label>Price</label><input id="productPrice" type="number" step="0.01" min="0" placeholder="50">
-<label>Stock</label><input id="productStock" type="number" min="0" placeholder="10">
-<label>Category</label><input id="productCategory" placeholder="Watch">
-<label>Image URL</label><input id="productImage" placeholder="https://example.com/image.jpg">
-<button type="button" id="addProductBtn" class="action full">Add Product</button>
-</div>
-<div class="card"><h2>Products</h2><div id="productList" class="loading">Loading...</div></div>
+
+<h2>Customer Balances</h2>
+
+<div id="balanceList" class="loading">
+Loading...
 </div>
 
-<div id="customers" class="page"><div class="card"><h2>Customers</h2><div id="customerList" class="loading">Loading...</div></div></div>
-<div id="messages" class="page"><div class="card"><h2>Customer Messages</h2><div id="messageList" class="loading">Loading...</div></div></div>
-<div id="notifications" class="page"><div class="card"><h2>Notifications</h2><div class="empty">No notifications yet.</div></div></div>
-<div id="settings" class="page"><div class="card"><h2>Settings</h2><p>Smart Seller Shop Admin Panel</p><button type="button" id="refreshBtn" class="action gray full">Refresh Panel</button></div></div>
 </div>
+
+</section>
+
+
+
+<!-- DEPOSITS -->
+
+<section id="deposits" class="page">
+
+<div class="card">
+
+<h2>Deposit Requests</h2>
+
+<p>
+Approve a pending deposit only once.
+</p>
+
+<div id="depositList" class="loading">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- WITHDRAWALS -->
+
+<section id="withdrawals" class="page">
+
+<div class="card">
+
+<h2>Withdrawal Requests</h2>
+
+<div id="withdrawalList" class="loading">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- KYC -->
+
+<section id="kyc" class="page">
+
+<div class="card">
+
+<h2>KYC Requests</h2>
+
+<div id="kycList" class="loading">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ORDERS -->
+
+<section id="orders" class="page">
+
+<div class="card">
+
+<h2>Customer Orders</h2>
+
+<div id="orderList" class="loading">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- PRODUCTS -->
+
+<section id="products" class="page">
+
+<div class="card">
+
+<h2>Add Product</h2>
+
+<label>Product Name</label>
+
+<input
+id="productName"
+type="text"
+placeholder="Product name"
+>
+
+<label>Description</label>
+
+<textarea
+id="productDescription"
+placeholder="Product description"
+></textarea>
+
+<label>Price</label>
+
+<input
+id="productPrice"
+type="number"
+step="0.01"
+placeholder="0"
+>
+
+<label>Stock</label>
+
+<input
+id="productStock"
+type="number"
+placeholder="0"
+>
+
+<label>Category</label>
+
+<input
+id="productCategory"
+type="text"
+placeholder="Category"
+>
+
+<label>Image URL</label>
+
+<input
+id="productImage"
+type="text"
+placeholder="https://..."
+>
+
+<button
+id="addProduct"
+class="action full"
+>
+Add Product
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>Products</h2>
+
+<div id="productList" class="loading">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- CUSTOMERS -->
+
+<section id="customers" class="page">
+
+<div class="card">
+
+<h2>Customers</h2>
+
+<div id="customerList" class="loading">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- MESSAGES -->
+
+<section id="messages" class="page">
+
+<div class="card">
+
+<h2>Customer Messages</h2>
+
+<div id="messageList" class="loading">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- SETTINGS -->
+
+<section id="settings" class="page">
+
+<div class="card">
+
+<h2>Settings</h2>
+
+<p>Smart Seller Shop Admin Panel</p>
+
+<button
+id="refresh"
+class="action gray full"
+>
+Refresh
+</button>
+
+</div>
+
+</section>
+
+</div>
+
+
 
 <div class="bottom">
-<button type="button" data-page="products"><span class="bottomIcon">P</span>Products</button>
-<button type="button" data-page="customers"><span class="bottomIcon">C</span>Customers</button>
-<button type="button" data-page="messages"><span class="bottomIcon">M</span>Messages</button>
-<button type="button" data-page="notifications"><span class="bottomIcon">N</span>Notifications</button>
-<button type="button" data-page="settings"><span class="bottomIcon">S</span>Settings</button>
+
+<button data-page="products">
+<span class="icon">📦</span>
+Products
+</button>
+
+<button data-page="customers">
+<span class="icon">👥</span>
+Customers
+</button>
+
+<button data-page="messages">
+<span class="icon">💬</span>
+Messages
+</button>
+
+<button data-page="settings">
+<span class="icon">⚙️</span>
+Settings
+</button>
+
 </div>
 
+
+
 <script>
+
 "use strict";
 
-const SUPABASE_URL="https://cgrwiwzqiusvjibpjzdv.supabase.co";
-const SUPABASE_KEY="sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
-const API=SUPABASE_URL+"/rest/v1";
-const RPC=SUPABASE_URL+"/rest/v1/rpc";
 
-const $=id=>document.getElementById(id);
+/* =========================
+   SUPABASE CONFIG
+========================= */
 
-function esc(v){
-  return String(v??"").replace(/[&<>"']/g,m=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-  }[m]));
+const SUPABASE_URL =
+"https://cgrwiwzqiusvjibpjzdv.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
+
+
+let supabaseClient = null;
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function $(id){
+return document.getElementById(id);
 }
+
+
+function escapeHTML(value){
+
+return String(value ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
 
 function showMessage(text,type="success"){
-  const b=$("messageBox");
-  b.textContent=text;
-  b.className="message "+type;
-  b.style.display="block";
-  clearTimeout(window.messageTimer);
-  window.messageTimer=setTimeout(()=>b.style.display="none",5000);
+
+const box=$("message");
+
+box.textContent=text;
+
+box.className="message "+type;
+
+box.style.display="block";
+
+setTimeout(()=>{
+box.style.display="none";
+},5000);
+
 }
 
-function setConnection(state,text){
-  const e=$("connection");
-  e.textContent=text;
-  e.className="connection "+state;
+
+function connection(text,type){
+
+const box=$("connection");
+
+box.textContent=text;
+
+box.className="connection "+type;
+
+$("connectionDetails").textContent=text;
+
 }
 
-function errorText(e){
-  if(!e)return "Unknown error";
-  return e.message||e.error_description||e.details||e.hint||String(e);
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+document.querySelectorAll("[data-page]")
+.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+const page=button.dataset.page;
+
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
+
+const target=$(page);
+
+if(target){
+target.classList.add("active");
 }
 
-async function api(path,options={}){
-  const headers={
-    "apikey":SUPABASE_KEY,
-    "Content-Type":"application/json",
-    "Accept":"application/json",
-    ...(options.headers||{})
-  };
-  const response=await fetch(path,{...options,headers});
-  const text=await response.text();
-  let data=null;
-  try{data=text?JSON.parse(text):null}catch(_){data=text}
-  if(!response.ok){
-    const msg=(data&&(data.message||data.error_description||data.error||data.hint||data.details))||("HTTP "+response.status);
-    const err=new Error(String(msg));
-    err.status=response.status;
-    err.data=data;
-    throw err;
-  }
-  return data;
-}
+document.querySelectorAll("[data-page]")
+.forEach(b=>b.classList.remove("active"));
 
-async function selectRows(table,query="select=*"){
-  return api(API+"/"+encodeURIComponent(table)+"?"+query);
-}
+button.classList.add("active");
 
-async function insertRow(table,row){
-  return api(API+"/"+encodeURIComponent(table),{
-    method:"POST",
-    headers:{"Prefer":"return=representation"},
-    body:JSON.stringify(row)
-  });
-}
+loadPage(page);
 
-async function updateRows(table,filters,row){
-  const q=Object.entries(filters).map(([k,v])=>encodeURIComponent(k)+"=eq."+encodeURIComponent(String(v))).join("&");
-  return api(API+"/"+encodeURIComponent(table)+"?"+q,{
-    method:"PATCH",
-    headers:{"Prefer":"return=representation"},
-    body:JSON.stringify(row)
-  });
-}
-
-async function deleteRows(table,filters){
-  const q=Object.entries(filters).map(([k,v])=>encodeURIComponent(k)+"=eq."+encodeURIComponent(String(v))).join("&");
-  return api(API+"/"+encodeURIComponent(table)+"?"+q,{
-    method:"DELETE",
-    headers:{"Prefer":"return=minimal"}
-  });
-}
-
-async function countRows(table){
-  const response=await fetch(API+"/"+encodeURIComponent(table)+"?select=id",{
-    method:"GET",
-    headers:{
-      "apikey":SUPABASE_KEY,
-      "Accept":"application/json",
-      "Prefer":"count=exact"
-    }
-  });
-  const text=await response.text();
-  if(!response.ok){
-    let data=null;try{data=JSON.parse(text)}catch(_){}
-    throw new Error((data&&(data.message||data.error||data.hint))||("HTTP "+response.status));
-  }
-  const range=response.headers.get("content-range");
-  if(range&&range.includes("/")){
-    const n=Number(range.split("/")[1]);
-    if(Number.isFinite(n))return n;
-  }
-  try{
-    const data=text?JSON.parse(text):[];
-    return Array.isArray(data)?data.length:0;
-  }catch(_){return 0}
-}
-
-function openPage(id){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  const page=$(id);
-  if(page)page.classList.add("active");
-  document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
-  const loaders={
-    dashboard:loadDashboard,balance:loadBalances,deposits:loadDeposits,
-    withdrawal:loadWithdrawals,kyc:loadKYC,orders:loadOrders,
-    products:loadProducts,customers:loadCustomers,messages:loadMessages
-  };
-  if(loaders[id])loaders[id]();
-}
-
-document.querySelectorAll("[data-page]").forEach(btn=>{
-  btn.addEventListener("click",e=>{
-    e.preventDefault();
-    openPage(btn.dataset.page);
-  });
 });
 
-$("refreshBtn").addEventListener("click",()=>location.reload());
-$("addProductBtn").addEventListener("click",addProduct);
+});
+
+
+async function loadPage(page){
+
+if(!supabaseClient)return;
+
+if(page==="dashboard") await loadDashboard();
+
+if(page==="products") await loadProducts();
+
+if(page==="customers") await loadCustomers();
+
+if(page==="messages") await loadMessages();
+
+if(page==="balance") await loadBalances();
+
+if(page==="deposits") await loadDeposits();
+
+if(page==="withdrawals") await loadWithdrawals();
+
+if(page==="kyc") await loadKYC();
+
+if(page==="orders") await loadOrders();
+
+}
+
+
+/* =========================
+   INIT
+========================= */
 
 async function init(){
-  setConnection("","Connecting...");
-  $("diagnostic").textContent="Testing Supabase REST API...";
-  try{
-    await api(API+"/products?select=id&limit=1");
-    setConnection("ok","Connected");
-    $("diagnostic").innerHTML="Supabase REST API is reachable.<br>Project URL: "+esc(SUPABASE_URL);
-    await loadDashboard();
-  }catch(e){
-    console.error(e);
-    setConnection("bad","Connection error");
-    $("diagnostic").innerHTML=
-      "<b>Supabase request failed.</b><br>"+
-      esc(errorText(e))+
-      "<br><br>HTTP status: "+esc(e.status||"unknown")+
-      "<br><br>If this is 401 or 403, check Supabase API key and RLS policies. "+
-      "The navigation buttons still work even when the database is unavailable.";
-    showMessage("Supabase error: "+errorText(e),"error");
-  }
+
+try{
+
+if(!window.supabase){
+
+connection(
+"Supabase library failed",
+"bad"
+);
+
+return;
 }
+
+
+supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+/*
+Do NOT block the entire panel
+on one database table.
+*/
+
+connection(
+"Connected",
+"ok"
+);
+
+
+/*
+Try dashboard separately.
+*/
+
+await loadDashboard();
+
+
+}catch(error){
+
+console.error(error);
+
+connection(
+"JavaScript error",
+"bad"
+);
+
+$("connectionDetails").innerHTML =
+'<div class="errorBox">'+
+escapeHTML(error.message)+
+'</div>';
+
+}
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
 
 async function loadDashboard(){
-  const jobs=[
-    ["statProducts","products"],
-    ["statOrders","orders"],
-    ["statMessages","support_tickets"],
-    ["statWithdrawals","withdrawals"]
-  ];
-  await Promise.all(jobs.map(async item=>{
-    try{$(item[0]).textContent=await countRows(item[1])}
-    catch(e){$(item[0]).textContent="0";console.error(item[1],e)}
-  }));
+
+try{
+
+const products =
+await supabaseClient
+.from("products")
+.select("*",{count:"exact",head:true});
+
+
+const orders =
+await supabaseClient
+.from("orders")
+.select("*",{count:"exact",head:true});
+
+
+const messages =
+await supabaseClient
+.from("support_tickets")
+.select("*",{count:"exact",head:true});
+
+
+const withdrawals =
+await supabaseClient
+.from("withdrawals")
+.select("*",{count:"exact",head:true});
+
+
+$("productsCount").textContent =
+products.error ? "!" : (products.count || 0);
+
+$("ordersCount").textContent =
+orders.error ? "!" : (orders.count || 0);
+
+$("messagesCount").textContent =
+messages.error ? "!" : (messages.count || 0);
+
+$("withdrawalsCount").textContent =
+withdrawals.error ? "!" : (withdrawals.count || 0);
+
+
+}catch(error){
+
+console.error(error);
+
 }
+
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
 
 async function loadProducts(){
-  const b=$("productList");b.className="loading";b.textContent="Loading...";
-  try{
-    const rows=await selectRows("products","select=*&order=created_at.desc");
-    if(!rows.length){b.className="empty";b.textContent="No products yet.";return}
-    b.className="";b.innerHTML="";
-    rows.forEach(p=>{
-      const d=document.createElement("div");d.className="item";
-      const image=p.image_url||p.image||"";
-      d.innerHTML=(image?'<img src="'+esc(image)+'" onerror="this.style.display=\'none\'">':"")+
-        "<b>"+esc(p.name||"Product")+"</b>"+
-        "<p>Price: $"+Number(p.price||0).toFixed(2)+"</p>"+
-        "<p>Stock: "+Number(p.stock||0)+"</p>"+
-        "<p>Category: "+esc(p.category_id||p.category||"")+"</p>"+
-        "<button type='button' class='action red'>Delete</button>";
-      d.querySelector("button").onclick=()=>deleteProduct(p.id);
-      b.appendChild(d);
-    });
-  }catch(e){b.className="errorBox";b.textContent="Products error: "+errorText(e)}
+
+const box=$("productList");
+
+box.className="loading";
+box.textContent="Loading...";
+
+
+const result =
+await supabaseClient
+.from("products")
+.select("*")
+.order("id",{ascending:false});
+
+
+if(result.error){
+
+box.className="errorBox";
+
+box.textContent =
+"Products error: "+
+result.error.message;
+
+return;
+
 }
 
-async function addProduct(){
-  const name=$("productName").value.trim();
-  if(!name){showMessage("Product name is required.","error");return}
-  const row={
-    name:name,
-    description:$("productDescription").value.trim(),
-    price:Number($("productPrice").value)||0,
-    stock:Number($("productStock").value)||0,
-    image_url:$("productImage").value.trim(),
-    is_active:true
-  };
-  try{
-    await insertRow("products",row);
-    document.querySelectorAll("#products input,#products textarea").forEach(x=>x.value="");
-    showMessage("Product added successfully.");
-    await loadProducts();await loadDashboard();
-  }catch(e){showMessage("Product error: "+errorText(e),"error")}
+
+if(!result.data || result.data.length===0){
+
+box.className="empty";
+
+box.textContent="No products found.";
+
+return;
+
 }
 
-async function deleteProduct(id){
-  if(id==null||!confirm("Delete this product?"))return;
-  try{
-    await deleteRows("products",{id:id});
-    showMessage("Product deleted.");
-    await loadProducts();await loadDashboard();
-  }catch(e){showMessage("Delete error: "+errorText(e),"error")}
+
+box.className="";
+
+box.innerHTML="";
+
+
+result.data.forEach(product=>{
+
+const div=document.createElement("div");
+
+div.className="item";
+
+
+const image =
+product.image_url ||
+product.image ||
+"";
+
+
+div.innerHTML=
+
+(image
+?
+'<img src="'+escapeHTML(image)+'" style="width:100%;height:150px;object-fit:cover;border-radius:8px">'
+:"")
+
++
+
+"<b>"+escapeHTML(
+product.name || "Product"
+)+"</b>"
+
++
+
+"<p>Price: $"+
+Number(product.price || 0).toFixed(2)+
+"</p>"
+
++
+
+"<p>Stock: "+
+escapeHTML(product.stock || 0)+
+"</p>"
+
++
+
+"<button class='action red deleteProduct'>Delete</button>";
+
+
+div.querySelector(".deleteProduct")
+.addEventListener("click",async()=>{
+
+if(!confirm("Delete this product?"))return;
+
+
+const id=product.id;
+
+
+const result =
+await supabaseClient
+.from("products")
+.delete()
+.eq("id",id);
+
+
+if(result.error){
+
+showMessage(
+result.error.message,
+"error"
+);
+
+return;
+
 }
+
+
+showMessage(
+"Product deleted."
+);
+
+loadProducts();
+
+loadDashboard();
+
+});
+
+
+box.appendChild(div);
+
+});
+
+}
+
+
+/* =========================
+   ADD PRODUCT
+========================= */
+
+$("addProduct")
+.addEventListener("click",async()=>{
+
+const name=$("productName").value.trim();
+
+const description=
+$("productDescription").value.trim();
+
+const price=
+Number($("productPrice").value || 0);
+
+const stock=
+Number($("productStock").value || 0);
+
+const category=
+$("productCategory").value.trim();
+
+const image=
+$("productImage").value.trim();
+
+
+if(!name){
+
+showMessage(
+"Product name is required.",
+"error"
+);
+
+return;
+
+}
+
+
+const result =
+await supabaseClient
+.from("products")
+.insert({
+
+name:name,
+description:description,
+price:price,
+stock:stock,
+category:category,
+image_url:image,
+is_active:true
+
+});
+
+
+if(result.error){
+
+showMessage(
+result.error.message,
+"error"
+);
+
+return;
+
+}
+
+
+$("productName").value="";
+$("productDescription").value="";
+$("productPrice").value="";
+$("productStock").value="";
+$("productCategory").value="";
+$("productImage").value="";
+
+
+showMessage(
+"Product added successfully."
+);
+
+
+loadProducts();
+
+loadDashboard();
+
+});
+
+
+/* =========================
+   BALANCES
+========================= */
 
 async function loadBalances(){
-  const b=$("balanceList");b.className="loading";b.textContent="Loading...";
-  try{
-    const rows=await selectRows("customer_balances","select=*&order=updated_at.desc");
-    if(!rows.length){b.className="empty";b.textContent="No customer balances yet.";return}
-    b.className="";b.innerHTML="";
-    rows.forEach(c=>{
-      const d=document.createElement("div");d.className="item";
-      d.innerHTML="<b>"+esc(c.customer_name||c.customer_id||"Customer")+"</b>"+
-        "<p>Customer ID: "+esc(c.customer_id||"")+"</p>"+
-        "<p>Current Balance: <b>$"+Number(c.balance||0).toFixed(2)+"</b></p>"+
-        "<input type='number' min='0' step='0.01' placeholder='New balance'>"+
-        "<button type='button' class='action'>Update Balance</button>";
-      d.querySelector("button").onclick=async()=>{
-        const value=Number(d.querySelector("input").value);
-        if(!Number.isFinite(value)||value<0){showMessage("Enter a valid balance.","error");return}
-        try{
-          await updateRows("customer_balances",{id:c.id},{
-            balance:value,updated_at:new Date().toISOString()
-          });
-          showMessage("Balance updated.");await loadBalances();
-        }catch(e){showMessage("Balance error: "+errorText(e),"error")}
-      };
-      b.appendChild(d);
-    });
-  }catch(e){b.className="errorBox";b.textContent="Balance error: "+errorText(e)}
+
+const box=$("balanceList");
+
+box.className="loading";
+box.textContent="Loading...";
+
+
+const result =
+await supabaseClient
+.from("customer_balances")
+.select("*")
+.order("updated_at",{ascending:false});
+
+
+if(result.error){
+
+box.className="errorBox";
+
+box.textContent=
+"Balance error: "+
+result.error.message;
+
+return;
+
 }
+
+
+if(!result.data?.length){
+
+box.className="empty";
+
+box.textContent=
+"No customer balances.";
+
+return;
+
+}
+
+
+box.className="";
+box.innerHTML="";
+
+
+result.data.forEach(item=>{
+
+const div=document.createElement("div");
+
+div.className="item";
+
+
+div.innerHTML=
+
+"<b>Customer</b>"+
+
+"<p>ID: "+
+escapeHTML(item.customer_id)+
+"</p>"+
+
+"<p>Balance: <b>$"+
+Number(item.balance || 0).toFixed(2)+
+"</b></p>"+
+
+"<input type='number' step='0.01' min='0' placeholder='New balance'>"+
+
+"<button class='action updateBalance'>Update</button>";
+
+
+div.querySelector(".updateBalance")
+.addEventListener("click",async()=>{
+
+const input=div.querySelector("input");
+
+const value=Number(input.value);
+
+
+if(!Number.isFinite(value) || value<0){
+
+showMessage(
+"Enter a valid balance.",
+"error"
+);
+
+return;
+
+}
+
+
+const result =
+await supabaseClient
+.from("customer_balances")
+.update({
+balance:value,
+updated_at:new Date().toISOString()
+})
+.eq("id",item.id);
+
+
+if(result.error){
+
+showMessage(
+result.error.message,
+"error"
+);
+
+return;
+
+}
+
+
+showMessage(
+"Balance updated."
+);
+
+loadBalances();
+
+});
+
+
+box.appendChild(div);
+
+});
+
+}
+
+
+/* =========================
+   DEPOSITS
+========================= */
 
 async function loadDeposits(){
-  const b=$("depositRequestList");b.className="loading";b.textContent="Loading...";
-  try{
-    const rows=await selectRows("deposit_requests","select=*&order=created_at.desc");
-    if(!rows.length){b.className="empty";b.textContent="No deposit requests yet.";return}
-    b.className="";b.innerHTML="";
-    rows.forEach(x=>{
-      const d=document.createElement("div");d.className="item";
-      const status=x.status||"Pending";
-      const pending=String(status).toLowerCase()==="pending";
-      const cls=status==="Approved"?"approved":status==="Rejected"?"rejected":"";
-      d.innerHTML="<b>Deposit Request</b>"+
-        "<p>Customer: <b>"+esc(x.customer_name||x.customer_id||"Customer")+"</b></p>"+
-        "<p>Customer ID: "+esc(x.customer_id||"")+"</p>"+
-        "<p>Amount: <b>$"+Number(x.amount||0).toFixed(2)+"</b></p>"+
-        "<p>Payment Method: "+esc(x.payment_method||x.method||"")+"</p>"+
-        "<p>Transaction ID: <b>"+esc(x.transaction_id||x.trx_id||"")+"</b></p>"+
-        "<p>Note: "+esc(x.note||"")+"</p>"+
-        "<p>Status: <span class='status "+cls+"'>"+esc(status)+"</span></p>"+
-        (pending?"<button type='button' class='action green approve'>Approve</button><button type='button' class='action red reject'>Reject</button>":"");
-      const a=d.querySelector(".approve"),r=d.querySelector(".reject");
-      if(a)a.onclick=()=>approveDeposit(x,a,r);
-      if(r)r.onclick=()=>rejectDeposit(x,a,r);
-      b.appendChild(d);
-    });
-  }catch(e){b.className="errorBox";b.textContent="Deposit error: "+errorText(e)}
+
+const box=$("depositList");
+
+box.className="loading";
+box.textContent="Loading...";
+
+
+const result =
+await supabaseClient
+.from("deposit_requests")
+.select("*")
+.order("created_at",{ascending:false});
+
+
+if(result.error){
+
+box.className="errorBox";
+
+box.textContent=
+"Deposit error: "+
+result.error.message;
+
+return;
+
 }
 
-async function approveDeposit(x,a,r){
-  if(String(x.status||"Pending").toLowerCase()!=="pending"){
-    showMessage("This deposit is already processed.","error");return;
-  }
-  a.disabled=true;r.disabled=true;
-  try{
-    await api(RPC+"/approve_deposit",{
-      method:"POST",
-      body:JSON.stringify({p_deposit_id:x.id})
-    });
-    showMessage("Deposit approved successfully.");
-    await loadDeposits();await loadBalances();await loadDashboard();
-  }catch(e){
-    console.error(e);
-    showMessage("Deposit approval failed: "+errorText(e),"error");
-    a.disabled=false;r.disabled=false;
-  }
+
+if(!result.data?.length){
+
+box.className="empty";
+
+box.textContent=
+"No deposit requests.";
+
+return;
+
 }
 
-async function rejectDeposit(x,a,r){
-  if(!confirm("Reject this deposit request?"))return;
-  a.disabled=true;r.disabled=true;
-  try{
-    await updateRows("deposit_requests",{id:x.id,status:"Pending"},{status:"Rejected"});
-    showMessage("Deposit rejected.");
-    await loadDeposits();await loadDashboard();
-  }catch(e){
-    showMessage("Reject error: "+errorText(e),"error");
-    a.disabled=false;r.disabled=false;
-  }
+
+box.className="";
+box.innerHTML="";
+
+
+result.data.forEach(deposit=>{
+
+const div=document.createElement("div");
+
+div.className="item";
+
+
+const status=
+deposit.status || "Pending";
+
+const pending=
+String(status).toLowerCase()==="pending";
+
+
+div.innerHTML=
+
+"<b>Deposit Request</b>"+
+
+"<p>Customer: "+
+escapeHTML(
+deposit.customer_name ||
+deposit.customer_id ||
+"Customer"
+)+
+"</p>"+
+
+"<p>Customer ID: "+
+escapeHTML(deposit.customer_id)+
+"</p>"+
+
+"<p>Amount: <b>$"+
+Number(deposit.amount || 0).toFixed(2)+
+"</b></p>"+
+
+"<p>Payment Method: "+
+escapeHTML(
+deposit.payment_method ||
+deposit.method ||
+""
+)+
+"</p>"+
+
+"<p>Transaction ID: "+
+escapeHTML(
+deposit.transaction_id ||
+deposit.trx_id ||
+""
+)+
+"</p>"+
+
+"<p>Status: <span class='status'>"+
+escapeHTML(status)+
+"</span></p>"+
+
+(
+pending
+?
+"<button class='action green approve'>Approve</button>"+
+"<button class='action red reject'>Reject</button>"
+:""
+);
+
+
+const approve=
+div.querySelector(".approve");
+
+const reject=
+div.querySelector(".reject");
+
+
+if(approve){
+
+approve.addEventListener(
+"click",
+()=>approveDeposit(deposit)
+);
+
 }
+
+
+if(reject){
+
+reject.addEventListener(
+"click",
+()=>rejectDeposit(deposit)
+);
+
+}
+
+
+box.appendChild(div);
+
+});
+
+}
+
+
+/* =========================
+   APPROVE DEPOSIT
+========================= */
+
+async function approveDeposit(deposit){
+
+if(!deposit.id){
+
+showMessage(
+"Deposit ID is missing.",
+"error"
+);
+
+return;
+
+}
+
+
+if(!deposit.customer_id){
+
+showMessage(
+"Customer ID is missing.",
+"error"
+);
+
+return;
+
+}
+
+
+const amount=
+Number(deposit.amount || 0);
+
+
+if(amount<=0){
+
+showMessage(
+"Invalid deposit amount.",
+"error"
+);
+
+return;
+
+}
+
+
+if(!confirm(
+"Approve this deposit and credit the customer balance?"
+))return;
+
+
+const result =
+await supabaseClient
+.rpc(
+"approve_deposit",
+{
+p_deposit_id:deposit.id
+}
+);
+
+
+if(result.error){
+
+showMessage(
+"Approval failed: "+
+result.error.message,
+"error"
+);
+
+return;
+
+}
+
+
+showMessage(
+"Deposit approved successfully."
+);
+
+
+loadDeposits();
+
+loadBalances();
+
+loadDashboard();
+
+}
+
+
+/* =========================
+   REJECT DEPOSIT
+========================= */
+
+async function rejectDeposit(deposit){
+
+if(!confirm(
+"Reject this deposit request?"
+))return;
+
+
+const result =
+await supabaseClient
+.from("deposit_requests")
+.update({
+status:"Rejected"
+})
+.eq("id",deposit.id)
+.eq("status","Pending");
+
+
+if(result.error){
+
+showMessage(
+result.error.message,
+"error"
+);
+
+return;
+
+}
+
+
+showMessage(
+"Deposit rejected."
+);
+
+loadDeposits();
+
+}
+
+
+/* =========================
+   WITHDRAWALS
+========================= */
 
 async function loadWithdrawals(){
-  const b=$("withdrawalList");b.className="loading";b.textContent="Loading...";
-  try{
-    const rows=await selectRows("withdrawals","select=*&order=created_at.desc");
-    if(!rows.length){b.className="empty";b.textContent="No withdrawal requests.";return}
-    b.className="";b.innerHTML="";
-    rows.forEach(w=>{
-      const d=document.createElement("div");d.className="item";
-      const status=w.status||"Pending";
-      d.innerHTML="<b>Withdrawal #"+esc(w.id)+"</b>"+
-        "<p>Customer: "+esc(w.customer_name||w.customer_id||"Customer")+"</p>"+
-        "<p>Amount: <b>$"+Number(w.amount||0).toFixed(2)+"</b></p>"+
-        "<p>Method: "+esc(w.method||w.payment_method||"")+"</p>"+
-        "<p>Account: "+esc(w.account_details||w.account||"")+"</p>"+
-        "<p>Status: <span class='statu
+
+const box=$("withdrawalList");
+
+box.className="loading";
+box.textContent="Loading...";
+
+
+const result =
+await supabaseClient
+.from("withdrawals")
+.select("*")
+.order("created_at",{ascending:false});
+
+
+if(result.error){
+
+box.className="errorBox";
+
+box.textContent=
+"Withdrawal error: "+
+result.error.message;
+
+return;
+
+}
+
+
+if(!result.data?.length){
+
+box.className="empty";
+
+box.textContent=
+"No withdrawal requests.";
+
+return;
+
+}
+
+
+box.className="";
+box.innerHTML="";
+
+
+result.data.forEach(item=>{
+
+const div=document.createElement("div");
+
+div.className="item";
+
+
+const status=
+item.status || "Pending";
+
+
+div.innerHTML=
+
+"<b>Withdrawal</b>"+
+
+"<p>Customer: "+
+escapeHTML(
+item.customer_name ||
+item.customer_id ||
+"Customer"
+)+
+"</p>"+
+
+"<p>Amount: <b>$"+
+Number(item.amount || 0).toFixed(2)+
+"</b></p>"+
+
+"<p>Method: "+
+escapeHTML(
+item.method ||
+item.payment_method ||
+""
+)+
+"</p>"+
+
+"<p>Account: "+
+escapeHTML(
+item.account_details ||
+item.account ||
+""
+)+
+"</p>"+
+
+"<select>"+
+"<option>Pending</option>"+
+"<option>Processing</option>"+
+"<option>Approved</option>"+
+"<option>Rejected</option>"+
+"<option>Completed</option>"+
+"</select>"+
+
+"<button class='action update'>Update</button>";
+
+
+const select=
+div.querySelector("select");
+
+select.value=status;
+
+
+div.querySelector(".update")
+.addEventListener("click",async()=>{
+
+const result =
+await supabaseClient
+.from("withdrawals")
+.update({
+status:select.value
+})
+.eq("id",item.id);
+
+
+if(result.error){
+
+showMessage(
+result.error.message,
+"error"
+);
+
+return;
+
+}
+
+
+showMessage(
+"Withdrawal status updated."
+);
+
+loadWithdra
