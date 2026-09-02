@@ -4,283 +4,57 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Smart Seller Shop - Admin</title>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box}
-
-body{
- margin:0;
- background:#f3f4f6;
- color:#172033;
- font-family:Arial,sans-serif;
- padding-bottom:72px
-}
-
-.header{
- background:#fff;
- padding:12px;
- display:flex;
- align-items:center;
- gap:10px;
- border-bottom:1px solid #ddd
-}
-
-.logo{
- width:46px;
- height:46px;
- border-radius:13px;
- background:#713be8;
- color:#fff;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:22px
-}
-
+body{margin:0;background:#f3f4f6;color:#172033;font-family:Arial,sans-serif;padding-bottom:72px}
+.header{background:#fff;padding:12px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ddd}
+.logo{width:46px;height:46px;border-radius:13px;background:#713be8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px}
 .header h1{margin:0;font-size:18px}
 .header p{margin:3px 0 0;color:#777;font-size:11px}
-
-.container{
- max-width:900px;
- margin:auto;
- padding:10px
-}
-
-.topMenu{
- display:grid;
- grid-template-columns:repeat(6,1fr);
- gap:6px;
- margin-bottom:10px
-}
-
-.topMenu button,
-.bottom button{
- border:0;
- background:#fff;
- cursor:pointer
-}
-
-.topMenu button{
- padding:9px 2px;
- border-radius:9px;
- box-shadow:0 2px 6px #ddd;
- font-size:10px
-}
-
-.topMenu button.active{
- background:#713be8;
- color:#fff
-}
-
+.container{max-width:900px;margin:auto;padding:10px}
+.topMenu{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px}
+.topMenu button,.bottom button{border:0;background:#fff;cursor:pointer}
+.topMenu button{padding:9px 2px;border-radius:9px;box-shadow:0 2px 6px #ddd;font-size:10px}
+.topMenu button.active{background:#713be8;color:#fff}
 .page{display:none}
 .page.active{display:block}
-
-.card{
- background:#fff;
- border-radius:13px;
- padding:13px;
- margin-bottom:10px;
- box-shadow:0 2px 8px #ddd
-}
-
-.card h2{
- margin:0 0 9px;
- font-size:16px
-}
-
-.welcome{
- background:#214f78;
- color:#fff
-}
-
-.welcome h2{
- margin:5px 0 8px;
- font-size:19px
-}
-
+.card{background:#fff;border-radius:13px;padding:13px;margin-bottom:10px;box-shadow:0 2px 8px #ddd}
+.card h2{margin:0 0 9px;font-size:16px}
+.welcome{background:#214f78;color:#fff}
+.welcome h2{margin:5px 0 8px;font-size:19px}
 .welcome p{font-size:12px}
-
-.stats{
- display:grid;
- grid-template-columns:repeat(5,1fr);
- gap:7px
-}
-
-.stat{
- background:#fff;
- border-radius:11px;
- padding:11px 4px;
- text-align:center;
- box-shadow:0 2px 7px #ddd
-}
-
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.stat{background:#fff;border-radius:11px;padding:11px 4px;text-align:center;box-shadow:0 2px 7px #ddd}
 .stat b{font-size:20px}
-
-.stat span{
- display:block;
- font-size:10px;
- color:#777;
- margin-top:3px
-}
-
-.item{
- border:1px solid #ddd;
- border-radius:10px;
- padding:10px;
- margin-top:7px;
- background:#fafafa
-}
-
-.item p{
- font-size:12px;
- color:#555;
- margin:4px 0
-}
-
-input,select,textarea{
- width:100%;
- padding:9px;
- border:1px solid #ddd;
- border-radius:8px;
- font-size:13px;
- margin:4px 0 8px
-}
-
+.stat span{display:block;font-size:10px;color:#777;margin-top:3px}
+.item{border:1px solid #ddd;border-radius:10px;padding:10px;margin-top:7px;background:#fafafa}
+.item p{font-size:12px;color:#555;margin:4px 0}
+input,select,textarea{width:100%;padding:9px;border:1px solid #ddd;border-radius:8px;font-size:13px;margin:4px 0 8px}
 textarea{min-height:75px}
-
-label{
- font-size:11px;
- font-weight:bold
-}
-
-.action{
- border:0;
- border-radius:7px;
- padding:8px 10px;
- background:#713be8;
- color:#fff;
- cursor:pointer;
- font-size:12px;
- margin:2px
-}
-
+label{font-size:11px;font-weight:bold}
+.action{border:0;border-radius:7px;padding:8px 10px;background:#713be8;color:#fff;cursor:pointer;font-size:12px;margin:2px}
 .green{background:#16a34a}
 .red{background:#dc2626}
 .gray{background:#777}
-.orange{background:#f59e0b}
 .full{width:100%}
+.status{display:inline-block;padding:3px 7px;border-radius:12px;background:#fff3cd;color:#856404;font-size:10px}
+.loading,.empty{text-align:center;padding:18px;color:#777;font-size:12px}
+.message{display:none;padding:9px;border-radius:8px;margin-bottom:8px;font-size:12px}
+.success{background:#dcfce7;color:#166534}
+.error{background:#fee2e2;color:#991b1b}
+.depositApproved{background:#dcfce7;color:#166534}
+.depositRejected{background:#fee2e2;color:#991b1b}
+.bottom{position:fixed;bottom:0;left:0;right:0;height:64px;background:#fff;border-top:1px solid #ddd;display:flex;z-index:999}
+.bottom button{flex:1;font-size:10px;color:#555}
+.bottom button.active{color:#713be8;font-weight:bold}
+.bottomIcon{font-size:17px;display:block;margin-bottom:2px}
 
-.status{
- display:inline-block;
- padding:3px 7px;
- border-radius:12px;
- background:#fff3cd;
- color:#856404;
- font-size:10px
-}
-
-.status-approved{
- background:#dcfce7;
- color:#166534
-}
-
-.status-rejected{
- background:#fee2e2;
- color:#991b1b
-}
-
-.loading,
-.empty{
- text-align:center;
- padding:18px;
- color:#777;
- font-size:12px
-}
-
-.message{
- display:none;
- padding:9px;
- border-radius:8px;
- margin-bottom:8px;
- font-size:12px
-}
-
-.success{
- background:#dcfce7;
- color:#166534
-}
-
-.error{
- background:#fee2e2;
- color:#991b1b
-}
-
-.deposit-card{
- border:2px solid #e5e7eb;
- border-radius:12px;
- padding:12px;
- margin-top:8px;
- background:#fff
-}
-
-.deposit-amount{
- font-size:20px;
- font-weight:bold;
- color:#16a34a
-}
-
-.deposit-actions{
- display:flex;
- gap:5px;
- flex-wrap:wrap;
- margin-top:8px
-}
-
-.bottom{
- position:fixed;
- bottom:0;
- left:0;
- right:0;
- height:64px;
- background:#fff;
- border-top:1px solid #ddd;
- display:flex;
- z-index:999
-}
-
-.bottom button{
- flex:1;
- font-size:10px;
- color:#555
-}
-
-.bottom button.active{
- color:#713be8;
- font-weight:bold
-}
-
-.bottomIcon{
- font-size:17px;
- display:block;
- margin-bottom:2px
-}
-
-@media(max-width:700px){
-
- .topMenu{
-  grid-template-columns:repeat(3,1fr)
- }
-
- .stats{
-  grid-template-columns:repeat(2,1fr)
- }
-
- .topMenu button{
-  font-size:9px;
-  padding:8px 1px
- }
+@media(max-width:600px){
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .topMenu{grid-template-columns:repeat(3,1fr)}
+ .topMenu button{font-size:8px;padding:8px 1px}
 }
 </style>
 </head>
@@ -303,27 +77,28 @@ label{
 <div class="topMenu">
 
 <button data-page="dashboard" class="active">
- 🏠<br>Dashboard
+🏠<br>Dashboard
 </button>
 
 <button data-page="balance">
- 💰<br>Balance
+💰<br>Balance
+</button>
+
+<!-- NEW DEPOSIT OPTION -->
+<button data-page="deposits">
+💵<br>Deposits
 </button>
 
 <button data-page="withdrawal">
- 💸<br>Withdrawal
+💸<br>Withdrawal
 </button>
 
 <button data-page="kyc">
- 🛡️<br>KYC
+🛡️<br>KYC
 </button>
 
 <button data-page="orders">
- 🛒<br>Orders
-</button>
-
-<button data-page="deposits">
- 💵<br>Deposits
+🛒<br>Orders
 </button>
 
 </div>
@@ -333,40 +108,34 @@ label{
 <div id="dashboard" class="page active">
 
 <div class="card welcome">
- <small>WELCOME BACK</small>
- <h2>Smart Seller Shop Admin</h2>
- <p>Manage your shop from one place.</p>
+<small>WELCOME BACK</small>
+<h2>Smart Seller Shop Admin</h2>
+<p>Manage your shop from one place.</p>
 </div>
 
 <div class="stats">
 
 <div class="stat">
- <b id="statProducts">0</b>
- <span>Products</span>
+<b id="statProducts">0</b>
+<span>Products</span>
 </div>
 
 <div class="stat">
- <b id="statOrders">0</b>
- <span>Orders</span>
+<b id="statOrders">0</b>
+<span>Orders</span>
 </div>
 
 <div class="stat">
- <b id="statMessages">0</b>
- <span>Messages</span>
+<b id="statMessages">0</b>
+<span>Messages</span>
 </div>
 
 <div class="stat">
- <b id="statWithdrawals">0</b>
- <span>Withdrawals</span>
-</div>
-
-<div class="stat">
- <b id="statDeposits">0</b>
- <span>Deposits</span>
+<b id="statWithdrawals">0</b>
+<span>Withdrawals</span>
 </div>
 
 </div>
-
 </div>
 
 
@@ -374,11 +143,30 @@ label{
 <div id="balance" class="page">
 
 <div class="card">
-
 <h2>💰 Customer Balance</h2>
 
 <div id="balanceList" class="loading">
- Loading...
+Loading...
+</div>
+
+</div>
+
+</div>
+
+
+<!-- NEW DEPOSIT REQUEST PAGE -->
+<div id="deposits" class="page">
+
+<div class="card">
+
+<h2>💵 Customer Deposit Requests</h2>
+
+<p style="font-size:12px;color:#777">
+Customer نے Add Money سے جو payment request بھیجی ہے وہ یہاں نظر آئے گی۔
+</p>
+
+<div id="depositRequestList" class="loading">
+Loading...
 </div>
 
 </div>
@@ -394,7 +182,7 @@ label{
 <h2>💸 Withdrawal Requests</h2>
 
 <div id="withdrawalList" class="loading">
- Loading...
+Loading...
 </div>
 
 </div>
@@ -410,7 +198,7 @@ label{
 <h2>🛡️ KYC Verification</h2>
 
 <div id="kycList" class="loading">
- Loading...
+Loading...
 </div>
 
 </div>
@@ -426,27 +214,7 @@ label{
 <h2>🛒 Customer Orders</h2>
 
 <div id="orderList" class="loading">
- Loading...
-</div>
-
-</div>
-
-</div>
-
-
-<!-- DEPOSIT REQUESTS -->
-<div id="deposits" class="page">
-
-<div class="card">
-
-<h2>💰 Customer Deposit Requests</h2>
-
-<p style="font-size:12px;color:#777">
-Customer Dashboard سے جو Add Money request آئے گی وہ یہاں दिखाई देगी۔
-</p>
-
-<div id="depositRequestList" class="loading">
- Loading...
+Loading...
 </div>
 
 </div>
@@ -465,30 +233,21 @@ Customer Dashboard سے جو Add Money request آئے گی وہ یہاں दि�
 <input id="productName" placeholder="Smart Watch">
 
 <label>Description</label>
-<textarea id="productDescription"
-placeholder="Product description"></textarea>
+<textarea id="productDescription" placeholder="Product description"></textarea>
 
 <label>Price</label>
-<input id="productPrice"
-type="number"
-step="0.01"
-placeholder="50">
+<input id="productPrice" type="number" step="0.01" placeholder="50">
 
 <label>Stock</label>
-<input id="productStock"
-type="number"
-placeholder="10">
+<input id="productStock" type="number" placeholder="10">
 
 <label>Category</label>
-<input id="productCategory"
-placeholder="Watch">
+<input id="productCategory" placeholder="Watch">
 
 <label>Image URL</label>
-<input id="productImage"
-placeholder="https://...">
+<input id="productImage" placeholder="https://...">
 
-<button id="addProduct"
-class="action full">
+<button id="addProduct" class="action full">
 ➕ Add Product
 </button>
 
@@ -500,7 +259,7 @@ class="action full">
 <h2>📦 Products</h2>
 
 <div id="productList" class="loading">
- Loading...
+Loading...
 </div>
 
 </div>
@@ -516,7 +275,7 @@ class="action full">
 <h2>👥 Customers</h2>
 
 <div id="customerList" class="loading">
- Loading...
+Loading...
 </div>
 
 </div>
@@ -532,7 +291,7 @@ class="action full">
 <h2>💬 Customer Messages</h2>
 
 <div id="messageList" class="loading">
- Loading...
+Loading...
 </div>
 
 </div>
@@ -565,8 +324,7 @@ No notifications.
 
 <p>Smart Seller Shop Admin Panel</p>
 
-<button id="refresh"
-class="action gray full">
+<button id="refresh" class="action gray full">
 Refresh Panel
 </button>
 
@@ -610,27 +368,20 @@ Settings
 
 <script>
 
-const SUPABASE_URL =
-"https://cgrwiwzqiusvjibpjzdv.supabase.co";
+const SUPABASE_URL="https://cgrwiwzqiusvjibpjzdv.supabase.co";
 
-const SUPABASE_KEY =
-"sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
+const SUPABASE_KEY="sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
 
-const db =
-supabase.createClient(
+const db=supabase.createClient(
  SUPABASE_URL,
  SUPABASE_KEY
 );
 
+const $=id=>document.getElementById(id);
 
-const $ = id =>
-document.getElementById(id);
-
-
-const esc = v =>
-String(v??"").replace(
+const esc=v=>String(v??"").replace(
  /[&<>"']/g,
- m => ({
+ m=>({
   "&":"&amp;",
   "<":"&lt;",
   ">":"&gt;",
@@ -646,15 +397,13 @@ function msg(t,e="success"){
 
  b.textContent=t;
 
- b.className=
- "message "+e;
+ b.className="message "+e;
 
  b.style.display="block";
 
  clearTimeout(window.msgTimer);
 
- window.msgTimer=
- setTimeout(
+ window.msgTimer=setTimeout(
   ()=>b.style.display="none",
   4000
  );
@@ -666,63 +415,49 @@ function msg(t,e="success"){
 
 async function openPage(id){
 
- document
- .querySelectorAll(".page")
- .forEach(x =>
-  x.classList.remove("active")
- );
+ document.querySelectorAll(".page")
+ .forEach(x=>x.classList.remove("active"));
 
  const page=$(id);
 
- if(page)
- page.classList.add("active");
+ if(page){
+  page.classList.add("active");
+ }
 
-
- document
- .querySelectorAll("[data-page]")
- .forEach(x =>
+ document.querySelectorAll("[data-page]")
+ .forEach(x=>{
   x.classList.toggle(
    "active",
    x.dataset.page===id
-  )
- );
-
+  );
+ });
 
  try{
 
-  if(id==="dashboard")
-  await dashboard();
+  if(id==="dashboard")await dashboard();
 
-  if(id==="balance")
-  await balances();
+  if(id==="balance")await balances();
 
-  if(id==="withdrawal")
-  await withdrawals();
+  if(id==="deposits")await deposits();
 
-  if(id==="kyc")
-  await kyc();
+  if(id==="withdrawal")await withdrawals();
 
-  if(id==="orders")
-  await orders();
+  if(id==="kyc")await kyc();
 
-  if(id==="deposits")
-  await deposits();
+  if(id==="orders")await orders();
 
-  if(id==="products")
-  await products();
+  if(id==="products")await products();
 
-  if(id==="customers")
-  await customers();
+  if(id==="customers")await customers();
 
-  if(id==="messages")
-  await messages();
+  if(id==="messages")await messages();
 
  }catch(e){
 
   console.error(e);
 
   msg(
-   "Database error. Supabase tables / RLS check karein.",
+   "Database error. Check Supabase tables and RLS.",
    "error"
   );
 
@@ -731,26 +466,26 @@ async function openPage(id){
 }
 
 
+/* MENU BUTTONS */
+
 document
 .querySelectorAll("[data-page]")
-.forEach(
- b =>
+.forEach(b=>{
+
  b.addEventListener(
   "click",
   ()=>openPage(b.dataset.page)
- )
-);
+ );
+
+});
 
 
-$("refresh")
-.addEventListener(
+$("refresh").addEventListener(
  "click",
  ()=>location.reload()
 );
 
-
-$("addProduct")
-.addEventListener(
+$("addProduct").addEventListener(
  "click",
  addProduct
 );
@@ -764,47 +499,34 @@ async function dashboard(){
   p,
   o,
   m,
-  w,
-  d
- ] = await Promise.all([
+  w
+ ]=await Promise.all([
 
-  db
-  .from("Products")
+  db.from("Products")
   .select("*",{count:"exact",head:true}),
 
-  db
-  .from("orders")
+  db.from("orders")
   .select("*",{count:"exact",head:true}),
 
-  db
-  .from("support_tickets")
+  db.from("support_tickets")
   .select("*",{count:"exact",head:true}),
 
-  db
-  .from("withdrawals")
-  .select("*",{count:"exact",head:true}),
-
-  db
-  .from("deposit_requests")
+  db.from("withdrawals")
   .select("*",{count:"exact",head:true})
 
  ]);
 
+ $("statProducts").textContent=
+  p.error?"0":p.count||0;
 
- $("statProducts").textContent =
- p.error ? "0" : p.count||0;
+ $("statOrders").textContent=
+  o.error?"0":o.count||0;
 
- $("statOrders").textContent =
- o.error ? "0" : o.count||0;
+ $("statMessages").textContent=
+  m.error?"0":m.count||0;
 
- $("statMessages").textContent =
- m.error ? "0" : m.count||0;
-
- $("statWithdrawals").textContent =
- w.error ? "0" : w.count||0;
-
- $("statDeposits").textContent =
- d.error ? "0" : d.count||0;
+ $("statWithdrawals").textContent=
+  w.error?"0":w.count||0;
 
 }
 
@@ -818,8 +540,7 @@ async function products(){
  b.className="loading";
  b.textContent="Loading...";
 
- const r=
- await db
+ const r=await db
  .from("Products")
  .select("*");
 
@@ -828,7 +549,7 @@ async function products(){
   b.className="empty";
 
   b.textContent=
-  "Products table is not available.";
+   "Products table is not available.";
 
   return;
  }
@@ -837,8 +558,7 @@ async function products(){
 
   b.className="empty";
 
-  b.textContent=
-  "No products yet.";
+  b.textContent="No products yet.";
 
   return;
  }
@@ -846,66 +566,65 @@ async function products(){
  b.className="";
  b.innerHTML="";
 
-
  r.data.forEach(p=>{
 
-  const d=
-  document.createElement("div");
+  const d=document.createElement("div");
 
   d.className="item";
 
-  const id=
-  p.Id??p.id;
+  const id=p.Id??p.id;
 
   const name=
-  p.Name??p.name??"Product";
+   p.Name??
+   p.name??
+   "Product";
 
   const price=
-  Number(
-   p.Price??p.price??0
-  );
+   Number(
+    p.Price??
+    p.price??
+    0
+   );
 
   const stock=
-  Number(
-   p.Stock??p.stock??0
-  );
+   Number(
+    p.Stock??
+    p.stock??
+    0
+   );
 
   const image=
-  p["Image url"]??
-  p.image_url??
-  p.image??"";
-
+   p["Image url"]??
+   p.image_url??
+   p.image??
+   "";
 
   d.innerHTML=
-  (image?
 
-  `<img
-   src="${esc(image)}"
-   style="
-   width:100%;
-   max-height:150px;
-   object-fit:cover;
-   border-radius:8px;
-   margin-bottom:6px"
-   onerror="
-   this.style.display='none'">`
+   (
+    image
+    ?
+    `<img src="${esc(image)}"
+      style="width:100%;max-height:150px;object-fit:cover;border-radius:8px;margin-bottom:6px"
+      onerror="this.style.display='none'">`
+    :
+    ""
+   )
 
-  :"")
-  +
+   +
 
-  `<b>📦 ${esc(name)}</b>
+   `<b>📦 ${esc(name)}</b>
+
    <p>Price: $${price.toFixed(2)}</p>
+
    <p>Stock: ${stock}</p>
+
    <button class="action red">
    Delete
    </button>`;
 
-
-  d
-  .querySelector("button")
-  .onclick=
-  ()=>delProduct(id);
-
+  d.querySelector("button")
+  .onclick=()=>delProduct(id);
 
   b.appendChild(d);
 
@@ -916,52 +635,52 @@ async function products(){
 
 async function addProduct(){
 
- const n=
- $("productName")
+ const n=$("productName")
  .value
  .trim();
 
- if(!n)
- return msg(
-  "Product name is required.",
-  "error"
- );
+ if(!n){
 
+  msg(
+   "Product name is required.",
+   "error"
+  );
 
- const r=
- await db
+  return;
+ }
+
+ const r=await db
  .from("Products")
  .insert({
 
   Name:n,
 
   Description:
-  $("productDescription")
-  .value
-  .trim(),
+   $("productDescription")
+   .value
+   .trim(),
 
   Price:
-  Number(
-   $("productPrice").value
-  )||0,
+   Number(
+    $("productPrice").value
+   )||0,
 
   Stock:
-  Number(
-   $("productStock").value
-  )||0,
+   Number(
+    $("productStock").value
+   )||0,
 
   Category:
-  $("productCategory")
-  .value
-  .trim(),
+   $("productCategory")
+   .value
+   .trim(),
 
   "Image url":
-  $("productImage")
-  .value
-  .trim()
+   $("productImage")
+   .value
+   .trim()
 
  });
-
 
  if(r.error){
 
@@ -975,21 +694,18 @@ async function addProduct(){
   return;
  }
 
-
  document
  .querySelectorAll(
   "#products input,#products textarea"
  )
- .forEach(
-  x=>x.value=""
- );
-
+ .forEach(x=>x.value="");
 
  msg(
   "Product added successfully."
  );
 
  await products();
+
  await dashboard();
 
 }
@@ -999,27 +715,29 @@ async function delProduct(id){
 
  if(!confirm(
   "Delete this product?"
- ))
- return;
+ ))return;
 
-
- const r=
- await db
+ const r=await db
  .from("Products")
  .delete()
  .eq("Id",id);
 
+ if(r.error){
 
- if(r.error)
- return msg(
-  r.error.message,
-  "error"
+  msg(
+   r.error.message,
+   "error"
+  );
+
+  return;
+ }
+
+ msg(
+  "Product deleted."
  );
 
-
- msg("Product deleted.");
-
  await products();
+
  await dashboard();
 
 }
@@ -1032,11 +750,10 @@ async function orders(){
  const b=$("orderList");
 
  b.className="loading";
+
  b.textContent="Loading...";
 
-
- const r=
- await db
+ const r=await db
  .from("orders")
  .select("*")
  .order(
@@ -1044,44 +761,40 @@ async function orders(){
   {ascending:false}
  );
 
-
  if(r.error){
 
   b.className="empty";
 
   b.textContent=
-  "Orders table is not available yet.";
+   "Orders table is not available yet.";
 
   return;
  }
-
 
  if(!r.data?.length){
 
   b.className="empty";
 
   b.textContent=
-  "No customer orders yet.";
+   "No customer orders yet.";
 
   return;
  }
 
-
  b.className="";
- b.innerHTML="";
 
+ b.innerHTML="";
 
  r.data.forEach(o=>{
 
   const d=
-  document.createElement("div");
+   document.createElement("div");
 
   d.className="item";
 
+  d.innerHTML=`
 
-  d.innerHTML=
-
-  `<b>🛒 Order #${esc(o.id)}</b>
+  <b>🛒 Order #${esc(o.id)}</b>
 
   <p>
   Customer:
@@ -1102,7 +815,9 @@ async function orders(){
 
   <p>
   Quantity:
-  ${esc(o.quantity||1)}
+  ${esc(
+   o.quantity||1
+  )}
   </p>
 
   <p>
@@ -1110,7 +825,8 @@ async function orders(){
   <b>
   $${Number(
    o.total_amount??
-   o.total??0
+   o.total??
+   0
   ).toFixed(2)}
   </b>
   </p>
@@ -1126,46 +842,44 @@ async function orders(){
   </p>
 
   <select>
+
    <option>Pending</option>
    <option>Processing</option>
    <option>Shipped</option>
    <option>Delivered</option>
    <option>Cancelled</option>
+
   </select>
 
   <button class="action">
   Update
-  </button>`;
+  </button>
+  `;
 
-
-  const s=
-  d.querySelector("select");
+  const s=d.querySelector("select");
 
   s.value=
-  o.status||"Pending";
+   o.status||
+   "Pending";
 
+  d.querySelector("button")
+  .onclick=async()=>{
 
-  d
-  .querySelector("button")
-  .onclick=
-  async()=>{
-
-   const x=
-   await db
+   const x=await db
    .from("orders")
    .update({
     status:s.value
    })
    .eq("id",o.id);
 
+   if(x.error){
 
-   if(x.error)
-   msg(
-    x.error.message,
-    "error"
-   );
+    msg(
+     x.error.message,
+     "error"
+    );
 
-   else{
+   }else{
 
     msg(
      "Order status updated."
@@ -1177,7 +891,6 @@ async function orders(){
 
   };
 
-
   b.appendChild(d);
 
  });
@@ -1185,18 +898,17 @@ async function orders(){
 }
 
 
-/* CUSTOMER MESSAGES */
+/* MESSAGES */
 
 async function messages(){
 
  const b=$("messageList");
 
  b.className="loading";
+
  b.textContent="Loading...";
 
-
- const r=
- await db
+ const r=await db
  .from("support_tickets")
  .select("*")
  .order(
@@ -1204,117 +916,118 @@ async function messages(){
   {ascending:false}
  );
 
-
  if(r.error){
 
   b.className="empty";
 
   b.textContent=
-  "Messages table is not available yet.";
+   "Messages table is not available yet.";
 
   return;
  }
-
 
  if(!r.data?.length){
 
   b.className="empty";
 
   b.textContent=
-  "No customer messages yet.";
+   "No customer messages yet.";
 
   return;
  }
 
-
  b.className="";
- b.innerHTML="";
 
+ b.innerHTML="";
 
  r.data.forEach(t=>{
 
   const d=
-  document.createElement("div");
+   document.createElement("div");
 
   d.className="item";
 
+  d.innerHTML=`
 
-  d.innerHTML=
+  <b>💬
+  ${esc(
+   t.customer_name||
+   t.customer_id||
+   "Customer"
+  )}
+  </b>
 
-  `<b>
-   💬 ${esc(
-    t.customer_name||
-    t.customer_id||
-    "Customer"
-   )}
-   </b>
+  <p>
+  ${esc(t.message||"")}
+  </p>
 
-   <p>
-   ${esc(t.message||"")}
-   </p>
+  <p>
+  Status:
+  <span class="status">
+  ${esc(
+   t.status||
+   "Pending"
+  )}
+  </span>
+  </p>
 
-   <p>
-   Status:
-   <span class="status">
-   ${esc(
-    t.status||
-    "Pending"
-   )}
-   </span>
-   </p>
+  <textarea>
+  ${esc(
+   t.admin_reply||
+   ""
+  )}
+  </textarea>
 
-   <textarea>
-   ${esc(
-    t.admin_reply||""
-   )}
-   </textarea>
+  <button class="action green">
+  Send Reply
+  </button>
 
-   <button class="action green">
-   Send Reply
-   </button>
+  <button class="action red">
+  Delete
+  </button>
+  `;
 
-   <button class="action red">
-   Delete
-   </button>`;
-
-
-  d
-  .querySelector(".green")
-  .onclick=
-  async()=>{
+  d.querySelector(".green")
+  .onclick=async()=>{
 
    const v=
-   d.querySelector("textarea")
-   .value
-   .trim();
+    d.querySelector("textarea")
+    .value
+    .trim();
 
+   if(!v){
 
-   if(!v)
-   return msg(
-    "Write a reply first.",
-    "error"
-   );
+    msg(
+     "Write a reply first.",
+     "error"
+    );
 
+    return;
+   }
 
-   const x=
-   await db
+   const x=await db
    .from("support_tickets")
    .update({
+
     admin_reply:v,
+
     status:"Replied"
+
    })
    .eq("id",t.id);
 
+   if(x.error){
 
-   if(x.error)
-   msg(
-    x.error.message,
-    "error"
-   );
+    msg(
+     x.error.message,
+     "error"
+    );
 
-   else{
+   }else{
 
-    msg("Reply sent.");
+    msg(
+     "Reply sent."
+    );
 
     messages();
 
@@ -1323,40 +1036,36 @@ async function messages(){
   };
 
 
-  d
-  .querySelector(".red")
-  .onclick=
-  async()=>{
+  d.querySelector(".red")
+  .onclick=async()=>{
 
    if(!confirm(
     "Delete this message?"
-   ))
-   return;
+   ))return;
 
-
-   const x=
-   await db
+   const x=await db
    .from("support_tickets")
    .delete()
    .eq("id",t.id);
 
+   if(x.error){
 
-   if(x.error)
-   msg(
-    x.error.message,
-    "error"
-   );
+    msg(
+     x.error.message,
+     "error"
+    );
 
-   else{
+   }else{
 
-    msg("Message deleted.");
+    msg(
+     "Message deleted."
+    );
 
     messages();
 
    }
 
   };
-
 
   b.appendChild(d);
 
@@ -1372,11 +1081,10 @@ async function balances(){
  const b=$("balanceList");
 
  b.className="loading";
+
  b.textContent="Loading...";
 
-
- const r=
- await db
+ const r=await db
  .from("customer_balances")
  .select("*")
  .order(
@@ -1384,109 +1092,114 @@ async function balances(){
   {ascending:false}
  );
 
-
  if(r.error){
 
   b.className="empty";
 
   b.textContent=
-  "Balance table is not available yet.";
+   "Balance table is not available yet.";
 
   return;
  }
-
 
  if(!r.data?.length){
 
   b.className="empty";
 
   b.textContent=
-  "No customer balances yet.";
+   "No customer balances yet.";
 
   return;
  }
 
-
  b.className="";
- b.innerHTML="";
 
+ b.innerHTML="";
 
  r.data.forEach(c=>{
 
   const d=
-  document.createElement("div");
+   document.createElement("div");
 
   d.className="item";
 
+  d.innerHTML=`
 
-  d.innerHTML=
+  <b>
+  👤
+  ${esc(
+   c.customer_name||
+   c.customer_id||
+   "Customer"
+  )}
+  </b>
 
-  `<b>
-   👤 ${esc(
-    c.customer_name||
-    c.customer_id||
-    "Customer"
-   )}
-   </b>
+  <p>
+  Current Balance:
+  <b>
+  $${Number(
+   c.balance||0
+  ).toFixed(2)}
+  </b>
+  </p>
 
-   <p>
-   Current Balance:
-   <b>
-   $${Number(
-    c.balance||0
-   ).toFixed(2)}
-   </b>
-   </p>
-
-   <input
+  <input
    type="number"
    min="0"
-   placeholder="New balance">
+   placeholder="New balance"
+  >
 
-   <button class="action">
-   Update Balance
-   </button>`;
+  <button class="action">
+  Update Balance
+  </button>
+  `;
 
-
-  d
-  .querySelector("button")
-  .onclick=
-  async()=>{
+  d.querySelector("button")
+  .onclick=async()=>{
 
    const v=
-   Number(
-    d.querySelector("input").value
-   );
-
+    Number(
+     d.querySelector("input")
+     .value
+    );
 
    if(
     !Number.isFinite(v)||
     v<0
-   )
-   return msg(
-    "Enter a valid balance.",
-    "error"
-   );
+   ){
 
+    msg(
+     "Enter a valid balance.",
+     "error"
+    );
 
-   const x=
-   await db
+    return;
+   }
+
+   const x=await db
    .from("customer_balances")
    .update({
+
     balance:v,
+
     updated_at:
-    new Date().toISOString()
+     new Date()
+     .toISOString()
+
    })
-   .eq("id",c.id);
-
-
-   if(x.error)
-   msg(
-    x.error.message,
-    "error"
+   .eq(
+    "id",
+    c.id
    );
 
-   else{
+   if(x.error){
+
+    msg(
+     x.error.message,
+     "error"
+    );
+
+   }else{
 
     msg(
      "Balance updated."
@@ -1498,7 +1211,6 @@ async function balances(){
 
   };
 
-
   b.appendChild(d);
 
  });
@@ -1506,197 +1218,244 @@ async function balances(){
 }
 
 
-/* WITHDRAWALS */
+/* =====================================================
+   DEPOSIT REQUESTS
+   ===================================================== */
 
-async function withdrawals(){
+async function deposits(){
 
- const b=$("withdrawalList");
+ const b=$("depositRequestList");
 
  b.className="loading";
+
  b.textContent="Loading...";
 
-
- const r=
- await db
- .from("withdrawals")
+ const r=await db
+ .from("deposit_requests")
  .select("*")
  .order(
   "created_at",
   {ascending:false}
  );
 
-
  if(r.error){
+
+  console.error(r.error);
 
   b.className="empty";
 
-  b.textContent=
-  "Withdrawal table is not available yet.";
+  b.innerHTML=
+   "<b>Deposit requests load نہیں ہو رہیں۔</b><br><br>"+
+   esc(r.error.message);
 
   return;
  }
-
 
  if(!r.data?.length){
 
   b.className="empty";
 
   b.textContent=
-  "No withdrawal requests.";
+   "No deposit requests yet.";
 
   return;
  }
 
-
  b.className="";
+
  b.innerHTML="";
 
-
- r.data.forEach(w=>{
+ r.data.forEach(x=>{
 
   const d=
-  document.createElement("div");
+   document.createElement("div");
 
   d.className="item";
 
+  const currentStatus=
+   x.status||
+   "Pending";
 
-  d.innerHTML=
+  d.innerHTML=`
 
-  `<b>
-   💸 Withdrawal #${esc(w.id)}
-   </b>
+  <b>💰 Deposit Request</b>
 
-   <p>
-   Customer:
-   ${esc(
-    w.customer_name||
-    w.customer_id||
-    "Customer"
-   )}
-   </p>
+  <p>
+  Customer:
+  <b>
+  ${esc(
+   x.customer_name||
+   x.customer_id||
+   "Customer"
+  )}
+  </b>
+  </p>
 
-   <p>
-   Amount:
-   <b>
-   $${Number(
-    w.amount||0
-   ).toFixed(2)}
-   </b>
-   </p>
+  <p>
+  Customer ID:
+  ${esc(
+   x.customer_id||
+   ""
+  )}
+  </p>
 
-   <p>
-   Method:
-   ${esc(w.method||"")}
-   </p>
+  <p>
+  Amount:
+  <b>
+  $${Number(
+   x.amount||0
+  ).toFixed(2)}
+  </b>
+  </p>
 
-   <p>
-   Account:
-   ${esc(
-    w.account_details||""
-   )}
-   </p>
+  <p>
+  Payment Method:
+  ${esc(
+   x.payment_method||
+   ""
+  )}
+  </p>
 
-   <p>
-   Status:
-   <span class="status">
-   ${esc(
-    w.status||
-    "Pending"
-   )}
-   </span>
-   </p>
+  <p>
+  Transaction ID:
+  <b>
+  ${esc(
+   x.transaction_id||
+   ""
+  )}
+  </b>
+  </p>
 
-   <select>
-    <option>Pending</option>
-    <option>Approved</option>
-    <option>Paid</option>
-    <option>Rejected</option>
-   </select>
+  <p>
+  Note:
+  ${esc(
+   x.note||
+   ""
+  )}
+  </p>
 
-   <button class="action green">
-   Update
-   </button>`;
+  <p>
+  Status:
+  <span class="status">
+  ${esc(currentStatus)}
+  </span>
+  </p>
+
+  <p>
+  Date:
+  ${esc(
+   x.created_at||
+   ""
+  )}
+  </p>
+
+  <select>
+   <option value="Pending">
+   Pending
+   </option>
+
+   <option value="Approved">
+   Approved
+   </option>
+
+   <option value="Rejected">
+   Rejected
+   </option>
+  </select>
+
+  <button class="action green">
+  Update
+  </button>
+
+  `;
+
+  const select=
+   d.querySelector("select");
+
+  select.value=
+   currentStatus;
 
 
-  const s=
-  d.querySelector("select");
+  d.querySelector("button")
+  .onclick=async()=>{
 
-  s.value=
-  w.status||"Pending";
-
-
-  d
-  .querySelector("button")
-  .onclick=
-  async()=>{
-
-   const x=
-   await db
-   .from("withdrawals")
-   .update({
-    status:s.value
-   })
-   .eq("id",w.id);
+   const newStatus=
+    select.value;
 
 
-   if(x.error)
-   msg(
-    x.error.message,
-    "error"
-   );
+   /* SAME STATUS */
 
-   else{
+   if(
+    newStatus===
+    currentStatus
+   ){
 
     msg(
-     "Withdrawal updated."
+     "Status is already "+newStatus+"."
     );
 
-    withdrawals();
-    dashboard();
-
+    return;
    }
 
-  };
+
+   /* APPROVE */
+
+   if(
+    newStatus===
+    "Approved"
+   ){
+
+    /*
+      First get customer balance.
+    */
+
+    const balanceResult=
+     await db
+     .from("customer_balances")
+     .select(
+      "id,balance,customer_name"
+     )
+     .eq(
+      "customer_id",
+      x.customer_id
+     )
+     .maybeSingle();
 
 
-  b.appendChild(d);
+    if(balanceResult.error){
 
- });
+     console.error(
+      balanceResult.error
+     );
 
-}
+     msg(
+      "Customer balance read نہیں ہو سکا: "+
+      balanceResult.error.message,
+      "error"
+     );
 
-
-/* KYC */
-
-async function kyc(){
-
- const b=$("kycList");
-
- b.className="loading";
- b.textContent="Loading...";
-
-
- const r=
- await db
- .from("kyc_requests")
- .select("*")
- .order(
-  "created_at",
-  {ascending:false}
- );
+     return;
+    }
 
 
- if(r.error){
-
-  b.className="empty";
-
-  b.textContent=
-  "KYC table is not available yet.";
-
-  return;
- }
+    let balanceRow=
+     balanceResult.data;
 
 
- if(!r.data?.length){
+    /*
+      If customer balance row
+      does not exist, create it.
+    */
 
-  b.c
+    if(!balanceRow){
+
+     const createBalance=
+      await db
+      .from("customer_balances")
+      .insert({
+
+       customer_id:
+        x.customer_id,
+
+       customer_name:
+ 
