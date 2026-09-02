@@ -1,372 +1,361 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Smart Seller Shop - Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Smart Seller Shop — New Admin</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#f3f4f6;color:#172033;font-family:Arial,sans-serif;padding-bottom:78px}
-.header{background:#fff;padding:14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:20}
-.logo{width:50px;height:50px;border-radius:14px;background:#713be8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:bold}
-.header h1{margin:0;font-size:19px}.header p{margin:3px 0 0;color:#777;font-size:12px}
-.connection{margin-left:auto;padding:6px 9px;border-radius:14px;background:#fff3cd;color:#856404;font-size:11px}
-.connection.ok{background:#dcfce7;color:#166534}.connection.bad{background:#fee2e2;color:#991b1b}
-.container{max-width:900px;margin:auto;padding:12px}
-.topMenu{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:12px}
-.navBtn{border:0;background:#fff;padding:10px 3px;border-radius:10px;box-shadow:0 2px 7px #ddd;font-size:11px;cursor:pointer;color:#172033}
-.navBtn.active{background:#713be8;color:#fff}
-.page{display:none}.page.active{display:block}
-.card{background:#fff;border-radius:15px;padding:15px;margin-bottom:12px;box-shadow:0 2px 10px #ddd}
-.card h2{margin:0 0 10px;font-size:18px}
-.welcome{background:#214f78;color:#fff}.welcome h2{font-size:21px;margin:6px 0 10px}.welcome p{font-size:13px;line-height:1.5}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.stat{background:#fff;border-radius:13px;padding:13px 5px;text-align:center;box-shadow:0 2px 8px #ddd}
-.stat b{font-size:22px}.stat span{display:block;font-size:11px;color:#777;margin-top:4px}
-input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:9px;font-size:14px;margin:5px 0 9px}
-textarea{min-height:90px}label{font-size:12px;font-weight:bold}
-.action{border:0;border-radius:8px;padding:9px 12px;background:#713be8;color:#fff;cursor:pointer;font-size:13px;margin:3px}
-.action:disabled{opacity:.5}.green{background:#16a34a}.red{background:#dc2626}.gray{background:#777}.full{width:100%;margin:3px 0}
-.item{border:1px solid #ddd;border-radius:11px;padding:12px;margin-top:8px;background:#fafafa}
-.item p{font-size:13px;color:#555;margin:5px 0}
-.item img{max-width:100%;height:140px;object-fit:cover;border-radius:8px;display:block;margin-bottom:8px}
-.status{display:inline-block;padding:4px 8px;border-radius:15px;background:#fff3cd;color:#856404;font-size:11px}
-.status.approved{background:#dcfce7;color:#166534}.status.rejected{background:#fee2e2;color:#991b1b}
-.loading,.empty{text-align:center;padding:20px;color:#777;font-size:13px}
-.errorBox{padding:12px;border-radius:9px;background:#fee2e2;color:#991b1b;font-size:12px;word-break:break-word}
-.message{display:none;padding:10px;border-radius:9px;margin-bottom:10px;font-size:13px}
-.message.success{background:#dcfce7;color:#166534}.message.error{background:#fee2e2;color:#991b1b}
-.bottom{position:fixed;bottom:0;left:0;right:0;height:67px;background:#fff;border-top:1px solid #ddd;display:flex;z-index:999}
-.bottom button{flex:1;border:0;background:#fff;font-size:10px;color:#555;cursor:pointer}
-.bottom button.active{color:#713be8;font-weight:bold}.bottomIcon{font-size:18px;display:block;margin-bottom:3px}
-@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.topMenu{grid-template-columns:repeat(3,1fr)}.topMenu button{font-size:9px;padding:9px 1px}.header h1{font-size:17px}.connection{font-size:9px}}
+*{box-sizing:border-box}body{margin:0;background:#f4f6fa;color:#172033;font-family:Arial,sans-serif;padding-bottom:82px}
+.header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e5e7eb;padding:12px 15px;display:flex;align-items:center;gap:11px}
+.logo{width:48px;height:48px;border-radius:14px;background:#713be8;color:#fff;display:grid;place-items:center;font-weight:800;font-size:19px}
+.header h1{font-size:18px;margin:0}.header p{margin:3px 0 0;color:#777;font-size:11px}.dot{margin-left:auto;padding:7px 10px;border-radius:20px;background:#fff7d6;color:#876c00;font-size:11px}.dot.ok{background:#dcfce7;color:#166534}.dot.bad{background:#fee2e2;color:#991b1b}
+.wrap{max-width:950px;margin:auto;padding:13px}.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}.nav button,.bottom button{border:0;background:#fff;color:#263044;cursor:pointer}.nav button{padding:11px 5px;border-radius:11px;box-shadow:0 2px 8px #dfe3ea;font-size:12px}.nav button.active{background:#713be8;color:#fff}
+.page{display:none}.page.active{display:block}.card{background:#fff;border-radius:17px;padding:16px;margin-bottom:12px;box-shadow:0 3px 13px #e0e4ea}.card h2{margin:0 0 12px;font-size:19px}.hero{background:#24577f;color:#fff}.hero h2{font-size:24px;margin:8px 0}.hero p{line-height:1.55;margin:0;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{text-align:center;background:#fff;border-radius:15px;padding:17px 5px;box-shadow:0 2px 10px #e0e4ea}.stat b{display:block;font-size:25px}.stat span{font-size:11px;color:#777}
+input,textarea,select{width:100%;border:1px solid #d9dee8;border-radius:10px;padding:11px;font-size:14px;margin:5px 0 10px;background:#fff}textarea{min-height:90px;resize:vertical}label{font-size:12px;font-weight:700}
+.btn{border:0;border-radius:9px;padding:10px 13px;background:#713be8;color:#fff;cursor:pointer;font-size:12px;margin:3px}.btn.green{background:#16a34a}.btn.red{background:#dc2626}.btn.gray{background:#697386}.btn:disabled{opacity:.5}
+.item{border:1px solid #e2e5eb;border-radius:12px;padding:12px;margin:9px 0;background:#fafbfc}.item p{margin:5px 0;font-size:12px;color:#5c6472;word-break:break-word}.item img{width:100%;height:150px;object-fit:cover;border-radius:9px;margin-bottom:8px}.tag{display:inline-block;padding:4px 8px;border-radius:15px;background:#fff3cd;color:#795f00;font-size:10px}.tag.ok{background:#dcfce7;color:#166534}.tag.no{background:#fee2e2;color:#991b1b}
+.notice{padding:11px;border-radius:10px;font-size:12px;margin-bottom:10px;background:#eef2ff;color:#3730a3}.notice.err{background:#fee2e2;color:#991b1b}.notice.ok{background:#dcfce7;color:#166534}
+.empty{text-align:center;color:#777;padding:20px;font-size:13px}.hidden{display:none}.row{display:flex;gap:7px;flex-wrap:wrap}.row>*{flex:1;min-width:120px}.small{font-size:11px;color:#777}
+.bottom{position:fixed;left:0;right:0;bottom:0;height:70px;background:#fff;border-top:1px solid #ddd;display:grid;grid-template-columns:repeat(5,1fr);z-index:100}.bottom button{font-size:10px}.bottom button.active{color:#713be8;font-weight:700}.ico{display:block;font-size:20px;margin-bottom:3px}
+pre{white-space:pre-wrap;word-break:break-word;background:#111827;color:#d1d5db;border-radius:10px;padding:11px;font-size:11px;overflow:auto}
+@media(min-width:700px){.stats{grid-template-columns:repeat(4,1fr)}.nav{grid-template-columns:repeat(6,1fr)}}
 </style>
 </head>
 <body>
-<div class="header">
-<div class="logo">SS</div>
-<div><h1>Smart Seller Shop</h1><p>Admin Panel</p></div>
-<span id="connection" class="connection">Checking...</span>
-</div>
 
-<div class="container">
-<div id="messageBox" class="message"></div>
+<header class="header">
+  <div class="logo">SS</div>
+  <div><h1>Smart Seller Shop</h1><p>NEW ADMIN PANEL</p></div>
+  <div id="conn" class="dot">Checking...</div>
+</header>
 
-<div class="topMenu">
-<button class="navBtn active" data-page="dashboard">Dashboard</button>
-<button class="navBtn" data-page="balance">Balance</button>
-<button class="navBtn" data-page="deposits">Deposits</button>
-<button class="navBtn" data-page="withdrawals">Withdrawals</button>
-<button class="navBtn" data-page="kyc">KYC</button>
-<button class="navBtn" data-page="orders">Orders</button>
-</div>
+<main class="wrap">
+  <div id="alert" class="notice hidden"></div>
 
-<section id="dashboard" class="page active">
-<div class="card welcome"><small>WELCOME BACK</small><h2>Smart Seller Shop Admin</h2><p>Manage your shop from one place.</p></div>
-<div class="stats">
-<div class="stat"><b id="statProducts">0</b><span>Products</span></div>
-<div class="stat"><b id="statOrders">0</b><span>Orders</span></div>
-<div class="stat"><b id="statMessages">0</b><span>Messages</span></div>
-<div class="stat"><b id="statWithdrawals">0</b><span>Withdrawals</span></div>
-</div>
-<div class="card"><h2>Connection Status</h2><div id="connectionDetails">Checking...</div></div>
-</section>
+  <div class="nav">
+    <button class="active" data-page="dashboard">Dashboard</button>
+    <button data-page="products">Products</button>
+    <button data-page="customers">Customers</button>
+    <button data-page="deposits">Deposits</button>
+    <button data-page="withdrawals">Withdrawals</button>
+    <button data-page="orders">Orders</button>
+  </div>
 
-<section id="balance" class="page"><div class="card"><h2>Customer Balance</h2><div id="balanceList" class="loading">Loading...</div></div></section>
-<section id="deposits" class="page"><div class="card"><h2>Customer Deposit Requests</h2><p>Approve a pending request only once.</p><div id="depositList" class="loading">Loading...</div></div></section>
-<section id="withdrawals" class="page"><div class="card"><h2>Withdrawal Requests</h2><div id="withdrawalList" class="loading">Loading...</div></div></section>
-<section id="kyc" class="page"><div class="card"><h2>KYC Verification</h2><div id="kycList" class="loading">Loading...</div></div></section>
-<section id="orders" class="page"><div class="card"><h2>Customer Orders</h2><div id="orderList" class="loading">Loading...</div></div></section>
+  <section id="dashboard" class="page active">
+    <div class="card hero">
+      <div>WELCOME BACK</div>
+      <h2>Smart Seller Shop Admin</h2>
+      <p>Products, customers, deposits, withdrawals, orders and database status — all in one panel.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="nProducts">—</b><span>Products</span></div>
+      <div class="stat"><b id="nCustomers">—</b><span>Customers</span></div>
+      <div class="stat"><b id="nDeposits">—</b><span>Deposits</span></div>
+      <div class="stat"><b id="nOrders">—</b><span>Orders</span></div>
+    </div>
+    <div class="card">
+      <h2>Database Status</h2>
+      <div id="diag" class="notice">Testing Supabase...</div>
+      <button class="btn gray" id="testBtn">Test Again</button>
+    </div>
+  </section>
 
-<section id="products" class="page">
-<div class="card">
-<h2>Add Product</h2>
-<label>Product Name</label><input id="productName" placeholder="Product name">
-<label>Description</label><textarea id="productDescription" placeholder="Product description"></textarea>
-<label>Price</label><input id="productPrice" type="number" step="0.01" min="0" placeholder="0">
-<label>Stock</label><input id="productStock" type="number" min="0" placeholder="0">
-<label>Category</label><input id="productCategory" placeholder="Category">
-<label>Image URL</label><input id="productImage" placeholder="https://...">
-<button id="addProduct" class="action full">Add Product</button>
-</div>
-<div class="card"><h2>Products</h2><div id="productList" class="loading">Loading...</div></div>
-</section>
+  <section id="products" class="page">
+    <div class="card">
+      <h2>➕ Add Product</h2>
+      <label>Product Name</label><input id="pName" placeholder="Example: Smart Watch">
+      <label>Description</label><textarea id="pDesc" placeholder="Product description"></textarea>
+      <div class="row">
+        <div><label>Price</label><input id="pPrice" type="number" min="0" step="0.01" placeholder="0"></div>
+        <div><label>Stock</label><input id="pStock" type="number" min="0" step="1" placeholder="0"></div>
+      </div>
+      <label>Category</label><input id="pCategory" placeholder="Electronics">
+      <label>Image URL</label><input id="pImage" placeholder="https://...">
+      <button class="btn" id="addProduct">Add Product</button>
+    </div>
+    <div class="card"><h2>📦 Products</h2><div id="productList" class="empty">Loading...</div></div>
+  </section>
 
-<section id="customers" class="page"><div class="card"><h2>Customers</h2><div id="customerList" class="loading">Loading...</div></div></section>
-<section id="messages" class="page"><div class="card"><h2>Customer Messages</h2><div id="messageList" class="loading">Loading...</div></div></section>
-<section id="notifications" class="page"><div class="card"><h2>Notifications</h2><div class="empty">No notifications.</div></div></section>
-<section id="settings" class="page"><div class="card"><h2>Settings</h2><p>Smart Seller Shop Admin Panel</p><button id="refresh" class="action gray full">Refresh Panel</button></div></section>
-</div>
+  <section id="customers" class="page">
+    <div class="card"><h2>👥 Customers</h2><div id="customerList" class="empty">Loading...</div></div>
+  </section>
 
-<div class="bottom">
-<button data-page="products"><span class="bottomIcon">📦</span>Products</button>
-<button data-page="customers"><span class="bottomIcon">👥</span>Customers</button>
-<button data-page="messages"><span class="bottomIcon">💬</span>Messages</button>
-<button data-page="notifications"><span class="bottomIcon">🔔</span>Notifications</button>
-<button data-page="settings"><span class="bottomIcon">⚙️</span>Settings</button>
-</div>
+  <section id="deposits">
+    <div class="card"><h2>💳 Deposit Requests</h2><div id="depositList" class="empty">Loading...</div></div>
+  </section>
+
+  <section id="withdrawals">
+    <div class="card"><h2>💸 Withdrawal Requests</h2><div id="withdrawalList" class="empty">Loading...</div></div>
+  </section>
+
+  <section id="orders">
+    <div class="card"><h2>🛒 Orders</h2><div id="orderList" class="empty">Loading...</div></div>
+  </section>
+
+</main>
+
+<nav class="bottom">
+  <button data-page="products"><span class="ico">📦</span>Products</button>
+  <button data-page="customers"><span class="ico">👥</span>Customers</button>
+  <button data-page="deposits"><span class="ico">💳</span>Deposits</button>
+  <button data-page="orders"><span class="ico">🛒</span>Orders</button>
+  <button data-page="dashboard" class="active"><span class="ico">🏠</span>Home</button>
+</nav>
 
 <script>
 "use strict";
 
-const SUPABASE_URL="https://cgrwiwzqiusvjibpjzdv.supabase.co";
-const SUPABASE_KEY="sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
-const REST=SUPABASE_URL+"/rest/v1/";
-const $=id=>document.getElementById(id);
+/* =========================================================
+   SMART SELLER SHOP — NEW ADMIN PANEL
+   Supabase REST API only. No library/CDN required.
+   ========================================================= */
 
-function esc(v){
- return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
-}
-function msg(t,type="success"){
- const b=$("messageBox");b.textContent=t;b.className="message "+type;b.style.display="block";
- clearTimeout(window.mt);window.mt=setTimeout(()=>b.style.display="none",4000);
-}
-function setConnection(t,ok){
- $("connection").textContent=t;
- $("connection").className="connection "+(ok?"ok":"bad");
- $("connectionDetails").textContent=t;
-}
-function show(id,text,cls="empty"){
- const b=$(id);b.className=cls;b.textContent=text;
-}
+const SUPABASE_URL = "https://cgrwiwzqiusvjibpjzdv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
+const REST = SUPABASE_URL + "/rest/v1/";
 
-async function api(table,options={}){
- const method=options.method||"GET";
- const body=options.body;
- const query=options.query||"";
- const h={
-  "apikey":SUPABASE_KEY,
-  "Authorization":"Bearer "+SUPABASE_KEY,
-  "Accept":"application/json"
- };
- if(body!==undefined){
-  h["Content-Type"]="application/json";
-  h["Prefer"]=options.prefer||"return=representation";
- }
- const r=await fetch(REST+table+query,{method,headers:h,body:body===undefined?undefined:JSON.stringify(body)});
- const text=await r.text();
- let data=null;
- try{data=text?JSON.parse(text):null}catch(e){}
- if(!r.ok){
-  const detail=data?.message||data?.error||data?.hint||text||("HTTP "+r.status);
-  throw new Error(detail);
- }
- return data;
-}
+const $ = id => document.getElementById(id);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+}[c]));
 
-function openPage(id){
- document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
- const p=$(id);if(p)p.classList.add("active");
- document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===id));
- const loaders={
-  dashboard:loadDashboard,balance:loadBalances,deposits:loadDeposits,
-  withdrawals:loadWithdrawals,kyc:loadKYC,orders:loadOrders,
-  products:loadProducts,customers:loadCustomers,messages:loadMessages
- };
- if(loaders[id])loaders[id]().catch(e=>msg(e.message,"error"));
+function alertBox(text,type="notice"){
+  const a=$("alert"); a.textContent=text; a.className="notice "+(type==="error"?"err":type==="ok"?"ok":""); a.classList.remove("hidden");
+  clearTimeout(window.__alertTimer); window.__alertTimer=setTimeout(()=>a.classList.add("hidden"),5000);
+}
+function setConn(text,type=""){
+  const c=$("conn"); c.textContent=text; c.className="dot "+type;
+}
+function errorText(e){ return e?.message || String(e || "Unknown error"); }
+
+async function api(table, opts={}){
+  const method=opts.method || "GET";
+  const query=opts.query || "";
+  const headers={
+    "apikey":SUPABASE_KEY,
+    "Authorization":"Bearer "+SUPABASE_KEY
+  };
+  if(opts.body!==undefined){
+    headers["Content-Type"]="application/json";
+    headers["Prefer"]=opts.prefer || "return=representation";
+  }
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),10000);
+  try{
+    const r=await fetch(REST+table+query,{method,headers,body:opts.body===undefined?undefined:JSON.stringify(opts.body),signal:controller.signal});
+    const raw=await r.text();
+    let data=null; try{data=raw?JSON.parse(raw):null}catch(_){}
+    if(!r.ok){
+      const msg=(data&&(data.message||data.error||data.hint||data.details))||raw||("HTTP "+r.status);
+      throw new Error(msg);
+    }
+    return data;
+  }catch(e){
+    if(e.name==="AbortError") throw new Error("Supabase response timeout — 10 seconds.");
+    throw e;
+  }finally{clearTimeout(timer)}
 }
 
-document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
-$("refresh").addEventListener("click",()=>location.reload());
+function page(id){
+  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+  const p=$(id); if(p)p.classList.add("active");
+  document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===id));
+  const loaders={dashboard:dashboard,products:products,customers:customers,deposits:deposits,withdrawals:withdrawals,orders:orders};
+  if(loaders[id]) loaders[id]();
+}
+
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>page(b.dataset.page)));
+$("testBtn").addEventListener("click",connect);
 $("addProduct").addEventListener("click",addProduct);
 
-async function init(){
- setConnection("Connecting...",false);
- try{
-  await api("products","?select=id&limit=1");
-  setConnection("Connected",true);
-  await loadDashboard();
- }catch(e){
-  console.error(e);
-  setConnection("Database error",false);
-  $("connectionDetails").innerHTML='<div class="errorBox">'+esc(e.message)+'</div>';
- }
+async function connect(){
+  setConn("Connecting...");
+  $("diag").className="notice"; $("diag").textContent="Supabase سے connection test ہو رہا ہے...";
+  try{
+    await api("products","?select=id&limit=1");
+    setConn("Connected","ok");
+    $("diag").className="notice ok";
+    $("diag").textContent="Supabase connected successfully. Admin panel ready.";
+    await dashboard();
+  }catch(e){
+    setConn("Database Error","bad");
+    $("diag").className="notice err";
+    $("diag").textContent="Connection failed: "+errorText(e);
+    console.error(e);
+  }
 }
 
-async function loadDashboard(){
- const results=await Promise.allSettled([
-  api("products","?select=id"),
-  api("orders","?select=id"),
-  api("support_tickets","?select=id"),
-  api("withdrawals","?select=id")
- ]);
- $("statProducts").textContent=results[0].status==="fulfilled"?(results[0].value?.length||0):"!";
- $("statOrders").textContent=results[1].status==="fulfilled"?(results[1].value?.length||0):"!";
- $("statMessages").textContent=results[2].status==="fulfilled"?(results[2].value?.length||0):"!";
- $("statWithdrawals").textContent=results[3].status==="fulfilled"?(results[3].value?.length||0):"!";
+async function countTable(table){
+  try{
+    const r=await api(table,"?select=id&limit=1000");
+    return Array.isArray(r)?r.length:0;
+  }catch(e){return null}
 }
 
-async function loadProducts(){
- const b=$("productList");b.className="loading";b.textContent="Loading...";
- try{
-  const r=await api("products","?select=*&order=id.desc");
-  if(!r?.length)return show("productList","No products found.");
-  b.className="";b.innerHTML="";
-  r.forEach(p=>{
-   const d=document.createElement("div");d.className="item";
-   const im=p.image_url||p.image||"";
-   d.innerHTML=(im?'<img src="'+esc(im)+'" onerror="this.style.display=\'none\'">':"")+
-    "<b>"+esc(p.name||"Product")+"</b>"+
-    "<p>Price: $"+Number(p.price||0).toFixed(2)+"</p>"+
-    "<p>Stock: "+esc(p.stock??0)+"</p>"+
-    '<button class="action red">Delete</button>';
-   d.querySelector("button").onclick=async()=>{
-    if(!confirm("Delete this product?"))return;
-    try{
-     await api("products",{method:"DELETE",query:"?id=eq."+encodeURIComponent(p.id),prefer:"return=minimal"});
-     msg("Product deleted.");loadProducts();loadDashboard();
-    }catch(e){msg(e.message,"error")}
-   };
-   b.appendChild(d);
-  });
- }catch(e){show("productList","Products error: "+e.message,"errorBox")}
+async function dashboard(){
+  const results=await Promise.all([
+    countTable("products"),countTable("customers"),countTable("deposit_requests"),countTable("orders")
+  ]);
+  $("nProducts").textContent=results[0]===null?"ERR":results[0];
+  $("nCustomers").textContent=results[1]===null?"ERR":results[1];
+  $("nDeposits").textContent=results[2]===null?"ERR":results[2];
+  $("nOrders").textContent=results[3]===null?"ERR":results[3];
+}
+
+async function products(){
+  const b=$("productList"); b.className="empty"; b.textContent="Loading...";
+  try{
+    const r=await api("products","?select=*&order=id.desc");
+    if(!r?.length){b.textContent="No products found.";return}
+    b.className=""; b.innerHTML="";
+    r.forEach(p=>{
+      const d=document.createElement("div"); d.className="item";
+      const image=p.image_url||p.image||"";
+      d.innerHTML=(image?`<img src="${esc(image)}" onerror="this.remove()">`:"")+
+      `<b>${esc(p.name||"Product")}</b>
+       <p>Price: <b>$${Number(p.price||0).toFixed(2)}</b></p>
+       <p>Stock: ${esc(p.stock??0)} ${p.category?` | Category: ${esc(p.category)}`:""}</p>
+       <p>${esc(p.description||"")}</p>
+       <button class="btn red">Delete</button>`;
+      d.querySelector("button").onclick=async()=>{
+        if(!confirm("Delete this product?"))return;
+        try{await api("products",{method:"DELETE",query:"?id=eq."+encodeURIComponent(p.id),prefer:"return=minimal"});alertBox("Product deleted.","ok");products();dashboard()}
+        catch(e){alertBox("Delete failed: "+errorText(e),"error")}
+      };
+      b.appendChild(d);
+    });
+  }catch(e){b.className="notice err";b.textContent="Products error: "+errorText(e)}
 }
 
 async function addProduct(){
- const name=$("productName").value.trim();
- if(!name)return msg("Product name is required.","error");
- try{
-  await api("products",{
-   method:"POST",
-   body:{
-    name:name,
-    description:$("productDescription").value.trim(),
-    price:Number($("productPrice").value)||0,
-    stock:Number($("productStock").value)||0,
-    category:$("productCategory").value.trim(),
-    image_url:$("productImage").value.trim(),
+  const name=$("pName").value.trim();
+  if(!name){alertBox("Product name لکھیں.","error");return}
+  const body={
+    name,
+    description:$("pDesc").value.trim(),
+    price:Number($("pPrice").value)||0,
+    stock:Number($("pStock").value)||0,
+    category:$("pCategory").value.trim(),
+    image_url:$("pImage").value.trim(),
     is_active:true
-   }
-  });
-  document.querySelectorAll("#products input,#products textarea").forEach(x=>x.value="");
-  msg("Product added successfully.");loadProducts();loadDashboard();
- }catch(e){msg(e.message,"error")}
+  };
+  try{
+    await api("products",{method:"POST",body});
+    ["pName","pDesc","pPrice","pStock","pCategory","pImage"].forEach(id=>$(id).value="");
+    alertBox("Product successfully added.","ok"); products(); dashboard();
+  }catch(e){alertBox("Product add failed: "+errorText(e),"error")}
 }
 
-async function loadBalances(){
- const b=$("balanceList");b.className="loading";b.textContent="Loading...";
- try{
-  const r=await api("customer_balances","?select=*&order=updated_at.desc");
-  if(!r?.length)return show("balanceList","No customer balances.");
-  b.className="";b.innerHTML="";
-  r.forEach(c=>{
-   const d=document.createElement("div");d.className="item";
-   d.innerHTML="<b>Customer</b><p>ID: "+esc(c.customer_id)+"</p><p>Balance: <b>$"+Number(c.balance||0).toFixed(2)+"</b></p><input type='number' min='0' step='0.01' placeholder='New balance'><button class='action'>Update</button>";
-   d.querySelector("button").onclick=async()=>{
-    const v=Number(d.querySelector("input").value);
-    if(!Number.isFinite(v)||v<0)return msg("Enter a valid balance.","error");
-    try{
-     await api("customer_balances",{method:"PATCH",query:"?id=eq."+encodeURIComponent(c.id),body:{balance:v,updated_at:new Date().toISOString()},prefer:"return=minimal"});
-     msg("Balance updated.");loadBalances();
-    }catch(e){msg(e.message,"error")}
-   };
-   b.appendChild(d);
-  });
- }catch(e){show("balanceList","Balance error: "+e.message,"errorBox")}
+async function customers(){
+  const b=$("customerList"); b.className="empty";b.textContent="Loading...";
+  try{
+    const r=await api("customers","?select=*&order=id.desc");
+    if(!r?.length){b.textContent="No customers found.";return}
+    b.className="";b.innerHTML="";
+    r.forEach(c=>{
+      const d=document.createElement("div");d.className="item";
+      d.innerHTML=`<b>${esc(c.name||c.full_name||c.email||"Customer")}</b>
+      <p>Email: ${esc(c.email||"—")}</p><p>Phone: ${esc(c.phone||"—")}</p>
+      <p>ID: ${esc(c.id||c.customer_id||"—")}</p>`;
+      b.appendChild(d);
+    });
+  }catch(e){b.className="notice err";b.textContent="Customers error: "+errorText(e)}
 }
 
-async function loadDeposits(){
- const b=$("depositList");b.className="loading";b.textContent="Loading...";
- try{
-  const r=await api("deposit_requests","?select=*&order=created_at.desc");
-  if(!r?.length)return show("depositList","No deposit requests.");
-  b.className="";b.innerHTML="";
-  r.forEach(x=>{
-   const d=document.createElement("div");d.className="item";
-   const s=x.status||"Pending",pending=s.toLowerCase()==="pending";
-   d.innerHTML="<b>Deposit Request</b>"+
-    "<p>Customer: "+esc(x.customer_name||x.customer_id||"Customer")+"</p>"+
-    "<p>Customer ID: "+esc(x.customer_id)+"</p>"+
-    "<p>Amount: <b>$"+Number(x.amount||0).toFixed(2)+"</b></p>"+
-    "<p>Payment Method: "+esc(x.payment_method||x.method||"")+"</p>"+
-    "<p>Transaction ID: "+esc(x.transaction_id||x.trx_id||"")+"</p>"+
-    '<p>Status: <span class="status '+(s==="Approved"?"approved":s==="Rejected"?"rejected":"")+'">'+esc(s)+'</span></p>'+
-    (pending?'<button class="action green approve">Approve</button><button class="action red reject">Reject</button>':"");
-   const a=d.querySelector(".approve"),q=d.querySelector(".reject");
-   if(a)a.onclick=async()=>{
-    if(!confirm("Approve this deposit and credit the customer balance?"))return;
-    a.disabled=true;q.disabled=true;
-    try{
-     await api("rpc/approve_deposit",{method:"POST",body:{p_deposit_id:x.id}});
-     msg("Deposit approved successfully.");loadDeposits();loadBalances();loadDashboard();
-    }catch(e){msg("Approval failed: "+e.message,"error");a.disabled=false;q.disabled=false}
-   };
-   if(q)q.onclick=async()=>{
-    if(!confirm("Reject this deposit request?"))return;
-    a.disabled=true;q.disabled=true;
-    try{
-     await api("deposit_requests",{method:"PATCH",query:"?id=eq."+encodeURIComponent(x.id)+"&status=eq.Pending",body:{status:"Rejected"},prefer:"return=minimal"});
-     msg("Deposit rejected.");loadDeposits();loadDashboard();
-    }catch(e){msg(e.message,"error");a.disabled=false;q.disabled=false}
-   };
-   b.appendChild(d);
-  });
- }catch(e){show("depositList","Deposit error: "+e.message,"errorBox")}
+async function deposits(){
+  const b=$("depositList");b.className="empty";b.textContent="Loading...";
+  try{
+    const r=await api("deposit_requests","?select=*&order=created_at.desc");
+    if(!r?.length){b.textContent="No deposit requests.";return}
+    b.className="";b.innerHTML="";
+    r.forEach(x=>{
+      const status=x.status||"Pending";
+      const d=document.createElement("div");d.className="item";
+      d.innerHTML=`<b>Deposit Request</b>
+      <p>Customer: ${esc(x.customer_name||x.customer_id||"—")}</p>
+      <p>Amount: <b>$${Number(x.amount||0).toFixed(2)}</b></p>
+      <p>Method: ${esc(x.payment_method||x.method||"—")}</p>
+      <p>Transaction: ${esc(x.transaction_id||x.trx_id||"—")}</p>
+      <p>Status: <span class="tag ${status.toLowerCase()==="approved"?"ok":status.toLowerCase()==="rejected"?"no":""}">${esc(status)}</span></p>`;
+      if(status.toLowerCase()==="pending"){
+        const a=document.createElement("button");a.className="btn green";a.textContent="Approve";
+        const q=document.createElement("button");q.className="btn red";q.textContent="Reject";
+        a.onclick=()=>approveDeposit(x.id,a,q);q.onclick=()=>rejectDeposit(x.id,a,q);
+        d.append(a,q);
+      }
+      b.appendChild(d);
+    });
+  }catch(e){b.className="notice err";b.textContent="Deposits error: "+errorText(e)}
 }
 
-async function loadWithdrawals(){
- const b=$("withdrawalList");b.className="loading";b.textContent="Loading...";
- try{
-  const r=await api("withdrawals","?select=*&order=created_at.desc");
-  if(!r?.length)return show("withdrawalList","No withdrawal requests.");
-  b.className="";b.innerHTML="";
-  r.forEach(w=>{
-   const d=document.createElement("div");d.className="item";const s=w.status||"Pending";
-   d.innerHTML="<b>Withdrawal #"+esc(w.id)+"</b><p>Customer: "+esc(w.customer_name||w.customer_id||"Customer")+"</p><p>Amount: <b>$"+Number(w.amount||0).toFixed(2)+"</b></p><p>Method: "+esc(w.method||w.payment_method||"")+"</p><p>Account: "+esc(w.account_details||w.account||"")+"</p><p>Status: <span class='status'>"+esc(s)+"</span></p><select><option>Pending</option><option>Processing</option><option>Approved</option><option>Rejected</option><option>Completed</option></select><button class='action'>Update</button>";
-   const sel=d.querySelector("select");sel.value=s;
-   d.querySelector("button").onclick=async()=>{
-    try{await api("withdrawals",{method:"PATCH",query:"?id=eq."+encodeURIComponent(w.id),body:{status:sel.value},prefer:"return=minimal"});msg("Withdrawal status updated.");loadWithdrawals();loadDashboard()}
-    catch(e){msg(e.message,"error")}
-   };
-   b.appendChild(d);
-  });
- }catch(e){show("withdrawalList","Withdrawal error: "+e.message,"errorBox")}
+async function approveDeposit(id,a,q){
+  if(!confirm("Approve deposit and credit customer balance?"))return;
+  a.disabled=q.disabled=true;
+  try{
+    await api("rpc/approve_deposit",{method:"POST",body:{p_deposit_id:id}});
+    alertBox("Deposit approved.","ok");deposits();dashboard();
+  }catch(e){a.disabled=q.disabled=false;alertBox("Approve failed: "+errorText(e),"error")}
+}
+async function rejectDeposit(id,a,q){
+  if(!confirm("Reject this deposit?"))return;
+  a.disabled=q.disabled=true;
+  try{
+    await api("deposit_requests",{method:"PATCH",query:"?id=eq."+encodeURIComponent(id)+"&status=eq.Pending",body:{status:"Rejected"},prefer:"return=minimal"});
+    alertBox("Deposit rejected.","ok");deposits();dashboard();
+  }catch(e){a.disabled=q.disabled=false;alertBox("Reject failed: "+errorText(e),"error")}
 }
 
-async function loadKYC(){
- const b=$("kycList");b.className="loading";b.textContent="Loading...";
- try{
-  const r=await api("kyc_requests","?select=*&order=created_at.desc");
-  if(!r?.length)return show("kycList","No KYC requests.");
-  b.className="";b.innerHTML="";
-  r.forEach(k=>{
-   const d=document.createElement("div");d.className="item";const s=k.status||"Pending";
-   d.innerHTML="<b>KYC Request</b><p>Customer: "+esc(k.customer_name||k.customer_id||"Customer")+"</p><p>ID Type: "+esc(k.id_type||"")+"</p><p>ID Number: "+esc(k.id_number||"")+"</p><p>Status: <span class='status'>"+esc(s)+"</span></p><select><option>Pending</option><option>Approved</option><option>Rejected</option></select><button class='action'>Update</button>";
-   const sel=d.querySelector("select");sel.value=s;
-   d.querySelector("button").onclick=async()=>{
-    try{await api("kyc_requests",{method:"PATCH",query:"?id=eq."+encodeURIComponent(k.id),body:{status:sel.value},prefer:"return=minimal"});msg("KYC status updated.");loadKYC()}
-    catch(e){msg(e.message,"error")}
-   };
-   b.appendChild(d);
-  });
- }catch(e){show("kycList","KYC error: "+e.message,"errorBox")}
+async function withdrawals(){
+  const b=$("withdrawalList");b.className="empty";b.textContent="Loading...";
+  try{
+    const r=await api("withdrawals","?select=*&order=created_at.desc");
+    if(!r?.length){b.textContent="No withdrawal requests.";return}
+    b.className="";b.innerHTML="";
+    r.forEach(w=>{
+      const d=document.createElement("div");d.className="item";
+      const status=w.status||"Pending";
+      d.innerHTML=`<b>Withdrawal #${esc(w.id)}</b>
+      <p>Customer: ${esc(w.customer_name||w.customer_id||"—")}</p>
+      <p>Amount: <b>$${Number(w.amount||0).toFixed(2)}</b></p>
+      <p>Method: ${esc(w.method||w.payment_method||"—")}</p>
+      <p>Account: ${esc(w.account_details||w.account||"—")}</p>`;
+      const s=document.createElement("select");
+      ["Pending","Processing","Approved","Rejected","Completed"].forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;s.appendChild(o)});
+      s.value=status;d.appendChild(s);
+      const btn=document.createElement("button");btn.className="btn";btn.textContent="Update";
+      btn.onclick=async()=>{try{await api("withdrawals",{method:"PATCH",query:"?id=eq."+encodeURIComponent(w.id),body:{status:s.value},prefer:"return=minimal"});alertBox("Withdrawal updated.","ok");withdrawals()}catch(e){alertBox(errorText(e),"error")}};
+      d.appendChild(btn);b.appendChild(d);
+    });
+  }catch(e){b.className="notice err";b.textContent="Withdrawals error: "+errorText(e)}
 }
 
-async function loadOrders(){
- const b=$("orderList");b.className="loading";b.textContent="Loading...";
- try{
-  const r=await api("orders","?select=*&order=created_at.desc");
-  if(!r?.length)return show("orderList","No customer orders.");
-  b.className="";b.innerHTML="";
-  r.forEach(o=>{
-   const d=document.createElement("div");d.className="item";const s=o.status||"Pending";
-   d.innerHTML="<b>Order #"+esc(o.id)+"</b><p>Customer: "+esc(o.customer_name||o.customer_id||"Customer")+"</p><p>Product: "+esc(o.product_name||"Product")+"</p><p>Quantity: "+esc(o.quantity||1)+"</p><p>Total: <b>$"+Number(o.total_amount??o.total??0).toFixed(2)+"</b></p><p>Status: <span class='status'>"+esc(s)+"</span></p><select><option>Pending</option><option>Processing</option><option>Shipped</option><option>Delivered</option><option>Cancelled</option></select><button class='action'>Update</button>";
-   const sel=d.querySelector("select");sel.value=s;
-   d.querySelector("button").onclick=async()=>{
-    try{await api("orders",{method:"PATCH",query:"?id=eq."+encodeURIComponent(o.id),body:{status:sel.value},prefer:"return=minimal"});msg("Order status updated.");loadOrders()}
-    catch(e){msg(e.message,"error")}
-   };
-   b.appendChild(d);
-  });
- }catch(e){show("orderList","Orders error: "+e.message,"errorBox")}
+async function orders(){
+  const b=$("orderList");b.className="empty";b.textContent="Loading...";
+  try{
+    const r=await api("orders","?select=*&order=created_at.desc");
+    if(!r?.length){b.textContent="No orders found.";return}
+    b.className="";b.innerHTML="";
+    r.forEach(o=>{
+      const d=document.createElement("div");d.className="item";
+      const status=o.status||"Pending";
+      d.innerHTML=`<b>Order #${esc(o.id)}</b>
+      <p>Customer: ${esc(o.customer_name||o.customer_id||"—")}</p>
+      <p>Product: ${esc(o.product_name||"—")}</p>
+      <p>Quantity: ${esc(o.quantity||1)}</p>
+      <p>Total: <b>$${Number(o.total_amount??o.total??0).toFixed(2)}</b></p>`;
+      const s=document.createElement("select");
+      ["Pending","Processing","Shipped","Delivered","Cancelled"].forEach(v=>{const z=document.createElement("option");z.value=v;z.textContent=v;s.appendChild(z)});
+      s.value=status;d.appendChild(s);
+      const btn=document.createElement("button");btn.className="btn";btn.textContent="Update";
+      btn.onclick=async()=>{try{await api("orders",{method:"PATCH",query:"?id=eq."+encodeURIComponent(o.id),body:{status:s.value},prefer:"return=minimal"});alertBox("Order status updated.","ok");orders();dashboard()}catch(e){alertBox(errorText(e),"error")}};
+      d.appendChild(btn);b.appendChild(d);
+    });
+  }catch(e){b.className="notice err";b.textContent="Orders error: "+errorText(e)}
 }
 
-async function loadMessages(){
- const b=$("messageList");b.className="loading";b.textContent="Loading...";
- try{
-  const r=await api("support_tickets","?select=*&order=created_at.desc");
-  if(!r?.length)return show("messageList","No customer messages.");
-  b.className="";b.innerHTML="";
-  r.forEach(t=>{
-   const d=document.createElement("div");d.className="item";
-   d.innerHTML="
+/* Start once. No infinite "Starting..." state. */
+connect();
+</script>
+</body>
+</html>
