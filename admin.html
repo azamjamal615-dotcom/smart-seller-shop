@@ -166,9 +166,15 @@ label{
  margin:2px
 }
 
+.action:disabled{
+ opacity:.5;
+ cursor:not-allowed
+}
+
 .green{background:#16a34a}
 .red{background:#dc2626}
 .gray{background:#777}
+.blue{background:#2563eb}
 .full{width:100%}
 
 .status{
@@ -177,27 +183,18 @@ label{
  border-radius:12px;
  background:#fff3cd;
  color:#856404;
- font-size:10px
+ font-size:10px;
+ font-weight:bold
 }
 
-.statusApproved{
- display:inline-block;
- padding:3px 7px;
- border-radius:12px;
+.status.approved{
  background:#dcfce7;
- color:#166534;
- font-size:10px;
- font-weight:bold
+ color:#166534
 }
 
-.statusRejected{
- display:inline-block;
- padding:3px 7px;
- border-radius:12px;
+.status.rejected{
  background:#fee2e2;
- color:#991b1b;
- font-size:10px;
- font-weight:bold
+ color:#991b1b
 }
 
 .loading,
@@ -222,6 +219,16 @@ label{
 }
 
 .error{
+ background:#fee2e2;
+ color:#991b1b
+}
+
+.depositApproved{
+ background:#dcfce7;
+ color:#166534
+}
+
+.depositRejected{
  background:#fee2e2;
  color:#991b1b
 }
@@ -255,18 +262,23 @@ label{
  margin-bottom:2px
 }
 
-.depositBox{
- border:1px solid #ddd;
+.smallNote{
+ font-size:11px;
+ color:#777;
+ line-height:1.5
+}
+
+.balanceBox{
+ background:#eef2ff;
  border-radius:10px;
- padding:11px;
- margin-top:8px;
- background:#fff
+ padding:10px;
+ margin:7px 0
 }
 
 .depositAmount{
- font-size:21px;
+ font-size:20px;
  font-weight:bold;
- color:#16a34a
+ color:#713be8
 }
 
 @media(max-width:600px){
@@ -377,6 +389,17 @@ label{
 
 </div>
 
+
+<div class="card">
+
+<h2>💵 Pending Deposits</h2>
+
+<div id="dashboardDeposits" class="loading">
+Loading...
+</div>
+
+</div>
+
 </div>
 
 
@@ -387,6 +410,11 @@ label{
 <div class="card">
 
 <h2>💰 Customer Balance</h2>
+
+<p class="smallNote">
+یہاں ہر customer کا موجودہ balance نظر آئے گا۔
+آپ manually بھی balance update کر سکتے ہیں۔
+</p>
 
 <div id="balanceList" class="loading">
 Loading...
@@ -405,9 +433,12 @@ Loading...
 
 <h2>💵 Customer Deposit Requests</h2>
 
-<p style="font-size:12px;color:#777">
-Customer نے Add Money سے جو payment request بھیجی ہے وہ یہاں نظر آئے گی۔
-Approve کرنے کے بعد amount customer کے balance میں automatically add ہوگی۔
+<p class="smallNote">
+Customer نے Customer Dashboard سے Add Money کی request بھیجی ہے
+تو وہ یہاں نظر آئے گی۔
+<br><br>
+<strong>Approve</strong> کرنے پر رقم customer کے balance میں add ہو جائے گی۔
+<strong>Reject</strong> کرنے پر balance میں کوئی رقم add نہیں ہوگی۔
 </p>
 
 <div id="depositRequestList" class="loading">
@@ -479,56 +510,25 @@ Loading...
 <h2>📦 Add Product</h2>
 
 <label>Product Name</label>
-
 <input id="productName" placeholder="Smart Watch">
 
-
 <label>Description</label>
-
-<textarea id="productDescription"
-placeholder="Product description"></textarea>
-
+<textarea id="productDescription" placeholder="Product description"></textarea>
 
 <label>Price</label>
-
-<input
- id="productPrice"
- type="number"
- step="0.01"
- placeholder="50"
->
-
+<input id="productPrice" type="number" step="0.01" placeholder="50">
 
 <label>Stock</label>
-
-<input
- id="productStock"
- type="number"
- placeholder="10"
->
-
+<input id="productStock" type="number" placeholder="10">
 
 <label>Category</label>
-
-<input
- id="productCategory"
- placeholder="Watch"
->
-
+<input id="productCategory" placeholder="Watch">
 
 <label>Image URL</label>
+<input id="productImage" placeholder="https://...">
 
-<input
- id="productImage"
- placeholder="https://..."
->
-
-
-<button id="addProduct"
-class="action full">
-
+<button id="addProduct" class="action full">
 ➕ Add Product
-
 </button>
 
 </div>
@@ -608,10 +608,7 @@ No notifications.
 
 <p>Smart Seller Shop Admin Panel</p>
 
-<button
- id="refresh"
- class="action gray full"
->
+<button id="refresh" class="action gray full">
 Refresh Panel
 </button>
 
@@ -627,47 +624,28 @@ Refresh Panel
 <div class="bottom">
 
 <button data-page="products">
-
 <span class="bottomIcon">📦</span>
-
 Products
-
 </button>
-
 
 <button data-page="customers">
-
 <span class="bottomIcon">👥</span>
-
 Customers
-
 </button>
-
 
 <button data-page="messages">
-
 <span class="bottomIcon">💬</span>
-
 Messages
-
 </button>
-
 
 <button data-page="notifications">
-
 <span class="bottomIcon">🔔</span>
-
 Notifications
-
 </button>
 
-
 <button data-page="settings">
-
 <span class="bottomIcon">⚙️</span>
-
 Settings
-
 </button>
 
 </div>
@@ -675,27 +653,35 @@ Settings
 
 <script>
 
-const SUPABASE_URL=
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
 "https://cgrwiwzqiusvjibpjzdv.supabase.co";
 
-const SUPABASE_KEY=
+const SUPABASE_KEY =
 "sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
 
-const db=
+const db =
 supabase.createClient(
  SUPABASE_URL,
  SUPABASE_KEY
 );
 
 
-const $=
-id=>document.getElementById(id);
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ = id =>
+document.getElementById(id);
 
 
-const esc=
-v=>String(v??"").replace(
+const esc = v =>
+String(v ?? "").replace(
  /[&<>"']/g,
- m=>({
+ m => ({
   "&":"&amp;",
   "<":"&lt;",
   ">":"&gt;",
@@ -705,46 +691,41 @@ v=>String(v??"").replace(
 );
 
 
-/* MESSAGE */
+function msg(text,type="success"){
 
-function msg(t,e="success"){
+ const box = $("messageBox");
 
- const b=$("messageBox");
+ box.textContent = text;
 
- b.textContent=t;
+ box.className =
+ "message " + type;
 
- b.className=
- "message "+e;
+ box.style.display = "block";
 
- b.style.display=
- "block";
+ clearTimeout(window.msgTimer);
 
- clearTimeout(
-  window.msgTimer
- );
-
- window.msgTimer=
+ window.msgTimer =
  setTimeout(
-  ()=>{
-   b.style.display="none";
-  },
-  4000
+  () => box.style.display="none",
+  4500
  );
 
 }
 
 
-/* PAGE SYSTEM */
+/* =========================================================
+   PAGE SYSTEM
+========================================================= */
 
 async function openPage(id){
 
  document
  .querySelectorAll(".page")
  .forEach(
-  x=>x.classList.remove("active")
+  x => x.classList.remove("active")
  );
 
- const page=$(id);
+ const page = $(id);
 
  if(page){
   page.classList.add("active");
@@ -752,14 +733,15 @@ async function openPage(id){
 
  document
  .querySelectorAll("[data-page]")
- .forEach(
-  x=>{
-   x.classList.toggle(
-    "active",
-    x.dataset.page===id
-   );
-  }
- );
+ .forEach(x => {
+
+  x.classList.toggle(
+   "active",
+   x.dataset.page === id
+  );
+
+ });
+
 
  try{
 
@@ -791,12 +773,12 @@ async function openPage(id){
    await messages();
 
  }
- catch(e){
+ catch(error){
 
-  console.error(e);
+  console.error(error);
 
   msg(
-   "Database error: "+e.message,
+   "Database error: " + error.message,
    "error"
   );
 
@@ -805,37 +787,37 @@ async function openPage(id){
 }
 
 
-/* MENU */
+/* =========================================================
+   MENU
+========================================================= */
 
 document
 .querySelectorAll("[data-page]")
-.forEach(
- b=>{
-  b.addEventListener(
-   "click",
-   ()=>openPage(
-    b.dataset.page
-   )
-  );
- }
-);
+.forEach(button => {
+
+ button.addEventListener(
+  "click",
+  () => openPage(button.dataset.page)
+ );
+
+});
 
 
-$("refresh")
-.addEventListener(
+$("refresh").addEventListener(
  "click",
- ()=>location.reload()
+ () => location.reload()
 );
 
 
-$("addProduct")
-.addEventListener(
+$("addProduct").addEventListener(
  "click",
  addProduct
 );
 
 
-/* DASHBOARD */
+/* =========================================================
+   DASHBOARD
+========================================================= */
 
 async function dashboard(){
 
@@ -844,203 +826,286 @@ async function dashboard(){
   o,
   m,
   w
- ]=
- await Promise.all([
+ ] = await Promise.all([
 
-  db
-  .from("Products")
-  .select("*",{
-   count:"exact",
-   head:true
-  }),
+  db.from("Products")
+  .select("*",{count:"exact",head:true}),
 
-  db
-  .from("orders")
-  .select("*",{
-   count:"exact",
-   head:true
-  }),
+  db.from("orders")
+  .select("*",{count:"exact",head:true}),
 
-  db
-  .from("support_tickets")
-  .select("*",{
-   count:"exact",
-   head:true
-  }),
+  db.from("support_tickets")
+  .select("*",{count:"exact",head:true}),
 
-  db
-  .from("withdrawals")
-  .select("*",{
-   count:"exact",
-   head:true
-  })
+  db.from("withdrawals")
+  .select("*",{count:"exact",head:true})
 
  ]);
 
 
- $("statProducts")
- .textContent=
- p.error?"0":p.count||0;
+ $("statProducts").textContent =
+ p.error ? "0" : (p.count || 0);
+
+ $("statOrders").textContent =
+ o.error ? "0" : (o.count || 0);
+
+ $("statMessages").textContent =
+ m.error ? "0" : (m.count || 0);
+
+ $("statWithdrawals").textContent =
+ w.error ? "0" : (w.count || 0);
 
 
- $("statOrders")
- .textContent=
- o.error?"0":o.count||0;
-
-
- $("statMessages")
- .textContent=
- m.error?"0":m.count||0;
-
-
- $("statWithdrawals")
- .textContent=
- w.error?"0":w.count||0;
+ await dashboardDeposits();
 
 }
 
 
-/* PRODUCTS */
+/* =========================================================
+   DASHBOARD DEPOSIT SUMMARY
+========================================================= */
 
-async function products(){
+async function dashboardDeposits(){
 
- const b=$("productList");
+ const box =
+ $("dashboardDeposits");
 
- b.className="loading";
- b.textContent="Loading...";
+ box.className="loading";
+ box.textContent="Loading...";
 
- const r=
+
+ const r =
  await db
- .from("Products")
- .select("*");
+ .from("deposit_requests")
+ .select("*")
+ .eq("status","Pending")
+ .order(
+  "created_at",
+  {ascending:false}
+ );
+
 
  if(r.error){
 
-  b.className="empty";
+  box.className="empty";
 
-  b.textContent=
-  "Products table is not available.";
+  box.textContent =
+  "Deposit requests table error.";
 
   return;
  }
+
 
  if(!r.data?.length){
 
-  b.className="empty";
+  box.className="empty";
 
-  b.textContent=
-  "No products yet.";
+  box.textContent =
+  "No pending deposit requests.";
 
   return;
  }
 
- b.className="";
- b.innerHTML="";
+
+ box.className="";
+ box.innerHTML="";
 
 
- r.data.forEach(p=>{
+ r.data.slice(0,5).forEach(x => {
 
-  const d=
+  const d =
   document.createElement("div");
 
   d.className="item";
 
 
-  const id=
-  p.Id??p.id;
+  d.innerHTML = `
 
+  <b>💵 $${Number(
+   x.amount || 0
+  ).toFixed(2)}</b>
 
-  const name=
-  p.Name??
-  p.name??
-  "Product";
+  <p>
+  Customer:
+  ${esc(
+   x.customer_name ||
+   x.customer_id ||
+   "Customer"
+  )}
+  </p>
 
+  <p>
+  Transaction:
+  ${esc(
+   x.transaction_id || ""
+  )}
+  </p>
 
-  const price=
-  Number(
-   p.Price??
-   p.price??
-   0
-  );
+  <button class="action green">
+  Review Deposit
+  </button>
 
-
-  const stock=
-  Number(
-   p.Stock??
-   p.stock??
-   0
-  );
-
-
-  const image=
-  p["Image url"]??
-  p.image_url??
-  p.image??
-  "";
-
-
-  d.innerHTML=
-
-  (
-   image
-   ?
-   `<img
-    src="${esc(image)}"
-    style="
-     width:100%;
-     max-height:150px;
-     object-fit:cover;
-     border-radius:8px;
-     margin-bottom:6px
-    "
-    onerror="
-     this.style.display='none'
-    "
-   >`
-   :
-   ""
-  )
-
-  +
-
-  `<b>📦 ${esc(name)}</b>
-
-   <p>
-   Price: $${price.toFixed(2)}
-   </p>
-
-   <p>
-   Stock: ${stock}
-   </p>
-
-   <button class="action red">
-   Delete
-   </button>`;
+  `;
 
 
   d.querySelector("button")
-  .onclick=
-  ()=>delProduct(id);
+  .onclick = () => {
+
+   openPage("deposits");
+
+  };
 
 
-  b.appendChild(d);
+  box.appendChild(d);
 
  });
 
 }
 
 
-/* ADD PRODUCT */
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+async function products(){
+
+ const box =
+ $("productList");
+
+ box.className="loading";
+ box.textContent="Loading...";
+
+
+ const r =
+ await db
+ .from("Products")
+ .select("*");
+
+
+ if(r.error){
+
+  box.className="empty";
+
+  box.textContent =
+  "Products table is not available.";
+
+  return;
+ }
+
+
+ if(!r.data?.length){
+
+  box.className="empty";
+
+  box.textContent =
+  "No products yet.";
+
+  return;
+ }
+
+
+ box.className="";
+ box.innerHTML="";
+
+
+ r.data.forEach(p => {
+
+  const d =
+  document.createElement("div");
+
+  d.className="item";
+
+
+  const id =
+  p.Id ?? p.id;
+
+  const name =
+  p.Name ??
+  p.name ??
+  "Product";
+
+  const price =
+  Number(
+   p.Price ??
+   p.price ??
+   0
+  );
+
+  const stock =
+  Number(
+   p.Stock ??
+   p.stock ??
+   0
+  );
+
+  const image =
+  p["Image url"] ??
+  p.image_url ??
+  p.image ??
+  "";
+
+
+  d.innerHTML =
+
+  (
+   image
+   ?
+   `<img
+   src="${esc(image)}"
+   style="width:100%;max-height:150px;object-fit:cover;border-radius:8px;margin-bottom:6px"
+   onerror="this.style.display='none'">`
+   :
+   ""
+  )
+
+  +
+
+  `
+
+  <b>📦 ${esc(name)}</b>
+
+  <p>
+  Price:
+  $${price.toFixed(2)}
+  </p>
+
+  <p>
+  Stock:
+  ${stock}
+  </p>
+
+  <button class="action red">
+  Delete
+  </button>
+
+  `;
+
+
+  d.querySelector("button")
+  .onclick =
+  () => delProduct(id);
+
+
+  box.appendChild(d);
+
+ });
+
+}
+
+
+/* =========================================================
+   ADD PRODUCT
+========================================================= */
 
 async function addProduct(){
 
- const n=
+ const name =
  $("productName")
  .value
  .trim();
 
 
- if(!n){
+ if(!name){
 
   msg(
    "Product name is required.",
@@ -1051,42 +1116,44 @@ async function addProduct(){
  }
 
 
- const r=
+ const r =
  await db
  .from("Products")
  .insert({
 
-  Name:n,
+  Name:name,
 
   Description:
-   $("productDescription")
-   .value
-   .trim(),
+  $("productDescription")
+  .value
+  .trim(),
 
   Price:
-   Number(
-    $("productPrice").value
-   )||0,
+  Number(
+   $("productPrice").value
+  ) || 0,
 
   Stock:
-   Number(
-    $("productStock").value
-   )||0,
+  Number(
+   $("productStock").value
+  ) || 0,
 
   Category:
-   $("productCategory")
-   .value
-   .trim(),
+  $("productCategory")
+  .value
+  .trim(),
 
   "Image url":
-   $("productImage")
-   .value
-   .trim()
+  $("productImage")
+  .value
+  .trim()
 
  });
 
 
  if(r.error){
+
+  console.error(r.error);
 
   msg(
    r.error.message,
@@ -1102,7 +1169,7 @@ async function addProduct(){
   "#products input,#products textarea"
  )
  .forEach(
-  x=>x.value=""
+  x => x.value=""
  );
 
 
@@ -1112,22 +1179,23 @@ async function addProduct(){
 
 
  await products();
-
  await dashboard();
 
 }
 
 
-/* DELETE PRODUCT */
+/* =========================================================
+   DELETE PRODUCT
+========================================================= */
 
 async function delProduct(id){
 
  if(!confirm(
   "Delete this product?"
- ))return;
+ )) return;
 
 
- const r=
+ const r =
  await db
  .from("Products")
  .delete()
@@ -1151,23 +1219,25 @@ async function delProduct(id){
 
 
  await products();
-
  await dashboard();
 
 }
 
 
-/* ORDERS */
+/* =========================================================
+   ORDERS
+========================================================= */
 
 async function orders(){
 
- const b=$("orderList");
+ const box =
+ $("orderList");
 
- b.className="loading";
- b.textContent="Loading...";
+ box.className="loading";
+ box.textContent="Loading...";
 
 
- const r=
+ const r =
  await db
  .from("orders")
  .select("*")
@@ -1179,9 +1249,9 @@ async function orders(){
 
  if(r.error){
 
-  b.className="empty";
+  box.className="empty";
 
-  b.textContent=
+  box.textContent =
   "Orders table is not available yet.";
 
   return;
@@ -1190,28 +1260,28 @@ async function orders(){
 
  if(!r.data?.length){
 
-  b.className="empty";
+  box.className="empty";
 
-  b.textContent=
+  box.textContent =
   "No customer orders yet.";
 
   return;
  }
 
 
- b.className="";
- b.innerHTML="";
+ box.className="";
+ box.innerHTML="";
 
 
- r.data.forEach(o=>{
+ r.data.forEach(o => {
 
-  const d=
+  const d =
   document.createElement("div");
 
   d.className="item";
 
 
-  d.innerHTML=`
+  d.innerHTML = `
 
   <b>
   🛒 Order #${esc(o.id)}
@@ -1220,8 +1290,8 @@ async function orders(){
   <p>
   Customer:
   ${esc(
-   o.customer_name||
-   o.customer_id||
+   o.customer_name ||
+   o.customer_id ||
    "Customer"
   )}
   </p>
@@ -1229,7 +1299,7 @@ async function orders(){
   <p>
   Product:
   ${esc(
-   o.product_name||
+   o.product_name ||
    "Product"
   )}
   </p>
@@ -1237,7 +1307,7 @@ async function orders(){
   <p>
   Quantity:
   ${esc(
-   o.quantity||1
+   o.quantity || 1
   )}
   </p>
 
@@ -1245,8 +1315,8 @@ async function orders(){
   Total:
   <b>
   $${Number(
-   o.total_amount??
-   o.total??
+   o.total_amount ??
+   o.total ??
    0
   ).toFixed(2)}
   </b>
@@ -1256,7 +1326,7 @@ async function orders(){
   Status:
   <span class="status">
   ${esc(
-   o.status||
+   o.status ||
    "Pending"
   )}
   </span>
@@ -1264,46 +1334,58 @@ async function orders(){
 
   <select>
 
-   <option>Pending</option>
-   <option>Processing</option>
-   <option>Shipped</option>
-   <option>Delivered</option>
-   <option>Cancelled</option>
+  <option value="Pending">
+  Pending
+  </option>
+
+  <option value="Processing">
+  Processing
+  </option>
+
+  <option value="Shipped">
+  Shipped
+  </option>
+
+  <option value="Delivered">
+  Delivered
+  </option>
+
+  <option value="Cancelled">
+  Cancelled
+  </option>
 
   </select>
 
   <button class="action">
   Update
   </button>
+
   `;
 
 
-  const s=
+  const select =
   d.querySelector("select");
 
-
-  s.value=
-  o.status||
-  "Pending";
+  select.value =
+  o.status || "Pending";
 
 
   d.querySelector("button")
-  .onclick=
-  async()=>{
+  .onclick = async () => {
 
-   const x=
+   const result =
    await db
    .from("orders")
    .update({
-    status:s.value
+    status:select.value
    })
    .eq("id",o.id);
 
 
-   if(x.error){
+   if(result.error){
 
     msg(
-     x.error.message,
+     result.error.message,
      "error"
     );
 
@@ -1321,24 +1403,27 @@ async function orders(){
   };
 
 
-  b.appendChild(d);
+  box.appendChild(d);
 
  });
 
 }
 
 
-/* MESSAGES */
+/* =========================================================
+   MESSAGES
+========================================================= */
 
 async function messages(){
 
- const b=$("messageList");
+ const box =
+ $("messageList");
 
- b.className="loading";
- b.textContent="Loading...";
+ box.className="loading";
+ box.textContent="Loading...";
 
 
- const r=
+ const r =
  await db
  .from("support_tickets")
  .select("*")
@@ -1350,9 +1435,9 @@ async function messages(){
 
  if(r.error){
 
-  b.className="empty";
+  box.className="empty";
 
-  b.textContent=
+  box.textContent =
   "Messages table is not available yet.";
 
   return;
@@ -1361,41 +1446,41 @@ async function messages(){
 
  if(!r.data?.length){
 
-  b.className="empty";
+  box.className="empty";
 
-  b.textContent=
+  box.textContent =
   "No customer messages yet.";
 
   return;
  }
 
 
- b.className="";
- b.innerHTML="";
+ box.className="";
+ box.innerHTML="";
 
 
- r.data.forEach(t=>{
+ r.data.forEach(t => {
 
-  const d=
+  const d =
   document.createElement("div");
 
   d.className="item";
 
 
-  d.innerHTML=`
+  d.innerHTML = `
 
   <b>
   💬
   ${esc(
-   t.customer_name||
-   t.customer_id||
+   t.customer_name ||
+   t.customer_id ||
    "Customer"
   )}
   </b>
 
   <p>
   ${esc(
-   t.message||""
+   t.message || ""
   )}
   </p>
 
@@ -1403,14 +1488,14 @@ async function messages(){
   Status:
   <span class="status">
   ${esc(
-   t.status||
+   t.status ||
    "Pending"
   )}
   </span>
   </p>
 
   <textarea>${esc(
-   t.admin_reply||""
+   t.admin_reply || ""
   )}</textarea>
 
   <button class="action green">
@@ -1420,20 +1505,20 @@ async function messages(){
   <button class="action red">
   Delete
   </button>
+
   `;
 
 
   d.querySelector(".green")
-  .onclick=
-  async()=>{
+  .onclick = async () => {
 
-   const v=
+   const reply =
    d.querySelector("textarea")
    .value
    .trim();
 
 
-   if(!v){
+   if(!reply){
 
     msg(
      "Write a reply first.",
@@ -1444,12 +1529,12 @@ async function messages(){
    }
 
 
-   const x=
+   const x =
    await db
    .from("support_tickets")
    .update({
 
-    admin_reply:v,
+    admin_reply:reply,
 
     status:"Replied"
 
@@ -1479,15 +1564,14 @@ async function messages(){
 
 
   d.querySelector(".red")
-  .onclick=
-  async()=>{
+  .onclick = async () => {
 
    if(!confirm(
     "Delete this message?"
-   ))return;
+   )) return;
 
 
-   const x=
+   const x =
    await db
    .from("support_tickets")
    .delete()
@@ -1515,319 +1599,18 @@ async function messages(){
   };
 
 
-  b.appendChild(d);
+  box.appendChild(d);
 
  });
 
 }
 
 
-/* BALANCES */
+/* =========================================================
+   CUSTOMER BALANCES
+========================================================= */
 
 async function balances(){
 
- const b=$("balanceList");
-
- b.className="loading";
- b.textContent="Loading...";
-
-
- const r=
- await db
- .from("customer_balances")
- .select("*")
- .order(
-  "updated_at",
-  {ascending:false}
- );
-
-
- if(r.error){
-
-  b.className="empty";
-
-  b.textContent=
-  "Balance table is not available: "+
-  r.error.message;
-
-  return;
- }
-
-
- if(!r.data?.length){
-
-  b.className="empty";
-
-  b.textContent=
-  "No customer balances yet.";
-
-  return;
- }
-
-
- b.className="";
- b.innerHTML="";
-
-
- r.data.forEach(c=>{
-
-  const d=
-  document.createElement("div");
-
-  d.className="item";
-
-
-  d.innerHTML=`
-
-  <b>
-  👤
-  ${esc(
-   c.customer_name||
-   c.customer_id||
-   "Customer"
-  )}
-  </b>
-
-  <p>
-  Customer ID:
-  ${esc(
-   c.customer_id||""
-  )}
-  </p>
-
-  <p>
-  Current Balance:
-  <b>
-  $${Number(
-   c.balance||0
-  ).toFixed(2)}
-  </b>
-  </p>
-
-  <input
-   type="number"
-   min="0"
-   step="0.01"
-   placeholder="New balance"
-  >
-
-  <button class="action">
-  Update Balance
-  </button>
-  `;
-
-
-  d.querySelector("button")
-  .onclick=
-  async()=>{
-
-   const v=
-   Number(
-    d.querySelector("input")
-    .value
-   );
-
-
-   if(
-    !Number.isFinite(v)||
-    v<0
-   ){
-
-    msg(
-     "Enter a valid balance.",
-     "error"
-    );
-
-    return;
-   }
-
-
-   const x=
-   await db
-   .from("customer_balances")
-   .update({
-
-    balance:v,
-
-    updated_at:
-    new Date()
-    .toISOString()
-
-   })
-   .eq(
-    "id",
-    c.id
-   );
-
-
-   if(x.error){
-
-    msg(
-     x.error.message,
-     "error"
-    );
-
-   }
-   else{
-
-    msg(
-     "Balance updated."
-    );
-
-    await balances();
-
-   }
-
-  };
-
-
-  b.appendChild(d);
-
- });
-
-}
-
-
-/* =====================================================
-   DEPOSIT REQUESTS
-===================================================== */
-
-async function deposits(){
-
- const b=
- $("depositRequestList");
-
-
- b.className="loading";
- b.textContent="Loading...";
-
-
- const r=
- await db
- .from("deposit_requests")
- .select("*")
- .order(
-  "created_at",
-  {ascending:false}
- );
-
-
- if(r.error){
-
-  console.error(r.error);
-
-  b.className="empty";
-
-  b.innerHTML=
-  "<b>Deposit requests load نہیں ہو رہیں۔</b><br><br>"+
-  esc(r.error.message);
-
-  return;
- }
-
-
- if(!r.data?.length){
-
-  b.className="empty";
-
-  b.textContent=
-  "No deposit requests yet.";
-
-  return;
- }
-
-
- b.className="";
- b.innerHTML="";
-
-
- r.data.forEach(x=>{
-
-  const d=
-  document.createElement("div");
-
-  d.className="depositBox";
-
-
-  const currentStatus=
-  x.status||
-  "Pending";
-
-
-  let statusHTML=
-  `<span class="status">
-   ${esc(currentStatus)}
-   </span>`;
-
-
-  if(currentStatus==="Approved"){
-
-   statusHTML=
-   `<span class="statusApproved">
-   Approved
-   </span>`;
-
-  }
-
-
-  if(currentStatus==="Rejected"){
-
-   statusHTML=
-   `<span class="statusRejected">
-   Rejected
-   </span>`;
-
-  }
-
-
-  d.innerHTML=`
-
-  <b>💰 Deposit Request</b>
-
-  <p>
-  Customer:
-  <b>
-  ${esc(
-   x.customer_name||
-   x.customer_id||
-   "Customer"
-  )}
-  </b>
-  </p>
-
-  <p>
-  Customer ID:
-  ${esc(
-   x.customer_id||
-   ""
-  )}
-  </p>
-
-  <p class="depositAmount">
-  $${Number(
-   x.amount||0
-  ).toFixed(2)}
-  </p>
-
-  <p>
-  Payment Method:
-  ${esc(
-   x.payment_method||
-   ""
-  )}
-  </p>
-
-  <p>
-  Transaction ID:
-  <b>
-  ${esc(
-   x.transaction_id||
-   ""
-  )}
-  </b>
-  </p>
-
-  <p>
-  Note:
-  ${esc(
- 
+ const box =
+ $("bal
