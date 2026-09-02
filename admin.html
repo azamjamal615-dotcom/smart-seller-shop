@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Smart Seller Shop - Admin</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -12,10 +12,10 @@
 
 body{
 margin:0;
-font-family:Arial,sans-serif;
-background:#f4f5f7;
+background:#f3f4f6;
 color:#172033;
-padding-bottom:80px
+font-family:Arial,sans-serif;
+padding-bottom:75px
 }
 
 .header{
@@ -23,24 +23,24 @@ background:#fff;
 padding:14px;
 display:flex;
 align-items:center;
-gap:12px;
+gap:10px;
 border-bottom:1px solid #ddd;
 position:sticky;
 top:0;
-z-index:100
+z-index:20
 }
 
 .logo{
-width:48px;
-height:48px;
-border-radius:12px;
+width:50px;
+height:50px;
+border-radius:14px;
 background:#713be8;
-color:white;
+color:#fff;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:22px;
-font-weight:bold
+font-weight:bold;
+font-size:22px
 }
 
 .header h1{
@@ -49,15 +49,15 @@ font-size:18px
 }
 
 .header p{
-margin:4px 0 0;
+margin:3px 0 0;
 font-size:12px;
 color:#777
 }
 
 .connection{
 margin-left:auto;
-padding:7px 10px;
-border-radius:20px;
+padding:6px 9px;
+border-radius:15px;
 font-size:11px;
 background:#fff3cd;
 color:#856404
@@ -76,21 +76,21 @@ color:#991b1b
 .container{
 max-width:950px;
 margin:auto;
-padding:14px
+padding:12px
 }
 
 .menu{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:8px;
-margin-bottom:14px
+margin-bottom:12px
 }
 
 .menu button{
 border:0;
-background:white;
-padding:13px 5px;
-border-radius:12px;
+background:#fff;
+padding:12px 4px;
+border-radius:11px;
 box-shadow:0 2px 8px #ddd;
 font-size:12px;
 cursor:pointer
@@ -98,7 +98,7 @@ cursor:pointer
 
 .menu button.active{
 background:#713be8;
-color:white
+color:#fff
 }
 
 .page{
@@ -110,62 +110,62 @@ display:block
 }
 
 .card{
-background:white;
-padding:16px;
+background:#fff;
 border-radius:15px;
-margin-bottom:14px;
+padding:15px;
+margin-bottom:12px;
 box-shadow:0 2px 10px #ddd
 }
 
 .card h2{
-margin:0 0 12px;
+margin:0 0 10px;
 font-size:18px
 }
 
 .welcome{
 background:#24547d;
-color:white
+color:#fff
 }
 
 .welcome h2{
-font-size:22px
+font-size:21px
 }
 
 .stats{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:10px
+gap:9px
 }
 
 .stat{
-background:white;
-padding:18px;
-border-radius:14px;
+background:#fff;
+border-radius:13px;
+padding:16px;
 text-align:center;
 box-shadow:0 2px 8px #ddd
 }
 
 .stat b{
 display:block;
-font-size:26px
+font-size:25px
 }
 
 .stat span{
-font-size:12px;
+font-size:11px;
 color:#777
 }
 
 input,textarea,select{
 width:100%;
-padding:11px;
-margin:5px 0 10px;
+padding:10px;
 border:1px solid #ddd;
 border-radius:9px;
-font-size:14px
+font-size:14px;
+margin:5px 0 9px
 }
 
 textarea{
-min-height:90px
+min-height:85px
 }
 
 label{
@@ -173,54 +173,103 @@ font-size:12px;
 font-weight:bold
 }
 
-button.action{
+.action{
 border:0;
-padding:10px 14px;
-border-radius:9px;
+border-radius:8px;
+padding:9px 12px;
 background:#713be8;
-color:white;
+color:#fff;
 cursor:pointer;
+font-size:13px;
 margin:3px
 }
 
-button.green{
+.green{
 background:#16a34a
 }
 
-button.red{
+.red{
 background:#dc2626
 }
 
-button.gray{
+.gray{
 background:#666
 }
 
-button:disabled{
-opacity:.5
+.action:disabled{
+opacity:.5;
+cursor:not-allowed
 }
 
 .full{
-width:100%
+width:100%;
+margin:3px 0
 }
 
 .item{
 border:1px solid #ddd;
-background:#fafafa;
-padding:13px;
 border-radius:11px;
-margin-top:9px
+padding:12px;
+margin-top:8px;
+background:#fafafa
 }
 
 .item p{
 font-size:13px;
 color:#555;
-margin:6px 0
+margin:5px 0;
+word-break:break-word
+}
+
+.item img{
+width:100%;
+height:140px;
+object-fit:cover;
+border-radius:8px;
+margin-bottom:8px
+}
+
+.loading,
+.empty{
+text-align:center;
+padding:20px;
+color:#777;
+font-size:13px
+}
+
+.errorBox{
+padding:11px;
+border-radius:9px;
+background:#fee2e2;
+color:#991b1b;
+font-size:12px;
+word-break:break-word
+}
+
+.notice{
+display:none;
+padding:10px;
+border-radius:9px;
+margin-bottom:10px;
+font-size:13px
+}
+
+.notice.good{
+display:block;
+background:#dcfce7;
+color:#166534
+}
+
+.notice.bad{
+display:block;
+background:#fee2e2;
+color:#991b1b
 }
 
 .status{
 display:inline-block;
-padding:5px 9px;
-border-radius:20px;
+padding:4px 8px;
+border-radius:15px;
 background:#fff3cd;
 color:#856404;
 font-size:11px
@@ -236,61 +285,22 @@ background:#fee2e2;
 color:#991b1b
 }
 
-.loading{
-padding:20px;
-text-align:center;
-color:#777
-}
-
-.empty{
-padding:20px;
-text-align:center;
-color:#777
-}
-
-.errorBox{
-background:#fee2e2;
-color:#991b1b;
-padding:12px;
-border-radius:10px;
-font-size:12px;
-word-break:break-word
-}
-
-.message{
-display:none;
-padding:12px;
-border-radius:10px;
-margin-bottom:12px;
-font-size:13px
-}
-
-.message.success{
-background:#dcfce7;
-color:#166534
-}
-
-.message.error{
-background:#fee2e2;
-color:#991b1b
-}
-
 .bottom{
 position:fixed;
 bottom:0;
 left:0;
 right:0;
 height:65px;
-background:white;
+background:#fff;
 border-top:1px solid #ddd;
 display:flex;
-z-index:999
+z-index:30
 }
 
 .bottom button{
 flex:1;
 border:0;
-background:white;
+background:#fff;
 font-size:10px;
 color:#555;
 cursor:pointer
@@ -308,23 +318,9 @@ margin-bottom:3px
 }
 
 @media(max-width:600px){
-
-.container{
-padding:10px
-}
-
-.header h1{
-font-size:17px
-}
-
-.menu{
-grid-template-columns:repeat(3,1fr)
-}
-
 .menu button{
 font-size:10px
 }
-
 }
 </style>
 </head>
@@ -349,7 +345,7 @@ Starting...
 
 <div class="container">
 
-<div id="message" class="message"></div>
+<div id="notice" class="notice"></div>
 
 
 <div class="menu">
@@ -381,19 +377,18 @@ Orders
 </div>
 
 
-<!-- DASHBOARD -->
-
 <section id="dashboard" class="page active">
 
 <div class="card welcome">
 
-<div>WELCOME BACK</div>
+<b>WELCOME BACK</b>
 
-<h2>Smart Seller Shop Admin</h2>
+<h2>
+Smart Seller Shop Admin
+</h2>
 
 <p>
-Manage products, customers, deposits, balances,
-withdrawals, KYC, orders and messages.
+Manage products, customers, deposits, balances, withdrawals, KYC, orders and messages.
 </p>
 
 </div>
@@ -426,7 +421,9 @@ withdrawals, KYC, orders and messages.
 
 <div class="card">
 
-<h2>Connection Status</h2>
+<h2>
+Connection Status
+</h2>
 
 <div id="connectionDetails">
 Checking Supabase...
@@ -437,14 +434,13 @@ Checking Supabase...
 </section>
 
 
-
-<!-- BALANCE -->
-
 <section id="balance" class="page">
 
 <div class="card">
 
-<h2>Customer Balances</h2>
+<h2>
+Customer Balances
+</h2>
 
 <div id="balanceList" class="loading">
 Loading...
@@ -455,14 +451,13 @@ Loading...
 </section>
 
 
-
-<!-- DEPOSITS -->
-
 <section id="deposits" class="page">
 
 <div class="card">
 
-<h2>Deposit Requests</h2>
+<h2>
+Deposit Requests
+</h2>
 
 <p>
 Approve a pending deposit only once.
@@ -477,14 +472,13 @@ Loading...
 </section>
 
 
-
-<!-- WITHDRAWALS -->
-
 <section id="withdrawals" class="page">
 
 <div class="card">
 
-<h2>Withdrawal Requests</h2>
+<h2>
+Withdrawal Requests
+</h2>
 
 <div id="withdrawalList" class="loading">
 Loading...
@@ -495,14 +489,13 @@ Loading...
 </section>
 
 
-
-<!-- KYC -->
-
 <section id="kyc" class="page">
 
 <div class="card">
 
-<h2>KYC Requests</h2>
+<h2>
+KYC Requests
+</h2>
 
 <div id="kycList" class="loading">
 Loading...
@@ -513,14 +506,13 @@ Loading...
 </section>
 
 
-
-<!-- ORDERS -->
-
 <section id="orders" class="page">
 
 <div class="card">
 
-<h2>Customer Orders</h2>
+<h2>
+Customer Orders
+</h2>
 
 <div id="orderList" class="loading">
 Loading...
@@ -531,16 +523,17 @@ Loading...
 </section>
 
 
-
-<!-- PRODUCTS -->
-
 <section id="products" class="page">
 
 <div class="card">
 
-<h2>Add Product</h2>
+<h2>
+Add Product
+</h2>
 
-<label>Product Name</label>
+<label>
+Product Name
+</label>
 
 <input
 id="productName"
@@ -548,31 +541,45 @@ type="text"
 placeholder="Product name"
 >
 
-<label>Description</label>
+
+<label>
+Description
+</label>
 
 <textarea
 id="productDescription"
 placeholder="Product description"
 ></textarea>
 
-<label>Price</label>
+
+<label>
+Price
+</label>
 
 <input
 id="productPrice"
 type="number"
 step="0.01"
+min="0"
 placeholder="0"
 >
 
-<label>Stock</label>
+
+<label>
+Stock
+</label>
 
 <input
 id="productStock"
 type="number"
+min="0"
 placeholder="0"
 >
 
-<label>Category</label>
+
+<label>
+Category
+</label>
 
 <input
 id="productCategory"
@@ -580,7 +587,10 @@ type="text"
 placeholder="Category"
 >
 
-<label>Image URL</label>
+
+<label>
+Image URL
+</label>
 
 <input
 id="productImage"
@@ -588,9 +598,11 @@ type="text"
 placeholder="https://..."
 >
 
+
 <button
 id="addProduct"
 class="action full"
+type="button"
 >
 Add Product
 </button>
@@ -600,7 +612,9 @@ Add Product
 
 <div class="card">
 
-<h2>Products</h2>
+<h2>
+Products
+</h2>
 
 <div id="productList" class="loading">
 Loading...
@@ -611,14 +625,13 @@ Loading...
 </section>
 
 
-
-<!-- CUSTOMERS -->
-
 <section id="customers" class="page">
 
 <div class="card">
 
-<h2>Customers</h2>
+<h2>
+Customers
+</h2>
 
 <div id="customerList" class="loading">
 Loading...
@@ -629,14 +642,13 @@ Loading...
 </section>
 
 
-
-<!-- MESSAGES -->
-
 <section id="messages" class="page">
 
 <div class="card">
 
-<h2>Customer Messages</h2>
+<h2>
+Customer Messages
+</h2>
 
 <div id="messageList" class="loading">
 Loading...
@@ -647,20 +659,22 @@ Loading...
 </section>
 
 
-
-<!-- SETTINGS -->
-
 <section id="settings" class="page">
 
 <div class="card">
 
-<h2>Settings</h2>
+<h2>
+Settings
+</h2>
 
-<p>Smart Seller Shop Admin Panel</p>
+<p>
+Smart Seller Shop Admin Panel
+</p>
 
 <button
 id="refresh"
 class="action gray full"
+type="button"
 >
 Refresh
 </button>
@@ -670,7 +684,6 @@ Refresh
 </section>
 
 </div>
-
 
 
 <div class="bottom">
@@ -698,36 +711,28 @@ Settings
 </div>
 
 
-
 <script>
 
 "use strict";
 
 
-/* =========================
-   SUPABASE CONFIG
-========================= */
-
 const SUPABASE_URL =
 "https://cgrwiwzqiusvjibpjzdv.supabase.co";
+
 
 const SUPABASE_KEY =
 "sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
 
 
-let supabaseClient = null;
+let db = null;
 
-
-/* =========================
-   HELPERS
-========================= */
 
 function $(id){
 return document.getElementById(id);
 }
 
 
-function escapeHTML(value){
+function esc(value){
 
 return String(value ?? "")
 .replace(/&/g,"&amp;")
@@ -739,224 +744,241 @@ return String(value ?? "")
 }
 
 
-function showMessage(text,type="success"){
+function showNotice(text,bad=false){
 
-const box=$("message");
+const box = $("notice");
 
-box.textContent=text;
+box.textContent = text;
 
-box.className="message "+type;
+box.className =
+"notice " + (bad ? "bad" : "good");
 
-box.style.display="block";
+clearTimeout(window.noticeTimer);
 
-setTimeout(()=>{
-box.style.display="none";
-},5000);
-
-}
-
-
-function connection(text,type){
-
-const box=$("connection");
-
-box.textContent=text;
-
-box.className="connection "+type;
-
-$("connectionDetails").textContent=text;
+window.noticeTimer =
+setTimeout(function(){
+box.className="notice";
+},4500);
 
 }
 
 
-/* =========================
-   PAGE NAVIGATION
-========================= */
+function setConnection(text,ok){
 
-document.querySelectorAll("[data-page]")
-.forEach(button=>{
+const box = $("connection");
 
-button.addEventListener("click",()=>{
+box.textContent = text;
 
-const page=button.dataset.page;
+box.className =
+"connection " + (ok ? "ok" : "bad");
 
-document.querySelectorAll(".page")
-.forEach(p=>p.classList.remove("active"));
+$("connectionDetails").textContent = text;
 
-const target=$(page);
+}
+
+
+function openPage(page){
+
+document
+.querySelectorAll(".page")
+.forEach(function(x){
+x.classList.remove("active");
+});
+
+
+const target = $(page);
 
 if(target){
 target.classList.add("active");
 }
 
-document.querySelectorAll("[data-page]")
-.forEach(b=>b.classList.remove("active"));
 
-button.classList.add("active");
-
-loadPage(page);
-
+document
+.querySelectorAll("[data-page]")
+.forEach(function(x){
+x.classList.toggle(
+"active",
+x.dataset.page === page
+);
 });
 
-});
+
+const loaders = {
+
+dashboard:loadDashboard,
+
+balance:loadBalances,
+
+deposits:loadDeposits,
+
+withdrawals:loadWithdrawals,
+
+kyc:loadKYC,
+
+orders:loadOrders,
+
+products:loadProducts,
+
+customers:loadCustomers,
+
+messages:loadMessages
+
+};
 
 
-async function loadPage(page){
-
-if(!supabaseClient)return;
-
-if(page==="dashboard") await loadDashboard();
-
-if(page==="products") await loadProducts();
-
-if(page==="customers") await loadCustomers();
-
-if(page==="messages") await loadMessages();
-
-if(page==="balance") await loadBalances();
-
-if(page==="deposits") await loadDeposits();
-
-if(page==="withdrawals") await loadWithdrawals();
-
-if(page==="kyc") await loadKYC();
-
-if(page==="orders") await loadOrders();
+if(db && loaders[page]){
+loaders[page]();
+}
 
 }
 
 
-/* =========================
-   INIT
-========================= */
+document
+.querySelectorAll("[data-page]")
+.forEach(function(button){
+
+button.addEventListener(
+"click",
+function(){
+
+openPage(button.dataset.page);
+
+}
+);
+
+});
+
+
+$("refresh").addEventListener(
+"click",
+function(){
+location.reload();
+}
+);
+
 
 async function init(){
 
 try{
 
-if(!window.supabase){
+if(
+!window.supabase ||
+typeof window.supabase.createClient !== "function"
+){
 
-connection(
+setConnection(
 "Supabase library failed",
-"bad"
+false
 );
 
 return;
+
 }
 
 
-supabaseClient =
+db =
 window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
 
 
-/*
-Do NOT block the entire panel
-on one database table.
-*/
-
-connection(
+setConnection(
 "Connected",
-"ok"
+true
 );
 
-
-/*
-Try dashboard separately.
-*/
 
 await loadDashboard();
 
 
-}catch(error){
+}
+catch(error){
 
 console.error(error);
 
-connection(
-"JavaScript error",
-"bad"
+setConnection(
+error.message || "Connection failed",
+false
 );
 
-$("connectionDetails").innerHTML =
-'<div class="errorBox">'+
-escapeHTML(error.message)+
-'</div>';
-
 }
 
 }
 
 
-/* =========================
-   DASHBOARD
-========================= */
-
-async function loadDashboard(){
+async function countRows(table){
 
 try{
 
-const products =
-await supabaseClient
-.from("products")
-.select("*",{count:"exact",head:true});
+const result =
+await db
+.from(table)
+.select("id",{
+count:"exact",
+head:true
+});
 
 
-const orders =
-await supabaseClient
-.from("orders")
-.select("*",{count:"exact",head:true});
+if(result.error){
+return null;
+}
 
 
-const messages =
-await supabaseClient
-.from("support_tickets")
-.select("*",{count:"exact",head:true});
+return result.count || 0;
+
+}
+catch(error){
+
+return null;
+
+}
+
+}
 
 
-const withdrawals =
-await supabaseClient
-.from("withdrawals")
-.select("*",{count:"exact",head:true});
+async function loadDashboard(){
+
+const results =
+await Promise.all([
+
+countRows("products"),
+
+countRows("orders"),
+
+countRows("support_tickets"),
+
+countRows("withdrawals")
+
+]);
 
 
 $("productsCount").textContent =
-products.error ? "!" : (products.count || 0);
+results[0] === null ? "-" : results[0];
 
 $("ordersCount").textContent =
-orders.error ? "!" : (orders.count || 0);
+results[1] === null ? "-" : results[1];
 
 $("messagesCount").textContent =
-messages.error ? "!" : (messages.count || 0);
+results[2] === null ? "-" : results[2];
 
 $("withdrawalsCount").textContent =
-withdrawals.error ? "!" : (withdrawals.count || 0);
-
-
-}catch(error){
-
-console.error(error);
+results[3] === null ? "-" : results[3];
 
 }
 
-}
-
-
-/* =========================
-   PRODUCTS
-========================= */
 
 async function loadProducts(){
 
-const box=$("productList");
+const box = $("productList");
 
 box.className="loading";
+
 box.textContent="Loading...";
 
 
 const result =
-await supabaseClient
+await db
 .from("products")
 .select("*")
 .order("id",{ascending:false});
@@ -967,7 +989,7 @@ if(result.error){
 box.className="errorBox";
 
 box.textContent =
-"Products error: "+
+"Products error: " +
 result.error.message;
 
 return;
@@ -975,7 +997,7 @@ return;
 }
 
 
-if(!result.data || result.data.length===0){
+if(!result.data || result.data.length === 0){
 
 box.className="empty";
 
@@ -991,9 +1013,10 @@ box.className="";
 box.innerHTML="";
 
 
-result.data.forEach(product=>{
+result.data.forEach(function(product){
 
-const div=document.createElement("div");
+const div =
+document.createElement("div");
 
 div.className="item";
 
@@ -1004,57 +1027,58 @@ product.image ||
 "";
 
 
-div.innerHTML=
+div.innerHTML =
 
-(image
-?
-'<img src="'+escapeHTML(image)+'" style="width:100%;height:150px;object-fit:cover;border-radius:8px">'
-:"")
+(image ?
+'<img src="' +
+esc(image) +
+'" onerror="this.style.display=\'none\'">' :
+"") +
 
-+
+"<b>" +
+esc(product.name || "Product") +
+"</b>" +
 
-"<b>"+escapeHTML(
-product.name || "Product"
-)+"</b>"
+"<p>Price: $" +
+Number(product.price || 0).toFixed(2) +
+"</p>" +
 
-+
+"<p>Stock: " +
+esc(product.stock ?? 0) +
+"</p>" +
 
-"<p>Price: $"+
-Number(product.price || 0).toFixed(2)+
-"</p>"
-
-+
-
-"<p>Stock: "+
-escapeHTML(product.stock || 0)+
-"</p>"
-
-+
-
-"<button class='action red deleteProduct'>Delete</button>";
+"<button class='action red deleteProduct' type='button'>" +
+"Delete" +
+"</button>";
 
 
-div.querySelector(".deleteProduct")
-.addEventListener("click",async()=>{
+div
+.querySelector(".deleteProduct")
+.addEventListener(
+"click",
+async function(){
 
-if(!confirm("Delete this product?"))return;
-
-
-const id=product.id;
+if(
+!confirm(
+"Delete this product?"
+)
+){
+return;
+}
 
 
 const result =
-await supabaseClient
+await db
 .from("products")
 .delete()
-.eq("id",id);
+.eq("id",product.id);
 
 
 if(result.error){
 
-showMessage(
+showNotice(
 result.error.message,
-"error"
+true
 );
 
 return;
@@ -1062,15 +1086,17 @@ return;
 }
 
 
-showMessage(
+showNotice(
 "Product deleted."
 );
+
 
 loadProducts();
 
 loadDashboard();
 
-});
+}
+);
 
 
 box.appendChild(div);
@@ -1080,36 +1106,25 @@ box.appendChild(div);
 }
 
 
-/* =========================
-   ADD PRODUCT
-========================= */
+$("addProduct").addEventListener(
+"click",
+addProduct
+);
 
-$("addProduct")
-.addEventListener("click",async()=>{
 
-const name=$("productName").value.trim();
+async function addProduct(){
 
-const description=
-$("productDescription").value.trim();
-
-const price=
-Number($("productPrice").value || 0);
-
-const stock=
-Number($("productStock").value || 0);
-
-const category=
-$("productCategory").value.trim();
-
-const image=
-$("productImage").value.trim();
+const name =
+$("productName")
+.value
+.trim();
 
 
 if(!name){
 
-showMessage(
+showNotice(
 "Product name is required.",
-"error"
+true
 );
 
 return;
@@ -1117,27 +1132,51 @@ return;
 }
 
 
-const result =
-await supabaseClient
-.from("products")
-.insert({
+const payload = {
 
 name:name,
-description:description,
-price:price,
-stock:stock,
-category:category,
-image_url:image,
+
+description:
+$("productDescription")
+.value
+.trim(),
+
+price:
+Number(
+$("productPrice").value
+) || 0,
+
+stock:
+Number(
+$("productStock").value
+) || 0,
+
+category:
+$("productCategory")
+.value
+.trim(),
+
+image_url:
+$("productImage")
+.value
+.trim(),
+
 is_active:true
 
-});
+};
+
+
+const result =
+await db
+.from("products")
+.insert(payload);
 
 
 if(result.error){
 
-showMessage(
+showNotice(
 result.error.message,
-"error"
+true
 );
 
 return;
@@ -1145,15 +1184,20 @@ return;
 }
 
 
-$("productName").value="";
-$("productDescription").value="";
-$("productPrice").value="";
-$("productStock").value="";
-$("productCategory").value="";
-$("productImage").value="";
+[
+"productName",
+"productDescription",
+"productPrice",
+"productStock",
+"productCategory",
+"productImage"
+]
+.forEach(function(id){
+$(id).value="";
+});
 
 
-showMessage(
+showNotice(
 "Product added successfully."
 );
 
@@ -1162,34 +1206,35 @@ loadProducts();
 
 loadDashboard();
 
-});
+}
 
-
-/* =========================
-   BALANCES
-========================= */
 
 async function loadBalances(){
 
-const box=$("balanceList");
+const box =
+$("balanceList");
 
 box.className="loading";
+
 box.textContent="Loading...";
 
 
 const result =
-await supabaseClient
+await db
 .from("customer_balances")
 .select("*")
-.order("updated_at",{ascending:false});
+.order(
+"updated_at",
+{ascending:false}
+);
 
 
 if(result.error){
 
 box.className="errorBox";
 
-box.textContent=
-"Balance error: "+
+box.textContent =
+"Balance error: " +
 result.error.message;
 
 return;
@@ -1197,11 +1242,11 @@ return;
 }
 
 
-if(!result.data?.length){
+if(!result.data.length){
 
 box.className="empty";
 
-box.textContent=
+box.textContent =
 "No customer balances.";
 
 return;
@@ -1210,46 +1255,55 @@ return;
 
 
 box.className="";
+
 box.innerHTML="";
 
 
-result.data.forEach(item=>{
+result.data.forEach(function(item){
 
-const div=document.createElement("div");
+const div =
+document.createElement("div");
 
 div.className="item";
 
 
-div.innerHTML=
+div.innerHTML =
 
-"<b>Customer</b>"+
+"<b>Customer</b>" +
 
-"<p>ID: "+
-escapeHTML(item.customer_id)+
-"</p>"+
+"<p>ID: " +
+esc(item.customer_id) +
+"</p>" +
 
-"<p>Balance: <b>$"+
-Number(item.balance || 0).toFixed(2)+
-"</b></p>"+
+"<p>Balance: <b>$" +
+Number(item.balance || 0).toFixed(2) +
+"</b></p>" +
 
-"<input type='number' step='0.01' min='0' placeholder='New balance'>"+
+"<input type='number' min='0' step='0.01' placeholder='New balance'>" +
 
-"<button class='action updateBalance'>Update</button>";
-
-
-div.querySelector(".updateBalance")
-.addEventListener("click",async()=>{
-
-const input=div.querySelector("input");
-
-const value=Number(input.value);
+"<button class='action' type='button'>Update</button>";
 
 
-if(!Number.isFinite(value) || value<0){
+div
+.querySelector("button")
+.addEventListener(
+"click",
+async function(){
 
-showMessage(
+const value =
+Number(
+div.querySelector("input").value
+);
+
+
+if(
+!Number.isFinite(value) ||
+value < 0
+){
+
+showNotice(
 "Enter a valid balance.",
-"error"
+true
 );
 
 return;
@@ -1258,20 +1312,24 @@ return;
 
 
 const result =
-await supabaseClient
+await db
 .from("customer_balances")
 .update({
+
 balance:value,
-updated_at:new Date().toISOString()
+
+updated_at:
+new Date().toISOString()
+
 })
 .eq("id",item.id);
 
 
 if(result.error){
 
-showMessage(
+showNotice(
 result.error.message,
-"error"
+true
 );
 
 return;
@@ -1279,13 +1337,15 @@ return;
 }
 
 
-showMessage(
+showNotice(
 "Balance updated."
 );
 
+
 loadBalances();
 
-});
+}
+);
 
 
 box.appendChild(div);
@@ -1295,31 +1355,32 @@ box.appendChild(div);
 }
 
 
-/* =========================
-   DEPOSITS
-========================= */
-
 async function loadDeposits(){
 
-const box=$("depositList");
+const box =
+$("depositList");
 
 box.className="loading";
+
 box.textContent="Loading...";
 
 
 const result =
-await supabaseClient
+await db
 .from("deposit_requests")
 .select("*")
-.order("created_at",{ascending:false});
+.order(
+"created_at",
+{ascending:false}
+);
 
 
 if(result.error){
 
 box.className="errorBox";
 
-box.textContent=
-"Deposit error: "+
+box.textContent =
+"Deposit error: " +
 result.error.message;
 
 return;
@@ -1327,11 +1388,11 @@ return;
 }
 
 
-if(!result.data?.length){
+if(!result.data.length){
 
 box.className="empty";
 
-box.textContent=
+box.textContent =
 "No deposit requests.";
 
 return;
@@ -1340,76 +1401,86 @@ return;
 
 
 box.className="";
+
 box.innerHTML="";
 
 
-result.data.forEach(deposit=>{
+result.data.forEach(function(deposit){
 
-const div=document.createElement("div");
+const div =
+document.createElement("div");
 
 div.className="item";
 
 
-const status=
+const status =
 deposit.status || "Pending";
 
-const pending=
-String(status).toLowerCase()==="pending";
+
+const pending =
+String(status).toLowerCase() ===
+"pending";
 
 
-div.innerHTML=
+div.innerHTML =
 
-"<b>Deposit Request</b>"+
+"<b>Deposit Request</b>" +
 
-"<p>Customer: "+
-escapeHTML(
+"<p>Customer: " +
+esc(
 deposit.customer_name ||
 deposit.customer_id ||
 "Customer"
-)+
-"</p>"+
+) +
+"</p>" +
 
-"<p>Customer ID: "+
-escapeHTML(deposit.customer_id)+
-"</p>"+
+"<p>Customer ID: " +
+esc(deposit.customer_id) +
+"</p>" +
 
-"<p>Amount: <b>$"+
-Number(deposit.amount || 0).toFixed(2)+
-"</b></p>"+
+"<p>Amount: <b>$" +
+Number(
+deposit.amount || 0
+).toFixed(2) +
+"</b></p>" +
 
-"<p>Payment Method: "+
-escapeHTML(
+"<p>Payment Method: " +
+esc(
 deposit.payment_method ||
 deposit.method ||
 ""
-)+
-"</p>"+
+) +
+"</p>" +
 
-"<p>Transaction ID: "+
-escapeHTML(
+"<p>Transaction ID: " +
+esc(
 deposit.transaction_id ||
 deposit.trx_id ||
 ""
-)+
-"</p>"+
+) +
+"</p>" +
 
-"<p>Status: <span class='status'>"+
-escapeHTML(status)+
-"</span></p>"+
+"<p>Status: <span class='status'>" +
+esc(status) +
+"</span></p>" +
 
 (
-pending
-?
-"<button class='action green approve'>Approve</button>"+
-"<button class='action red reject'>Reject</button>"
-:""
+pending ?
+
+"<button class='action green approve' type='button'>Approve</button>" +
+
+"<button class='action red reject' type='button'>Reject</button>"
+
+:
+
+""
 );
 
 
-const approve=
+const approve =
 div.querySelector(".approve");
 
-const reject=
+const reject =
 div.querySelector(".reject");
 
 
@@ -1417,7 +1488,13 @@ if(approve){
 
 approve.addEventListener(
 "click",
-()=>approveDeposit(deposit)
+function(){
+approveDeposit(
+deposit,
+approve,
+reject
+);
+}
 );
 
 }
@@ -1427,7 +1504,13 @@ if(reject){
 
 reject.addEventListener(
 "click",
-()=>rejectDeposit(deposit)
+function(){
+rejectDeposit(
+deposit,
+approve,
+reject
+);
+}
 );
 
 }
@@ -1440,17 +1523,21 @@ box.appendChild(div);
 }
 
 
-/* =========================
-   APPROVE DEPOSIT
-========================= */
+async function approveDeposit(
+deposit,
+approve,
+reject
+){
 
-async function approveDeposit(deposit){
+if(
+!deposit.id ||
+!deposit.customer_id ||
+Number(deposit.amount || 0) <= 0
+){
 
-if(!deposit.id){
-
-showMessage(
-"Deposit ID is missing.",
-"error"
+showNotice(
+"Invalid deposit data.",
+true
 );
 
 return;
@@ -1458,42 +1545,24 @@ return;
 }
 
 
-if(!deposit.customer_id){
-
-showMessage(
-"Customer ID is missing.",
-"error"
-);
-
-return;
-
-}
-
-
-const amount=
-Number(deposit.amount || 0);
-
-
-if(amount<=0){
-
-showMessage(
-"Invalid deposit amount.",
-"error"
-);
-
-return;
-
-}
-
-
-if(!confirm(
+if(
+!confirm(
 "Approve this deposit and credit the customer balance?"
-))return;
+)
+){
+
+return;
+
+}
+
+
+approve.disabled=true;
+
+reject.disabled=true;
 
 
 const result =
-await supabaseClient
-.rpc(
+await db.rpc(
 "approve_deposit",
 {
 p_deposit_id:deposit.id
@@ -1503,18 +1572,22 @@ p_deposit_id:deposit.id
 
 if(result.error){
 
-showMessage(
-"Approval failed: "+
+showNotice(
+"Approval failed: " +
 result.error.message,
-"error"
+true
 );
+
+approve.disabled=false;
+
+reject.disabled=false;
 
 return;
 
 }
 
 
-showMessage(
+showNotice(
 "Deposit approved successfully."
 );
 
@@ -1528,19 +1601,30 @@ loadDashboard();
 }
 
 
-/* =========================
-   REJECT DEPOSIT
-========================= */
+async function rejectDeposit(
+deposit,
+approve,
+reject
+){
 
-async function rejectDeposit(deposit){
-
-if(!confirm(
+if(
+!confirm(
 "Reject this deposit request?"
-))return;
+)
+){
+
+return;
+
+}
+
+
+approve.disabled=true;
+
+reject.disabled=true;
 
 
 const result =
-await supabaseClient
+await db
 .from("deposit_requests")
 .update({
 status:"Rejected"
@@ -1551,50 +1635,58 @@ status:"Rejected"
 
 if(result.error){
 
-showMessage(
+showNotice(
 result.error.message,
-"error"
+true
 );
+
+approve.disabled=false;
+
+reject.disabled=false;
 
 return;
 
 }
 
 
-showMessage(
+showNotice(
 "Deposit rejected."
 );
 
+
 loadDeposits();
+
+loadDashboard();
 
 }
 
 
-/* =========================
-   WITHDRAWALS
-========================= */
-
 async function loadWithdrawals(){
 
-const box=$("withdrawalList");
+const box =
+$("withdrawalList");
 
 box.className="loading";
+
 box.textContent="Loading...";
 
 
 const result =
-await supabaseClient
+await db
 .from("withdrawals")
 .select("*")
-.order("created_at",{ascending:false});
+.order(
+"created_at",
+{ascending:false}
+);
 
 
 if(result.error){
 
 box.className="errorBox";
 
-box.textContent=
-"Withdrawal error: "+
+box.textContent =
+"Withdrawal error: " +
 result.error.message;
 
 return;
@@ -1602,11 +1694,11 @@ return;
 }
 
 
-if(!result.data?.length){
+if(!result.data.length){
 
 box.className="empty";
 
-box.textContent=
+box.textContent =
 "No withdrawal requests.";
 
 return;
@@ -1615,74 +1707,84 @@ return;
 
 
 box.className="";
+
 box.innerHTML="";
 
 
-result.data.forEach(item=>{
+result.data.forEach(function(item){
 
-const div=document.createElement("div");
+const div =
+document.createElement("div");
 
 div.className="item";
 
 
-const status=
+const status =
 item.status || "Pending";
 
 
-div.innerHTML=
+div.innerHTML =
 
-"<b>Withdrawal</b>"+
+"<b>Withdrawal</b>" +
 
-"<p>Customer: "+
-escapeHTML(
+"<p>Customer: " +
+esc(
 item.customer_name ||
 item.customer_id ||
 "Customer"
-)+
-"</p>"+
+) +
+"</p>" +
 
-"<p>Amount: <b>$"+
-Number(item.amount || 0).toFixed(2)+
-"</b></p>"+
+"<p>Amount: <b>$" +
+Number(
+item.amount || 0
+).toFixed(2) +
+"</b></p>" +
 
-"<p>Method: "+
-escapeHTML(
+"<p>Method: " +
+esc(
 item.method ||
 item.payment_method ||
 ""
-)+
-"</p>"+
+) +
+"</p>" +
 
-"<p>Account: "+
-escapeHTML(
+"<p>Account: " +
+esc(
 item.account_details ||
 item.account ||
 ""
-)+
-"</p>"+
+) +
+"</p>" +
 
-"<select>"+
-"<option>Pending</option>"+
-"<option>Processing</option>"+
-"<option>Approved</option>"+
-"<option>Rejected</option>"+
-"<option>Completed</option>"+
-"</select>"+
+"<select>" +
 
-"<button class='action update'>Update</button>";
+"<option>Pending</option>" +
+"<option>Processing</option>" +
+"<option>Approved</option>" +
+"<option>Rejected</option>" +
+"<option>Completed</option>" +
+
+"</select>" +
+
+"<button class='action update' type='button'>Update</button>";
 
 
-const select=
+const select =
 div.querySelector("select");
+
 
 select.value=status;
 
 
-div.querySelector(".update")
-.addEventListener("click",async()=>{
+div
+.querySelector(".update")
+.addEventListener(
+"click",
+async function(){
 
 const result =
-await supabaseClient
+await db
 .from("withdrawals")
 .update({
 status:select.value
@@ -1692,9 +1794,9 @@ status:select.value
 
 if(result.error){
 
-showMessage(
+showNotice(
 result.error.message,
-"error"
+true
 );
 
 return;
@@ -1702,8 +1804,118 @@ return;
 }
 
 
-showMessage(
+showNotice(
 "Withdrawal status updated."
 );
 
-loadWithdra
+
+loadWithdrawals();
+
+loadDashboard();
+
+}
+);
+
+
+box.appendChild(div);
+
+});
+
+}
+
+
+async function loadKYC(){
+
+const box =
+$("kycList");
+
+box.className="loading";
+
+box.textContent="Loading...";
+
+
+const result =
+await db
+.from("kyc_requests")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+
+if(result.error){
+
+box.className="errorBox";
+
+box.textContent =
+"KYC error: " +
+result.error.message;
+
+return;
+
+}
+
+
+if(!result.data.length){
+
+box.className="empty";
+
+box.textContent =
+"No KYC requests.";
+
+return;
+
+}
+
+
+box.className="";
+
+box.innerHTML="";
+
+
+result.data.forEach(function(item){
+
+const div =
+document.createElement("div");
+
+div.className="item";
+
+
+const status =
+item.status || "Pending";
+
+
+div.innerHTML =
+
+"<b>KYC Request</b>" +
+
+"<p>Customer: " +
+esc(
+item.customer_name ||
+item.customer_id ||
+"Customer"
+) +
+"</p>" +
+
+"<p>ID Type: " +
+esc(item.id_type || "") +
+"</p>" +
+
+"<p>ID Number: " +
+esc(item.id_number || "") +
+"</p>" +
+
+"<p>Status: " +
+esc(status) +
+"</p>" +
+
+"<select>" +
+
+"<option>Pending</option>" +
+"<option>Approved</option>" +
+"<option>Rejected</option>" +
+
+"</select>" +
+
+"<button class='action' type='button'>Update</button>";
