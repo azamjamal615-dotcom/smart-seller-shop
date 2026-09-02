@@ -231,8 +231,9 @@ async function approveDeposit(x,approve,reject){
  if(String(x.status||"Pending").toLowerCase()!=="pending"){showMessage("This deposit has already been processed.","error");return}
  approve.disabled=true;reject.disabled=true;const id=x.id,cid=x.customer_id,amount=Number(x.amount||0);
  if(!id||!cid||amount<=0){showMessage("Invalid deposit data.","error");approve.disabled=false;reject.disabled=false;return}
- const u=await db.from("deposit_requests").update({status:"Approved"}).eq("id",id).eq("status","Pending");
+ const u=await db.from("deposit_requests").update({status:"Approved"}).eq("id",id).eq("status","Pending").select("id,status").maybeSingle();
  if(u.error){showMessage("Deposit approval failed: "+errText(u),"error");approve.disabled=false;reject.disabled=false;return}
+ if(!u.data){showMessage("This deposit was already processed by another action.","error");loadDeposits();return}
  const bal=await db.from("customer_balances").select("*").eq("customer_id",cid).maybeSingle();
  if(bal.error){await db.from("deposit_requests").update({status:"Pending"}).eq("id",id);showMessage("Balance lookup failed: "+errText(bal),"error");approve.disabled=false;reject.disabled=false;return}
  let bu;
@@ -243,14 +244,12 @@ async function approveDeposit(x,approve,reject){
 }
 async function rejectDeposit(x,approve,reject){
  if(!confirm("Reject this deposit?"))return;reject.disabled=true;approve.disabled=true;
- const u=await db.from("deposit_requests").update({status:"Rejected"}).eq("id",x.id).eq("status","Pending");
- if(u.error){showMessage("Deposit rejection failed: "+errText(u),"error");reject.disabled=false;approve.disabled=false}else{showMessage("Deposit rejected.");loadDeposits();loadDashboard()}
+ const u=await db.from("deposit_requests").update({status:"Rejected"}).eq("id",x.id).eq("status","Pending").select("id,status").maybeSingle();
+ if(u.error){showMessage("Deposit rejection failed: "+errText(u),"error");reject.disabled=false;approve.disabled=false}else if(!u.data){showMessage("This deposit was already processed.","error");loadDeposits()}else{showMessage("Deposit rejected.");loadDeposits();loadDashboard()}
 }
 
 async function loadWithdrawals(){
  if(!requireDB())return;const b=$("withdrawalList");b.className="loading";b.textContent="Loading...";
  const r=await db.from("withdrawals").select("*").order("created_at",{ascending:false});
  if(r.error){b.className="empty";b.textContent="Withdrawal table error: "+errText(r);return}
- if(!r.data?.length){b.className="empty";b.textContent="No withdrawal requests.";return}
- b.className="";b.innerHTML="";
- r.data.forEach(w=>{const d=document.createElement("div");d.className="item";d.innerHTML="<b>💸 Withdrawal #"+esc(w.id)+"</b><p>Customer: "+esc(w.customer_name||w.customer_id||"Customer")+"</p><p>Amo
+ if(!r.data?.length){b.className="empty";b.textC
