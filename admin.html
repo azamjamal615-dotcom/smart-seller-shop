@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Smart Seller Shop - Admin</title>
+<title>Smart Seller Shop - Admin Panel</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#f3f4f6;color:#172033;font-family:Arial,sans-serif;padding-bottom:78px}
-.header{background:#fff;padding:14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:10}
-.logo{width:50px;height:50px;border-radius:14px;background:#713be8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px}
+.header{background:#fff;padding:14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:20}
+.logo{width:48px;height:48px;border-radius:13px;background:#713be8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:bold}
 .header h1{margin:0;font-size:19px}.header p{margin:3px 0 0;color:#777;font-size:12px}
-.connection{font-size:11px;margin-left:auto;padding:6px 9px;border-radius:12px;background:#fff3cd;color:#856404;white-space:nowrap}
+.connection{margin-left:auto;font-size:11px;padding:6px 9px;border-radius:14px;background:#fff3cd;color:#856404}
 .connection.ok{background:#dcfce7;color:#166534}.connection.bad{background:#fee2e2;color:#991b1b}
 .container{max-width:900px;margin:auto;padding:12px}
 .topMenu{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:12px}
@@ -23,10 +23,10 @@ button{font-family:inherit}
 .welcome{background:#214f78;color:#fff}.welcome h2{font-size:21px;margin:6px 0 10px}.welcome p{font-size:13px;line-height:1.5}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .stat{background:#fff;border-radius:13px;padding:13px 5px;text-align:center;box-shadow:0 2px 8px #ddd}.stat b{font-size:22px}.stat span{display:block;font-size:11px;color:#777;margin-top:4px}
-.item{border:1px solid #ddd;border-radius:11px;padding:12px;margin-top:8px;background:#fafafa}.item p{font-size:13px;color:#555;margin:5px 0;word-break:break-word}
+.item{border:1px solid #ddd;border-radius:11px;padding:12px;margin-top:8px;background:#fafafa}.item p{font-size:13px;color:#555;margin:5px 0}
 .item img{max-width:100%;height:120px;object-fit:cover;border-radius:8px}
-input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:9px;font-size:14px;margin:5px 0 9px}textarea{min-height:90px}
-label{font-size:12px;font-weight:bold}
+input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:9px;font-size:14px;margin:5px 0 9px}
+textarea{min-height:90px}label{font-size:12px;font-weight:bold}
 .action{border:0;border-radius:8px;padding:9px 12px;background:#713be8;color:#fff;cursor:pointer;font-size:13px;margin:3px}
 .action:disabled{opacity:.55;cursor:not-allowed}
 .green{background:#16a34a}.red{background:#dc2626}.gray{background:#777}.full{width:100%;margin:3px 0}
@@ -35,17 +35,24 @@ label{font-size:12px;font-weight:bold}
 .loading,.empty{text-align:center;padding:20px;color:#777;font-size:13px}
 .message{display:none;padding:10px;border-radius:9px;margin-bottom:10px;font-size:13px}
 .success{background:#dcfce7;color:#166534}.error{background:#fee2e2;color:#991b1b}
-.small{font-size:11px;color:#777}.errorBox{white-space:pre-wrap;word-break:break-word;text-align:left}
+.errorBox{white-space:pre-wrap;text-align:left;background:#fff1f2;color:#991b1b;border:1px solid #fecdd3;border-radius:9px;padding:12px}
+.small{font-size:11px;color:#777}
 .bottom{position:fixed;bottom:0;left:0;right:0;height:67px;background:#fff;border-top:1px solid #ddd;display:flex;z-index:999}
 .bottom button{flex:1;border:0;background:#fff;font-size:10px;color:#555;cursor:pointer}
 .bottom button.active{color:#713be8;font-weight:bold}.bottomIcon{font-size:18px;display:block;margin-bottom:3px}
-@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.topMenu{grid-template-columns:repeat(3,1fr)}.topMenu button{font-size:9px;padding:9px 1px}.header h1{font-size:17px}.connection{font-size:9px;padding:5px 6px}}
+.diag{font-size:12px;line-height:1.5;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px;margin-top:10px}
+@media(max-width:600px){
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .topMenu{grid-template-columns:repeat(3,1fr)}
+ .topMenu button{font-size:9px;padding:9px 1px}
+ .header h1{font-size:17px}
+}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="logo">▦</div>
+  <div class="logo">SS</div>
   <div><h1>Smart Seller Shop</h1><p>Admin Panel</p></div>
   <span id="connection" class="connection">Checking...</span>
 </div>
@@ -54,153 +61,175 @@ label{font-size:12px;font-weight:bold}
 <div id="messageBox" class="message"></div>
 
 <div class="topMenu">
-<button type="button" class="navBtn active" data-page="dashboard">🏠<br>Dashboard</button>
-<button type="button" class="navBtn" data-page="balance">💰<br>Balance</button>
-<button type="button" class="navBtn" data-page="deposits">💵<br>Deposits</button>
-<button type="button" class="navBtn" data-page="withdrawal">💸<br>Withdrawal</button>
-<button type="button" class="navBtn" data-page="kyc">🛡️<br>KYC</button>
-<button type="button" class="navBtn" data-page="orders">🛒<br>Orders</button>
+<button type="button" class="navBtn active" data-page="dashboard">Dashboard</button>
+<button type="button" class="navBtn" data-page="balance">Balance</button>
+<button type="button" class="navBtn" data-page="deposits">Deposits</button>
+<button type="button" class="navBtn" data-page="withdrawal">Withdrawals</button>
+<button type="button" class="navBtn" data-page="kyc">KYC</button>
+<button type="button" class="navBtn" data-page="orders">Orders</button>
 </div>
 
 <div id="dashboard" class="page active">
-<div class="card welcome"><small>WELCOME BACK</small><h2>Smart Seller Shop Admin</h2><p>Manage your shop from one place.</p></div>
+<div class="card welcome"><small>WELCOME BACK</small><h2>Smart Seller Shop Admin</h2><p>Manage products, deposits, balances, withdrawals, KYC, orders and customer messages.</p></div>
 <div class="stats">
 <div class="stat"><b id="statProducts">0</b><span>Products</span></div>
 <div class="stat"><b id="statOrders">0</b><span>Orders</span></div>
 <div class="stat"><b id="statMessages">0</b><span>Messages</span></div>
 <div class="stat"><b id="statWithdrawals">0</b><span>Withdrawals</span></div>
 </div>
+<div class="card">
+<h2>Connection Status</h2>
+<div id="diagnostic" class="diag">Checking Supabase...</div>
+</div>
 </div>
 
-<div id="balance" class="page"><div class="card"><h2>💰 Customer Balance</h2><div id="balanceList" class="loading">Loading...</div></div></div>
+<div id="balance" class="page"><div class="card"><h2>Customer Balance</h2><div id="balanceList" class="loading">Loading...</div></div></div>
 
-<div id="deposits" class="page"><div class="card"><h2>💵 Customer Deposit Requests</h2><p class="small">Approve only pending requests. A request can be approved only once.</p><div id="depositRequestList" class="loading">Loading...</div></div></div>
+<div id="deposits" class="page">
+<div class="card"><h2>Customer Deposit Requests</h2><p class="small">Only Pending requests can be approved. Approval must be handled by the Supabase RPC function.</p><div id="depositRequestList" class="loading">Loading...</div></div>
+</div>
 
-<div id="withdrawal" class="page"><div class="card"><h2>💸 Withdrawal Requests</h2><div id="withdrawalList" class="loading">Loading...</div></div></div>
-
-<div id="kyc" class="page"><div class="card"><h2>🛡️ KYC Verification</h2><div id="kycList" class="loading">Loading...</div></div></div>
-
-<div id="orders" class="page"><div class="card"><h2>🛒 Customer Orders</h2><div id="orderList" class="loading">Loading...</div></div></div>
+<div id="withdrawal" class="page"><div class="card"><h2>Withdrawal Requests</h2><div id="withdrawalList" class="loading">Loading...</div></div></div>
+<div id="kyc" class="page"><div class="card"><h2>KYC Verification</h2><div id="kycList" class="loading">Loading...</div></div></div>
+<div id="orders" class="page"><div class="card"><h2>Customer Orders</h2><div id="orderList" class="loading">Loading...</div></div></div>
 
 <div id="products" class="page">
 <div class="card">
-<h2>📦 Add Product</h2>
+<h2>Add Product</h2>
 <label>Product Name</label><input id="productName" placeholder="Smart Watch">
 <label>Description</label><textarea id="productDescription" placeholder="Product description"></textarea>
 <label>Price</label><input id="productPrice" type="number" step="0.01" min="0" placeholder="50">
 <label>Stock</label><input id="productStock" type="number" min="0" placeholder="10">
 <label>Category</label><input id="productCategory" placeholder="Watch">
-<label>Image URL</label><input id="productImage" placeholder="https://...">
-<button type="button" id="addProductBtn" class="action full">➕ Add Product</button>
+<label>Image URL</label><input id="productImage" placeholder="https://example.com/image.jpg">
+<button type="button" id="addProductBtn" class="action full">Add Product</button>
 </div>
-<div class="card"><h2>📦 Products</h2><div id="productList" class="loading">Loading...</div></div>
+<div class="card"><h2>Products</h2><div id="productList" class="loading">Loading...</div></div>
 </div>
 
-<div id="customers" class="page"><div class="card"><h2>👥 Customers</h2><div id="customerList" class="loading">Loading...</div></div></div>
-<div id="messages" class="page"><div class="card"><h2>💬 Customer Messages</h2><div id="messageList" class="loading">Loading...</div></div></div>
-<div id="notifications" class="page"><div class="card"><h2>🔔 Notifications</h2><div class="empty">No notifications.</div></div></div>
-<div id="settings" class="page"><div class="card"><h2>⚙️ Settings</h2><p>Smart Seller Shop Admin Panel</p><button type="button" id="refreshBtn" class="action gray full">Refresh Panel</button></div></div>
+<div id="customers" class="page"><div class="card"><h2>Customers</h2><div id="customerList" class="loading">Loading...</div></div></div>
+<div id="messages" class="page"><div class="card"><h2>Customer Messages</h2><div id="messageList" class="loading">Loading...</div></div></div>
+<div id="notifications" class="page"><div class="card"><h2>Notifications</h2><div class="empty">No notifications yet.</div></div></div>
+<div id="settings" class="page"><div class="card"><h2>Settings</h2><p>Smart Seller Shop Admin Panel</p><button type="button" id="refreshBtn" class="action gray full">Refresh Panel</button></div></div>
 </div>
 
 <div class="bottom">
-<button type="button" data-page="products"><span class="bottomIcon">📦</span>Products</button>
-<button type="button" data-page="customers"><span class="bottomIcon">👥</span>Customers</button>
-<button type="button" data-page="messages"><span class="bottomIcon">💬</span>Messages</button>
-<button type="button" data-page="notifications"><span class="bottomIcon">🔔</span>Notifications</button>
-<button type="button" data-page="settings"><span class="bottomIcon">⚙️</span>Settings</button>
+<button type="button" data-page="products"><span class="bottomIcon">P</span>Products</button>
+<button type="button" data-page="customers"><span class="bottomIcon">C</span>Customers</button>
+<button type="button" data-page="messages"><span class="bottomIcon">M</span>Messages</button>
+<button type="button" data-page="notifications"><span class="bottomIcon">N</span>Notifications</button>
+<button type="button" data-page="settings"><span class="bottomIcon">S</span>Settings</button>
 </div>
 
 <script>
 "use strict";
 
-const SUPABASE_URL = "https://cgrwiwzqiusvjibpjzdv.supabase.co";
-const SUPABASE_KEY = "sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
-const API = SUPABASE_URL + "/rest/v1";
-const RPC = SUPABASE_URL + "/rest/v1/rpc";
+const SUPABASE_URL="https://cgrwiwzqiusvjibpjzdv.supabase.co";
+const SUPABASE_KEY="sb_publishable_du1gsmfC1UqGUpc40-uHiQ_P-2T8wnV";
+const API=SUPABASE_URL+"/rest/v1";
+const RPC=SUPABASE_URL+"/rest/v1/rpc";
 
-const $ = id => document.getElementById(id);
+const $=id=>document.getElementById(id);
 
 function esc(v){
-  return String(v ?? "").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+  return String(v??"").replace(/[&<>"']/g,m=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[m]));
 }
-function msg(text,type="success"){
+
+function showMessage(text,type="success"){
   const b=$("messageBox");
   b.textContent=text;
   b.className="message "+type;
   b.style.display="block";
-  clearTimeout(window.msgTimer);
-  window.msgTimer=setTimeout(()=>b.style.display="none",5000);
-}
-function setConnection(ok,text){
-  const e=$("connection");
-  e.textContent=text;
-  e.className="connection "+(ok?"ok":"bad");
-}
-function errText(e){
-  return e && e.message ? e.message : "Database request failed.";
+  clearTimeout(window.messageTimer);
+  window.messageTimer=setTimeout(()=>b.style.display="none",5000);
 }
 
-async function request(path,options={}){
+function setConnection(state,text){
+  const e=$("connection");
+  e.textContent=text;
+  e.className="connection "+state;
+}
+
+function errorText(e){
+  if(!e)return "Unknown error";
+  return e.message||e.error_description||e.details||e.hint||String(e);
+}
+
+async function api(path,options={}){
   const headers={
     "apikey":SUPABASE_KEY,
     "Content-Type":"application/json",
+    "Accept":"application/json",
     ...(options.headers||{})
   };
-  const res=await fetch(path,{...options,headers});
-  const text=await res.text();
+  const response=await fetch(path,{...options,headers});
+  const text=await response.text();
   let data=null;
   try{data=text?JSON.parse(text):null}catch(_){data=text}
-  if(!res.ok){
-    const message=(data && (data.message||data.error_description||data.hint||data.error)) || ("HTTP "+res.status);
-    const e=new Error(String(message));
-    e.status=res.status;e.data=data;
-    throw e;
+  if(!response.ok){
+    const msg=(data&&(data.message||data.error_description||data.error||data.hint||data.details))||("HTTP "+response.status);
+    const err=new Error(String(msg));
+    err.status=response.status;
+    err.data=data;
+    throw err;
   }
   return data;
 }
 
-async function selectRows(table,query=""){
-  return request(API+"/"+encodeURIComponent(table)+"?"+query,{
-    headers:{"Accept":"application/json"}
-  });
+async function selectRows(table,query="select=*"){
+  return api(API+"/"+encodeURIComponent(table)+"?"+query);
 }
+
 async function insertRow(table,row){
-  return request(API+"/"+encodeURIComponent(table),{
+  return api(API+"/"+encodeURIComponent(table),{
     method:"POST",
-    headers:{"Prefer":"return=representation","Accept":"application/json"},
+    headers:{"Prefer":"return=representation"},
     body:JSON.stringify(row)
   });
 }
+
 async function updateRows(table,filters,row){
-  let url=API+"/"+encodeURIComponent(table)+"?";
-  const parts=[];
-  Object.entries(filters).forEach(([k,v])=>parts.push(encodeURIComponent(k)+"=eq."+encodeURIComponent(String(v))));
-  url+=parts.join("&");
-  return request(url,{
+  const q=Object.entries(filters).map(([k,v])=>encodeURIComponent(k)+"=eq."+encodeURIComponent(String(v))).join("&");
+  return api(API+"/"+encodeURIComponent(table)+"?"+q,{
     method:"PATCH",
-    headers:{"Prefer":"return=representation","Accept":"application/json"},
+    headers:{"Prefer":"return=representation"},
     body:JSON.stringify(row)
   });
 }
+
 async function deleteRows(table,filters){
-  let url=API+"/"+encodeURIComponent(table)+"?";
-  const parts=[];
-  Object.entries(filters).forEach(([k,v])=>parts.push(encodeURIComponent(k)+"=eq."+encodeURIComponent(String(v))));
-  url+=parts.join("&");
-  return request(url,{method:"DELETE",headers:{"Prefer":"return=minimal"}});
+  const q=Object.entries(filters).map(([k,v])=>encodeURIComponent(k)+"=eq."+encodeURIComponent(String(v))).join("&");
+  return api(API+"/"+encodeURIComponent(table)+"?"+q,{
+    method:"DELETE",
+    headers:{"Prefer":"return=minimal"}
+  });
 }
+
 async function countRows(table){
-  const res=await fetch(API+"/"+encodeURIComponent(table)+"?select=*",{
-    method:"HEAD",
+  const response=await fetch(API+"/"+encodeURIComponent(table)+"?select=id",{
+    method:"GET",
     headers:{
       "apikey":SUPABASE_KEY,
+      "Accept":"application/json",
       "Prefer":"count=exact"
     }
   });
-  if(!res.ok)throw new Error("Cannot read table: "+table+" (HTTP "+res.status+")");
-  const range=res.headers.get("content-range")||"*/0";
-  const total=range.split("/")[1];
-  return Number(total)||0;
+  const text=await response.text();
+  if(!response.ok){
+    let data=null;try{data=JSON.parse(text)}catch(_){}
+    throw new Error((data&&(data.message||data.error||data.hint))||("HTTP "+response.status));
+  }
+  const range=response.headers.get("content-range");
+  if(range&&range.includes("/")){
+    const n=Number(range.split("/")[1]);
+    if(Number.isFinite(n))return n;
+  }
+  try{
+    const data=text?JSON.parse(text):[];
+    return Array.isArray(data)?data.length:0;
+  }catch(_){return 0}
 }
 
 function openPage(id){
@@ -208,44 +237,56 @@ function openPage(id){
   const page=$(id);
   if(page)page.classList.add("active");
   document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
-  const f={
+  const loaders={
     dashboard:loadDashboard,balance:loadBalances,deposits:loadDeposits,
     withdrawal:loadWithdrawals,kyc:loadKYC,orders:loadOrders,
     products:loadProducts,customers:loadCustomers,messages:loadMessages
-  }[id];
-  if(f) f();
+  };
+  if(loaders[id])loaders[id]();
 }
+
 document.querySelectorAll("[data-page]").forEach(btn=>{
-  btn.addEventListener("click",e=>{e.preventDefault();openPage(btn.dataset.page)});
+  btn.addEventListener("click",e=>{
+    e.preventDefault();
+    openPage(btn.dataset.page);
+  });
 });
+
 $("refreshBtn").addEventListener("click",()=>location.reload());
 $("addProductBtn").addEventListener("click",addProduct);
 
 async function init(){
-  setConnection(false,"Connecting...");
+  setConnection("","Connecting...");
+  $("diagnostic").textContent="Testing Supabase REST API...";
   try{
-    const test=await request(API+"/products?select=id&limit=1",{headers:{"Accept":"application/json"}});
-    setConnection(true,"Connected");
+    await api(API+"/products?select=id&limit=1");
+    setConnection("ok","Connected");
+    $("diagnostic").innerHTML="Supabase REST API is reachable.<br>Project URL: "+esc(SUPABASE_URL);
     await loadDashboard();
   }catch(e){
-    console.error("Supabase connection error:",e);
-    setConnection(false,"Connection error");
-    msg("Supabase error: "+errText(e),"error");
-    const b=$("messageBox");
-    b.title=errText(e);
+    console.error(e);
+    setConnection("bad","Connection error");
+    $("diagnostic").innerHTML=
+      "<b>Supabase request failed.</b><br>"+
+      esc(errorText(e))+
+      "<br><br>HTTP status: "+esc(e.status||"unknown")+
+      "<br><br>If this is 401 or 403, check Supabase API key and RLS policies. "+
+      "The navigation buttons still work even when the database is unavailable.";
+    showMessage("Supabase error: "+errorText(e),"error");
   }
 }
 
 async function loadDashboard(){
-  try{
-    const [p,o,m,w]=await Promise.all([
-      countRows("products"),countRows("orders"),countRows("support_tickets"),countRows("withdrawals")
-    ]);
-    $("statProducts").textContent=p;
-    $("statOrders").textContent=o;
-    $("statMessages").textContent=m;
-    $("statWithdrawals").textContent=w;
-  }catch(e){console.error(e)}
+  const jobs=[
+    ["statProducts","products"],
+    ["statOrders","orders"],
+    ["statMessages","support_tickets"],
+    ["statWithdrawals","withdrawals"]
+  ];
+  await Promise.all(jobs.map(async item=>{
+    try{$(item[0]).textContent=await countRows(item[1])}
+    catch(e){$(item[0]).textContent="0";console.error(item[1],e)}
+  }));
 }
 
 async function loadProducts(){
@@ -256,9 +297,9 @@ async function loadProducts(){
     b.className="";b.innerHTML="";
     rows.forEach(p=>{
       const d=document.createElement("div");d.className="item";
-      const image=p.image_url||"";
+      const image=p.image_url||p.image||"";
       d.innerHTML=(image?'<img src="'+esc(image)+'" onerror="this.style.display=\'none\'">':"")+
-        "<b>📦 "+esc(p.name||"Product")+"</b>"+
+        "<b>"+esc(p.name||"Product")+"</b>"+
         "<p>Price: $"+Number(p.price||0).toFixed(2)+"</p>"+
         "<p>Stock: "+Number(p.stock||0)+"</p>"+
         "<p>Category: "+esc(p.category_id||p.category||"")+"</p>"+
@@ -266,13 +307,14 @@ async function loadProducts(){
       d.querySelector("button").onclick=()=>deleteProduct(p.id);
       b.appendChild(d);
     });
-  }catch(e){b.className="empty errorBox";b.textContent="Products error: "+errText(e)}
+  }catch(e){b.className="errorBox";b.textContent="Products error: "+errorText(e)}
 }
+
 async function addProduct(){
   const name=$("productName").value.trim();
-  if(!name){msg("Product name is required.","error");return}
+  if(!name){showMessage("Product name is required.","error");return}
   const row={
-    name,
+    name:name,
     description:$("productDescription").value.trim(),
     price:Number($("productPrice").value)||0,
     stock:Number($("productStock").value)||0,
@@ -282,14 +324,18 @@ async function addProduct(){
   try{
     await insertRow("products",row);
     document.querySelectorAll("#products input,#products textarea").forEach(x=>x.value="");
-    msg("Product added successfully.");
-    loadProducts();loadDashboard();
-  }catch(e){msg("Product error: "+errText(e),"error")}
+    showMessage("Product added successfully.");
+    await loadProducts();await loadDashboard();
+  }catch(e){showMessage("Product error: "+errorText(e),"error")}
 }
+
 async function deleteProduct(id){
   if(id==null||!confirm("Delete this product?"))return;
-  try{await deleteRows("products",{id});msg("Product deleted.");loadProducts();loadDashboard()}
-  catch(e){msg("Delete error: "+errText(e),"error")}
+  try{
+    await deleteRows("products",{id:id});
+    showMessage("Product deleted.");
+    await loadProducts();await loadDashboard();
+  }catch(e){showMessage("Delete error: "+errorText(e),"error")}
 }
 
 async function loadBalances(){
@@ -300,22 +346,24 @@ async function loadBalances(){
     b.className="";b.innerHTML="";
     rows.forEach(c=>{
       const d=document.createElement("div");d.className="item";
-      d.innerHTML="<b>👤 "+esc(c.customer_name||c.customer_id||"Customer")+"</b>"+
+      d.innerHTML="<b>"+esc(c.customer_name||c.customer_id||"Customer")+"</b>"+
         "<p>Customer ID: "+esc(c.customer_id||"")+"</p>"+
         "<p>Current Balance: <b>$"+Number(c.balance||0).toFixed(2)+"</b></p>"+
         "<input type='number' min='0' step='0.01' placeholder='New balance'>"+
         "<button type='button' class='action'>Update Balance</button>";
       d.querySelector("button").onclick=async()=>{
-        const v=Number(d.querySelector("input").value);
-        if(!Number.isFinite(v)||v<0){msg("Enter a valid balance.","error");return}
+        const value=Number(d.querySelector("input").value);
+        if(!Number.isFinite(value)||value<0){showMessage("Enter a valid balance.","error");return}
         try{
-          await updateRows("customer_balances",{id:c.id},{balance:v,updated_at:new Date().toISOString()});
-          msg("Balance updated.");loadBalances();
-        }catch(e){msg("Balance error: "+errText(e),"error")}
+          await updateRows("customer_balances",{id:c.id},{
+            balance:value,updated_at:new Date().toISOString()
+          });
+          showMessage("Balance updated.");await loadBalances();
+        }catch(e){showMessage("Balance error: "+errorText(e),"error")}
       };
       b.appendChild(d);
     });
-  }catch(e){b.className="empty errorBox";b.textContent="Balance error: "+errText(e)}
+  }catch(e){b.className="errorBox";b.textContent="Balance error: "+errorText(e)}
 }
 
 async function loadDeposits(){
@@ -329,7 +377,7 @@ async function loadDeposits(){
       const status=x.status||"Pending";
       const pending=String(status).toLowerCase()==="pending";
       const cls=status==="Approved"?"approved":status==="Rejected"?"rejected":"";
-      d.innerHTML="<b>💰 Deposit Request</b>"+
+      d.innerHTML="<b>Deposit Request</b>"+
         "<p>Customer: <b>"+esc(x.customer_name||x.customer_id||"Customer")+"</b></p>"+
         "<p>Customer ID: "+esc(x.customer_id||"")+"</p>"+
         "<p>Amount: <b>$"+Number(x.amount||0).toFixed(2)+"</b></p>"+
@@ -343,32 +391,39 @@ async function loadDeposits(){
       if(r)r.onclick=()=>rejectDeposit(x,a,r);
       b.appendChild(d);
     });
-  }catch(e){b.className="empty errorBox";b.textContent="Deposit error: "+errText(e)}
+  }catch(e){b.className="errorBox";b.textContent="Deposit error: "+errorText(e)}
 }
+
 async function approveDeposit(x,a,r){
-  if(String(x.status||"Pending").toLowerCase()!=="pending"){msg("This deposit is already processed.","error");return}
+  if(String(x.status||"Pending").toLowerCase()!=="pending"){
+    showMessage("This deposit is already processed.","error");return;
+  }
   a.disabled=true;r.disabled=true;
   try{
-    const result=await request(RPC+"/approve_deposit",{
+    await api(RPC+"/approve_deposit",{
       method:"POST",
       body:JSON.stringify({p_deposit_id:x.id})
     });
-    if(result && result.ok===false)throw new Error(result.message||"Approval failed");
-    msg("Deposit approved. Balance was credited once.");
-    loadDeposits();loadBalances();loadDashboard();
+    showMessage("Deposit approved successfully.");
+    await loadDeposits();await loadBalances();await loadDashboard();
   }catch(e){
     console.error(e);
-    msg("Deposit approval failed: "+errText(e),"error");
+    showMessage("Deposit approval failed: "+errorText(e),"error");
     a.disabled=false;r.disabled=false;
   }
 }
+
 async function rejectDeposit(x,a,r){
   if(!confirm("Reject this deposit request?"))return;
   a.disabled=true;r.disabled=true;
   try{
     await updateRows("deposit_requests",{id:x.id,status:"Pending"},{status:"Rejected"});
-    msg("Deposit rejected.");loadDeposits();loadDashboard();
-  }catch(e){msg("Reject error: "+errText(e),"error");a.disabled=false;r.disabled=false}
+    showMessage("Deposit rejected.");
+    await loadDeposits();await loadDashboard();
+  }catch(e){
+    showMessage("Reject error: "+errorText(e),"error");
+    a.disabled=false;r.disabled=false;
+  }
 }
 
 async function loadWithdrawals(){
@@ -380,29 +435,9 @@ async function loadWithdrawals(){
     rows.forEach(w=>{
       const d=document.createElement("div");d.className="item";
       const status=w.status||"Pending";
-      d.innerHTML="<b>💸 Withdrawal #"+esc(w.id)+"</b>"+
+      d.innerHTML="<b>Withdrawal #"+esc(w.id)+"</b>"+
         "<p>Customer: "+esc(w.customer_name||w.customer_id||"Customer")+"</p>"+
         "<p>Amount: <b>$"+Number(w.amount||0).toFixed(2)+"</b></p>"+
         "<p>Method: "+esc(w.method||w.payment_method||"")+"</p>"+
         "<p>Account: "+esc(w.account_details||w.account||"")+"</p>"+
-        "<p>Status: <span class='status'>"+esc(status)+"</span></p>"+
-        "<select><option>Pending</option><option>Processing</option><option>Approved</option><option>Rejected</option><option>Completed</option></select>"+
-        "<button type='button' class='action'>Update</button>";
-      const s=d.querySelector("select");s.value=status;
-      d.querySelector("button").onclick=async()=>{
-        try{await updateRows("withdrawals",{id:w.id},{status:s.value});msg("Withdrawal status updated.");loadWithdrawals();loadDashboard()}
-        catch(e){msg("Withdrawal error: "+errText(e),"error")}
-      };
-      b.appendChild(d);
-    });
-  }catch(e){b.className="empty errorBox";b.textContent="Withdrawal error: "+errText(e)}
-}
-
-async function loadKYC(){
-  const b=$("kycList");b.className="loading";b.textContent="Loading...";
-  try{
-    const rows=await selectRows("kyc_requests","select=*&order=created_at.desc");
-    if(!rows.length){b.className="empty";b.textContent="No KYC requests.";return}
-    b.className="";b.innerHTML="";
-    rows.forEach(k=>{
-      const d=document.createE
+        "<p>Status: <span class='statu
